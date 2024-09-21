@@ -1,13 +1,14 @@
 import { request } from '@/axios';
-import { LoginDto, LoginInput } from './types';
+import { TokenDto, LoginInput } from './types';
 
 export class AuthService {
-  static login(input: LoginInput) {
-    return request({
-      // baseURL: 'http://localhost:3005',
+  static async login(input: LoginInput) {
+    const ret = (await request({
       method: 'post',
       url: '/api/auth/login',
       data: input
-    }) as Promise<LoginDto>;
+    })) as TokenDto;
+    ret.creation_time = new Date();
+    return ret;
   }
 }

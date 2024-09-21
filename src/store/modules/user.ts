@@ -6,11 +6,12 @@ import { useI18n } from '@/hooks/web/useI18n';
 import { loginOutApi } from '@/api/login';
 import { useTagsViewStore } from './tagsView';
 import router from '@/router';
+import { TokenDto } from '@/api/auth/types';
 
 interface UserState {
   userInfo?: UserType;
   tokenKey: string;
-  token: string;
+  token: TokenDto | null;
   roleRouters?: string[] | AppCustomRouteRecordRaw[];
   rememberMe: boolean;
   loginInfo?: UserLoginType;
@@ -21,7 +22,7 @@ export const useUserStore = defineStore('user', {
     return {
       userInfo: undefined,
       tokenKey: 'Authorization',
-      token: '',
+      token: null,
       roleRouters: undefined,
       // 记住我
       rememberMe: true,
@@ -32,7 +33,7 @@ export const useUserStore = defineStore('user', {
     getTokenKey(): string {
       return this.tokenKey;
     },
-    getToken(): string {
+    getToken(): TokenDto | null {
       return this.token;
     },
     getUserInfo(): UserType | undefined {
@@ -52,7 +53,7 @@ export const useUserStore = defineStore('user', {
     setTokenKey(tokenKey: string) {
       this.tokenKey = tokenKey;
     },
-    setToken(token: string) {
+    setToken(token: TokenDto | null) {
       this.token = token;
     },
     setUserInfo(userInfo?: UserType) {
@@ -79,7 +80,7 @@ export const useUserStore = defineStore('user', {
     reset() {
       const tagsViewStore = useTagsViewStore();
       tagsViewStore.delAllViews();
-      this.setToken('');
+      this.setToken(null);
       this.setUserInfo(undefined);
       this.setRoleRouters([]);
       router.replace('/login');
