@@ -1,7 +1,7 @@
-import { SUCCESS_CODE } from '@/constants'
-import { MockMethod } from 'vite-plugin-mock'
+import { SUCCESS_CODE } from '@/constants';
+import { MockMethod } from 'vite-plugin-mock';
 
-const timeout = 1000
+const timeout = 1000;
 
 export default [
   // 分析页统计接口
@@ -18,7 +18,7 @@ export default [
           moneys: 9280,
           shoppings: 13600
         }
-      }
+      };
     }
   },
   // 用户来源
@@ -36,7 +36,7 @@ export default [
           { value: 135, name: 'analysis.videoAdvertising' },
           { value: 1548, name: 'analysis.searchEngines' }
         ]
-      }
+      };
     }
   },
   // 每周用户活跃量
@@ -56,7 +56,7 @@ export default [
           { value: 1322, name: 'analysis.saturday' },
           { value: 1324, name: 'analysis.sunday' }
         ]
-      }
+      };
     }
   },
   // 每月销售额
@@ -81,7 +81,7 @@ export default [
           { estimate: 118, actual: 99, name: 'analysis.november' },
           { estimate: 123, actual: 123, name: 'analysis.december' }
         ]
-      }
+      };
     }
   }
-] as MockMethod[]
+] as MockMethod[];

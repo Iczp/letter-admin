@@ -1,43 +1,43 @@
 <script setup lang="tsx">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Table } from '@/components/Table'
-import { ref, unref, nextTick, watch, reactive } from 'vue'
-import { ElTree, ElInput, ElDivider } from 'element-plus'
-import { getDepartmentApi, getUserByIdApi, saveUserApi, deleteUserByIdApi } from '@/api/department'
-import type { DepartmentItem, DepartmentUserItem } from '@/api/department/types'
-import { useTable } from '@/hooks/web/useTable'
-import { Search } from '@/components/Search'
-import Write from './components/Write.vue'
-import Detail from './components/Detail.vue'
-import { Dialog } from '@/components/Dialog'
-import { getRoleListApi } from '@/api/role'
-import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
-import { BaseButton } from '@/components/Button'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Table } from '@/components/Table';
+import { ref, unref, nextTick, watch, reactive } from 'vue';
+import { ElTree, ElInput, ElDivider } from 'element-plus';
+import { getDepartmentApi, getUserByIdApi, saveUserApi, deleteUserByIdApi } from '@/api/department';
+import type { DepartmentItem, DepartmentUserItem } from '@/api/department/types';
+import { useTable } from '@/hooks/web/useTable';
+import { Search } from '@/components/Search';
+import Write from './components/Write.vue';
+import Detail from './components/Detail.vue';
+import { Dialog } from '@/components/Dialog';
+import { getRoleListApi } from '@/api/role';
+import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
+import { BaseButton } from '@/components/Button';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const { tableRegister, tableState, tableMethods } = useTable({
   fetchDataApi: async () => {
-    const { pageSize, currentPage } = tableState
+    const { pageSize, currentPage } = tableState;
     const res = await getUserByIdApi({
       id: unref(currentNodeKey),
       pageIndex: unref(currentPage),
       pageSize: unref(pageSize),
       ...unref(searchParams)
-    })
+    });
     return {
       list: res.data.list || [],
       total: res.data.total || 0
-    }
+    };
   },
   fetchDelApi: async () => {
-    const res = await deleteUserByIdApi(unref(ids))
-    return !!res
+    const res = await deleteUserByIdApi(unref(ids));
+    return !!res;
   }
-})
-const { total, loading, dataList, pageSize, currentPage } = tableState
-const { getList, getElTableExpose, delList } = tableMethods
+});
+const { total, loading, dataList, pageSize, currentPage } = tableState;
+const { getList, getElTableExpose, delList } = tableMethods;
 
 const crudSchemas = reactive<CrudSchema[]>([
   {
@@ -102,8 +102,8 @@ const crudSchemas = reactive<CrudSchema[]>([
         }
       },
       optionApi: async () => {
-        const res = await getDepartmentApi()
-        return res.data.list
+        const res = await getDepartmentApi();
+        return res.data.list;
       }
     },
     table: {
@@ -125,11 +125,11 @@ const crudSchemas = reactive<CrudSchema[]>([
         maxCollapseTags: 1
       },
       optionApi: async () => {
-        const res = await getRoleListApi()
+        const res = await getRoleListApi();
         return res.data?.list?.map((v) => ({
           label: v.roleName,
           value: v.id
-        }))
+        }));
       }
     }
   },
@@ -169,7 +169,7 @@ const crudSchemas = reactive<CrudSchema[]>([
       width: 240,
       slots: {
         default: (data: any) => {
-          const row = data.row as DepartmentUserItem
+          const row = data.row as DepartmentUserItem;
           return (
             <>
               <BaseButton type="primary" onClick={() => action(row, 'edit')}>
@@ -182,114 +182,114 @@ const crudSchemas = reactive<CrudSchema[]>([
                 {t('exampleDemo.del')}
               </BaseButton>
             </>
-          )
+          );
         }
       }
     }
   }
-])
+]);
 
-const { allSchemas } = useCrudSchemas(crudSchemas)
+const { allSchemas } = useCrudSchemas(crudSchemas);
 
-const searchParams = ref({})
+const searchParams = ref({});
 const setSearchParams = (params: any) => {
-  currentPage.value = 1
-  searchParams.value = params
-  getList()
-}
+  currentPage.value = 1;
+  searchParams.value = params;
+  getList();
+};
 
-const treeEl = ref<typeof ElTree>()
+const treeEl = ref<typeof ElTree>();
 
-const currentNodeKey = ref('')
-const departmentList = ref<DepartmentItem[]>([])
+const currentNodeKey = ref('');
+const departmentList = ref<DepartmentItem[]>([]);
 const fetchDepartment = async () => {
-  const res = await getDepartmentApi()
-  departmentList.value = res.data.list
+  const res = await getDepartmentApi();
+  departmentList.value = res.data.list;
   currentNodeKey.value =
-    (res.data.list[0] && res.data.list[0]?.children && res.data.list[0].children[0].id) || ''
-  await nextTick()
-  unref(treeEl)?.setCurrentKey(currentNodeKey.value)
-}
-fetchDepartment()
+    (res.data.list[0] && res.data.list[0]?.children && res.data.list[0].children[0].id) || '';
+  await nextTick();
+  unref(treeEl)?.setCurrentKey(currentNodeKey.value);
+};
+fetchDepartment();
 
-const currentDepartment = ref('')
+const currentDepartment = ref('');
 watch(
   () => currentDepartment.value,
   (val) => {
-    unref(treeEl)!.filter(val)
+    unref(treeEl)!.filter(val);
   }
-)
+);
 
 const currentChange = (data: DepartmentItem) => {
   // if (data.children) return
-  currentNodeKey.value = data.id
-  currentPage.value = 1
-  getList()
-}
+  currentNodeKey.value = data.id;
+  currentPage.value = 1;
+  getList();
+};
 
 const filterNode = (value: string, data: DepartmentItem) => {
-  if (!value) return true
-  return data.departmentName.includes(value)
-}
+  if (!value) return true;
+  return data.departmentName.includes(value);
+};
 
-const dialogVisible = ref(false)
-const dialogTitle = ref('')
+const dialogVisible = ref(false);
+const dialogTitle = ref('');
 
-const currentRow = ref<DepartmentUserItem>()
-const actionType = ref('')
+const currentRow = ref<DepartmentUserItem>();
+const actionType = ref('');
 
 const AddAction = () => {
-  dialogTitle.value = t('exampleDemo.add')
-  currentRow.value = undefined
-  dialogVisible.value = true
-  actionType.value = ''
-}
+  dialogTitle.value = t('exampleDemo.add');
+  currentRow.value = undefined;
+  dialogVisible.value = true;
+  actionType.value = '';
+};
 
-const delLoading = ref(false)
-const ids = ref<string[]>([])
+const delLoading = ref(false);
+const ids = ref<string[]>([]);
 
 const delData = async (row?: DepartmentUserItem) => {
-  const elTableExpose = await getElTableExpose()
+  const elTableExpose = await getElTableExpose();
   ids.value = row
     ? [row.id]
-    : elTableExpose?.getSelectionRows().map((v: DepartmentUserItem) => v.id) || []
-  delLoading.value = true
+    : elTableExpose?.getSelectionRows().map((v: DepartmentUserItem) => v.id) || [];
+  delLoading.value = true;
 
   await delList(unref(ids).length).finally(() => {
-    delLoading.value = false
-  })
-}
+    delLoading.value = false;
+  });
+};
 
 const action = (row: DepartmentUserItem, type: string) => {
-  dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail')
-  actionType.value = type
-  currentRow.value = { ...row, department: unref(treeEl)?.getCurrentNode() || {} }
-  dialogVisible.value = true
-}
+  dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail');
+  actionType.value = type;
+  currentRow.value = { ...row, department: unref(treeEl)?.getCurrentNode() || {} };
+  dialogVisible.value = true;
+};
 
-const writeRef = ref<ComponentRef<typeof Write>>()
+const writeRef = ref<ComponentRef<typeof Write>>();
 
-const saveLoading = ref(false)
+const saveLoading = ref(false);
 
 const save = async () => {
-  const write = unref(writeRef)
-  const formData = await write?.submit()
+  const write = unref(writeRef);
+  const formData = await write?.submit();
   if (formData) {
-    saveLoading.value = true
+    saveLoading.value = true;
     try {
-      const res = await saveUserApi(formData)
+      const res = await saveUserApi(formData);
       if (res) {
-        currentPage.value = 1
-        getList()
+        currentPage.value = 1;
+        getList();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      saveLoading.value = false
-      dialogVisible.value = false
+      saveLoading.value = false;
+      dialogVisible.value = false;
     }
   }
-}
+};
 </script>
 
 <template>

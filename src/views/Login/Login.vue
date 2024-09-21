@@ -1,37 +1,37 @@
 <script setup lang="ts">
-import { LoginForm, RegisterForm } from './components'
-import { ThemeSwitch } from '@/components/ThemeSwitch'
-import { LocaleDropdown } from '@/components/LocaleDropdown'
-import { useI18n } from '@/hooks/web/useI18n'
-import { getCssVar, underlineToHump } from '@/utils'
-import { useAppStore } from '@/store/modules/app'
-import { useDesign } from '@/hooks/web/useDesign'
-import { ref } from 'vue'
-import { ElScrollbar } from 'element-plus'
+import { LoginForm, RegisterForm } from './components';
+import { ThemeSwitch } from '@/components/ThemeSwitch';
+import { LocaleDropdown } from '@/components/LocaleDropdown';
+import { useI18n } from '@/hooks/web/useI18n';
+import { getCssVar, underlineToHump } from '@/utils';
+import { useAppStore } from '@/store/modules/app';
+import { useDesign } from '@/hooks/web/useDesign';
+import { ref } from 'vue';
+import { ElScrollbar } from 'element-plus';
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('login')
+const prefixCls = getPrefixCls('login');
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const isLogin = ref(true)
+const isLogin = ref(true);
 
 const toRegister = () => {
-  isLogin.value = false
-}
+  isLogin.value = false;
+};
 
 const toLogin = () => {
-  isLogin.value = true
-}
+  isLogin.value = true;
+};
 
 const themeChange = () => {
-  const color = getCssVar('--el-bg-color')
-  appStore.setMenuTheme(color)
-  appStore.setHeaderTheme(color)
-}
+  const color = getCssVar('--el-bg-color');
+  appStore.setMenuTheme(color);
+  appStore.setHeaderTheme(color);
+};
 </script>
 
 <template>

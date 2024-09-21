@@ -1,3 +1,3 @@
-import ImageCropping from './src/ImageCropping.vue'
+import ImageCropping from './src/ImageCropping.vue';
 
-export { ImageCropping }
+export { ImageCropping };

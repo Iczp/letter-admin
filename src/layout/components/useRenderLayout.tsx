@@ -1,39 +1,39 @@
-import { computed } from 'vue'
-import { useAppStore } from '@/store/modules/app'
-import { Menu } from '@/components/Menu'
-import { TabMenu } from '@/components/TabMenu'
-import { TagsView } from '@/components/TagsView'
-import { Logo } from '@/components/Logo'
-import AppView from './AppView.vue'
-import ToolHeader from './ToolHeader.vue'
-import { ElScrollbar } from 'element-plus'
-import { useDesign } from '@/hooks/web/useDesign'
+import { computed } from 'vue';
+import { useAppStore } from '@/store/modules/app';
+import { Menu } from '@/components/Menu';
+import { TabMenu } from '@/components/TabMenu';
+import { TagsView } from '@/components/TagsView';
+import { Logo } from '@/components/Logo';
+import AppView from './AppView.vue';
+import ToolHeader from './ToolHeader.vue';
+import { ElScrollbar } from 'element-plus';
+import { useDesign } from '@/hooks/web/useDesign';
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('layout')
+const prefixCls = getPrefixCls('layout');
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const pageLoading = computed(() => appStore.getPageLoading)
+const pageLoading = computed(() => appStore.getPageLoading);
 
 // 标签页
-const tagsView = computed(() => appStore.getTagsView)
+const tagsView = computed(() => appStore.getTagsView);
 
 // 菜单折叠
-const collapse = computed(() => appStore.getCollapse)
+const collapse = computed(() => appStore.getCollapse);
 
 // logo
-const logo = computed(() => appStore.logo)
+const logo = computed(() => appStore.logo);
 
 // 固定头部
-const fixedHeader = computed(() => appStore.getFixedHeader)
+const fixedHeader = computed(() => appStore.getFixedHeader);
 
 // 是否是移动端
-const mobile = computed(() => appStore.getMobile)
+const mobile = computed(() => appStore.getMobile);
 
 // 固定菜单
-const fixedMenu = computed(() => appStore.getFixedMenu)
+const fixedMenu = computed(() => appStore.getFixedMenu);
 
 export const useRenderLayout = () => {
   const renderClassic = () => {
@@ -115,8 +115,8 @@ export const useRenderLayout = () => {
           </ElScrollbar>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   const renderTopLeft = () => {
     return (
@@ -172,8 +172,8 @@ export const useRenderLayout = () => {
           </div>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   const renderTop = () => {
     return (
@@ -227,8 +227,8 @@ export const useRenderLayout = () => {
           </ElScrollbar>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   const renderCutMenu = () => {
     return (
@@ -294,13 +294,13 @@ export const useRenderLayout = () => {
           </div>
         </div>
       </>
-    )
-  }
+    );
+  };
 
   return {
     renderClassic,
     renderTopLeft,
     renderTop,
     renderCutMenu
-  }
-}
+  };
+};

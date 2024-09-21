@@ -1,32 +1,32 @@
 <script setup lang="tsx">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Table, TableColumn, TableSlotDefault } from '@/components/Table'
-import { getTableListApi } from '@/api/table'
-import { ref, reactive, unref, onMounted } from 'vue'
-import { ElTag } from 'element-plus'
-import { useTable } from '@/hooks/web/useTable'
-import { BaseButton } from '@/components/Button'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Table, TableColumn, TableSlotDefault } from '@/components/Table';
+import { getTableListApi } from '@/api/table';
+import { ref, reactive, unref, onMounted } from 'vue';
+import { ElTag } from 'element-plus';
+import { useTable } from '@/hooks/web/useTable';
+import { BaseButton } from '@/components/Button';
 
 const { tableRegister, tableMethods, tableState } = useTable({
   fetchDataApi: async () => {
-    const { currentPage, pageSize } = tableState
+    const { currentPage, pageSize } = tableState;
     const res = await getTableListApi({
       pageIndex: unref(currentPage),
       pageSize: unref(pageSize)
-    })
+    });
     return {
       list: res.data.list,
       total: res.data.total
-    }
+    };
   }
-})
-const { loading, dataList, total, currentPage, pageSize } = tableState
-const { setProps, setColumn, getElTableExpose, addColumn, delColumn, refresh } = tableMethods
+});
+const { loading, dataList, total, currentPage, pageSize } = tableState;
+const { setProps, setColumn, getElTableExpose, addColumn, delColumn, refresh } = tableMethods;
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const columns = reactive<TableColumn[]>([])
+const columns = reactive<TableColumn[]>([]);
 
 onMounted(() => {
   setTimeout(() => {
@@ -37,7 +37,7 @@ onMounted(() => {
           type: 'expand',
           slots: {
             default: (data: TableSlotDefault) => {
-              const { row } = data
+              const { row } = data;
               return (
                 <div class="ml-30px">
                   <div>
@@ -50,7 +50,7 @@ onMounted(() => {
                     {t('tableDemo.displayTime')}：{row.display_time}
                   </div>
                 </div>
-              )
+              );
             }
           }
         },
@@ -87,7 +87,7 @@ onMounted(() => {
                     ? t('tableDemo.good')
                     : t('tableDemo.commonly')}
               </ElTag>
-            )
+            );
           }
         },
         {
@@ -103,29 +103,29 @@ onMounted(() => {
                 <BaseButton type="primary" onClick={() => actionFn(data)}>
                   {t('tableDemo.action')}
                 </BaseButton>
-              )
+              );
             }
           }
         }
       ]
-    })
-  }, 2000)
-})
+    });
+  }, 2000);
+});
 
 const actionFn = (data: TableSlotDefault) => {
-  console.log(data)
-}
+  console.log(data);
+};
 
-const canShowPagination = ref(true)
+const canShowPagination = ref(true);
 const showPagination = (show: boolean) => {
-  canShowPagination.value = show
-}
+  canShowPagination.value = show;
+};
 
 const reserveIndex = (custom: boolean) => {
   setProps({
     reserveIndex: custom
-  })
-}
+  });
+};
 
 const showSelections = (show: boolean) => {
   setColumn([
@@ -134,10 +134,10 @@ const showSelections = (show: boolean) => {
       path: 'hidden',
       value: !show
     }
-  ])
-}
+  ]);
+};
 
-const index = ref(1)
+const index = ref(1);
 
 const changeTitle = () => {
   setColumn([
@@ -146,9 +146,9 @@ const changeTitle = () => {
       path: 'label',
       value: `${t('tableDemo.title')}${unref(index)}`
     }
-  ])
-  index.value++
-}
+  ]);
+  index.value++;
+};
 
 const showExpandedRows = (show: boolean) => {
   setColumn([
@@ -157,19 +157,19 @@ const showExpandedRows = (show: boolean) => {
       path: 'hidden',
       value: !show
     }
-  ])
-}
+  ]);
+};
 
 const selectAllNone = async () => {
-  const elTableRef = await getElTableExpose()
-  elTableRef?.toggleAllSelection()
-}
+  const elTableRef = await getElTableExpose();
+  elTableRef?.toggleAllSelection();
+};
 
-const showAction = ref(true)
+const showAction = ref(true);
 const delOrAddAction = () => {
   if (unref(showAction)) {
-    delColumn('action')
-    showAction.value = false
+    delColumn('action');
+    showAction.value = false;
   } else {
     addColumn({
       field: 'action',
@@ -180,42 +180,42 @@ const delOrAddAction = () => {
             <BaseButton type="primary" onClick={() => actionFn(data)}>
               {t('tableDemo.action')}
             </BaseButton>
-          )
+          );
         }
       }
-    })
-    showAction.value = true
+    });
+    showAction.value = true;
   }
-}
+};
 
-const showStripe = ref(false)
+const showStripe = ref(false);
 const showOrHiddenStripe = () => {
   setProps({
     stripe: !unref(showStripe)
-  })
-  showStripe.value = !unref(showStripe)
-}
+  });
+  showStripe.value = !unref(showStripe);
+};
 
-const height = ref<string | number>('auto')
+const height = ref<string | number>('auto');
 const fixedHeaderOrAuto = () => {
   if (unref(height) === 'auto') {
     setProps({
       height: 300
-    })
-    height.value = 300
+    });
+    height.value = 300;
   } else {
     setProps({
       height: 'auto'
-    })
-    height.value = 'auto'
+    });
+    height.value = 'auto';
   }
-}
+};
 
 const getSelections = async () => {
-  const elTableRef = await getElTableExpose()
-  const selections = elTableRef?.getSelectionRows()
-  console.log(selections)
-}
+  const elTableRef = await getElTableExpose();
+  const selections = elTableRef?.getSelectionRows();
+  console.log(selections);
+};
 </script>
 
 <template>

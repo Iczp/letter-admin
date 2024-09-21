@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { createImageViewer } from '@/components/ImageViewer'
-import { useI18n } from '@/hooks/web/useI18n'
+import { ContentWrap } from '@/components/ContentWrap';
+import { createImageViewer } from '@/components/ImageViewer';
+import { useI18n } from '@/hooks/web/useI18n';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const open = () => {
   createImageViewer({
@@ -15,8 +15,8 @@ const open = () => {
       'https://images3.alphacoders.com/679/thumbbig-679917.webp',
       'https://images3.alphacoders.com/737/thumbbig-73785.webp'
     ]
-  })
-}
+  });
+};
 </script>
 
 <template>

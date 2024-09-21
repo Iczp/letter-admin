@@ -1,32 +1,32 @@
 <script setup lang="tsx">
-import { reactive, ref, unref } from 'vue'
-import { getMenuListApi } from '@/api/menu'
-import { useTable } from '@/hooks/web/useTable'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Table, TableColumn } from '@/components/Table'
-import { ElTag } from 'element-plus'
-import { Icon } from '@/components/Icon'
-import { Search } from '@/components/Search'
-import { FormSchema } from '@/components/Form'
-import { ContentWrap } from '@/components/ContentWrap'
-import Write from './components/Write.vue'
-import Detail from './components/Detail.vue'
-import { Dialog } from '@/components/Dialog'
-import { BaseButton } from '@/components/Button'
+import { reactive, ref, unref } from 'vue';
+import { getMenuListApi } from '@/api/menu';
+import { useTable } from '@/hooks/web/useTable';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Table, TableColumn } from '@/components/Table';
+import { ElTag } from 'element-plus';
+import { Icon } from '@/components/Icon';
+import { Search } from '@/components/Search';
+import { FormSchema } from '@/components/Form';
+import { ContentWrap } from '@/components/ContentWrap';
+import Write from './components/Write.vue';
+import Detail from './components/Detail.vue';
+import { Dialog } from '@/components/Dialog';
+import { BaseButton } from '@/components/Button';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const { tableRegister, tableState, tableMethods } = useTable({
   fetchDataApi: async () => {
-    const res = await getMenuListApi()
+    const res = await getMenuListApi();
     return {
       list: res.data.list || []
-    }
+    };
   }
-})
+});
 
-const { dataList, loading } = tableState
-const { getList } = tableMethods
+const { dataList, loading } = tableState;
+const { getList } = tableMethods;
 
 const tableColumns = reactive<TableColumn[]>([
   {
@@ -39,8 +39,8 @@ const tableColumns = reactive<TableColumn[]>([
     label: t('menu.menuName'),
     slots: {
       default: (data: any) => {
-        const title = data.row.meta.title
-        return <>{title}</>
+        const title = data.row.meta.title;
+        return <>{title}</>;
       }
     }
   },
@@ -49,15 +49,15 @@ const tableColumns = reactive<TableColumn[]>([
     label: t('menu.icon'),
     slots: {
       default: (data: any) => {
-        const icon = data.row.meta.icon
+        const icon = data.row.meta.icon;
         if (icon) {
           return (
             <>
               <Icon icon={icon} />
             </>
-          )
+          );
         } else {
-          return null
+          return null;
         }
       }
     }
@@ -77,8 +77,8 @@ const tableColumns = reactive<TableColumn[]>([
     label: t('menu.component'),
     slots: {
       default: (data: any) => {
-        const component = data.row.component
-        return <>{component === '#' ? '顶级目录' : component === '##' ? '子目录' : component}</>
+        const component = data.row.component;
+        return <>{component === '#' ? '顶级目录' : component === '##' ? '子目录' : component}</>;
       }
     }
   },
@@ -97,7 +97,7 @@ const tableColumns = reactive<TableColumn[]>([
               {data.row.status === 1 ? t('userDemo.enable') : t('userDemo.disable')}
             </ElTag>
           </>
-        )
+        );
       }
     }
   },
@@ -107,7 +107,7 @@ const tableColumns = reactive<TableColumn[]>([
     width: 240,
     slots: {
       default: (data: any) => {
-        const row = data.row
+        const row = data.row;
         return (
           <>
             <BaseButton type="primary" onClick={() => action(row, 'edit')}>
@@ -118,11 +118,11 @@ const tableColumns = reactive<TableColumn[]>([
             </BaseButton>
             <BaseButton type="danger">{t('exampleDemo.del')}</BaseButton>
           </>
-        )
+        );
       }
     }
   }
-])
+]);
 
 const searchSchema = reactive<FormSchema[]>([
   {
@@ -130,50 +130,50 @@ const searchSchema = reactive<FormSchema[]>([
     label: t('menu.menuName'),
     component: 'Input'
   }
-])
+]);
 
-const searchParams = ref({})
+const searchParams = ref({});
 const setSearchParams = (data: any) => {
-  searchParams.value = data
-  getList()
-}
+  searchParams.value = data;
+  getList();
+};
 
-const dialogVisible = ref(false)
-const dialogTitle = ref('')
+const dialogVisible = ref(false);
+const dialogTitle = ref('');
 
-const currentRow = ref()
-const actionType = ref('')
+const currentRow = ref();
+const actionType = ref('');
 
-const writeRef = ref<ComponentRef<typeof Write>>()
+const writeRef = ref<ComponentRef<typeof Write>>();
 
-const saveLoading = ref(false)
+const saveLoading = ref(false);
 
 const action = (row: any, type: string) => {
-  dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail')
-  actionType.value = type
-  currentRow.value = row
-  dialogVisible.value = true
-}
+  dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail');
+  actionType.value = type;
+  currentRow.value = row;
+  dialogVisible.value = true;
+};
 
 const AddAction = () => {
-  dialogTitle.value = t('exampleDemo.add')
-  currentRow.value = undefined
-  dialogVisible.value = true
-  actionType.value = ''
-}
+  dialogTitle.value = t('exampleDemo.add');
+  currentRow.value = undefined;
+  dialogVisible.value = true;
+  actionType.value = '';
+};
 
 const save = async () => {
-  const write = unref(writeRef)
-  const formData = await write?.submit()
-  console.log(formData)
+  const write = unref(writeRef);
+  const formData = await write?.submit();
+  console.log(formData);
   if (formData) {
-    saveLoading.value = true
+    saveLoading.value = true;
     setTimeout(() => {
-      saveLoading.value = false
-      dialogVisible.value = false
-    }, 1000)
+      saveLoading.value = false;
+      dialogVisible.value = false;
+    }, 1000);
   }
-}
+};
 </script>
 
 <template>

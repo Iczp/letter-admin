@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ElImageViewer } from 'element-plus'
-import { computed, ref, PropType } from 'vue'
-import { propTypes } from '@/utils/propTypes'
+import { ElImageViewer } from 'element-plus';
+import { computed, ref, PropType } from 'vue';
+import { propTypes } from '@/utils/propTypes';
 
 const props = defineProps({
   urlList: {
@@ -14,19 +14,19 @@ const props = defineProps({
   hideOnClickModal: propTypes.bool.def(false),
   teleported: propTypes.bool.def(false),
   show: propTypes.bool.def(false)
-})
+});
 
 const getBindValue = computed(() => {
-  const propsData: Recordable = { ...props }
-  delete propsData.show
-  return propsData
-})
+  const propsData: Recordable = { ...props };
+  delete propsData.show;
+  return propsData;
+});
 
-const show = ref(props.show)
+const show = ref(props.show);
 
 const close = () => {
-  show.value = false
-}
+  show.value = false;
+};
 </script>
 
 <template>

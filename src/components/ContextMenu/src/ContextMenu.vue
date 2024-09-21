@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
-import { PropType, ref } from 'vue'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useDesign } from '@/hooks/web/useDesign'
-import type { RouteLocationNormalizedLoaded } from 'vue-router'
-import { ContextMenuSchema } from './types'
-const { getPrefixCls } = useDesign()
+import { ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus';
+import { PropType, ref } from 'vue';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useDesign } from '@/hooks/web/useDesign';
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
+import { ContextMenuSchema } from './types';
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('context-menu')
+const prefixCls = getPrefixCls('context-menu');
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const emit = defineEmits(['visibleChange'])
+const emit = defineEmits(['visibleChange']);
 
 const props = defineProps({
   schema: {
@@ -26,22 +26,22 @@ const props = defineProps({
     type: Object as PropType<RouteLocationNormalizedLoaded>,
     default: () => ({})
   }
-})
+});
 
 const command = (item: ContextMenuSchema) => {
-  item.command && item.command(item)
-}
+  item.command && item.command(item);
+};
 
 const visibleChange = (visible: boolean) => {
-  emit('visibleChange', visible, props.tagItem)
-}
+  emit('visibleChange', visible, props.tagItem);
+};
 
-const elDropdownMenuRef = ref<ComponentRef<typeof ElDropdown>>()
+const elDropdownMenuRef = ref<ComponentRef<typeof ElDropdown>>();
 
 defineExpose({
   elDropdownMenuRef,
   tagItem: props.tagItem
-})
+});
 </script>
 
 <template>

@@ -1,44 +1,44 @@
 <script setup lang="tsx">
-import { PropType, ref, unref, nextTick } from 'vue'
-import { Descriptions, DescriptionsSchema } from '@/components/Descriptions'
-import { ElTag, ElTree } from 'element-plus'
-import { findIndex } from '@/utils'
-import { getMenuListApi } from '@/api/menu'
+import { PropType, ref, unref, nextTick } from 'vue';
+import { Descriptions, DescriptionsSchema } from '@/components/Descriptions';
+import { ElTag, ElTree } from 'element-plus';
+import { findIndex } from '@/utils';
+import { getMenuListApi } from '@/api/menu';
 
 defineProps({
   currentRow: {
     type: Object as PropType<any>,
     default: () => undefined
   }
-})
+});
 
 const filterPermissionName = (value: string) => {
   const index = findIndex(unref(currentTreeData)?.permissionList || [], (item) => {
-    return item.value === value
-  })
-  return (unref(currentTreeData)?.permissionList || [])[index].label ?? ''
-}
+    return item.value === value;
+  });
+  return (unref(currentTreeData)?.permissionList || [])[index].label ?? '';
+};
 
 const renderTag = (enable?: boolean) => {
-  return <ElTag type={!enable ? 'danger' : 'success'}>{enable ? '启用' : '禁用'}</ElTag>
-}
+  return <ElTag type={!enable ? 'danger' : 'success'}>{enable ? '启用' : '禁用'}</ElTag>;
+};
 
-const treeRef = ref<typeof ElTree>()
+const treeRef = ref<typeof ElTree>();
 
-const currentTreeData = ref()
+const currentTreeData = ref();
 const nodeClick = (treeData: any) => {
-  currentTreeData.value = treeData
-}
+  currentTreeData.value = treeData;
+};
 
-const treeData = ref<any[]>([])
+const treeData = ref<any[]>([]);
 const getMenuList = async () => {
-  const res = await getMenuListApi()
+  const res = await getMenuListApi();
   if (res) {
-    treeData.value = res.data.list
-    await nextTick()
+    treeData.value = res.data.list;
+    await nextTick();
   }
-}
-getMenuList()
+};
+getMenuList();
 
 const detailSchema = ref<DescriptionsSchema[]>([
   {
@@ -50,7 +50,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '状态',
     slots: {
       default: (data: any) => {
-        return renderTag(data.status)
+        return renderTag(data.status);
       }
     }
   },
@@ -80,7 +80,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
                 >
                   {{
                     default: (data) => {
-                      return <span>{data?.data?.title}</span>
+                      return <span>{data?.data?.title}</span>;
                     }
                   }}
                 </ElTree>
@@ -88,17 +88,17 @@ const detailSchema = ref<DescriptionsSchema[]>([
               <div class="flex-1">
                 {unref(currentTreeData)
                   ? unref(currentTreeData)?.meta?.permission?.map((v: string) => {
-                      return <ElTag class="ml-2 mt-2">{filterPermissionName(v)}</ElTag>
+                      return <ElTag class="ml-2 mt-2">{filterPermissionName(v)}</ElTag>;
                     })
                   : null}
               </div>
             </div>
           </>
-        )
+        );
       }
     }
   }
-])
+]);
 </script>
 
 <template>

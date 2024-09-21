@@ -1,19 +1,19 @@
 <script setup lang="tsx">
-import { PropType, ref } from 'vue'
-import { Descriptions, DescriptionsSchema } from '@/components/Descriptions'
-import { Icon } from '@/components/Icon'
-import { ElTag } from 'element-plus'
+import { PropType, ref } from 'vue';
+import { Descriptions, DescriptionsSchema } from '@/components/Descriptions';
+import { Icon } from '@/components/Icon';
+import { ElTag } from 'element-plus';
 
 defineProps({
   currentRow: {
     type: Object as PropType<any>,
     default: () => undefined
   }
-})
+});
 
 const renderTag = (enable?: boolean) => {
-  return <ElTag type={!enable ? 'danger' : 'success'}>{enable ? '启用' : '禁用'}</ElTag>
-}
+  return <ElTag type={!enable ? 'danger' : 'success'}>{enable ? '启用' : '禁用'}</ElTag>;
+};
 
 const detailSchema = ref<DescriptionsSchema[]>([
   {
@@ -22,8 +22,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     span: 24,
     slots: {
       default: (data) => {
-        const type = data.type
-        return <>{type === 1 ? '菜单' : '目录'}</>
+        const type = data.type;
+        return <>{type === 1 ? '菜单' : '目录'}</>;
       }
     }
   },
@@ -40,8 +40,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '组件',
     slots: {
       default: (data) => {
-        const component = data.component
-        return <>{component === '#' ? '顶级目录' : component === '##' ? '子目录' : component}</>
+        const component = data.component;
+        return <>{component === '#' ? '顶级目录' : component === '##' ? '子目录' : component}</>;
       }
     }
   },
@@ -54,15 +54,15 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '图标',
     slots: {
       default: (data) => {
-        const icon = data.icon
+        const icon = data.icon;
         if (icon) {
           return (
             <>
               <Icon icon={icon} />
             </>
-          )
+          );
         } else {
-          return null
+          return null;
         }
       }
     }
@@ -87,7 +87,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
               <ElTag class="mr-1" key={v.value}>
                 {v.label}
               </ElTag>
-            )
+            );
           })}
         </>
       )
@@ -98,7 +98,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '菜单状态',
     slots: {
       default: (data) => {
-        return renderTag(data.menuState)
+        return renderTag(data.menuState);
       }
     }
   },
@@ -107,7 +107,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '是否隐藏',
     slots: {
       default: (data) => {
-        return renderTag(data.enableHidden)
+        return renderTag(data.enableHidden);
       }
     }
   },
@@ -116,7 +116,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '是否一直显示',
     slots: {
       default: (data) => {
-        return renderTag(data.enableDisplay)
+        return renderTag(data.enableDisplay);
       }
     }
   },
@@ -125,7 +125,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '是否清除缓存',
     slots: {
       default: (data) => {
-        return renderTag(data.enableCleanCache)
+        return renderTag(data.enableCleanCache);
       }
     }
   },
@@ -134,7 +134,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '是否显示面包屑',
     slots: {
       default: (data) => {
-        return renderTag(data.enableShowCrumb)
+        return renderTag(data.enableShowCrumb);
       }
     }
   },
@@ -143,7 +143,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '是否固定标签页',
     slots: {
       default: (data) => {
-        return renderTag(data.enablePinnedTab)
+        return renderTag(data.enablePinnedTab);
       }
     }
   },
@@ -152,7 +152,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '是否隐藏标签页',
     slots: {
       default: (data) => {
-        return renderTag(data.enableHiddenTab)
+        return renderTag(data.enableHiddenTab);
       }
     }
   },
@@ -161,11 +161,11 @@ const detailSchema = ref<DescriptionsSchema[]>([
     label: '是否可跳转',
     slots: {
       default: (data) => {
-        return renderTag(data.enableSkip)
+        return renderTag(data.enableSkip);
       }
     }
   }
-])
+]);
 </script>
 
 <template>

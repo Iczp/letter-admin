@@ -1,33 +1,33 @@
-import type { Form, FormExpose } from '@/components/Form'
-import type { ElForm, ElFormItem } from 'element-plus'
-import { ref, unref, nextTick } from 'vue'
-import { FormSchema, FormSetProps, FormProps } from '@/components/Form'
-import { isEmptyVal, isObject } from '@/utils/is'
+import type { Form, FormExpose } from '@/components/Form';
+import type { ElForm, ElFormItem } from 'element-plus';
+import { ref, unref, nextTick } from 'vue';
+import { FormSchema, FormSetProps, FormProps } from '@/components/Form';
+import { isEmptyVal, isObject } from '@/utils/is';
 
 export const useForm = () => {
   // From实例
-  const formRef = ref<typeof Form & FormExpose>()
+  const formRef = ref<typeof Form & FormExpose>();
 
   // ElForm实例
-  const elFormRef = ref<ComponentRef<typeof ElForm>>()
+  const elFormRef = ref<ComponentRef<typeof ElForm>>();
 
   /**
    * @param ref Form实例
    * @param elRef ElForm实例
    */
   const register = (ref: typeof Form & FormExpose, elRef: ComponentRef<typeof ElForm>) => {
-    formRef.value = ref
-    elFormRef.value = elRef
-  }
+    formRef.value = ref;
+    elFormRef.value = elRef;
+  };
 
   const getForm = async () => {
-    await nextTick()
-    const form = unref(formRef)
+    await nextTick();
+    const form = unref(formRef);
     if (!form) {
-      console.error('The form is not registered. Please use the register method to register')
+      console.error('The form is not registered. Please use the register method to register');
     }
-    return form
-  }
+    return form;
+  };
 
   // 一些内置的方法
   const methods = {
@@ -36,10 +36,10 @@ export const useForm = () => {
      * @param props form组件的props
      */
     setProps: async (props: FormProps = {}) => {
-      const form = await getForm()
-      form?.setProps(props)
+      const form = await getForm();
+      form?.setProps(props);
       if (props.model) {
-        form?.setValues(props.model)
+        form?.setValues(props.model);
       }
     },
 
@@ -48,8 +48,8 @@ export const useForm = () => {
      * @param data 需要设置的数据
      */
     setValues: async (data: Recordable) => {
-      const form = await getForm()
-      form?.setValues(data)
+      const form = await getForm();
+      form?.setValues(data);
     },
 
     /**
@@ -57,8 +57,8 @@ export const useForm = () => {
      * @param schemaProps 需要设置的schemaProps
      */
     setSchema: async (schemaProps: FormSetProps[]) => {
-      const form = await getForm()
-      form?.setSchema(schemaProps)
+      const form = await getForm();
+      form?.setSchema(schemaProps);
     },
 
     /**
@@ -67,8 +67,8 @@ export const useForm = () => {
      * @param index 在哪里新增
      */
     addSchema: async (formSchema: FormSchema, index?: number) => {
-      const form = await getForm()
-      form?.addSchema(formSchema, index)
+      const form = await getForm();
+      form?.addSchema(formSchema, index);
     },
 
     /**
@@ -76,8 +76,8 @@ export const useForm = () => {
      * @param field 删除哪个数据
      */
     delSchema: async (field: string) => {
-      const form = await getForm()
-      form?.delSchema(field)
+      const form = await getForm();
+      form?.delSchema(field);
     },
 
     /**
@@ -85,25 +85,25 @@ export const useForm = () => {
      * @returns form data
      */
     getFormData: async <T = Recordable>(filterEmptyVal = true): Promise<T> => {
-      const form = await getForm()
-      const model = form?.formModel as any
+      const form = await getForm();
+      const model = form?.formModel as any;
       if (filterEmptyVal) {
         // 使用reduce过滤空值，并返回一个新对象
         return Object.keys(model).reduce((prev, next) => {
-          const value = model[next]
+          const value = model[next];
           if (!isEmptyVal(value)) {
             if (isObject(value)) {
               if (Object.keys(value).length > 0) {
-                prev[next] = value
+                prev[next] = value;
               }
             } else {
-              prev[next] = value
+              prev[next] = value;
             }
           }
-          return prev
-        }, {}) as T
+          return prev;
+        }, {}) as T;
       } else {
-        return model as T
+        return model as T;
       }
     },
 
@@ -113,8 +113,8 @@ export const useForm = () => {
      * @returns component instance
      */
     getComponentExpose: async (field: string) => {
-      const form = await getForm()
-      return form?.getComponentExpose(field)
+      const form = await getForm();
+      return form?.getComponentExpose(field);
     },
 
     /**
@@ -123,8 +123,8 @@ export const useForm = () => {
      * @returns formItem instance
      */
     getFormItemExpose: async (field: string) => {
-      const form = await getForm()
-      return form?.getFormItemExpose(field) as ComponentRef<typeof ElFormItem>
+      const form = await getForm();
+      return form?.getFormItemExpose(field) as ComponentRef<typeof ElFormItem>;
     },
 
     /**
@@ -132,18 +132,18 @@ export const useForm = () => {
      * @returns ElForm instance
      */
     getElFormExpose: async () => {
-      await getForm()
-      return unref(elFormRef)
+      await getForm();
+      return unref(elFormRef);
     },
 
     getFormExpose: async () => {
-      await getForm()
-      return unref(formRef)
+      await getForm();
+      return unref(formRef);
     }
-  }
+  };
 
   return {
     formRegister: register,
     formMethods: methods
-  }
-}
+  };
+};

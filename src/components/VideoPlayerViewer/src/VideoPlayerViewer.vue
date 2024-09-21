@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { VideoPlayer } from '@/components/VideoPlayer'
-import { ElOverlay } from 'element-plus'
-import { ref, nextTick } from 'vue'
-import { Icon } from '@/components/Icon'
+import { VideoPlayer } from '@/components/VideoPlayer';
+import { ElOverlay } from 'element-plus';
+import { ref, nextTick } from 'vue';
+import { Icon } from '@/components/Icon';
 
 const props = defineProps({
   show: {
@@ -22,17 +22,17 @@ const props = defineProps({
     type: String,
     default: ''
   }
-})
+});
 
-const visible = ref(props.show)
+const visible = ref(props.show);
 
 const close = async () => {
-  visible.value = false
-  await nextTick()
-  const wrap = document.getElementById(props.id)
-  if (!wrap) return
-  document.body.removeChild(wrap)
-}
+  visible.value = false;
+  await nextTick();
+  const wrap = document.getElementById(props.id);
+  if (!wrap) return;
+  document.body.removeChild(wrap);
+};
 </script>
 <template>
   <ElOverlay v-show="visible" @click="close">

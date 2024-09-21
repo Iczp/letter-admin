@@ -1,21 +1,21 @@
-import { ref, onBeforeUnmount } from 'vue'
+import { ref, onBeforeUnmount } from 'vue';
 
 const useNetwork = () => {
-  const online = ref(true)
+  const online = ref(true);
 
   const updateNetwork = () => {
-    online.value = navigator.onLine
-  }
+    online.value = navigator.onLine;
+  };
 
-  window.addEventListener('online', updateNetwork)
-  window.addEventListener('offline', updateNetwork)
+  window.addEventListener('online', updateNetwork);
+  window.addEventListener('offline', updateNetwork);
 
   onBeforeUnmount(() => {
-    window.removeEventListener('online', updateNetwork)
-    window.removeEventListener('offline', updateNetwork)
-  })
+    window.removeEventListener('online', updateNetwork);
+    window.removeEventListener('offline', updateNetwork);
+  });
 
-  return { online }
-}
+  return { online };
+};
 
-export { useNetwork }
+export { useNetwork };

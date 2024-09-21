@@ -1,14 +1,14 @@
 <script setup lang="tsx">
-import { ContentWrap } from '@/components/ContentWrap'
-import { ref, unref } from 'vue'
-import { ElDivider, ElRow, ElCol } from 'element-plus'
-import { hasPermi } from '@/components/Permission'
+import { ContentWrap } from '@/components/ContentWrap';
+import { ref, unref } from 'vue';
+import { ElDivider, ElRow, ElCol } from 'element-plus';
+import { hasPermi } from '@/components/Permission';
 
-const permission = ref('add')
+const permission = ref('add');
 
 setTimeout(() => {
-  permission.value = 'view'
-}, 3000)
+  permission.value = 'view';
+}, 3000);
 </script>
 
 <template>

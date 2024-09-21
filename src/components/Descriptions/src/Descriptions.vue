@@ -1,22 +1,22 @@
 <script lang="tsx">
-import { ElCollapseTransition, ElTooltip, ElRow, ElCol } from 'element-plus'
-import { useDesign } from '@/hooks/web/useDesign'
-import { propTypes } from '@/utils/propTypes'
-import { ref, unref, PropType, computed, defineComponent } from 'vue'
-import { useAppStore } from '@/store/modules/app'
-import { DescriptionsSchema } from './types'
-import { Icon } from '@/components/Icon'
-import { get } from 'lodash-es'
+import { ElCollapseTransition, ElTooltip, ElRow, ElCol } from 'element-plus';
+import { useDesign } from '@/hooks/web/useDesign';
+import { propTypes } from '@/utils/propTypes';
+import { ref, unref, PropType, computed, defineComponent } from 'vue';
+import { useAppStore } from '@/store/modules/app';
+import { DescriptionsSchema } from './types';
+import { Icon } from '@/components/Icon';
+import { get } from 'lodash-es';
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const mobile = computed(() => appStore.getMobile)
+const mobile = computed(() => appStore.getMobile);
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('descriptions')
+const prefixCls = getPrefixCls('descriptions');
 
-const defaultData = '-'
+const defaultData = '-';
 
 export default defineComponent({
   name: 'Descriptions',
@@ -40,41 +40,41 @@ export default defineComponent({
   },
   setup(props, { attrs }) {
     const getBindValue = computed((): any => {
-      const delArr: string[] = ['title', 'message', 'collapse', 'schema', 'data', 'class']
-      const obj = { ...attrs, ...props }
+      const delArr: string[] = ['title', 'message', 'collapse', 'schema', 'data', 'class'];
+      const obj = { ...attrs, ...props };
       for (const key in obj) {
         if (delArr.indexOf(key) !== -1) {
-          delete obj[key]
+          delete obj[key];
         }
       }
       if (unref(mobile)) {
-        obj.direction = 'vertical'
+        obj.direction = 'vertical';
       }
-      return obj
-    })
+      return obj;
+    });
 
     const getBindItemValue = (item: DescriptionsSchema) => {
-      const delArr: string[] = ['field']
-      const obj = { ...item }
+      const delArr: string[] = ['field'];
+      const obj = { ...item };
       for (const key in obj) {
         if (delArr.indexOf(key) !== -1) {
-          delete obj[key]
+          delete obj[key];
         }
       }
       return {
         labelClassName: `${prefixCls}-label`,
         ...obj
-      }
-    }
+      };
+    };
 
     // 折叠
-    const show = ref(true)
+    const show = ref(true);
 
     const toggleClick = () => {
       if (props.collapse) {
-        show.value = !unref(show)
+        show.value = !unref(show);
       }
-    }
+    };
 
     return () => {
       return (
@@ -152,16 +152,16 @@ export default defineComponent({
                         </div>
                       )}
                     </ElCol>
-                  )
+                  );
                 })}
               </ElRow>
             </div>
           </ElCollapseTransition>
         </div>
-      )
-    }
+      );
+    };
   }
-})
+});
 </script>
 
 <style lang="less" scoped>

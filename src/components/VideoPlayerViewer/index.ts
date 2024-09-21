@@ -1,3 +1,3 @@
-import VideoPlayerViewer from './src/VideoPlayerViewer.vue'
+import VideoPlayerViewer from './src/VideoPlayerViewer.vue';
 
-export { VideoPlayerViewer }
+export { VideoPlayerViewer };

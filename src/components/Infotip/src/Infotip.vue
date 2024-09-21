@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { PropType } from 'vue'
-import { Highlight } from '@/components/Highlight'
-import { useDesign } from '@/hooks/web/useDesign'
-import { propTypes } from '@/utils/propTypes'
-import { InfoTipSchema } from './types'
+import { PropType } from 'vue';
+import { Highlight } from '@/components/Highlight';
+import { useDesign } from '@/hooks/web/useDesign';
+import { propTypes } from '@/utils/propTypes';
+import { InfoTipSchema } from './types';
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('infotip')
+const prefixCls = getPrefixCls('infotip');
 
 defineProps({
   title: propTypes.string.def(''),
@@ -18,13 +18,13 @@ defineProps({
   },
   showIndex: propTypes.bool.def(true),
   highlightColor: propTypes.string.def('var(--el-color-primary)')
-})
+});
 
-const emit = defineEmits(['click'])
+const emit = defineEmits(['click']);
 
 const keyClick = (key: string) => {
-  emit('click', key)
-}
+  emit('click', key);
+};
 </script>
 
 <template>

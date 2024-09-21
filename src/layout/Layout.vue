@@ -1,46 +1,46 @@
 <script lang="tsx">
-import { computed, defineComponent, unref } from 'vue'
-import { useAppStore } from '@/store/modules/app'
-import { Backtop } from '@/components/Backtop'
-import { Setting } from '@/components/Setting'
-import { useRenderLayout } from './components/useRenderLayout'
-import { useDesign } from '@/hooks/web/useDesign'
+import { computed, defineComponent, unref } from 'vue';
+import { useAppStore } from '@/store/modules/app';
+import { Backtop } from '@/components/Backtop';
+import { Setting } from '@/components/Setting';
+import { useRenderLayout } from './components/useRenderLayout';
+import { useDesign } from '@/hooks/web/useDesign';
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('layout')
+const prefixCls = getPrefixCls('layout');
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
 // 是否是移动端
-const mobile = computed(() => appStore.getMobile)
+const mobile = computed(() => appStore.getMobile);
 
 // 菜单折叠
-const collapse = computed(() => appStore.getCollapse)
+const collapse = computed(() => appStore.getCollapse);
 
-const layout = computed(() => appStore.getLayout)
+const layout = computed(() => appStore.getLayout);
 
-const hideSetting = computed(() => import.meta.env.VITE_HIDE_GLOBAL_SETTING === 'true')
+const hideSetting = computed(() => import.meta.env.VITE_HIDE_GLOBAL_SETTING === 'true');
 
 const handleClickOutside = () => {
-  appStore.setCollapse(true)
-}
+  appStore.setCollapse(true);
+};
 
 const renderLayout = () => {
-  const { renderClassic, renderTopLeft, renderTop, renderCutMenu } = useRenderLayout()
+  const { renderClassic, renderTopLeft, renderTop, renderCutMenu } = useRenderLayout();
   switch (unref(layout)) {
     case 'classic':
-      return renderClassic()
+      return renderClassic();
     case 'topLeft':
-      return renderTopLeft()
+      return renderTopLeft();
     case 'top':
-      return renderTop()
+      return renderTop();
     case 'cutMenu':
-      return renderCutMenu()
+      return renderCutMenu();
     default:
-      break
+      break;
   }
-}
+};
 
 export default defineComponent({
   name: 'Layout',
@@ -60,9 +60,9 @@ export default defineComponent({
 
         {!unref(hideSetting) && <Setting></Setting>}
       </section>
-    )
+    );
   }
-})
+});
 </script>
 
 <style lang="less" scoped>

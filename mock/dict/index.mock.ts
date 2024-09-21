@@ -1,6 +1,6 @@
-import { SUCCESS_CODE } from '@/constants'
+import { SUCCESS_CODE } from '@/constants';
 
-const timeout = 1000
+const timeout = 1000;
 
 const dictObj: Recordable = {
   importance: [
@@ -17,7 +17,7 @@ const dictObj: Recordable = {
       label: 'tableDemo.important'
     }
   ]
-}
+};
 
 export default [
   // 字典接口
@@ -29,7 +29,7 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: dictObj
-      }
+      };
     }
   },
   // 获取某个字典
@@ -54,7 +54,7 @@ export default [
             value: 2
           }
         ]
-      }
+      };
     }
   }
-]
+];

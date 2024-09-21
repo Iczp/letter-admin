@@ -1,3 +1,3 @@
-import Highlight from './src/Highlight.vue'
+import Highlight from './src/Highlight.vue';
 
-export { Highlight }
+export { Highlight };

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useAppStore } from '@/store/modules/app'
-import { computed } from 'vue'
-import { useDesign } from '@/hooks/web/useDesign'
+import { useAppStore } from '@/store/modules/app';
+import { computed } from 'vue';
+import { useDesign } from '@/hooks/web/useDesign';
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('layout-radio-picker')
+const prefixCls = getPrefixCls('layout-radio-picker');
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const layout = computed(() => appStore.getLayout)
+const layout = computed(() => appStore.getLayout);
 </script>
 
 <template>

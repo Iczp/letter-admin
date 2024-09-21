@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useIcon } from '@/hooks/web/useIcon'
-import { propTypes } from '@/utils/propTypes'
-import { useI18n } from '@/hooks/web/useI18n'
+import { useIcon } from '@/hooks/web/useIcon';
+import { propTypes } from '@/utils/propTypes';
+import { useI18n } from '@/hooks/web/useI18n';
 
-const emit = defineEmits(['search', 'reset', 'expand'])
+const emit = defineEmits(['search', 'reset', 'expand']);
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 defineProps({
   showSearch: propTypes.bool.def(true),
@@ -14,19 +14,19 @@ defineProps({
   visible: propTypes.bool.def(true),
   searchLoading: propTypes.bool.def(false),
   resetLoading: propTypes.bool.def(false)
-})
+});
 
 const onSearch = () => {
-  emit('search')
-}
+  emit('search');
+};
 
 const onReset = () => {
-  emit('reset')
-}
+  emit('reset');
+};
 
 const onExpand = () => {
-  emit('expand')
-}
+  emit('expand');
+};
 </script>
 
 <template>

@@ -1,13 +1,13 @@
-import { defineStore } from 'pinia'
-import { store } from '../index'
+import { defineStore } from 'pinia';
+import { store } from '../index';
 
 interface lockInfo {
-  isLock?: boolean
-  password?: string
+  isLock?: boolean;
+  password?: string;
 }
 
 interface LockState {
-  lockInfo: lockInfo
+  lockInfo: lockInfo;
 }
 
 export const useLockStore = defineStore('lock', {
@@ -17,32 +17,32 @@ export const useLockStore = defineStore('lock', {
         // isLock: false, // 是否锁定屏幕
         // password: '' // 锁屏密码
       }
-    }
+    };
   },
   getters: {
     getLockInfo(): lockInfo {
-      return this.lockInfo
+      return this.lockInfo;
     }
   },
   actions: {
     setLockInfo(lockInfo: lockInfo) {
-      this.lockInfo = lockInfo
+      this.lockInfo = lockInfo;
     },
     resetLockInfo() {
-      this.lockInfo = {}
+      this.lockInfo = {};
     },
     unLock(password: string) {
       if (this.lockInfo?.password === password) {
-        this.resetLockInfo()
-        return true
+        this.resetLockInfo();
+        return true;
       } else {
-        return false
+        return false;
       }
     }
   },
   persist: true
-})
+});
 
 export const useLockStoreWithOut = () => {
-  return useLockStore(store)
-}
+  return useLockStore(store);
+};

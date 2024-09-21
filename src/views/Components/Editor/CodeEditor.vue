@@ -1,16 +1,16 @@
 <script setup lang="tsx">
-import { CodeEditor } from '@/components/CodeEditor'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ContentWrap } from '@/components/ContentWrap'
-import { ref } from 'vue'
-import { BaseButton } from '@/components/Button'
-import { ElDivider } from 'element-plus'
+import { CodeEditor } from '@/components/CodeEditor';
+import { useI18n } from '@/hooks/web/useI18n';
+import { ContentWrap } from '@/components/ContentWrap';
+import { ref } from 'vue';
+import { BaseButton } from '@/components/Button';
+import { ElDivider } from 'element-plus';
 const content = ref(
   'public class HelloWorld {\n  public static void main(String[] args) {\n    System.out.println("Hello, World!");\n  }\n}'
-)
-const { t } = useI18n()
+);
+const { t } = useI18n();
 
-const MonacoEditRef = ref<InstanceType<typeof CodeEditor>>()
+const MonacoEditRef = ref<InstanceType<typeof CodeEditor>>();
 </script>
 <template>
   <ContentWrap :title="t('richText.codeEditor')" :message="t('richText.codeEditorDes')">

@@ -1,34 +1,34 @@
-import { resolve } from 'path'
-import { loadEnv } from 'vite'
-import type { UserConfig, ConfigEnv } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import VueJsx from '@vitejs/plugin-vue-jsx'
-import progress from 'vite-plugin-progress'
-import EslintPlugin from 'vite-plugin-eslint'
-import { ViteEjsPlugin } from 'vite-plugin-ejs'
-import { viteMockServe } from 'vite-plugin-mock'
-import PurgeIcons from 'vite-plugin-purge-icons'
-import ServerUrlCopy from 'vite-plugin-url-copy'
-import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import'
-import UnoCSS from 'unocss/vite'
-import { visualizer } from 'rollup-plugin-visualizer'
+import { resolve } from 'path';
+import { loadEnv } from 'vite';
+import type { UserConfig, ConfigEnv } from 'vite';
+import Vue from '@vitejs/plugin-vue';
+import VueJsx from '@vitejs/plugin-vue-jsx';
+import progress from 'vite-plugin-progress';
+import EslintPlugin from 'vite-plugin-eslint';
+import { ViteEjsPlugin } from 'vite-plugin-ejs';
+import { viteMockServe } from 'vite-plugin-mock';
+import PurgeIcons from 'vite-plugin-purge-icons';
+import ServerUrlCopy from 'vite-plugin-url-copy';
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import';
+import UnoCSS from 'unocss/vite';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
-const root = process.cwd()
+const root = process.cwd();
 
 function pathResolve(dir: string) {
-  return resolve(root, '.', dir)
+  return resolve(root, '.', dir);
 }
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
-  let env = {} as any
-  const isBuild = command === 'build'
+  let env = {} as any;
+  const isBuild = command === 'build';
   if (!isBuild) {
-    env = loadEnv(process.argv[3] === '--mode' ? process.argv[4] : process.argv[3], root)
+    env = loadEnv(process.argv[3] === '--mode' ? process.argv[4] : process.argv[3], root);
   } else {
-    env = loadEnv(mode, root)
+    env = loadEnv(mode, root);
   }
   return {
     base: env.VITE_BASE_PATH,
@@ -51,9 +51,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
                 esModule: true,
                 resolveStyle: (name) => {
                   if (name === 'click-outside') {
-                    return ''
+                    return '';
                   }
-                  return `element-plus/es/components/${name.replace(/^el-/, '')}/style/css`
+                  return `element-plus/es/components/${name.replace(/^el-/, '')}/style/css`;
                 }
               }
             ]
@@ -78,6 +78,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       PurgeIcons(),
       env.VITE_USE_MOCK === 'true'
         ? viteMockServe({
+            // 默认是 false，设置为 true 时会在控制台输出日志
+            supportTs: true,
             ignore: /^\_/,
             mockPath: 'mock',
             localEnabled: !isBuild,
@@ -151,7 +153,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         }
       },
       hmr: {
-        overlay: false
+        overlay: true
       },
       host: '0.0.0.0'
     },
@@ -177,5 +179,5 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'cropperjs'
       ]
     }
-  }
-}
+  };
+};

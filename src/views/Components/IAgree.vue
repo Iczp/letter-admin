@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { IAgree } from '@/components/IAgree'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { IAgree } from '@/components/IAgree';
 
-const { t } = useI18n()
+const { t } = useI18n();
 </script>
 
 <template>

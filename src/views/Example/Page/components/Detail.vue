@@ -1,18 +1,18 @@
 <script setup lang="tsx">
-import { PropType, reactive } from 'vue'
-import type { TableData } from '@/api/table/types'
-import { Descriptions, DescriptionsSchema } from '@/components/Descriptions'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ElTag } from 'element-plus'
+import { PropType, reactive } from 'vue';
+import type { TableData } from '@/api/table/types';
+import { Descriptions, DescriptionsSchema } from '@/components/Descriptions';
+import { useI18n } from '@/hooks/web/useI18n';
+import { ElTag } from 'element-plus';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 defineProps({
   currentRow: {
     type: Object as PropType<Nullable<TableData>>,
     default: () => null
   }
-})
+});
 
 const schema = reactive<DescriptionsSchema[]>([
   {
@@ -43,7 +43,7 @@ const schema = reactive<DescriptionsSchema[]>([
                 ? t('tableDemo.good')
                 : t('tableDemo.commonly')}
           </ElTag>
-        )
+        );
       }
     }
   },
@@ -57,11 +57,11 @@ const schema = reactive<DescriptionsSchema[]>([
     span: 24,
     slots: {
       default: (data: any) => {
-        return <div innerHTML={data.content}></div>
+        return <div innerHTML={data.content}></div>;
       }
     }
   }
-])
+]);
 </script>
 
 <template>

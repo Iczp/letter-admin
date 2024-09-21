@@ -1,16 +1,16 @@
 <script setup lang="tsx">
-import { Descriptions } from '@/components/Descriptions'
-import { useI18n } from '@/hooks/web/useI18n'
-import { reactive } from 'vue'
-import { Form } from '@/components/Form'
-import { ElFormItem, ElInput } from 'element-plus'
-import { useValidator } from '@/hooks/web/useValidator'
-import { useForm } from '@/hooks/web/useForm'
-import { DescriptionsSchema } from '@/components/Descriptions'
+import { Descriptions } from '@/components/Descriptions';
+import { useI18n } from '@/hooks/web/useI18n';
+import { reactive } from 'vue';
+import { Form } from '@/components/Form';
+import { ElFormItem, ElInput } from 'element-plus';
+import { useValidator } from '@/hooks/web/useValidator';
+import { useForm } from '@/hooks/web/useForm';
+import { DescriptionsSchema } from '@/components/Descriptions';
 
-const { required } = useValidator()
+const { required } = useValidator();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const data = reactive({
   username: 'chenkl',
@@ -21,7 +21,7 @@ const data = reactive({
   addr: '这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的地址',
   sex: '男',
   certy: '3505831994xxxxxxxx'
-})
+});
 
 const schema = reactive<DescriptionsSchema[]>([
   {
@@ -45,7 +45,7 @@ const schema = reactive<DescriptionsSchema[]>([
     label: t('descriptionsDemo.addr'),
     span: 24
   }
-])
+]);
 
 const schema2 = reactive<DescriptionsSchema[]>([
   {
@@ -53,14 +53,14 @@ const schema2 = reactive<DescriptionsSchema[]>([
     label: t('descriptionsDemo.username'),
     slots: {
       label: (row) => {
-        return <span class="is-required--item">{row.label}</span>
+        return <span class="is-required--item">{row.label}</span>;
       },
       default: () => {
         return (
           <ElFormItem prop="username">
             <ElInput v-model={form.username} />
           </ElFormItem>
-        )
+        );
       }
     }
   },
@@ -69,14 +69,14 @@ const schema2 = reactive<DescriptionsSchema[]>([
     label: t('descriptionsDemo.nickName'),
     slots: {
       label: (row) => {
-        return <span class="is-required--item">{row.label}</span>
+        return <span class="is-required--item">{row.label}</span>;
       },
       default: () => {
         return (
           <ElFormItem prop="nickName">
             <ElInput v-model={form.nickName} />
           </ElFormItem>
-        )
+        );
       }
     }
   },
@@ -85,14 +85,14 @@ const schema2 = reactive<DescriptionsSchema[]>([
     label: t('descriptionsDemo.phone'),
     slots: {
       label: (row) => {
-        return <span class="is-required--item">{row.label}</span>
+        return <span class="is-required--item">{row.label}</span>;
       },
       default: () => {
         return (
           <ElFormItem prop="phone">
             <ElInput v-model={form.phone} />
           </ElFormItem>
-        )
+        );
       }
     }
   },
@@ -101,14 +101,14 @@ const schema2 = reactive<DescriptionsSchema[]>([
     label: t('descriptionsDemo.email'),
     slots: {
       label: (row) => {
-        return <span class="is-required--item">{row.label}</span>
+        return <span class="is-required--item">{row.label}</span>;
       },
       default: () => {
         return (
           <ElFormItem prop="email">
             <ElInput v-model={form.email} />
           </ElFormItem>
-        )
+        );
       }
     }
   },
@@ -117,19 +117,19 @@ const schema2 = reactive<DescriptionsSchema[]>([
     label: t('descriptionsDemo.addr'),
     slots: {
       label: (row) => {
-        return <span class="is-required--item">{row.label}</span>
+        return <span class="is-required--item">{row.label}</span>;
       },
       default: () => {
         return (
           <ElFormItem prop="addr">
             <ElInput v-model={form.addr} />
           </ElFormItem>
-        )
+        );
       }
     },
     span: 24
   }
-])
+]);
 
 const form = reactive({
   username: '',
@@ -137,7 +137,7 @@ const form = reactive({
   phone: '',
   email: '',
   addr: ''
-})
+});
 
 const rules = reactive({
   username: [required()],
@@ -145,17 +145,17 @@ const rules = reactive({
   phone: [required()],
   email: [required()],
   addr: [required()]
-})
+});
 
-const { formRegister, formMethods } = useForm()
-const { getElFormExpose } = formMethods
+const { formRegister, formMethods } = useForm();
+const { getElFormExpose } = formMethods;
 
 const formValidation = async () => {
-  const elFormExpose = await getElFormExpose()
+  const elFormExpose = await getElFormExpose();
   elFormExpose?.validate((isValid) => {
-    console.log(isValid)
-  })
-}
+    console.log(isValid);
+  });
+};
 </script>
 
 <template>

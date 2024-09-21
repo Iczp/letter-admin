@@ -1,35 +1,35 @@
 <script setup lang="tsx">
-import { Form, FormSchema } from '@/components/Form'
-import { reactive, ref, unref } from 'vue'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useForm } from '@/hooks/web/useForm'
-import { ElInput, FormRules } from 'element-plus'
-import { useValidator } from '@/hooks/web/useValidator'
-import { BaseButton } from '@/components/Button'
-import { IAgree } from '@/components/IAgree'
+import { Form, FormSchema } from '@/components/Form';
+import { reactive, ref, unref } from 'vue';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useForm } from '@/hooks/web/useForm';
+import { ElInput, FormRules } from 'element-plus';
+import { useValidator } from '@/hooks/web/useValidator';
+import { BaseButton } from '@/components/Button';
+import { IAgree } from '@/components/IAgree';
 
-const emit = defineEmits(['to-login'])
+const emit = defineEmits(['to-login']);
 
-const { formRegister, formMethods } = useForm()
-const { getElFormExpose } = formMethods
+const { formRegister, formMethods } = useForm();
+const { getElFormExpose } = formMethods;
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const { required, check } = useValidator()
+const { required, check } = useValidator();
 
-const getCodeTime = ref(60)
-const getCodeLoading = ref(false)
+const getCodeTime = ref(60);
+const getCodeLoading = ref(false);
 const getCode = () => {
-  getCodeLoading.value = true
+  getCodeLoading.value = true;
   const timer = setInterval(() => {
-    getCodeTime.value--
+    getCodeTime.value--;
     if (getCodeTime.value <= 0) {
-      clearInterval(timer)
-      getCodeTime.value = 60
-      getCodeLoading.value = false
+      clearInterval(timer);
+      getCodeTime.value = 60;
+      getCodeLoading.value = false;
     }
-  }, 1000)
-}
+  }, 1000);
+};
 
 const schema = reactive<FormSchema[]>([
   {
@@ -40,7 +40,7 @@ const schema = reactive<FormSchema[]>([
     formItemProps: {
       slots: {
         default: () => {
-          return <h2 class="text-2xl font-bold text-center w-[100%]">{t('login.register')}</h2>
+          return <h2 class="text-2xl font-bold text-center w-[100%]">{t('login.register')}</h2>;
         }
       }
     }
@@ -111,7 +111,7 @@ const schema = reactive<FormSchema[]>([
                 {unref(getCodeLoading) ? `(${unref(getCodeTime)})` : ''}
               </BaseButton>
             </div>
-          )
+          );
         }
       }
     }
@@ -138,7 +138,7 @@ const schema = reactive<FormSchema[]>([
                 ]}
               />
             </>
-          )
+          );
         }
       }
     }
@@ -169,12 +169,12 @@ const schema = reactive<FormSchema[]>([
                 </BaseButton>
               </div>
             </>
-          )
+          );
         }
       }
     }
   }
-])
+]);
 
 const rules: FormRules = {
   username: [required()],
@@ -182,27 +182,27 @@ const rules: FormRules = {
   check_password: [required()],
   code: [required()],
   iAgree: [required(), check()]
-}
+};
 
 const toLogin = () => {
-  emit('to-login')
-}
+  emit('to-login');
+};
 
-const loading = ref(false)
+const loading = ref(false);
 
 const loginRegister = async () => {
-  const formRef = await getElFormExpose()
+  const formRef = await getElFormExpose();
   formRef?.validate(async (valid) => {
     if (valid) {
       try {
-        loading.value = true
-        toLogin()
+        loading.value = true;
+        toLogin();
       } finally {
-        loading.value = false
+        loading.value = false;
       }
     }
-  })
-}
+  });
+};
 </script>
 
 <template>

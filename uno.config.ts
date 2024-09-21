@@ -1,30 +1,30 @@
-import { defineConfig, toEscapedSelector as e, presetUno, presetIcons } from 'unocss'
-import transformerVariantGroup from '@unocss/transformer-variant-group'
-import { loadEnv } from 'vite'
-import { ICON_PREFIX } from './src/constants'
+import { defineConfig, toEscapedSelector as e, presetUno, presetIcons } from 'unocss';
+import transformerVariantGroup from '@unocss/transformer-variant-group';
+import { loadEnv } from 'vite';
+import { ICON_PREFIX } from './src/constants';
 
-const root = process.cwd()
+const root = process.cwd();
 
 const createPresetIcons = () => {
-  const isBuild = !!process.argv[4]
-  let env = {} as any
+  const isBuild = !!process.argv[4];
+  let env = {} as any;
   if (!isBuild) {
-    env = loadEnv(process.argv[3], root)
+    env = loadEnv(process.argv[3], root);
   } else {
-    env = loadEnv(process.argv[4], root)
+    env = loadEnv(process.argv[4], root);
   }
   // @ts-ignore
   if (env.VITE_USE_ONLINE_ICON === 'true') {
-    return []
+    return [];
   } else {
     return [
       presetIcons({
         autoInstall: false,
         prefix: ICON_PREFIX
       })
-    ]
+    ];
   }
-}
+};
 
 export default defineConfig({
   // ...UnoCSS options
@@ -32,18 +32,18 @@ export default defineConfig({
     [
       /^overflow-ellipsis$/,
       ([], { rawSelector }) => {
-        const selector = e(rawSelector)
+        const selector = e(rawSelector);
         return `
 ${selector} {
   text-overflow: ellipsis;
 }
-`
+`;
       }
     ],
     [
       /^custom-hover$/,
       ([], { rawSelector }) => {
-        const selector = e(rawSelector)
+        const selector = e(rawSelector);
         return `
 ${selector} {
   display: flex;
@@ -60,13 +60,13 @@ ${selector}:hover {
 .dark ${selector}:hover {
   background-color: var(--el-bg-color-overlay);
 }
-`
+`;
       }
     ],
     [
       /^layout-border__left$/,
       ([], { rawSelector }) => {
-        const selector = e(rawSelector)
+        const selector = e(rawSelector);
         return `
 ${selector}:before {
   content: "";
@@ -78,13 +78,13 @@ ${selector}:before {
   background-color: var(--el-border-color);
   z-index: 3;
 }
-`
+`;
       }
     ],
     [
       /^layout-border__right$/,
       ([], { rawSelector }) => {
-        const selector = e(rawSelector)
+        const selector = e(rawSelector);
         return `
 ${selector}:after {
   content: "";
@@ -96,13 +96,13 @@ ${selector}:after {
   background-color: var(--el-border-color);
   z-index: 3;
 }
-`
+`;
       }
     ],
     [
       /^layout-border__top$/,
       ([], { rawSelector }) => {
-        const selector = e(rawSelector)
+        const selector = e(rawSelector);
         return `
 ${selector}:before {
   content: "";
@@ -114,13 +114,13 @@ ${selector}:before {
   background-color: var(--el-border-color);
   z-index: 3;
 }
-`
+`;
       }
     ],
     [
       /^layout-border__bottom$/,
       ([], { rawSelector }) => {
-        const selector = e(rawSelector)
+        const selector = e(rawSelector);
         return `
 ${selector}:after {
   content: "";
@@ -132,7 +132,7 @@ ${selector}:after {
   background-color: var(--el-border-color);
   z-index: 3;
 }
-`
+`;
       }
     ]
   ],
@@ -143,4 +143,4 @@ ${selector}:after {
       include: [/\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|ts)($|\?)/]
     }
   }
-})
+});

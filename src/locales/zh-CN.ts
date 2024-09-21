@@ -563,4 +563,4 @@ export default {
   avatarsDemo: {
     title: '头像列表组件，基于element-plus的Avatar组件二次封装'
   }
-}
+};

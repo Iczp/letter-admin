@@ -1,53 +1,53 @@
 <script setup lang="ts">
-import { ElDrawer, ElDivider, ElMessage } from 'element-plus'
-import { ref, unref } from 'vue'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ThemeSwitch } from '@/components/ThemeSwitch'
-import { useCssVar } from '@vueuse/core'
-import { useAppStore } from '@/store/modules/app'
-import { trim, setCssVar, getCssVar } from '@/utils'
-import ColorRadioPicker from './components/ColorRadioPicker.vue'
-import InterfaceDisplay from './components/InterfaceDisplay.vue'
-import LayoutRadioPicker from './components/LayoutRadioPicker.vue'
-import { useStorage } from '@/hooks/web/useStorage'
-import { useClipboard } from '@vueuse/core'
-import { useDesign } from '@/hooks/web/useDesign'
+import { ElDrawer, ElDivider, ElMessage } from 'element-plus';
+import { ref, unref } from 'vue';
+import { useI18n } from '@/hooks/web/useI18n';
+import { ThemeSwitch } from '@/components/ThemeSwitch';
+import { useCssVar } from '@vueuse/core';
+import { useAppStore } from '@/store/modules/app';
+import { trim, setCssVar, getCssVar } from '@/utils';
+import ColorRadioPicker from './components/ColorRadioPicker.vue';
+import InterfaceDisplay from './components/InterfaceDisplay.vue';
+import LayoutRadioPicker from './components/LayoutRadioPicker.vue';
+import { useStorage } from '@/hooks/web/useStorage';
+import { useClipboard } from '@vueuse/core';
+import { useDesign } from '@/hooks/web/useDesign';
 
-const { clear: storageClear } = useStorage('localStorage')
+const { clear: storageClear } = useStorage('localStorage');
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('setting')
+const prefixCls = getPrefixCls('setting');
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const drawer = ref(false)
+const drawer = ref(false);
 
 // 主题色相关
-const systemTheme = ref(appStore.getTheme.elColorPrimary)
+const systemTheme = ref(appStore.getTheme.elColorPrimary);
 
 const setSystemTheme = (color: string) => {
-  setCssVar('--el-color-primary', color)
-  appStore.setTheme({ elColorPrimary: color })
-  const leftMenuBgColor = useCssVar('--left-menu-bg-color', document.documentElement)
-  setMenuTheme(trim(unref(leftMenuBgColor)))
-}
+  setCssVar('--el-color-primary', color);
+  appStore.setTheme({ elColorPrimary: color });
+  const leftMenuBgColor = useCssVar('--left-menu-bg-color', document.documentElement);
+  setMenuTheme(trim(unref(leftMenuBgColor)));
+};
 
 // 头部主题相关
-const headerTheme = ref(appStore.getTheme.topHeaderBgColor || '')
+const headerTheme = ref(appStore.getTheme.topHeaderBgColor || '');
 
 const setHeaderTheme = (color: string) => {
-  appStore.setHeaderTheme(color)
-}
+  appStore.setHeaderTheme(color);
+};
 
 // 菜单主题相关
-const menuTheme = ref(appStore.getTheme.leftMenuBgColor || '')
+const menuTheme = ref(appStore.getTheme.leftMenuBgColor || '');
 
 const setMenuTheme = (color: string) => {
-  appStore.setMenuTheme(color)
-}
+  appStore.setMenuTheme(color);
+};
 
 // 监听layout变化，重置一些主题色
 // watch(
@@ -131,28 +131,28 @@ const copyConfig = async () => {
       }
     `,
     legacy: true
-  })
+  });
   if (!isSupported) {
-    ElMessage.error(t('setting.copyFailed'))
+    ElMessage.error(t('setting.copyFailed'));
   } else {
-    await copy()
+    await copy();
     if (unref(copied)) {
-      ElMessage.success(t('setting.copySuccess'))
+      ElMessage.success(t('setting.copySuccess'));
     }
   }
-}
+};
 
 // 清空缓存
 const clear = () => {
-  storageClear()
-  window.location.reload()
-}
+  storageClear();
+  window.location.reload();
+};
 
 const themeChange = () => {
-  const color = getCssVar('--el-bg-color')
-  setMenuTheme(color)
-  setHeaderTheme(color)
-}
+  const color = getCssVar('--el-bg-color');
+  setMenuTheme(color);
+  setHeaderTheme(color);
+};
 </script>
 
 <template>

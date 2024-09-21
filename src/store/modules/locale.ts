@@ -1,19 +1,19 @@
-import { defineStore } from 'pinia'
-import { store } from '../index'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
-import en from 'element-plus/es/locale/lang/en'
-import { useStorage } from '@/hooks/web/useStorage'
-import { LocaleDropdownType } from '@/components/LocaleDropdown'
+import { defineStore } from 'pinia';
+import { store } from '../index';
+import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import en from 'element-plus/es/locale/lang/en';
+import { useStorage } from '@/hooks/web/useStorage';
+import { LocaleDropdownType } from '@/components/LocaleDropdown';
 
-const { getStorage, setStorage } = useStorage('localStorage')
+const { getStorage, setStorage } = useStorage('localStorage');
 
 const elLocaleMap = {
   'zh-CN': zhCn,
   en: en
-}
+};
 interface LocaleState {
-  currentLocale: LocaleDropdownType
-  localeMap: LocaleDropdownType[]
+  currentLocale: LocaleDropdownType;
+  localeMap: LocaleDropdownType[];
 }
 
 export const useLocaleStore = defineStore('locales', {
@@ -34,26 +34,26 @@ export const useLocaleStore = defineStore('locales', {
           name: 'English'
         }
       ]
-    }
+    };
   },
   getters: {
     getCurrentLocale(): LocaleDropdownType {
-      return this.currentLocale
+      return this.currentLocale;
     },
     getLocaleMap(): LocaleDropdownType[] {
-      return this.localeMap
+      return this.localeMap;
     }
   },
   actions: {
     setCurrentLocale(localeMap: LocaleDropdownType) {
       // this.locale = Object.assign(this.locale, localeMap)
-      this.currentLocale.lang = localeMap?.lang
-      this.currentLocale.elLocale = elLocaleMap[localeMap?.lang]
-      setStorage('lang', localeMap?.lang)
+      this.currentLocale.lang = localeMap?.lang;
+      this.currentLocale.elLocale = elLocaleMap[localeMap?.lang];
+      setStorage('lang', localeMap?.lang);
     }
   }
-})
+});
 
 export const useLocaleStoreWithOut = () => {
-  return useLocaleStore(store)
-}
+  return useLocaleStore(store);
+};

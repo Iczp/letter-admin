@@ -1,21 +1,21 @@
 <script lang="tsx">
-import { usePermissionStore } from '@/store/modules/permission'
-import { useAppStore } from '@/store/modules/app'
-import { computed, unref, defineComponent, watch, ref, onMounted } from 'vue'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ElScrollbar, ClickOutside } from 'element-plus'
-import { Icon } from '@/components/Icon'
-import { Menu } from '@/components/Menu'
-import { useRouter } from 'vue-router'
-import { pathResolve } from '@/utils/routerHelper'
-import { cloneDeep } from 'lodash-es'
-import { filterMenusPath, initTabMap, tabPathMap } from './helper'
-import { useDesign } from '@/hooks/web/useDesign'
-import { isUrl } from '@/utils/is'
+import { usePermissionStore } from '@/store/modules/permission';
+import { useAppStore } from '@/store/modules/app';
+import { computed, unref, defineComponent, watch, ref, onMounted } from 'vue';
+import { useI18n } from '@/hooks/web/useI18n';
+import { ElScrollbar, ClickOutside } from 'element-plus';
+import { Icon } from '@/components/Icon';
+import { Menu } from '@/components/Menu';
+import { useRouter } from 'vue-router';
+import { pathResolve } from '@/utils/routerHelper';
+import { cloneDeep } from 'lodash-es';
+import { filterMenusPath, initTabMap, tabPathMap } from './helper';
+import { useDesign } from '@/hooks/web/useDesign';
+import { isUrl } from '@/utils/is';
 
-const { getPrefixCls, variables } = useDesign()
+const { getPrefixCls, variables } = useDesign();
 
-const prefixCls = getPrefixCls('tab-menu')
+const prefixCls = getPrefixCls('tab-menu');
 
 export default defineComponent({
   name: 'TabMenu',
@@ -23,126 +23,126 @@ export default defineComponent({
     ClickOutside
   },
   setup() {
-    const { push, currentRoute } = useRouter()
+    const { push, currentRoute } = useRouter();
 
-    const { t } = useI18n()
+    const { t } = useI18n();
 
-    const appStore = useAppStore()
+    const appStore = useAppStore();
 
-    const collapse = computed(() => appStore.getCollapse)
+    const collapse = computed(() => appStore.getCollapse);
 
-    const fixedMenu = computed(() => appStore.getFixedMenu)
+    const fixedMenu = computed(() => appStore.getFixedMenu);
 
-    const permissionStore = usePermissionStore()
+    const permissionStore = usePermissionStore();
 
-    const routers = computed(() => permissionStore.getRouters)
+    const routers = computed(() => permissionStore.getRouters);
 
-    const tabRouters = computed(() => unref(routers).filter((v) => !v?.meta?.hidden))
+    const tabRouters = computed(() => unref(routers).filter((v) => !v?.meta?.hidden));
 
     const setCollapse = () => {
-      appStore.setCollapse(!unref(collapse))
-    }
+      appStore.setCollapse(!unref(collapse));
+    };
 
     onMounted(() => {
       if (unref(fixedMenu)) {
-        const path = `/${unref(currentRoute).path.split('/')[1]}`
+        const path = `/${unref(currentRoute).path.split('/')[1]}`;
         const children = unref(tabRouters).find(
           (v) =>
             (v.meta?.alwaysShow || (v?.children?.length && v?.children?.length > 1)) &&
             v.path === path
-        )?.children
+        )?.children;
 
-        tabActive.value = path
+        tabActive.value = path;
         if (children) {
           permissionStore.setMenuTabRouters(
             cloneDeep(children).map((v) => {
-              v.path = pathResolve(unref(tabActive), v.path)
-              return v
+              v.path = pathResolve(unref(tabActive), v.path);
+              return v;
             })
-          )
+          );
         }
       }
-    })
+    });
 
     watch(
       () => routers.value,
       (routers: AppRouteRecordRaw[]) => {
-        initTabMap(routers)
-        filterMenusPath(routers, routers)
+        initTabMap(routers);
+        filterMenusPath(routers, routers);
       },
       {
         immediate: true,
         deep: true
       }
-    )
+    );
 
-    const showTitle = ref(true)
+    const showTitle = ref(true);
 
     watch(
       () => collapse.value,
       (collapse: boolean) => {
         if (!collapse) {
           setTimeout(() => {
-            showTitle.value = !collapse
-          }, 200)
+            showTitle.value = !collapse;
+          }, 200);
         } else {
-          showTitle.value = !collapse
+          showTitle.value = !collapse;
         }
       },
       {
         immediate: true
       }
-    )
+    );
 
     // 是否显示菜单
-    const showMenu = ref(unref(fixedMenu) ? true : false)
+    const showMenu = ref(unref(fixedMenu) ? true : false);
 
     // tab高亮
-    const tabActive = ref('')
+    const tabActive = ref('');
 
     // tab点击事件
     const tabClick = (item: AppRouteRecordRaw) => {
       if (isUrl(item.path)) {
-        window.open(item.path)
-        return
+        window.open(item.path);
+        return;
       }
-      const newPath = item.children ? item.path : item.path.split('/')[0]
-      const oldPath = unref(tabActive)
-      tabActive.value = item.children ? item.path : item.path.split('/')[0]
+      const newPath = item.children ? item.path : item.path.split('/')[0];
+      const oldPath = unref(tabActive);
+      tabActive.value = item.children ? item.path : item.path.split('/')[0];
       if (item.children) {
         if (newPath === oldPath || !unref(showMenu)) {
           // showMenu.value = unref(fixedMenu) ? true : !unref(showMenu)
-          showMenu.value = !unref(showMenu)
+          showMenu.value = !unref(showMenu);
         }
         if (unref(showMenu)) {
           permissionStore.setMenuTabRouters(
             cloneDeep(item.children).map((v) => {
-              v.path = pathResolve(unref(tabActive), v.path)
-              return v
+              v.path = pathResolve(unref(tabActive), v.path);
+              return v;
             })
-          )
+          );
         }
       } else {
-        push(item.path)
-        permissionStore.setMenuTabRouters([])
-        showMenu.value = false
+        push(item.path);
+        permissionStore.setMenuTabRouters([]);
+        showMenu.value = false;
       }
-    }
+    };
 
     // 设置高亮
     const isActive = (currentPath: string) => {
-      const { path } = unref(currentRoute)
+      const { path } = unref(currentRoute);
       if (tabPathMap[currentPath].includes(path)) {
-        return true
+        return true;
       }
-      return false
-    }
+      return false;
+    };
 
     const clickOut = () => {
       if (!unref(fixedMenu)) {
-        showMenu.value = false
+        showMenu.value = false;
       }
-    }
+    };
 
     return () => (
       <div
@@ -168,7 +168,7 @@ export default defineComponent({
                         ...(v?.children && v?.children[0]),
                         path: pathResolve(v.path, (v?.children && v?.children[0])?.path as string)
                       }
-                ) as AppRouteRecordRaw
+                ) as AppRouteRecordRaw;
                 return (
                   <div
                     class={[
@@ -179,7 +179,7 @@ export default defineComponent({
                       }
                     ]}
                     onClick={() => {
-                      tabClick(item)
+                      tabClick(item);
                     }}
                   >
                     <div>
@@ -189,8 +189,8 @@ export default defineComponent({
                       <p class="break-words mt-5px px-2px">{t(item.meta?.title || '')}</p>
                     )}
                   </div>
-                )
-              })
+                );
+              });
             }}
           </div>
         </ElScrollbar>
@@ -217,9 +217,9 @@ export default defineComponent({
           style="transition: width var(--transition-time-02), left var(--transition-time-02);"
         ></Menu>
       </div>
-    )
+    );
   }
-})
+});
 </script>
 
 <style lang="less" scoped>

@@ -574,4 +574,4 @@ export default {
     title:
       'Avatar component for avatar list, secondary packaging based on element plus Avatar component'
   }
-}
+};

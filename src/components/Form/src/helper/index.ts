@@ -1,10 +1,10 @@
-import { useI18n } from '@/hooks/web/useI18n'
-import { PlaceholderModel, FormSchema, ComponentNameEnum, ColProps } from '../types'
-import { isFunction } from '@/utils/is'
-import { firstUpperCase, humpToDash } from '@/utils'
-import { set, get } from 'lodash-es'
+import { useI18n } from '@/hooks/web/useI18n';
+import { PlaceholderModel, FormSchema, ComponentNameEnum, ColProps } from '../types';
+import { isFunction } from '@/utils/is';
+import { firstUpperCase, humpToDash } from '@/utils';
+import { set, get } from 'lodash-es';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 /**
  *
@@ -18,22 +18,22 @@ export const setTextPlaceholder = (schema: FormSchema): PlaceholderModel => {
     ComponentNameEnum.AUTOCOMPLETE,
     ComponentNameEnum.INPUT_NUMBER,
     ComponentNameEnum.INPUT_PASSWORD
-  ]
+  ];
   const selectMap = [
     ComponentNameEnum.SELECT,
     ComponentNameEnum.TIME_PICKER,
     ComponentNameEnum.DATE_PICKER,
     ComponentNameEnum.TIME_SELECT,
     ComponentNameEnum.SELECT_V2
-  ]
+  ];
   if (textMap.includes(schema?.component as ComponentNameEnum)) {
     return {
       placeholder: t('common.inputText')
-    }
+    };
   }
   if (selectMap.includes(schema?.component as ComponentNameEnum)) {
     // 一些范围选择器
-    const twoTextMap = ['datetimerange', 'daterange', 'monthrange', 'datetimerange', 'daterange']
+    const twoTextMap = ['datetimerange', 'daterange', 'monthrange', 'datetimerange', 'daterange'];
     if (
       twoTextMap.includes(
         ((schema?.componentProps as any)?.type ||
@@ -44,15 +44,15 @@ export const setTextPlaceholder = (schema: FormSchema): PlaceholderModel => {
         startPlaceholder: t('common.startTimeText'),
         endPlaceholder: t('common.endTimeText'),
         rangeSeparator: '-'
-      }
+      };
     } else {
       return {
         placeholder: t('common.selectText')
-      }
+      };
     }
   }
-  return {}
-}
+  return {};
+};
 
 /**
  *
@@ -73,9 +73,9 @@ export const setGridProp = (col: ColProps = {}): ColProps => {
           xl: 12
         }),
     ...col
-  }
-  return colProps
-}
+  };
+  return colProps;
+};
 
 /**
  *
@@ -85,14 +85,14 @@ export const setGridProp = (col: ColProps = {}): ColProps => {
 export const setComponentProps = (item: FormSchema): Recordable => {
   // const notNeedClearable = ['ColorPicker']
   // 拆分事件并组合
-  const onEvents = (item?.componentProps as any)?.on || {}
-  const newOnEvents: Recordable = {}
+  const onEvents = (item?.componentProps as any)?.on || {};
+  const newOnEvents: Recordable = {};
 
   for (const key in onEvents) {
     if (onEvents[key]) {
       newOnEvents[`on${firstUpperCase(key)}`] = (...args: any[]) => {
-        onEvents[key](...args)
-      }
+        onEvents[key](...args);
+      };
     }
   }
 
@@ -100,16 +100,16 @@ export const setComponentProps = (item: FormSchema): Recordable => {
     clearable: true,
     ...item.componentProps,
     ...newOnEvents
-  }
+  };
   // 需要删除额外的属性
   if (componentProps.slots) {
-    delete componentProps.slots
+    delete componentProps.slots;
   }
   if (componentProps.on) {
-    delete componentProps.on
+    delete componentProps.on;
   }
-  return componentProps
-}
+  return componentProps;
+};
 
 /**
  *
@@ -117,22 +117,22 @@ export const setComponentProps = (item: FormSchema): Recordable => {
  * @param slotsProps 插槽属性
  */
 export const setItemComponentSlots = (slotsProps: Recordable = {}): Recordable => {
-  const slotObj: Recordable = {}
+  const slotObj: Recordable = {};
   for (const key in slotsProps) {
     if (slotsProps[key]) {
       if (isFunction(slotsProps[key])) {
         slotObj[humpToDash(key)] = (...args: any[]) => {
-          return slotsProps[key]?.(...args)
-        }
+          return slotsProps[key]?.(...args);
+        };
       } else {
         slotObj[humpToDash(key)] = () => {
-          return slotsProps[key]
-        }
+          return slotsProps[key];
+        };
       }
     }
   }
-  return slotObj
-}
+  return slotObj;
+};
 
 /**
  *
@@ -142,28 +142,28 @@ export const setItemComponentSlots = (slotsProps: Recordable = {}): Recordable =
  * @description 生成对应的formModel
  */
 export const initModel = (schema: FormSchema[], formModel: Recordable) => {
-  const model: Recordable = { ...formModel }
+  const model: Recordable = { ...formModel };
   schema.map((v) => {
     if (v.remove) {
-      delete model[v.field]
+      delete model[v.field];
     } else if (v.component !== 'Divider') {
       // const hasField = Reflect.has(model, v.field)
-      const hasField = get(model, v.field)
+      const hasField = get(model, v.field);
       // 如果先前已经有值存在，则不进行重新赋值，而是采用现有的值
       set(
         model,
         v.field,
         hasField !== void 0 ? get(model, v.field) : v.value !== void 0 ? v.value : undefined
-      )
+      );
       // model[v.field] = hasField ? model[v.field] : v.value !== void 0 ? v.value : undefined
     }
-  })
+  });
   // 如果 schema 对应的 field 不存在，则删除 model 中的对应的 field
   for (let i = 0; i < schema.length; i++) {
-    const key = schema[i].field
+    const key = schema[i].field;
     if (!get(model, key) && get(model, key) !== 0) {
-      delete model[key]
+      delete model[key];
     }
   }
-  return model
-}
+  return model;
+};

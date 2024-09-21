@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { useDesign } from '@/hooks/web/useDesign'
-import { nextTick, unref, ref, watch, onBeforeUnmount, onMounted, computed } from 'vue'
-import Cropper from 'cropperjs'
-import 'cropperjs/dist/cropper.min.css'
-import { ElDivider, ElUpload, UploadFile, ElMessage, ElTooltip } from 'element-plus'
-import { useDebounceFn } from '@vueuse/core'
-import { BaseButton } from '@/components/Button'
+import { useDesign } from '@/hooks/web/useDesign';
+import { nextTick, unref, ref, watch, onBeforeUnmount, onMounted, computed } from 'vue';
+import Cropper from 'cropperjs';
+import 'cropperjs/dist/cropper.min.css';
+import { ElDivider, ElUpload, UploadFile, ElMessage, ElTooltip } from 'element-plus';
+import { useDebounceFn } from '@vueuse/core';
+import { BaseButton } from '@/components/Button';
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('image-cropping')
+const prefixCls = getPrefixCls('image-cropping');
 
 const props = defineProps({
   imageUrl: {
@@ -41,51 +41,51 @@ const props = defineProps({
     type: Boolean,
     default: true
   }
-})
+});
 
 const getBase64 = useDebounceFn(() => {
-  imgBase64.value = unref(cropperRef)?.getCroppedCanvas()?.toDataURL() ?? ''
-}, 80)
+  imgBase64.value = unref(cropperRef)?.getCroppedCanvas()?.toDataURL() ?? '';
+}, 80);
 
 const resetCropBox = () => {
-  const containerData = unref(cropperRef)?.getContainerData()
+  const containerData = unref(cropperRef)?.getContainerData();
   unref(cropperRef)?.setCropBoxData({
     width: props.cropBoxWidth,
     height: props.cropBoxHeight,
     left: (containerData?.width || 0) / 2 - 100,
     top: (containerData?.height || 0) / 2 - 100
-  })
-  imgBase64.value = unref(cropperRef)?.getCroppedCanvas()?.toDataURL() ?? ''
-}
+  });
+  imgBase64.value = unref(cropperRef)?.getCroppedCanvas()?.toDataURL() ?? '';
+};
 
 const getBoxStyle = computed(() => {
   return {
     width: `${props.boxWidth}px`,
     height: `${props.boxHeight}px`
-  }
-})
+  };
+});
 
 const getCropBoxStyle = computed(() => {
   return {
     width: `${props.cropBoxWidth}px`,
     height: `${props.cropBoxHeight}px`
-  }
-})
+  };
+});
 
 // 获取对应的缩小倍数的宽高
 const getScaleSize = (scale: number) => {
   return {
     width: props.cropBoxWidth * scale + 'px',
     height: props.cropBoxHeight * scale + 'px'
-  }
-}
+  };
+};
 
-const imgBase64 = ref('')
-const imgRef = ref<HTMLImageElement>()
-const cropperRef = ref<Cropper>()
+const imgBase64 = ref('');
+const imgRef = ref<HTMLImageElement>();
+const cropperRef = ref<Cropper>();
 const intiCropper = () => {
-  if (!unref(imgRef)) return
-  const imgEl = unref(imgRef)!
+  if (!unref(imgRef)) return;
+  const imgEl = unref(imgRef)!;
   cropperRef.value = new Cropper(imgEl, {
     aspectRatio: 1,
     viewMode: 1,
@@ -95,78 +95,78 @@ const intiCropper = () => {
     toggleDragModeOnDblclick: false,
     checkCrossOrigin: false,
     ready() {
-      resetCropBox()
+      resetCropBox();
     },
     cropmove() {
-      getBase64()
+      getBase64();
     },
     zoom() {
-      getBase64()
+      getBase64();
     },
     crop() {
-      getBase64()
+      getBase64();
     }
-  })
-}
+  });
+};
 
 const uploadChange = (uploadFile: UploadFile) => {
   // 判断是否是图片
   if (uploadFile?.raw?.type.indexOf('image') === -1) {
-    ElMessage.error('请上传图片格式的文件')
-    return
+    ElMessage.error('请上传图片格式的文件');
+    return;
   }
-  if (!uploadFile.raw) return
+  if (!uploadFile.raw) return;
   // 获取图片的访问地址
-  const url = URL.createObjectURL(uploadFile.raw)
-  unref(cropperRef)?.replace(url)
-}
+  const url = URL.createObjectURL(uploadFile.raw);
+  unref(cropperRef)?.replace(url);
+};
 
 const reset = () => {
-  unref(cropperRef)?.reset()
-}
+  unref(cropperRef)?.reset();
+};
 
 const rotate = (deg: number) => {
-  unref(cropperRef)?.rotate(deg)
-}
+  unref(cropperRef)?.rotate(deg);
+};
 
-const scaleX = ref(1)
-const scaleY = ref(1)
+const scaleX = ref(1);
+const scaleY = ref(1);
 const scale = (type: 'scaleX' | 'scaleY') => {
   if (type === 'scaleX') {
-    scaleX.value = scaleX.value === 1 ? -1 : 1
-    unref(cropperRef)?.[type](unref(scaleX))
+    scaleX.value = scaleX.value === 1 ? -1 : 1;
+    unref(cropperRef)?.[type](unref(scaleX));
   } else {
-    scaleY.value = scaleY.value === 1 ? -1 : 1
-    unref(cropperRef)?.[type](unref(scaleY))
+    scaleY.value = scaleY.value === 1 ? -1 : 1;
+    unref(cropperRef)?.[type](unref(scaleY));
   }
-}
+};
 
 const zoom = (num: number) => {
-  unref(cropperRef)?.zoom(num)
-}
+  unref(cropperRef)?.zoom(num);
+};
 
 onMounted(() => {
-  intiCropper()
-})
+  intiCropper();
+});
 
 watch(
   () => props.imageUrl,
   async (url) => {
     if (url) {
-      unref(cropperRef)?.replace(url)
-      await nextTick()
-      resetCropBox()
+      unref(cropperRef)?.replace(url);
+      await nextTick();
+      resetCropBox();
     }
   }
-)
+);
 
 onBeforeUnmount(() => {
-  unref(cropperRef)?.destroy()
-})
+  unref(cropperRef)?.destroy();
+});
 
 defineExpose({
   cropperExpose: cropperRef
-})
+});
 </script>
 
 <template>

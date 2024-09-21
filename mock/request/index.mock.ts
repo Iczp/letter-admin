@@ -1,6 +1,6 @@
-import { SUCCESS_CODE } from '@/constants'
+import { SUCCESS_CODE } from '@/constants';
 
-const timeout = 600000
+const timeout = 600000;
 
 export default [
   {
@@ -11,7 +11,7 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: 'request-1'
-      }
+      };
     }
   },
   {
@@ -22,7 +22,7 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: 'request-2'
-      }
+      };
     }
   },
   {
@@ -33,7 +33,7 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: 'request-3'
-      }
+      };
     }
   },
   {
@@ -44,7 +44,7 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: 'request-4'
-      }
+      };
     }
   },
   {
@@ -55,7 +55,7 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: 'request-5'
-      }
+      };
     }
   },
   {
@@ -66,7 +66,7 @@ export default [
       return {
         code: 401,
         message: 'token expired'
-      }
+      };
     }
   }
-]
+];

@@ -107,7 +107,7 @@ export const languageOptions = [
   { label: 'xml', value: 'xml' },
   { label: 'yaml', value: 'yaml' },
   { label: 'json', value: 'json' }
-]
+];
 
 export const themeOptions = [
   {
@@ -126,4 +126,4 @@ export const themeOptions = [
     label: 'hc-light',
     value: 'hc-light'
   }
-]
+];

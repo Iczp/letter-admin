@@ -1,17 +1,17 @@
 <script setup lang="tsx">
-import { Form, FormSchema } from '@/components/Form'
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useForm } from '@/hooks/web/useForm'
-import { reactive, unref, ref } from 'vue'
-import { ElInput, FormItemProp, ComponentSize, ElMessage, ElMessageBox } from 'element-plus'
-import { useValidator } from '@/hooks/web/useValidator'
-import { getDictOneApi } from '@/api/common'
-import { BaseButton } from '@/components/Button'
+import { Form, FormSchema } from '@/components/Form';
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useForm } from '@/hooks/web/useForm';
+import { reactive, unref, ref } from 'vue';
+import { ElInput, FormItemProp, ComponentSize, ElMessage, ElMessageBox } from 'element-plus';
+import { useValidator } from '@/hooks/web/useValidator';
+import { getDictOneApi } from '@/api/common';
+import { BaseButton } from '@/components/Button';
 
-const { required } = useValidator()
+const { required } = useValidator();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const treeSelectData = [
   {
@@ -82,16 +82,16 @@ const treeSelectData = [
       }
     ]
   }
-]
+];
 
 // 模拟远程加载
 const getTreeSelectData = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(treeSelectData)
-    }, 3000)
-  })
-}
+      resolve(treeSelectData);
+    }, 3000);
+  });
+};
 
 const schema = reactive<FormSchema[]>([
   {
@@ -183,8 +183,8 @@ const schema = reactive<FormSchema[]>([
     component: 'TreeSelect',
     // 远程加载option
     optionApi: async () => {
-      const res = await getTreeSelectData()
-      return res
+      const res = await getTreeSelectData();
+      return res;
     }
   },
   {
@@ -197,23 +197,23 @@ const schema = reactive<FormSchema[]>([
       // fileList: ,
       multiple: true,
       onPreview: (uploadFile) => {
-        console.log(uploadFile)
+        console.log(uploadFile);
       },
       onRemove: (file) => {
-        console.log(file)
+        console.log(file);
       },
       beforeRemove: (uploadFile) => {
         return ElMessageBox.confirm(`Cancel the transfer of ${uploadFile.name} ?`).then(
           () => true,
           () => false
-        )
+        );
       },
       onExceed: (files, uploadFiles) => {
         ElMessage.warning(
           `The limit is 3, you selected ${files.length} files this time, add up to ${
             files.length + uploadFiles.length
           } totally`
-        )
+        );
       },
       slots: {
         default: () => <BaseButton type="primary">Click to upload</BaseButton>,
@@ -221,9 +221,9 @@ const schema = reactive<FormSchema[]>([
       }
     }
   }
-])
+]);
 
-const { formRegister, formMethods } = useForm()
+const { formRegister, formMethods } = useForm();
 const {
   setProps,
   delSchema,
@@ -234,29 +234,29 @@ const {
   getFormItemExpose,
   getElFormExpose,
   getFormData
-} = formMethods
+} = formMethods;
 
 const changeLabelWidth = (width: number | string) => {
   setProps({
     labelWidth: width
-  })
-}
+  });
+};
 
 const changeSize = (size: ComponentSize) => {
   setProps({
     size
-  })
-}
+  });
+};
 
 const changeDisabled = (bool: boolean) => {
   setProps({
     disabled: bool
-  })
-}
+  });
+};
 
 const changeSchema = (del: boolean) => {
   if (del) {
-    delSchema('field2')
+    delSchema('field2');
   } else if (!del && schema[1].field !== 'field2') {
     addSchema(
       {
@@ -277,14 +277,14 @@ const changeSchema = (del: boolean) => {
         }
       },
       1
-    )
+    );
   }
-}
+};
 
 const setValue = async (reset: boolean) => {
-  const elFormExpose = await getElFormExpose()
+  const elFormExpose = await getElFormExpose();
   if (reset) {
-    elFormExpose?.resetFields()
+    elFormExpose?.resetFields();
   } else {
     setValues({
       field1: 'field1',
@@ -303,13 +303,13 @@ const setValue = async (reset: boolean) => {
           url: 'https://element-plus.org/images/element-plus-logo.svg'
         }
       ]
-    })
-    const formData = await getFormData()
-    console.log(formData)
+    });
+    const formData = await getFormData();
+    console.log(formData);
   }
-}
+};
 
-const index = ref(7)
+const index = ref(7);
 
 const setLabel = () => {
   setSchema([
@@ -336,9 +336,9 @@ const setLabel = () => {
         }
       ]
     }
-  ])
-  index.value++
-}
+  ]);
+  index.value++;
+};
 
 const addItem = () => {
   if (unref(index) % 2 === 0) {
@@ -346,7 +346,7 @@ const addItem = () => {
       field: `field${unref(index)}`,
       label: `${t('formDemo.input')}${unref(index)}`,
       component: 'Input'
-    })
+    });
   } else {
     addSchema(
       {
@@ -355,25 +355,25 @@ const addItem = () => {
         component: 'Input'
       },
       unref(index)
-    )
+    );
   }
-  index.value++
-}
+  index.value++;
+};
 
 const formValidation = async () => {
-  const elFormExpose = await getElFormExpose()
+  const elFormExpose = await getElFormExpose();
   elFormExpose?.validate((isValid) => {
-    console.log(isValid)
-  })
-}
+    console.log(isValid);
+  });
+};
 
 const verifyReset = async () => {
-  const elFormExpose = await getElFormExpose()
-  elFormExpose?.resetFields()
-}
+  const elFormExpose = await getElFormExpose();
+  elFormExpose?.resetFields();
+};
 
 const getDictOne = async () => {
-  const res = await getDictOneApi()
+  const res = await getDictOneApi();
   if (res) {
     setSchema([
       {
@@ -381,37 +381,37 @@ const getDictOne = async () => {
         path: 'componentProps.options',
         value: res.data
       }
-    ])
+    ]);
   }
-}
+};
 
 const inoutFocus = async () => {
-  const inputEl: ComponentRef<typeof ElInput> = await getComponentExpose('field1')
-  inputEl?.focus()
-}
+  const inputEl: ComponentRef<typeof ElInput> = await getComponentExpose('field1');
+  inputEl?.focus();
+};
 
 const inoutValidation = async () => {
-  const formItem = await getFormItemExpose('field1')
-  const inputEl: ComponentRef<typeof ElInput> = await getComponentExpose('field1')
-  inputEl?.focus()
+  const formItem = await getFormItemExpose('field1');
+  const inputEl: ComponentRef<typeof ElInput> = await getComponentExpose('field1');
+  inputEl?.focus();
   formItem?.validate('focus', (val: boolean) => {
-    console.log(val)
-  })
-}
+    console.log(val);
+  });
+};
 
 const formValidate = (prop: FormItemProp, isValid: boolean, message: string) => {
-  console.log(prop, isValid, message)
-}
+  console.log(prop, isValid, message);
+};
 
 setTimeout(async () => {
-  const formData = await getFormData()
-  console.log(formData)
-}, 2000)
+  const formData = await getFormData();
+  console.log(formData);
+}, 2000);
 
 const getData = async () => {
-  const formData = await getFormData()
-  console.log(formData)
-}
+  const formData = await getFormData();
+  console.log(formData);
+};
 </script>
 
 <template>

@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { ImageCropping } from '@/components/ImageCropping'
-import { ref, unref } from 'vue'
-import { ElInput, ElDivider } from 'element-plus'
+import { ContentWrap } from '@/components/ContentWrap';
+import { ImageCropping } from '@/components/ImageCropping';
+import { ref, unref } from 'vue';
+import { ElInput, ElDivider } from 'element-plus';
 
-const cropperExpose = ref<InstanceType<typeof ImageCropping>>()
+const cropperExpose = ref<InstanceType<typeof ImageCropping>>();
 
-const base64 = ref('')
+const base64 = ref('');
 
 const getBase64 = () => {
-  base64.value = unref(cropperExpose)?.cropperExpose?.getCroppedCanvas()?.toDataURL() ?? ''
-}
+  base64.value = unref(cropperExpose)?.cropperExpose?.getCroppedCanvas()?.toDataURL() ?? '';
+};
 
-const cropperExpose2 = ref<InstanceType<typeof ImageCropping>>()
+const cropperExpose2 = ref<InstanceType<typeof ImageCropping>>();
 
-const base642 = ref('')
+const base642 = ref('');
 
 const getBase642 = () => {
-  base642.value = unref(cropperExpose)?.cropperExpose?.getCroppedCanvas()?.toDataURL() ?? ''
-}
+  base642.value = unref(cropperExpose)?.cropperExpose?.getCroppedCanvas()?.toDataURL() ?? '';
+};
 </script>
 
 <template>

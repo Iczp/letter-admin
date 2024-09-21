@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Avatars, AvatarItem } from '@/components/Avatars'
-import { ref } from 'vue'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Avatars, AvatarItem } from '@/components/Avatars';
+import { ref } from 'vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const data = ref<AvatarItem[]>([
   {
@@ -43,7 +43,7 @@ const data = ref<AvatarItem[]>([
     name: 'Wendy',
     url: 'https://avatars.githubusercontent.com/u/3459326?v=4'
   }
-])
+]);
 </script>
 
 <template>

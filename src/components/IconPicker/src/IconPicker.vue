@@ -1,38 +1,38 @@
 <script setup lang="ts">
-import epIcons from './data/icons.ep'
-import antIcons from './data/icons.ant-design'
-import tIcons from './data/icons.tdesign'
-import { useDesign } from '@/hooks/web/useDesign'
-import { ElInput, ElPopover, ElScrollbar, ElTabs, ElTabPane, ElPagination } from 'element-plus'
-import { useAppStore } from '@/store/modules/app'
-import { computed, CSSProperties, ref, unref, watch } from 'vue'
-import { nextTick } from 'vue'
+import epIcons from './data/icons.ep';
+import antIcons from './data/icons.ant-design';
+import tIcons from './data/icons.tdesign';
+import { useDesign } from '@/hooks/web/useDesign';
+import { ElInput, ElPopover, ElScrollbar, ElTabs, ElTabPane, ElPagination } from 'element-plus';
+import { useAppStore } from '@/store/modules/app';
+import { computed, CSSProperties, ref, unref, watch } from 'vue';
+import { nextTick } from 'vue';
 
 const init = async (icon?: string) => {
-  if (!icon) return
-  const iconInfo = icon.split(':')
-  iconName.value = iconInfo[0]
-  const wrapIndex = icons.findIndex((item) => item.prefix === iconInfo[0])
+  if (!icon) return;
+  const iconInfo = icon.split(':');
+  iconName.value = iconInfo[0];
+  const wrapIndex = icons.findIndex((item) => item.prefix === iconInfo[0]);
   // 查询当前icon的索引
-  const index = filterItemIcons(icons[wrapIndex].icons).findIndex((item) => item === icon)
+  const index = filterItemIcons(icons[wrapIndex].icons).findIndex((item) => item === icon);
   // 计算当前icon的页码
-  await nextTick()
-  currentPage.value = Math.ceil((index + 1) / unref(pageSize))
-}
+  await nextTick();
+  currentPage.value = Math.ceil((index + 1) / unref(pageSize));
+};
 
-const modelValue = defineModel<string>()
+const modelValue = defineModel<string>();
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const size = computed(() => appStore.getCurrentSize)
+const size = computed(() => appStore.getCurrentSize);
 
 const iconSize = computed(() => {
   return unref(size) === 'small'
     ? 'var(--el-component-size-small)'
     : unref(size) === 'large'
       ? 'var(--el-component-size-large)'
-      : 'var(--el-component-size)'
-})
+      : 'var(--el-component-size)';
+});
 
 const iconWrapStyle = computed((): CSSProperties => {
   return {
@@ -45,68 +45,68 @@ const iconWrapStyle = computed((): CSSProperties => {
     position: 'relative',
     left: '-1px',
     cursor: 'pointer'
-  }
-})
+  };
+});
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('icon-picker')
+const prefixCls = getPrefixCls('icon-picker');
 
-const icons = [epIcons, antIcons, tIcons]
+const icons = [epIcons, antIcons, tIcons];
 
-const iconName = ref(icons[0].prefix)
+const iconName = ref(icons[0].prefix);
 
 const currentIconNameIndex = computed(() => {
-  return icons.findIndex((item) => item.prefix === unref(iconName))
-})
+  return icons.findIndex((item) => item.prefix === unref(iconName));
+});
 
 const tabChange = () => {
-  currentPage.value = 1
-}
+  currentPage.value = 1;
+};
 
-const pageSize = ref(49)
+const pageSize = ref(49);
 
-const currentPage = ref(1)
+const currentPage = ref(1);
 
 const filterIcons = (icons: string[]) => {
-  const start = (unref(currentPage) - 1) * unref(pageSize)
-  const end = unref(currentPage) * unref(pageSize)
-  return icons.slice(start, end)
-}
+  const start = (unref(currentPage) - 1) * unref(pageSize);
+  const end = unref(currentPage) * unref(pageSize);
+  return icons.slice(start, end);
+};
 
 watch(
   () => modelValue.value,
   async (val) => {
-    await nextTick()
-    val && init(val)
+    await nextTick();
+    val && init(val);
   },
   {
     immediate: true
   }
-)
+);
 
 const popoverShow = () => {
-  init(unref(modelValue))
-}
+  init(unref(modelValue));
+};
 
 const iconSelect = (icon: string) => {
   // 如果是同一个icon则不做处理，则相当于点击了清空按钮
   if (icon === unref(modelValue)) {
-    modelValue.value = ''
-    return
+    modelValue.value = '';
+    return;
   }
-  modelValue.value = icon
-}
+  modelValue.value = icon;
+};
 
-const search = ref('')
+const search = ref('');
 
 const filterItemIcons = (icons: string[]) => {
-  return icons.filter((item) => item.includes(unref(search)))
-}
+  return icons.filter((item) => item.includes(unref(search)));
+};
 
 const inputClear = () => {
-  init(unref(modelValue))
-}
+  init(unref(modelValue));
+};
 </script>
 
 <template>

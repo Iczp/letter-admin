@@ -1,20 +1,20 @@
-import mitt from 'mitt'
-import { onBeforeUnmount } from 'vue'
+import mitt from 'mitt';
+import { onBeforeUnmount } from 'vue';
 
 interface Option {
-  name: string // 事件名称
-  callback: Fn // 回调
+  name: string; // 事件名称
+  callback: Fn; // 回调
 }
 
-const emitter = mitt()
+const emitter = mitt();
 
 export const useEventBus = (option?: Option) => {
   if (option) {
-    emitter.on(option.name, option.callback)
+    emitter.on(option.name, option.callback);
 
     onBeforeUnmount(() => {
-      emitter.off(option.name)
-    })
+      emitter.off(option.name);
+    });
   }
 
   return {
@@ -22,5 +22,5 @@ export const useEventBus = (option?: Option) => {
     off: emitter.off,
     emit: emitter.emit,
     all: emitter.all
-  }
-}
+  };
+};

@@ -8,18 +8,18 @@ import {
   ElImage,
   ElEmpty,
   ElCard
-} from 'element-plus'
-import { defineComponent, PropType, ref, computed, unref, watch, onMounted } from 'vue'
-import { propTypes } from '@/utils/propTypes'
-import { setIndex } from './helper'
-import type { TableProps, TableColumn, Pagination, TableSetProps } from './types'
-import { set, get } from 'lodash-es'
-import { CSSProperties } from 'vue'
-import { getSlot } from '@/utils/tsxHelper'
-import TableActions from './components/TableActions.vue'
-import { createVideoViewer } from '@/components/VideoPlayer'
-import { Icon } from '@/components/Icon'
-import { BaseButton } from '@/components/Button'
+} from 'element-plus';
+import { defineComponent, PropType, ref, computed, unref, watch, onMounted } from 'vue';
+import { propTypes } from '@/utils/propTypes';
+import { setIndex } from './helper';
+import type { TableProps, TableColumn, Pagination, TableSetProps } from './types';
+import { set, get } from 'lodash-es';
+import { CSSProperties } from 'vue';
+import { getSlot } from '@/utils/tsxHelper';
+import TableActions from './components/TableActions.vue';
+import { createVideoViewer } from '@/components/VideoPlayer';
+import { Icon } from '@/components/Icon';
+import { BaseButton } from '@/components/Button';
 
 export default defineComponent({
   name: 'Table',
@@ -213,75 +213,75 @@ export default defineComponent({
   },
   emits: ['update:pageSize', 'update:currentPage', 'register', 'refresh'],
   setup(props, { attrs, emit, slots, expose }) {
-    const elTableRef = ref<ComponentRef<typeof ElTable>>()
+    const elTableRef = ref<ComponentRef<typeof ElTable>>();
 
     // 注册
     onMounted(() => {
-      const tableRef = unref(elTableRef)
-      emit('register', tableRef?.$parent, elTableRef)
-    })
+      const tableRef = unref(elTableRef);
+      emit('register', tableRef?.$parent, elTableRef);
+    });
 
-    const pageSizeRef = ref(props.pageSize)
+    const pageSizeRef = ref(props.pageSize);
 
-    const currentPageRef = ref(props.currentPage)
+    const currentPageRef = ref(props.currentPage);
 
     // useTable传入的props
-    const outsideProps = ref<TableProps>({})
+    const outsideProps = ref<TableProps>({});
 
-    const mergeProps = ref<TableProps>({})
+    const mergeProps = ref<TableProps>({});
 
     const getProps = computed(() => {
-      const propsObj = { ...props }
-      Object.assign(propsObj, unref(mergeProps))
-      return propsObj
-    })
+      const propsObj = { ...props };
+      Object.assign(propsObj, unref(mergeProps));
+      return propsObj;
+    });
 
     const setProps = (props: TableProps = {}) => {
-      mergeProps.value = Object.assign(unref(mergeProps), props)
-      outsideProps.value = { ...props } as any
-    }
+      mergeProps.value = Object.assign(unref(mergeProps), props);
+      outsideProps.value = { ...props } as any;
+    };
 
     const setColumn = (columnProps: TableSetProps[], columnsChildren?: TableColumn[]) => {
-      const { columns } = unref(getProps)
+      const { columns } = unref(getProps);
       for (const v of columnsChildren || columns) {
         for (const item of columnProps) {
           if (v.field === item.field) {
-            set(v, item.path, item.value)
+            set(v, item.path, item.value);
           } else if (v.children?.length) {
-            setColumn(columnProps, v.children)
+            setColumn(columnProps, v.children);
           }
         }
       }
-    }
+    };
 
     const addColumn = (column: TableColumn, index?: number) => {
-      const { columns } = unref(getProps)
+      const { columns } = unref(getProps);
       if (index !== void 0) {
-        columns.splice(index, 0, column)
+        columns.splice(index, 0, column);
       } else {
-        columns.push(column)
+        columns.push(column);
       }
-    }
+    };
 
     const delColumn = (field: string) => {
-      const { columns } = unref(getProps)
-      const index = columns.findIndex((item) => item.field === field)
+      const { columns } = unref(getProps);
+      const index = columns.findIndex((item) => item.field === field);
       if (index > -1) {
-        columns.splice(index, 1)
+        columns.splice(index, 1);
       }
-    }
+    };
 
     const refresh = () => {
-      emit('refresh')
-    }
+      emit('refresh');
+    };
 
     const changSize = (size: ComponentSize) => {
-      setProps({ size })
-    }
+      setProps({ size });
+    };
 
     const confirmSetColumn = (columns: TableColumn[]) => {
-      setProps({ columns })
-    }
+      setProps({ columns });
+    };
 
     expose({
       setProps,
@@ -289,7 +289,7 @@ export default defineComponent({
       delColumn,
       addColumn,
       elTableRef
-    })
+    });
 
     const pagination = computed(() => {
       return Object.assign(
@@ -304,62 +304,62 @@ export default defineComponent({
           total: 10
         },
         unref(getProps).pagination
-      )
-    })
+      );
+    });
 
     watch(
       () => unref(getProps).pageSize,
       (val: number) => {
-        pageSizeRef.value = val
+        pageSizeRef.value = val;
       }
-    )
+    );
 
     watch(
       () => unref(getProps).currentPage,
       (val: number) => {
-        currentPageRef.value = val
+        currentPageRef.value = val;
       }
-    )
+    );
 
     watch(
       () => pageSizeRef.value,
       (val: number) => {
-        emit('update:pageSize', val)
+        emit('update:pageSize', val);
       }
-    )
+    );
 
     watch(
       () => currentPageRef.value,
       (val: number) => {
-        emit('update:currentPage', val)
+        emit('update:currentPage', val);
       }
-    )
+    );
 
     const getBindValue = computed(() => {
-      const bindValue: Recordable = { ...attrs, ...unref(getProps) }
-      delete bindValue.columns
-      delete bindValue.data
-      delete bindValue.align
-      return bindValue
-    })
+      const bindValue: Recordable = { ...attrs, ...unref(getProps) };
+      delete bindValue.columns;
+      delete bindValue.data;
+      delete bindValue.align;
+      return bindValue;
+    });
 
     const renderTreeTableColumn = (columnsChildren: TableColumn[]) => {
       const { align, headerAlign, showOverflowTooltip, imagePreview, videoPreview } =
-        unref(getProps)
+        unref(getProps);
       return columnsChildren.map((v) => {
-        if (v.hidden) return null
-        const props = { ...v } as any
-        if (props.children) delete props.children
+        if (v.hidden) return null;
+        const props = { ...v } as any;
+        if (props.children) delete props.children;
 
-        const children = v.children
+        const children = v.children;
 
         const slots = {
           default: (...args: any[]) => {
-            const data = args[0]
-            let isPreview = false
+            const data = args[0];
+            let isPreview = false;
             isPreview =
               imagePreview.some((item) => (item as string) === v.field) ||
-              videoPreview.some((item) => (item as string) === v.field)
+              videoPreview.some((item) => (item as string) === v.field);
 
             return children && children.length
               ? renderTreeTableColumn(children)
@@ -369,11 +369,11 @@ export default defineComponent({
                   ? v?.formatter?.(data.row, data.column, get(data.row, v.field), data.$index)
                   : isPreview
                     ? renderPreview(get(data.row, v.field), v.field)
-                    : get(data.row, v.field)
+                    : get(data.row, v.field);
           }
-        }
+        };
         if (props?.slots?.header) {
-          slots['header'] = (...args: any[]) => props.slots.header(...args)
+          slots['header'] = (...args: any[]) => props.slots.header(...args);
         }
 
         return (
@@ -386,12 +386,12 @@ export default defineComponent({
           >
             {slots}
           </ElTableColumn>
-        )
-      })
-    }
+        );
+      });
+    };
 
     const renderPreview = (url: string, field: string) => {
-      const { imagePreview, videoPreview } = unref(getProps)
+      const { imagePreview, videoPreview } = unref(getProps);
       return (
         <div class="flex items-center">
           {imagePreview.includes(field) ? (
@@ -410,15 +410,15 @@ export default defineComponent({
               onClick={() => {
                 createVideoViewer({
                   url
-                })
+                });
               }}
             >
               预览
             </BaseButton>
           ) : null}
         </div>
-      )
-    }
+      );
+    };
 
     const renderTableColumn = (columnsChildren?: TableColumn[]) => {
       const {
@@ -432,10 +432,10 @@ export default defineComponent({
         reserveSelection,
         imagePreview,
         videoPreview
-      } = unref(getProps)
+      } = unref(getProps);
 
       return (columnsChildren || columns).map((v) => {
-        if (v.hidden) return null
+        if (v.hidden) return null;
         if (v.type === 'index') {
           return (
             <ElTableColumn
@@ -449,7 +449,7 @@ export default defineComponent({
               fixed={v.fixed}
               width="65px"
             ></ElTableColumn>
-          )
+          );
         } else if (v.type === 'selection') {
           return (
             <ElTableColumn
@@ -460,21 +460,21 @@ export default defineComponent({
               selectable={v.selectable}
               width="50"
             ></ElTableColumn>
-          )
+          );
         } else {
-          const props = { ...v } as any
-          if (props.children) delete props.children
+          const props = { ...v } as any;
+          if (props.children) delete props.children;
 
-          const children = v.children
+          const children = v.children;
 
           const slots = {
             default: (...args: any[]) => {
-              const data = args[0]
+              const data = args[0];
 
-              let isPreview = false
+              let isPreview = false;
               isPreview =
                 imagePreview.some((item) => (item as string) === v.field) ||
-                videoPreview.some((item) => (item as string) === v.field)
+                videoPreview.some((item) => (item as string) === v.field);
 
               return children && children.length
                 ? renderTreeTableColumn(children)
@@ -484,11 +484,11 @@ export default defineComponent({
                     ? v?.formatter?.(data.row, data.column, get(data.row, v.field), data.$index)
                     : isPreview
                       ? renderPreview(get(data.row, v.field), v.field)
-                      : get(data.row, v.field)
+                      : get(data.row, v.field);
             }
-          }
+          };
           if (props?.slots?.header) {
-            slots['header'] = (...args: any[]) => props.slots.header(...args)
+            slots['header'] = (...args: any[]) => props.slots.header(...args);
           }
           return (
             <ElTableColumn
@@ -500,18 +500,18 @@ export default defineComponent({
             >
               {slots}
             </ElTableColumn>
-          )
+          );
         }
-      })
-    }
+      });
+    };
 
     return () => {
-      const tableSlots = {}
+      const tableSlots = {};
       if (getSlot(slots, 'empty')) {
-        tableSlots['empty'] = (...args: any[]) => getSlot(slots, 'empty', args)
+        tableSlots['empty'] = (...args: any[]) => getSlot(slots, 'empty', args);
       }
       if (getSlot(slots, 'append')) {
-        tableSlots['append'] = (...args: any[]) => getSlot(slots, 'append', args)
+        tableSlots['append'] = (...args: any[]) => getSlot(slots, 'append', args);
       }
 
       return (
@@ -522,18 +522,18 @@ export default defineComponent({
                 unref(getProps)?.data.map((item) => {
                   const cardSlots = {
                     default: () => {
-                      return getSlot(slots, 'content', item)
+                      return getSlot(slots, 'content', item);
                     }
-                  }
+                  };
                   if (getSlot(slots, 'content-header')) {
                     cardSlots['header'] = () => {
-                      return getSlot(slots, 'content-header', item)
-                    }
+                      return getSlot(slots, 'content-header', item);
+                    };
                   }
                   if (getSlot(slots, 'content-footer')) {
                     cardSlots['footer'] = () => {
-                      return getSlot(slots, 'content-footer', item)
-                    }
+                      return getSlot(slots, 'content-footer', item);
+                    };
                   }
                   return (
                     <ElCard
@@ -545,7 +545,7 @@ export default defineComponent({
                     >
                       {cardSlots}
                     </ElCard>
-                  )
+                  );
                 })
               ) : (
                 <div class="flex flex-1 justify-center">
@@ -580,8 +580,8 @@ export default defineComponent({
             ></ElPagination>
           ) : undefined}
         </div>
-      )
-    }
+      );
+    };
   }
-})
+});
 </script>

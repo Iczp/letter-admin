@@ -1,6 +1,6 @@
-import { SUCCESS_CODE } from '@/constants'
+import { SUCCESS_CODE } from '@/constants';
 
-const timeout = 1000
+const timeout = 1000;
 
 export default [
   // 获取统计
@@ -16,7 +16,7 @@ export default [
           access: 2340,
           todo: 10
         }
-      }
+      };
     }
   },
   // 获取项目
@@ -71,7 +71,7 @@ export default [
             time: new Date()
           }
         ]
-      }
+      };
     }
   },
   // 获取动态
@@ -108,7 +108,7 @@ export default [
             time: new Date()
           }
         ]
-      }
+      };
     }
   },
   // 获取团队信息
@@ -145,7 +145,7 @@ export default [
             icon: 'vscode-icons:file-type-vite'
           }
         ]
-      }
+      };
     }
   },
   // 获取指数
@@ -163,7 +163,7 @@ export default [
           { name: 'workplace.yield', max: 130, personal: 35, team: 35 },
           { name: 'workplace.follow', max: 100, personal: 80, team: 90 }
         ]
-      }
+      };
     }
   }
-]
+];

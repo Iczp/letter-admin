@@ -1,7 +1,7 @@
-import { EChartsOption } from 'echarts'
-import { useI18n } from '@/hooks/web/useI18n'
+import { EChartsOption } from 'echarts';
+import { useI18n } from '@/hooks/web/useI18n';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 export const lineOptions: EChartsOption = {
   title: {
@@ -70,7 +70,7 @@ export const lineOptions: EChartsOption = {
       animationEasing: 'quadraticOut'
     }
   ]
-}
+};
 
 export const pieOptions: EChartsOption = {
   title: {
@@ -107,7 +107,7 @@ export const pieOptions: EChartsOption = {
       ]
     }
   ]
-}
+};
 
 export const barOptions: EChartsOption = {
   title: {
@@ -150,7 +150,7 @@ export const barOptions: EChartsOption = {
       type: 'bar'
     }
   ]
-}
+};
 
 export const radarOption: EChartsOption = {
   legend: {
@@ -182,7 +182,7 @@ export const radarOption: EChartsOption = {
       ]
     }
   ]
-}
+};
 
 export const wordOptions = {
   series: [
@@ -205,7 +205,7 @@ export const wordOptions = {
               Math.round(Math.random() * 160)
             ].join(',') +
             ')'
-          )
+          );
         }
       },
       emphasis: {
@@ -306,4 +306,4 @@ export const wordOptions = {
       ]
     }
   ]
-}
+};

@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { ElInput } from 'element-plus'
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { useTagsView } from '@/hooks/web/useTagsView'
+import { ContentWrap } from '@/components/ContentWrap';
+import { ElInput } from 'element-plus';
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { useTagsView } from '@/hooks/web/useTagsView';
 
-const { setTitle } = useTagsView()
+const { setTitle } = useTagsView();
 
-const { params } = useRoute()
+const { params } = useRoute();
 
-const val = ref(params.id as string)
+const val = ref(params.id as string);
 
-setTitle(`详情页-${val.value}`)
+setTitle(`详情页-${val.value}`);
 </script>
 
 <template>

@@ -1,42 +1,42 @@
-import { reactive } from 'vue'
-import { eachTree, treeMap, filter } from '@/utils/tree'
-import { FormSchema } from '@/components/Form'
-import { TableColumn } from '@/components/Table'
-import { DescriptionsSchema } from '@/components/Descriptions'
+import { reactive } from 'vue';
+import { eachTree, treeMap, filter } from '@/utils/tree';
+import { FormSchema } from '@/components/Form';
+import { TableColumn } from '@/components/Table';
+import { DescriptionsSchema } from '@/components/Descriptions';
 
 export type CrudSchema = Omit<TableColumn, 'children'> & {
-  search?: CrudSearchParams
-  table?: CrudTableParams
-  form?: CrudFormParams
-  detail?: CrudDescriptionsParams
-  children?: CrudSchema[]
-}
+  search?: CrudSearchParams;
+  table?: CrudTableParams;
+  form?: CrudFormParams;
+  detail?: CrudDescriptionsParams;
+  children?: CrudSchema[];
+};
 
 interface CrudSearchParams extends Omit<FormSchema, 'field'> {
   // 是否隐藏在查询项
-  hidden?: boolean
+  hidden?: boolean;
 }
 
 interface CrudTableParams extends Omit<TableColumn, 'field'> {
   // 是否隐藏表头
-  hidden?: boolean
+  hidden?: boolean;
 }
 
 interface CrudFormParams extends Omit<FormSchema, 'field'> {
   // 是否隐藏表单项
-  hidden?: boolean
+  hidden?: boolean;
 }
 
 interface CrudDescriptionsParams extends Omit<DescriptionsSchema, 'field'> {
   // 是否隐藏表单项
-  hidden?: boolean
+  hidden?: boolean;
 }
 
 interface AllSchemas {
-  searchSchema: FormSchema[]
-  tableColumns: TableColumn[]
-  formSchema: FormSchema[]
-  detailSchema: DescriptionsSchema[]
+  searchSchema: FormSchema[];
+  tableColumns: TableColumn[];
+  formSchema: FormSchema[];
+  detailSchema: DescriptionsSchema[];
 }
 
 /**
@@ -45,7 +45,7 @@ interface AllSchemas {
 export const useCrudSchemas = (
   crudSchema: CrudSchema[]
 ): {
-  allSchemas: AllSchemas
+  allSchemas: AllSchemas;
 } => {
   // 所有结构数据
   const allSchemas = reactive<AllSchemas>({
@@ -53,35 +53,35 @@ export const useCrudSchemas = (
     tableColumns: [],
     formSchema: [],
     detailSchema: []
-  })
+  });
 
-  const searchSchema = filterSearchSchema(crudSchema)
+  const searchSchema = filterSearchSchema(crudSchema);
   // @ts-ignore
-  allSchemas.searchSchema = searchSchema || []
+  allSchemas.searchSchema = searchSchema || [];
 
-  const tableColumns = filterTableSchema(crudSchema)
-  allSchemas.tableColumns = tableColumns || []
+  const tableColumns = filterTableSchema(crudSchema);
+  allSchemas.tableColumns = tableColumns || [];
 
-  const formSchema = filterFormSchema(crudSchema)
-  allSchemas.formSchema = formSchema
+  const formSchema = filterFormSchema(crudSchema);
+  allSchemas.formSchema = formSchema;
 
-  const detailSchema = filterDescriptionsSchema(crudSchema)
-  allSchemas.detailSchema = detailSchema
+  const detailSchema = filterDescriptionsSchema(crudSchema);
+  allSchemas.detailSchema = detailSchema;
 
   return {
     allSchemas
-  }
-}
+  };
+};
 
 // 过滤 Search 结构
 const filterSearchSchema = (crudSchema: CrudSchema[]): FormSchema[] => {
-  const searchSchema: FormSchema[] = []
-  const length = crudSchema.length
+  const searchSchema: FormSchema[] = [];
+  const length = crudSchema.length;
 
   for (let i = 0; i < length; i++) {
-    const schemaItem = crudSchema[i]
+    const schemaItem = crudSchema[i];
     if (schemaItem.search?.hidden === true) {
-      continue
+      continue;
     }
     // 判断是否隐藏
     const searchSchemaItem = {
@@ -89,13 +89,13 @@ const filterSearchSchema = (crudSchema: CrudSchema[]): FormSchema[] => {
       ...schemaItem.search,
       field: schemaItem.field,
       label: schemaItem.search?.label || schemaItem.label
-    }
+    };
 
-    searchSchema.push(searchSchemaItem)
+    searchSchema.push(searchSchemaItem);
   }
 
-  return searchSchema
-}
+  return searchSchema;
+};
 
 // 过滤 table 结构
 const filterTableSchema = (crudSchema: CrudSchema[]): TableColumn[] => {
@@ -105,43 +105,43 @@ const filterTableSchema = (crudSchema: CrudSchema[]): TableColumn[] => {
         return {
           ...schema,
           ...schema.table
-        }
+        };
       }
     }
-  })
+  });
 
   // 第一次过滤会有 undefined 所以需要二次过滤
   return filter<TableColumn>(tableColumns as TableColumn[], (data) => {
     if (data.children === void 0) {
-      delete data.children
+      delete data.children;
     }
-    return !!data.field
-  })
-}
+    return !!data.field;
+  });
+};
 
 // 过滤 form 结构
 const filterFormSchema = (crudSchema: CrudSchema[]): FormSchema[] => {
-  const formSchema: FormSchema[] = []
-  const length = crudSchema.length
+  const formSchema: FormSchema[] = [];
+  const length = crudSchema.length;
 
   for (let i = 0; i < length; i++) {
-    const formItem = crudSchema[i]
+    const formItem = crudSchema[i];
     const formSchemaItem = {
       component: formItem?.form?.component || 'Input',
       ...formItem.form,
       field: formItem.field,
       label: formItem.form?.label || formItem.label
-    }
+    };
 
-    formSchema.push(formSchemaItem)
+    formSchema.push(formSchemaItem);
   }
 
-  return formSchema
-}
+  return formSchema;
+};
 
 // 过滤 descriptions 结构
 const filterDescriptionsSchema = (crudSchema: CrudSchema[]): DescriptionsSchema[] => {
-  const descriptionsSchema: FormSchema[] = []
+  const descriptionsSchema: FormSchema[] = [];
 
   eachTree(crudSchema, (schemaItem: CrudSchema) => {
     // 判断是否隐藏
@@ -150,14 +150,14 @@ const filterDescriptionsSchema = (crudSchema: CrudSchema[]): DescriptionsSchema[
         ...schemaItem.detail,
         field: schemaItem.field,
         label: schemaItem.detail?.label || schemaItem.label
-      }
+      };
 
       // 删除不必要的字段
-      delete descriptionsSchemaItem.hidden
+      delete descriptionsSchemaItem.hidden;
 
-      descriptionsSchema.push(descriptionsSchemaItem)
+      descriptionsSchema.push(descriptionsSchemaItem);
     }
-  })
+  });
 
-  return descriptionsSchema
-}
+  return descriptionsSchema;
+};

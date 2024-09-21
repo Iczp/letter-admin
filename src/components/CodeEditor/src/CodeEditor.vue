@@ -1,19 +1,19 @@
 <script setup lang="tsx">
-import { useMonacoEditor } from '@/hooks/web/useMonacoEditor'
-import { onMounted, computed, watch, ref } from 'vue'
-import { ElSelect, ElOption, ElFormItem, ElForm } from 'element-plus'
-import { languageOptions, themeOptions } from './config/config'
+import { useMonacoEditor } from '@/hooks/web/useMonacoEditor';
+import { onMounted, computed, watch, ref } from 'vue';
+import { ElSelect, ElOption, ElFormItem, ElForm } from 'element-plus';
+import { languageOptions, themeOptions } from './config/config';
 
 const props = withDefaults(
   defineProps<{
-    width?: string | number
-    height?: string | number
-    languageSelector?: boolean
-    language?: string
-    themeSelector?: boolean
-    theme?: string
-    editorOption?: Object
-    modelValue: string
+    width?: string | number;
+    height?: string | number;
+    languageSelector?: boolean;
+    language?: string;
+    themeSelector?: boolean;
+    theme?: string;
+    editorOption?: Object;
+    modelValue: string;
   }>(),
   {
     width: '100%',
@@ -25,19 +25,19 @@ const props = withDefaults(
     editorOption: () => ({}),
     modelValue: ''
   }
-)
+);
 
 const emits = defineEmits<{
-  (e: 'blur'): void
-  (e: 'update:modelValue', val: string): void
-}>()
+  (e: 'blur'): void;
+  (e: 'update:modelValue', val: string): void;
+}>();
 
 const monacoEditorStyle = computed(() => {
   return {
     width: typeof props.width === 'string' ? props.width : props.width + 'px',
     height: typeof props.height === 'string' ? props.height : props.height + 'px'
-  }
-})
+  };
+});
 
 const {
   monacoEditorRef,
@@ -47,44 +47,44 @@ const {
   getEditor,
   changeLanguage,
   changeTheme
-} = useMonacoEditor(props.language)
+} = useMonacoEditor(props.language);
 
 onMounted(() => {
-  const monacoEditor = createEditor(props.editorOption)
-  updateMonacoVal(props.modelValue)
+  const monacoEditor = createEditor(props.editorOption);
+  updateMonacoVal(props.modelValue);
   monacoEditor?.onDidChangeModelContent(() => {
-    emits('update:modelValue', monacoEditor!.getValue())
-  })
+    emits('update:modelValue', monacoEditor!.getValue());
+  });
   monacoEditor?.onDidBlurEditorText(() => {
-    emits('blur')
-  })
-})
+    emits('blur');
+  });
+});
 
 watch(
   () => props.modelValue,
   () => {
-    updateMonacoVal(props.modelValue)
+    updateMonacoVal(props.modelValue);
   }
-)
+);
 
-const localLanguage = ref(props.language)
+const localLanguage = ref(props.language);
 
 watch(localLanguage, (newLanguage) => {
-  changeLanguage(newLanguage)
-})
+  changeLanguage(newLanguage);
+});
 
-const localTheme = ref(props.theme)
+const localTheme = ref(props.theme);
 watch(localTheme, (newTheme) => {
-  changeTheme(newTheme)
-})
+  changeTheme(newTheme);
+});
 
 function updateMonacoVal(val: string) {
   if (val !== getEditor()?.getValue()) {
-    updateVal(val)
+    updateVal(val);
   }
 }
 
-defineExpose({ updateOptions })
+defineExpose({ updateOptions });
 </script>
 
 <template>

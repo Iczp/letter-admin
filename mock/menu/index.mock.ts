@@ -1,7 +1,7 @@
-import Mock from 'mockjs'
-import { SUCCESS_CODE } from '@/constants'
+import Mock from 'mockjs';
+import { SUCCESS_CODE } from '@/constants';
 
-const timeout = 1000
+const timeout = 1000;
 
 export default [
   // 列表接口
@@ -23,9 +23,9 @@ export default [
               id: 1,
               type: 0,
               parentId: undefined,
-              title: '首页',
+              title: '首页**',
               meta: {
-                title: '首页',
+                title: '首页**',
                 icon: 'vi-ant-design:dashboard-filled',
                 alwaysShow: true
               },
@@ -94,7 +94,7 @@ export default [
               path: '/external-link',
               component: '#',
               meta: {
-                title: '文档',
+                title: '文档555',
                 icon: 'vi-clarity:document-solid'
               },
               name: 'ExternalLink',
@@ -102,7 +102,7 @@ export default [
               id: 4,
               type: 0,
               parentId: undefined,
-              title: '文档',
+              title: '文档55',
               children: [
                 {
                   path: 'https://element-plus-admin-doc.cn/',
@@ -111,9 +111,9 @@ export default [
                   id: 5,
                   type: 1,
                   parentId: 4,
-                  title: '文档',
+                  title: '文档555',
                   meta: {
-                    title: '文档'
+                    title: '文档555'
                   }
                 }
               ]
@@ -351,7 +351,7 @@ export default [
             }
           ]
         }
-      }
+      };
     }
   }
-]
+];

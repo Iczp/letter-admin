@@ -1,5 +1,5 @@
-import Form from './src/Form.vue'
-import type { FormSchema, FormSetProps } from './src/types'
+import Form from './src/Form.vue';
+import type { FormSchema, FormSetProps } from './src/types';
 export type {
   ComponentNameEnum,
   ComponentName,
@@ -32,17 +32,17 @@ export type {
   PlaceholderModel,
   InputPasswordComponentProps,
   TreeSelectComponentProps
-} from './src/types'
+} from './src/types';
 
 export interface FormExpose {
-  setValues: (data: Recordable) => void
-  setProps: (props: Recordable) => void
-  delSchema: (field: string) => void
-  addSchema: (formSchema: FormSchema, index?: number) => void
-  setSchema: (schemaProps: FormSetProps[]) => void
-  formModel: Recordable
-  getComponentExpose: (field: string) => any
-  getFormItemExpose: (field: string) => any
+  setValues: (data: Recordable) => void;
+  setProps: (props: Recordable) => void;
+  delSchema: (field: string) => void;
+  addSchema: (formSchema: FormSchema, index?: number) => void;
+  setSchema: (schemaProps: FormSetProps[]) => void;
+  formModel: Recordable;
+  getComponentExpose: (field: string) => any;
+  getFormItemExpose: (field: string) => any;
 }
 
-export { Form }
+export { Form };

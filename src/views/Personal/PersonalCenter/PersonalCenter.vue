@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { ref, unref } from 'vue'
-import { ElDivider, ElImage, ElTag, ElTabPane, ElTabs, ElButton, ElMessage } from 'element-plus'
-import defaultAvatar from '@/assets/imgs/avatar.jpg'
-import UploadAvatar from './components/UploadAvatar.vue'
-import { Dialog } from '@/components/Dialog'
-import EditInfo from './components/EditInfo.vue'
-import EditPassword from './components/EditPassword.vue'
+import { ContentWrap } from '@/components/ContentWrap';
+import { ref, unref } from 'vue';
+import { ElDivider, ElImage, ElTag, ElTabPane, ElTabs, ElButton, ElMessage } from 'element-plus';
+import defaultAvatar from '@/assets/imgs/avatar.jpg';
+import UploadAvatar from './components/UploadAvatar.vue';
+import { Dialog } from '@/components/Dialog';
+import EditInfo from './components/EditInfo.vue';
+import EditPassword from './components/EditPassword.vue';
 
-const userInfo = ref()
+const userInfo = ref();
 const fetchDetailUserApi = async () => {
   // 这里可以调用接口获取用户信息
   const data = {
@@ -19,32 +19,32 @@ const fetchDetailUserApi = async () => {
     email: '502431556@qq.com',
     avatarUrl: '',
     roleList: ['超级管理员']
-  }
-  userInfo.value = data
-}
-fetchDetailUserApi()
+  };
+  userInfo.value = data;
+};
+fetchDetailUserApi();
 
-const activeName = ref('first')
+const activeName = ref('first');
 
-const dialogVisible = ref(false)
+const dialogVisible = ref(false);
 
-const uploadAvatarRef = ref<ComponentRef<typeof UploadAvatar>>()
-const avatarLoading = ref(false)
+const uploadAvatarRef = ref<ComponentRef<typeof UploadAvatar>>();
+const avatarLoading = ref(false);
 const saveAvatar = async () => {
   try {
-    avatarLoading.value = true
-    const base64 = unref(uploadAvatarRef)?.getBase64()
-    console.log(base64)
+    avatarLoading.value = true;
+    const base64 = unref(uploadAvatarRef)?.getBase64();
+    console.log(base64);
     // 这里可以调用修改头像接口
-    fetchDetailUserApi()
-    ElMessage.success('修改成功')
-    dialogVisible.value = false
+    fetchDetailUserApi();
+    ElMessage.success('修改成功');
+    dialogVisible.value = false;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   } finally {
-    avatarLoading.value = false
+    avatarLoading.value = false;
   }
-}
+};
 </script>
 
 <template>

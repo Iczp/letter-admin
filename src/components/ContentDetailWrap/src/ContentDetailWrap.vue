@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ElCard } from 'element-plus'
-import { propTypes } from '@/utils/propTypes'
-import { useDesign } from '@/hooks/web/useDesign'
+import { ElCard } from 'element-plus';
+import { propTypes } from '@/utils/propTypes';
+import { useDesign } from '@/hooks/web/useDesign';
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('content-detail-wrap')
+const prefixCls = getPrefixCls('content-detail-wrap');
 
 defineProps({
   title: propTypes.string.def(''),
   message: propTypes.string.def('')
-})
+});
 </script>
 
 <template>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useRouter } from 'vue-router'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useRouter } from 'vue-router';
 
-const { push } = useRouter()
+const { push } = useRouter();
 
 const openTab = (item: number) => {
-  push(`/function/multiple-tabs-demo/${item}`)
-}
+  push(`/function/multiple-tabs-demo/${item}`);
+};
 </script>
 
 <template>

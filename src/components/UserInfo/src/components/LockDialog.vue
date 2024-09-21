@@ -1,45 +1,45 @@
 <script setup lang="ts">
-import { useI18n } from '@/hooks/web/useI18n'
-import { ref } from 'vue'
-import { Dialog } from '@/components/Dialog'
-import { Form } from '@/components/Form'
-import { useForm } from '@/hooks/web/useForm'
-import { reactive, computed } from 'vue'
-import { useValidator } from '@/hooks/web/useValidator'
-import { FormSchema } from '@/components/Form'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useLockStore } from '@/store/modules/lock'
+import { useI18n } from '@/hooks/web/useI18n';
+import { ref } from 'vue';
+import { Dialog } from '@/components/Dialog';
+import { Form } from '@/components/Form';
+import { useForm } from '@/hooks/web/useForm';
+import { reactive, computed } from 'vue';
+import { useValidator } from '@/hooks/web/useValidator';
+import { FormSchema } from '@/components/Form';
+import { useDesign } from '@/hooks/web/useDesign';
+import { useLockStore } from '@/store/modules/lock';
 
-const { getPrefixCls } = useDesign()
-const prefixCls = getPrefixCls('lock-dialog')
+const { getPrefixCls } = useDesign();
+const prefixCls = getPrefixCls('lock-dialog');
 
-const { required } = useValidator()
+const { required } = useValidator();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const lockStore = useLockStore()
+const lockStore = useLockStore();
 
 const props = defineProps({
   modelValue: {
     type: Boolean
   }
-})
+});
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue']);
 
 const dialogVisible = computed({
   get: () => props.modelValue,
   set: (val) => {
-    console.log('set: ', val)
-    emit('update:modelValue', val)
+    console.log('set: ', val);
+    emit('update:modelValue', val);
   }
-})
+});
 
-const dialogTitle = ref(t('lock.lockScreen'))
+const dialogTitle = ref(t('lock.lockScreen'));
 
 const rules = reactive({
   password: [required()]
-})
+});
 
 const schema: FormSchema[] = reactive([
   {
@@ -51,25 +51,25 @@ const schema: FormSchema[] = reactive([
       showPassword: true
     }
   }
-])
+]);
 
-const { formRegister, formMethods } = useForm()
+const { formRegister, formMethods } = useForm();
 
-const { getFormData, getElFormExpose } = formMethods
+const { getFormData, getElFormExpose } = formMethods;
 
 const handleLock = async () => {
-  const formExpose = await getElFormExpose()
+  const formExpose = await getElFormExpose();
   formExpose?.validate(async (valid) => {
     if (valid) {
-      dialogVisible.value = false
-      const formData = await getFormData()
+      dialogVisible.value = false;
+      const formData = await getFormData();
       lockStore.setLockInfo({
         isLock: true,
         ...formData
-      })
+      });
     }
-  })
-}
+  });
+};
 </script>
 
 <template>

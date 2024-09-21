@@ -1,66 +1,66 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { ElInput } from 'element-plus'
-import { resetRouter } from '@/router'
-import { useRouter } from 'vue-router'
-import { useStorage } from '@/hooks/web/useStorage'
-import { useLockStore } from '@/store/modules/lock'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useNow } from '@/hooks/web/useNow'
-import { useDesign } from '@/hooks/web/useDesign'
-import { Icon } from '@/components/Icon'
-import { loginOutApi } from '@/api/login'
-import { useTagsViewStore } from '@/store/modules/tagsView'
+import { ref } from 'vue';
+import { ElInput } from 'element-plus';
+import { resetRouter } from '@/router';
+import { useRouter } from 'vue-router';
+import { useStorage } from '@/hooks/web/useStorage';
+import { useLockStore } from '@/store/modules/lock';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useNow } from '@/hooks/web/useNow';
+import { useDesign } from '@/hooks/web/useDesign';
+import { Icon } from '@/components/Icon';
+import { loginOutApi } from '@/api/login';
+import { useTagsViewStore } from '@/store/modules/tagsView';
 
-const tagsViewStore = useTagsViewStore()
+const tagsViewStore = useTagsViewStore();
 
-const { clear } = useStorage()
+const { clear } = useStorage();
 
-const { replace } = useRouter()
+const { replace } = useRouter();
 
-const password = ref('')
-const loading = ref(false)
-const errMsg = ref(false)
-const showDate = ref(true)
+const password = ref('');
+const loading = ref(false);
+const errMsg = ref(false);
+const showDate = ref(true);
 
-const { getPrefixCls } = useDesign()
-const prefixCls = getPrefixCls('lock-page')
+const { getPrefixCls } = useDesign();
+const prefixCls = getPrefixCls('lock-page');
 
-const lockStore = useLockStore()
+const lockStore = useLockStore();
 
-const { hour, month, minute, meridiem, year, day, week } = useNow(true)
+const { hour, month, minute, meridiem, year, day, week } = useNow(true);
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 // 解锁
 async function unLock() {
   if (!password.value) {
-    return
+    return;
   }
-  const pwd = password.value
+  const pwd = password.value;
   try {
-    loading.value = true
-    const res = await lockStore.unLock(pwd)
-    errMsg.value = !res
+    loading.value = true;
+    const res = await lockStore.unLock(pwd);
+    errMsg.value = !res;
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 
 // 返回登录
 async function goLogin() {
-  const res = await loginOutApi().catch(() => {})
+  const res = await loginOutApi().catch(() => {});
   if (res) {
-    clear()
-    tagsViewStore.delAllViews()
-    resetRouter() // 重置静态路由表
-    lockStore.resetLockInfo()
-    replace('/login')
+    clear();
+    tagsViewStore.delAllViews();
+    resetRouter(); // 重置静态路由表
+    lockStore.resetLockInfo();
+    replace('/login');
   }
 }
 
 function handleShowForm(show = false) {
-  showDate.value = show
+  showDate.value = show;
 }
 </script>
 

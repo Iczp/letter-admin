@@ -1,8 +1,8 @@
-import Mock from 'mockjs'
-import { SUCCESS_CODE } from '@/constants'
-import { toAnyString } from '@/utils'
+import Mock from 'mockjs';
+import { SUCCESS_CODE } from '@/constants';
+import { toAnyString } from '@/utils';
 
-const timeout = 1000
+const timeout = 1000;
 
 const adminList = [
   {
@@ -64,6 +64,15 @@ const adminList = [
         path: 'index',
         component: 'views/Guide/Guide',
         name: 'GuideDemo',
+        meta: {
+          title: 'router.guide',
+          icon: 'vi-cib:telegram-plane'
+        }
+      },
+      {
+        path: 'index1',
+        component: 'views/Guide/Guide1',
+        name: 'GuideDemo1',
         meta: {
           title: 'router.guide',
           icon: 'vi-cib:telegram-plane'
@@ -669,7 +678,7 @@ const adminList = [
       }
     ]
   }
-]
+];
 
 const testList: string[] = [
   '/dashboard',
@@ -679,6 +688,9 @@ const testList: string[] = [
   'https://element-plus-admin-doc.cn/',
   '/guide',
   '/guide/index',
+  '/guide/index1',
+  '/activity',
+  '/activity/activity',
   '/components',
   '/components/form',
   '/components/form/default-form',
@@ -746,11 +758,11 @@ const testList: string[] = [
   '/error/404-demo',
   '/error/403-demo',
   '/error/500-demo'
-]
+];
 
-const List: any[] = []
+const List: any[] = [];
 
-const roleNames = ['超级管理员', '管理员', '普通用户', '游客']
+const roleNames = ['超级管理员', '管理员', '普通用户', '游客'];
 const menus = [
   [
     {
@@ -761,7 +773,7 @@ const menus = [
       status: Mock.Random.integer(0, 1),
       id: 1,
       meta: {
-        title: '首页',
+        title: '首页##',
         icon: 'vi-ant-design:dashboard-filled',
         alwaysShow: true
       },
@@ -794,7 +806,7 @@ const menus = [
       path: '/external-link',
       component: '#',
       meta: {
-        title: '文档',
+        title: '文档55',
         icon: 'vi-clarity:document-solid'
       },
       name: 'ExternalLink',
@@ -807,7 +819,7 @@ const menus = [
           status: Mock.Random.integer(0, 1),
           id: 5,
           meta: {
-            title: '文档'
+            title: '文档55'
           }
         }
       ]
@@ -1024,7 +1036,7 @@ const menus = [
       path: '/external-link',
       component: '#',
       meta: {
-        title: '文档',
+        title: '文档55',
         icon: 'vi-clarity:document-solid'
       },
       name: 'ExternalLink',
@@ -1037,7 +1049,7 @@ const menus = [
           status: Mock.Random.integer(0, 1),
           id: 5,
           meta: {
-            title: '文档'
+            title: '文档55'
           }
         }
       ]
@@ -1154,7 +1166,7 @@ const menus = [
       ]
     }
   ]
-]
+];
 
 for (let i = 0; i < 4; i++) {
   List.push(
@@ -1168,7 +1180,7 @@ for (let i = 0; i < 4; i++) {
       remark: '@cword(10, 15)',
       menu: menus[i]
     })
-  )
+  );
 }
 
 export default [
@@ -1181,7 +1193,7 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: adminList
-      }
+      };
     }
   },
   {
@@ -1195,7 +1207,7 @@ export default [
           list: List,
           total: 4
         }
-      }
+      };
     }
   },
   // 列表接口
@@ -1207,7 +1219,7 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: testList
-      }
+      };
     }
   },
   {
@@ -1221,7 +1233,7 @@ export default [
           list: List,
           total: 4
         }
-      }
+      };
     }
   }
-]
+];

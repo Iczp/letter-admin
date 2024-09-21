@@ -1,3 +1,3 @@
-import IconPicker from './src/IconPicker.vue'
+import IconPicker from './src/IconPicker.vue';
 
-export { IconPicker }
+export { IconPicker };

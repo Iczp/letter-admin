@@ -1,18 +1,18 @@
 <script setup lang="tsx">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Table, TableColumn } from '@/components/Table'
-import { getTableListApi } from '@/api/table'
-import { TableData } from '@/api/table/types'
-import { ref } from 'vue'
-import { ElTag } from 'element-plus'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Table, TableColumn } from '@/components/Table';
+import { getTableListApi } from '@/api/table';
+import { TableData } from '@/api/table/types';
+import { ref } from 'vue';
+import { ElTag } from 'element-plus';
 
 interface Params {
-  pageIndex?: number
-  pageSize?: number
+  pageIndex?: number;
+  pageSize?: number;
 }
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const columns: TableColumn[] = [
   {
@@ -43,18 +43,18 @@ const columns: TableColumn[] = [
               ? t('tableDemo.good')
               : t('tableDemo.commonly')}
         </ElTag>
-      )
+      );
     }
   },
   {
     field: 'pageviews',
     label: t('tableDemo.pageviews')
   }
-]
+];
 
-const loading = ref(true)
+const loading = ref(true);
 
-const tableDataList = ref<TableData[]>([])
+const tableDataList = ref<TableData[]>([]);
 
 const getTableList = async (params?: Params) => {
   const res = await getTableListApi(
@@ -65,14 +65,14 @@ const getTableList = async (params?: Params) => {
   )
     .catch(() => {})
     .finally(() => {
-      loading.value = false
-    })
+      loading.value = false;
+    });
   if (res) {
-    tableDataList.value = res.data.list
+    tableDataList.value = res.data.list;
   }
-}
+};
 
-getTableList()
+getTableList();
 </script>
 
 <template>

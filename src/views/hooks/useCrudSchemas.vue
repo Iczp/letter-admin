@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
-import { useI18n } from '@/hooks/web/useI18n'
-import { reactive } from 'vue'
-import { JsonEditor } from '@/components/JsonEditor'
-import { ContentWrap } from '@/components/ContentWrap'
-import { ElRow, ElCol } from 'element-plus'
+import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
+import { useI18n } from '@/hooks/web/useI18n';
+import { reactive } from 'vue';
+import { JsonEditor } from '@/components/JsonEditor';
+import { ContentWrap } from '@/components/ContentWrap';
+import { ElRow, ElCol } from 'element-plus';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const crudSchemas = reactive<CrudSchema[]>([
   {
@@ -148,9 +148,9 @@ const crudSchemas = reactive<CrudSchema[]>([
       hidden: true
     }
   }
-])
+]);
 
-const { allSchemas } = useCrudSchemas(crudSchemas)
+const { allSchemas } = useCrudSchemas(crudSchemas);
 </script>
 
 <template>

@@ -1,20 +1,20 @@
-import { useAppStoreWithOut } from '@/store/modules/app'
+import { useAppStoreWithOut } from '@/store/modules/app';
 
 export const usePageLoading = () => {
   const loadStart = () => {
-    const appStore = useAppStoreWithOut()
+    const appStore = useAppStoreWithOut();
 
-    appStore.setPageLoading(true)
-  }
+    appStore.setPageLoading(true);
+  };
 
   const loadDone = () => {
-    const appStore = useAppStoreWithOut()
+    const appStore = useAppStoreWithOut();
 
-    appStore.setPageLoading(false)
-  }
+    appStore.setPageLoading(false);
+  };
 
   return {
     loadStart,
     loadDone
-  }
-}
+  };
+};

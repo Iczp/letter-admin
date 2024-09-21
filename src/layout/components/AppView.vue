@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { useTagsViewStore } from '@/store/modules/tagsView'
-import { useAppStore } from '@/store/modules/app'
-import { Footer } from '@/components/Footer'
-import { computed } from 'vue'
+import { useTagsViewStore } from '@/store/modules/tagsView';
+import { useAppStore } from '@/store/modules/app';
+import { Footer } from '@/components/Footer';
+import { computed } from 'vue';
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const footer = computed(() => appStore.getFooter)
+const footer = computed(() => appStore.getFooter);
 
-const tagsViewStore = useTagsViewStore()
+const tagsViewStore = useTagsViewStore();
 
 const getCaches = computed((): string[] => {
-  return tagsViewStore.getCachedViews
-})
+  return tagsViewStore.getCachedViews;
+});
 </script>
 
 <template>

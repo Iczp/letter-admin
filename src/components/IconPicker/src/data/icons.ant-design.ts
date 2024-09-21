@@ -833,4 +833,4 @@ export default {
     'vi-ant-design:zoom-in-outlined',
     'vi-ant-design:zoom-out-outlined'
   ]
-}
+};

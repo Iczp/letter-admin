@@ -1,11 +1,11 @@
-import { Config, driver } from 'driver.js'
-import 'driver.js/dist/driver.css'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useI18n } from '@/hooks/web/useI18n'
+import { Config, driver } from 'driver.js';
+import 'driver.js/dist/driver.css';
+import { useDesign } from '@/hooks/web/useDesign';
+import { useI18n } from '@/hooks/web/useI18n';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const { variables } = useDesign()
+const { variables } = useDesign();
 
 export const useGuide = (options?: Config) => {
   const driverObj = driver(
@@ -41,9 +41,9 @@ export const useGuide = (options?: Config) => {
         }
       ]
     }
-  )
+  );
 
   return {
     ...driverObj
-  }
-}
+  };
+};

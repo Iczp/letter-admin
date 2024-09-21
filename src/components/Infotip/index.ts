@@ -1,5 +1,5 @@
-import Infotip from './src/Infotip.vue'
+import Infotip from './src/Infotip.vue';
 
-export type { InfoTipSchema } from './src/types'
+export type { InfoTipSchema } from './src/types';
 
-export { Infotip }
+export { Infotip };

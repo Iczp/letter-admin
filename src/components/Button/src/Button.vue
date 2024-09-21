@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { useDesign } from '@/hooks/web/useDesign'
-import { ElButton, ComponentSize, ButtonType } from 'element-plus'
-import { PropType, Component, computed, unref } from 'vue'
-import { useAppStore } from '@/store/modules/app'
+import { useDesign } from '@/hooks/web/useDesign';
+import { ElButton, ComponentSize, ButtonType } from 'element-plus';
+import { PropType, Component, computed, unref } from 'vue';
+import { useAppStore } from '@/store/modules/app';
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const getTheme = computed(() => appStore.getTheme)
+const getTheme = computed(() => appStore.getTheme);
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('button')
+const prefixCls = getPrefixCls('button');
 
 const props = defineProps({
   size: {
@@ -85,25 +85,25 @@ const props = defineProps({
     type: [String, Object] as PropType<String | Component>,
     default: 'button'
   }
-})
+});
 
-const emits = defineEmits(['click'])
+const emits = defineEmits(['click']);
 
 const color = computed(() => {
-  const { type, link } = props
+  const { type, link } = props;
   if (type === 'primary' && !link) {
-    return unref(getTheme).elColorPrimary
+    return unref(getTheme).elColorPrimary;
   }
-  return ''
-})
+  return '';
+});
 
 const style = computed(() => {
-  const { type, link } = props
+  const { type, link } = props;
   if (type === 'primary' && !link) {
-    return '--el-button-text-color: #fff; --el-button-hover-text-color: #fff'
+    return '--el-button-text-color: #fff; --el-button-hover-text-color: #fff';
   }
-  return ''
-})
+  return '';
+});
 </script>
 
 <template>

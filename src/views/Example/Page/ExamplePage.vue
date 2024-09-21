@@ -1,66 +1,66 @@
 <script setup lang="tsx">
-import { ContentWrap } from '@/components/ContentWrap'
-import { Search } from '@/components/Search'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ElTag } from 'element-plus'
-import { Table } from '@/components/Table'
-import { getTableListApi, delTableListApi } from '@/api/table'
-import { useTable } from '@/hooks/web/useTable'
-import { TableData } from '@/api/table/types'
-import { reactive, ref, unref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useEventBus } from '@/hooks/event/useEventBus'
-import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
-import { BaseButton } from '@/components/Button'
+import { ContentWrap } from '@/components/ContentWrap';
+import { Search } from '@/components/Search';
+import { useI18n } from '@/hooks/web/useI18n';
+import { ElTag } from 'element-plus';
+import { Table } from '@/components/Table';
+import { getTableListApi, delTableListApi } from '@/api/table';
+import { useTable } from '@/hooks/web/useTable';
+import { TableData } from '@/api/table/types';
+import { reactive, ref, unref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useEventBus } from '@/hooks/event/useEventBus';
+import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
+import { BaseButton } from '@/components/Button';
 
 defineOptions({
   name: 'ExamplePage'
-})
+});
 
-const { push } = useRouter()
+const { push } = useRouter();
 
-const ids = ref<string[]>([])
+const ids = ref<string[]>([]);
 
-const searchParams = ref({})
+const searchParams = ref({});
 const setSearchParams = (params: any) => {
-  searchParams.value = params
-  getList()
-}
+  searchParams.value = params;
+  getList();
+};
 
 const { tableRegister, tableState, tableMethods } = useTable({
   fetchDataApi: async () => {
-    const { currentPage, pageSize } = tableState
+    const { currentPage, pageSize } = tableState;
     const res = await getTableListApi({
       pageIndex: unref(currentPage),
       pageSize: unref(pageSize),
       ...unref(searchParams)
-    })
+    });
     return {
       list: res.data.list,
       total: res.data.total
-    }
+    };
   },
   fetchDelApi: async () => {
-    const res = await delTableListApi(unref(ids))
-    return !!res
+    const res = await delTableListApi(unref(ids));
+    return !!res;
   }
-})
-const { loading, dataList, total, currentPage, pageSize } = tableState
-const { getList, getElTableExpose, delList } = tableMethods
+});
+const { loading, dataList, total, currentPage, pageSize } = tableState;
+const { getList, getElTableExpose, delList } = tableMethods;
 
-getList()
+getList();
 
 useEventBus({
   name: 'getList',
   callback: (type: string) => {
     if (type === 'add') {
-      currentPage.value = 1
+      currentPage.value = 1;
     }
-    getList()
+    getList();
   }
-})
+});
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const crudSchemas = reactive<CrudSchema[]>([
   {
@@ -172,7 +172,7 @@ const crudSchemas = reactive<CrudSchema[]>([
                   ? t('tableDemo.good')
                   : t('tableDemo.commonly')}
             </ElTag>
-          )
+          );
         }
       }
     }
@@ -207,7 +207,7 @@ const crudSchemas = reactive<CrudSchema[]>([
       span: 24,
       slots: {
         default: (data: any) => {
-          return <div innerHTML={data.content}></div>
+          return <div innerHTML={data.content}></div>;
         }
       }
     }
@@ -240,34 +240,34 @@ const crudSchemas = reactive<CrudSchema[]>([
                 {t('exampleDemo.del')}
               </BaseButton>
             </>
-          )
+          );
         }
       }
     }
   }
-])
+]);
 
 // @ts-ignore
-const { allSchemas } = useCrudSchemas(crudSchemas)
+const { allSchemas } = useCrudSchemas(crudSchemas);
 
 const AddAction = () => {
-  push('/example/example-add')
-}
+  push('/example/example-add');
+};
 
-const delLoading = ref(false)
+const delLoading = ref(false);
 
 const delData = async (row: TableData | null) => {
-  const elTableExpose = await getElTableExpose()
-  ids.value = row ? [row.id] : elTableExpose?.getSelectionRows().map((v: TableData) => v.id) || []
-  delLoading.value = true
+  const elTableExpose = await getElTableExpose();
+  ids.value = row ? [row.id] : elTableExpose?.getSelectionRows().map((v: TableData) => v.id) || [];
+  delLoading.value = true;
   await delList(unref(ids).length).finally(() => {
-    delLoading.value = false
-  })
-}
+    delLoading.value = false;
+  });
+};
 
 const action = (row: TableData, type: string) => {
-  push(`/example/example-${type}?id=${row.id}`)
-}
+  push(`/example/example-${type}?id=${row.id}`);
+};
 </script>
 
 <template>

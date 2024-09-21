@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import { propTypes } from '@/utils/propTypes'
-import { useDesign } from '@/hooks/web/useDesign'
-import { ref, nextTick, unref, onMounted, watch } from 'vue'
-import { useEventListener, useIntersectionObserver } from '@vueuse/core'
-import { debounce } from 'lodash-es'
+import { propTypes } from '@/utils/propTypes';
+import { useDesign } from '@/hooks/web/useDesign';
+import { ref, nextTick, unref, onMounted, watch } from 'vue';
+import { useEventListener, useIntersectionObserver } from '@vueuse/core';
+import { debounce } from 'lodash-es';
 
-const { getPrefixCls } = useDesign()
+const { getPrefixCls } = useDesign();
 
-const prefixCls = getPrefixCls('waterfall')
+const prefixCls = getPrefixCls('waterfall');
 
-const emit = defineEmits(['loadMore'])
+const emit = defineEmits(['loadMore']);
 
 const prop = defineProps({
   data: propTypes.arrayOf(propTypes.any),
@@ -27,123 +27,123 @@ const prop = defineProps({
   endText: propTypes.string.def('没有更多了'),
   autoCenter: propTypes.bool.def(true),
   layout: propTypes.oneOf(['javascript', 'flex']).def('flex')
-})
+});
 
-const wrapEl = ref<HTMLDivElement>()
+const wrapEl = ref<HTMLDivElement>();
 
-const heights = ref<number[]>([])
+const heights = ref<number[]>([]);
 
-const wrapHeight = ref(0)
+const wrapHeight = ref(0);
 
-const wrapWidth = ref(0)
+const wrapWidth = ref(0);
 
-const loadMore = ref<HTMLDivElement>()
+const loadMore = ref<HTMLDivElement>();
 
 // 首先确定列数 = 页面宽度 / 图片宽度
-const innerCols = ref(0)
+const innerCols = ref(0);
 
-const filterData = ref<any[]>([])
+const filterData = ref<any[]>([]);
 
 const filterWaterfall = async () => {
-  filterData.value = []
-  const { props, width, gap } = prop
-  const data = prop.data as any[]
-  await nextTick()
+  filterData.value = [];
+  const { props, width, gap } = prop;
+  const data = prop.data as any[];
+  await nextTick();
 
-  const container = unref(wrapEl) as HTMLElement
-  if (!container) return
-  innerCols.value = prop.cols ?? Math.floor(container.clientWidth / (width + gap))
+  const container = unref(wrapEl) as HTMLElement;
+  if (!container) return;
+  innerCols.value = prop.cols ?? Math.floor(container.clientWidth / (width + gap));
 
-  const length = data.length
+  const length = data.length;
   for (let i = 0; i < length; i++) {
     if (i < unref(innerCols)) {
-      heights.value[i] = data[i][props.height as string]
+      heights.value[i] = data[i][props.height as string];
       filterData.value.push({
         ...data[i],
         top: 0,
         left: i * (width + gap)
-      })
+      });
     } else {
       // 其他行，先找出最矮的那一列 和 索引
       // 假设最小高度是第一个元素
-      let minHeight = heights.value[0]
-      let index = 0
+      let minHeight = heights.value[0];
+      let index = 0;
       // 找出最小高度
       for (let j = 1; j < unref(innerCols); j++) {
         if (unref(heights)[j] < minHeight) {
-          minHeight = unref(heights)[j]
-          index = j
+          minHeight = unref(heights)[j];
+          index = j;
         }
       }
 
       // 更新最矮高度
-      heights.value[index] += data[i][props.height as string] + gap
+      heights.value[index] += data[i][props.height as string] + gap;
       filterData.value.push({
         ...data[i],
         top: minHeight + gap,
         left: index * (width + gap)
-      })
+      });
     }
   }
-  wrapHeight.value = Math.max(...unref(heights))
-  wrapWidth.value = unref(innerCols) * (width + gap) - gap
-}
+  wrapHeight.value = Math.max(...unref(heights));
+  wrapWidth.value = unref(innerCols) * (width + gap) - gap;
+};
 
 const flexWaterfall = async () => {
-  const { width, gap } = prop
-  const data = prop.data as any[]
-  await nextTick()
+  const { width, gap } = prop;
+  const data = prop.data as any[];
+  await nextTick();
 
-  const container = unref(wrapEl) as HTMLElement
-  if (!container) return
-  innerCols.value = prop.cols ?? Math.floor(container.clientWidth / (width + gap))
+  const container = unref(wrapEl) as HTMLElement;
+  if (!container) return;
+  innerCols.value = prop.cols ?? Math.floor(container.clientWidth / (width + gap));
 
-  const length = data.length
+  const length = data.length;
   // 根据列数，创建数组
-  const arr = new Array(unref(innerCols)).fill([])
+  const arr = new Array(unref(innerCols)).fill([]);
   // 循环data，依次插入到arr中
   for (let i = 0; i < length; i++) {
-    const index = i % unref(innerCols)
-    arr[index] = [...arr[index], data[i]]
+    const index = i % unref(innerCols);
+    arr[index] = [...arr[index], data[i]];
   }
-  filterData.value = arr
-}
+  filterData.value = arr;
+};
 
 const initLayout = () => {
-  const { layout } = prop
+  const { layout } = prop;
   if (layout === 'javascript') {
-    filterWaterfall()
+    filterWaterfall();
   } else if (layout === 'flex') {
-    flexWaterfall()
+    flexWaterfall();
   }
-}
+};
 
 watch(
   () => [prop.data, prop.cols],
   () => {
-    initLayout()
+    initLayout();
   },
   {
     immediate: true
   }
-)
+);
 
 onMounted(() => {
   if (unref(prop.reset)) {
-    useEventListener(window, 'resize', debounce(initLayout, 300))
+    useEventListener(window, 'resize', debounce(initLayout, 300));
   }
   useIntersectionObserver(
     unref(loadMore),
     ([{ isIntersecting }]) => {
       if (isIntersecting && !prop.loading && !prop.end) {
-        emit('loadMore')
+        emit('loadMore');
       }
     },
     {
       threshold: 0.1
     }
-  )
-})
+  );
+});
 </script>
 
 <template>

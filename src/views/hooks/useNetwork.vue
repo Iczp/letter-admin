@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useNetwork } from '@/hooks/web/useNetwork'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useNetwork } from '@/hooks/web/useNetwork';
 
-const { online } = useNetwork()
+const { online } = useNetwork();
 </script>
 
 <template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import VueJsonPretty from 'vue-json-pretty'
-import 'vue-json-pretty/lib/styles.css'
-import { propTypes } from '@/utils/propTypes'
-import { computed } from 'vue'
+import VueJsonPretty from 'vue-json-pretty';
+import 'vue-json-pretty/lib/styles.css';
+import { propTypes } from '@/utils/propTypes';
+import { computed } from 'vue';
 
 const emits = defineEmits([
   'update:modelValue',
@@ -10,7 +10,7 @@ const emits = defineEmits([
   'brackets-click',
   'icon-click',
   'selected-value'
-])
+]);
 
 const props = defineProps({
   modelValue: {
@@ -37,34 +37,34 @@ const props = defineProps({
   renderNodeValue: propTypes.func.def(),
   editable: propTypes.bool.def(true),
   editableTrigger: propTypes.oneOf<'click' | 'dblclick'>(['click', 'dblclick']).def('click')
-})
+});
 
-const data = computed(() => props.modelValue)
+const data = computed(() => props.modelValue);
 
 const localModelValue = computed({
   get: () => data.value,
   set: (val) => {
-    console.log(val)
-    emits('update:modelValue', val)
+    console.log(val);
+    emits('update:modelValue', val);
   }
-})
+});
 
 const nodeClick = (node: any) => {
-  emits('node-click', node)
-}
+  emits('node-click', node);
+};
 
 const bracketsClick = (collapsed: boolean) => {
-  emits('brackets-click', collapsed)
-}
+  emits('brackets-click', collapsed);
+};
 
 const iconClick = (collapsed: boolean) => {
-  emits('icon-click', collapsed)
-}
+  emits('icon-click', collapsed);
+};
 
 const selectedChange = (newVal: any, oldVal: any) => {
-  console.log(newVal, oldVal)
-  emits('selected-value', newVal, oldVal)
-}
+  console.log(newVal, oldVal);
+  emits('selected-value', newVal, oldVal);
+};
 </script>
 
 <template>

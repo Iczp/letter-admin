@@ -1,12 +1,12 @@
-import { useI18n } from '@/hooks/web/useI18n'
-import { FormItemRule } from 'element-plus'
+import { useI18n } from '@/hooks/web/useI18n';
+import { FormItemRule } from 'element-plus';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 interface LengthRange {
-  min: number
-  max: number
-  message?: string
+  min: number;
+  max: number;
+  message?: string;
 }
 
 export const useValidator = () => {
@@ -14,87 +14,87 @@ export const useValidator = () => {
     return {
       required: true,
       message: message || t('common.required')
-    }
-  }
+    };
+  };
 
   const lengthRange = (options: LengthRange): FormItemRule => {
-    const { min, max, message } = options
+    const { min, max, message } = options;
 
     return {
       min,
       max,
       message: message || t('common.lengthRange', { min, max })
-    }
-  }
+    };
+  };
 
   const notSpace = (message?: string): FormItemRule => {
     return {
       validator: (_, val, callback) => {
         if (val?.indexOf(' ') !== -1) {
-          callback(new Error(message || t('common.notSpace')))
+          callback(new Error(message || t('common.notSpace')));
         } else {
-          callback()
+          callback();
         }
       }
-    }
-  }
+    };
+  };
 
   const notSpecialCharacters = (message?: string): FormItemRule => {
     return {
       validator: (_, val, callback) => {
         if (/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/gi.test(val)) {
-          callback(new Error(message || t('common.notSpecialCharacters')))
+          callback(new Error(message || t('common.notSpecialCharacters')));
         } else {
-          callback()
+          callback();
         }
       }
-    }
-  }
+    };
+  };
 
   const phone = (message?: string): FormItemRule => {
     return {
       validator: (_, val, callback) => {
-        if (!val) return callback()
+        if (!val) return callback();
         if (!/^1[3456789]\d{9}$/.test(val)) {
-          callback(new Error(message || '请输入正确的手机号码'))
+          callback(new Error(message || '请输入正确的手机号码'));
         } else {
-          callback()
+          callback();
         }
       }
-    }
-  }
+    };
+  };
 
   const email = (message?: string): FormItemRule => {
     return {
       validator: (_, val, callback) => {
-        if (!val) return callback()
+        if (!val) return callback();
         if (!/^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(val)) {
-          callback(new Error(message || '请输入正确的邮箱'))
+          callback(new Error(message || '请输入正确的邮箱'));
         } else {
-          callback()
+          callback();
         }
       }
-    }
-  }
+    };
+  };
 
   const maxlength = (max: number): FormItemRule => {
     return {
       max,
       message: '长度不能超过' + max + '个字符'
-    }
-  }
+    };
+  };
 
   const check = (message?: string): FormItemRule => {
     return {
       validator: (_, val, callback) => {
         if (!val) {
-          callback(new Error(message || t('common.required')))
+          callback(new Error(message || t('common.required')));
         } else {
-          callback()
+          callback();
         }
       }
-    }
-  }
+    };
+  };
 
   return {
     required,
@@ -105,5 +105,5 @@ export const useValidator = () => {
     email,
     maxlength,
     check
-  }
-}
+  };
+};

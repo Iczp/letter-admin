@@ -1,11 +1,11 @@
 <script lang="tsx">
-import { defineComponent, unref, computed, PropType, ref } from 'vue'
-import { ElDropdown, ElDropdownMenu, ElDropdownItem, ComponentSize } from 'element-plus'
-import { Icon } from '@/components/Icon'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useAppStore } from '@/store/modules/app'
-import { TableColumn } from '../types'
-import ColumnSetting from './ColumnSetting.vue'
+import { defineComponent, unref, computed, PropType, ref } from 'vue';
+import { ElDropdown, ElDropdownMenu, ElDropdownItem, ComponentSize } from 'element-plus';
+import { Icon } from '@/components/Icon';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useAppStore } from '@/store/modules/app';
+import { TableColumn } from '../types';
+import ColumnSetting from './ColumnSetting.vue';
 
 export default defineComponent({
   name: 'TableActions',
@@ -20,26 +20,26 @@ export default defineComponent({
   },
   emits: ['refresh', 'changSize', 'confirm'],
   setup(props, { emit }) {
-    const appStore = useAppStore()
-    const { t } = useI18n()
-    const sizeMap = computed(() => appStore.sizeMap)
-    const showSetting = ref(false)
+    const appStore = useAppStore();
+    const { t } = useI18n();
+    const sizeMap = computed(() => appStore.sizeMap);
+    const showSetting = ref(false);
 
     const refresh = () => {
-      emit('refresh')
-    }
+      emit('refresh');
+    };
 
     const changSize = (size: ComponentSize) => {
-      emit('changSize', size)
-    }
+      emit('changSize', size);
+    };
 
     const confirm = (columns: TableColumn[]) => {
-      emit('confirm', columns)
-    }
+      emit('confirm', columns);
+    };
 
     const showColumnSetting = () => {
-      showSetting.value = true
-    }
+      showSetting.value = true;
+    };
 
     return () => (
       <>
@@ -63,7 +63,7 @@ export default defineComponent({
                       hover-color="var(--el-color-primary)"
                     />
                   </div>
-                )
+                );
               },
               dropdown: () => {
                 return (
@@ -75,12 +75,12 @@ export default defineComponent({
                             <ElDropdownItem key={v} command={v}>
                               {t(`size.${v}`)}
                             </ElDropdownItem>
-                          )
-                        })
+                          );
+                        });
                       }
                     }}
                   </ElDropdownMenu>
-                )
+                );
               }
             }}
           </ElDropdown>
@@ -99,7 +99,7 @@ export default defineComponent({
         </div>
         <ColumnSetting v-model={showSetting.value} columns={props.columns} onConfirm={confirm} />
       </>
-    )
+    );
   }
-})
+});
 </script>

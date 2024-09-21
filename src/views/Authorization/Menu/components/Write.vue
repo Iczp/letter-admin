@@ -1,51 +1,51 @@
 <script setup lang="tsx">
-import { Form, FormSchema } from '@/components/Form'
-import { useForm } from '@/hooks/web/useForm'
-import { PropType, reactive, watch, ref, unref } from 'vue'
-import { useValidator } from '@/hooks/web/useValidator'
-import { useI18n } from '@/hooks/web/useI18n'
-import { getMenuListApi } from '@/api/menu'
-import { ElButton, ElInput, ElPopconfirm, ElTable, ElTableColumn, ElTag } from 'element-plus'
-import AddButtonPermission from './AddButtonPermission.vue'
-import { BaseButton } from '@/components/Button'
-import { cloneDeep } from 'lodash-es'
+import { Form, FormSchema } from '@/components/Form';
+import { useForm } from '@/hooks/web/useForm';
+import { PropType, reactive, watch, ref, unref } from 'vue';
+import { useValidator } from '@/hooks/web/useValidator';
+import { useI18n } from '@/hooks/web/useI18n';
+import { getMenuListApi } from '@/api/menu';
+import { ElButton, ElInput, ElPopconfirm, ElTable, ElTableColumn, ElTag } from 'element-plus';
+import AddButtonPermission from './AddButtonPermission.vue';
+import { BaseButton } from '@/components/Button';
+import { cloneDeep } from 'lodash-es';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const { required } = useValidator()
+const { required } = useValidator();
 
 const props = defineProps({
   currentRow: {
     type: Object as PropType<any>,
     default: () => null
   }
-})
+});
 
 const handleClose = async (tag: any) => {
-  const formData = await getFormData()
+  const formData = await getFormData();
   // 删除对应的权限
   setValues({
     permissionList: formData?.permissionList?.filter((v: any) => v.value !== tag.value)
-  })
-}
+  });
+};
 
 const handleEdit = async (row: any) => {
   // 深拷贝当前行数据到编辑行
-  permissionEditingRow.value = { ...row }
-}
+  permissionEditingRow.value = { ...row };
+};
 
 const handleSave = async () => {
-  const formData = await getFormData()
-  const index = formData?.permissionList?.findIndex((x) => x.id === permissionEditingRow.value.id)
+  const formData = await getFormData();
+  const index = formData?.permissionList?.findIndex((x) => x.id === permissionEditingRow.value.id);
   if (index !== -1) {
-    formData.permissionList[index] = { ...permissionEditingRow.value }
-    permissionEditingRow.value = null // 重置编辑状态
+    formData.permissionList[index] = { ...permissionEditingRow.value };
+    permissionEditingRow.value = null; // 重置编辑状态
   }
-}
+};
 
-const showDrawer = ref(false)
+const showDrawer = ref(false);
 // 存储正在编辑的行的数据
-const permissionEditingRow = ref<any>(null)
+const permissionEditingRow = ref<any>(null);
 
 const formSchema = reactive<FormSchema[]>([
   {
@@ -69,7 +69,7 @@ const formSchema = reactive<FormSchema[]>([
       ],
       on: {
         change: async (val: number) => {
-          const formData = await getFormData()
+          const formData = await getFormData();
           if (val === 1) {
             setSchema([
               {
@@ -77,10 +77,10 @@ const formSchema = reactive<FormSchema[]>([
                 path: 'componentProps.disabled',
                 value: false
               }
-            ])
+            ]);
             setValues({
               component: unref(cacheComponent)
-            })
+            });
           } else {
             setSchema([
               {
@@ -88,16 +88,16 @@ const formSchema = reactive<FormSchema[]>([
                 path: 'componentProps.disabled',
                 value: true
               }
-            ])
+            ]);
 
             if (formData.parentId === void 0) {
               setValues({
                 component: '#'
-              })
+              });
             } else {
               setValues({
                 component: '##'
-              })
+              });
             }
           }
         }
@@ -122,26 +122,26 @@ const formSchema = reactive<FormSchema[]>([
       clearable: true,
       on: {
         change: async (val: number) => {
-          const formData = await getFormData()
+          const formData = await getFormData();
           if (val && formData.type === 0) {
             setValues({
               component: '##'
-            })
+            });
           } else if (!val && formData.type === 0) {
             setValues({
               component: '#'
-            })
+            });
           } else if (formData.type === 1) {
             setValues({
               component: unref(cacheComponent) ?? ''
-            })
+            });
           }
         }
       }
     },
     optionApi: async () => {
-      const res = await getMenuListApi()
-      return res.data.list || []
+      const res = await getMenuListApi();
+      return res.data.list || [];
     }
   },
   {
@@ -159,7 +159,7 @@ const formSchema = reactive<FormSchema[]>([
       placeholder: '#为顶级目录，##为子目录',
       on: {
         change: (val: string) => {
-          cacheComponent.value = val
+          cacheComponent.value = val;
         }
       }
     }
@@ -319,36 +319,36 @@ const formSchema = reactive<FormSchema[]>([
     label: t('menu.canTo'),
     component: 'Switch'
   }
-])
+]);
 
 const rules = reactive({
   component: [required()],
   path: [required()],
   'meta.title': [required()]
-})
+});
 
-const { formRegister, formMethods } = useForm()
-const { setValues, getFormData, getElFormExpose, setSchema } = formMethods
+const { formRegister, formMethods } = useForm();
+const { setValues, getFormData, getElFormExpose, setSchema } = formMethods;
 
 const submit = async () => {
-  const elForm = await getElFormExpose()
+  const elForm = await getElFormExpose();
   const valid = await elForm?.validate().catch((err) => {
-    console.log(err)
-  })
+    console.log(err);
+  });
   if (valid) {
-    const formData = await getFormData()
-    return formData
+    const formData = await getFormData();
+    return formData;
   }
-}
+};
 
-const cacheComponent = ref('')
+const cacheComponent = ref('');
 
 watch(
   () => props.currentRow,
   (value) => {
-    if (!value) return
-    const currentRow = cloneDeep(value)
-    cacheComponent.value = currentRow.type === 1 ? currentRow.component : ''
+    if (!value) return;
+    const currentRow = cloneDeep(value);
+    cacheComponent.value = currentRow.type === 1 ? currentRow.component : '';
     if (currentRow.parentId === 0) {
       setSchema([
         {
@@ -356,7 +356,7 @@ watch(
           path: 'componentProps.disabled',
           value: true
         }
-      ])
+      ]);
     } else {
       setSchema([
         {
@@ -364,7 +364,7 @@ watch(
           path: 'componentProps.disabled',
           value: false
         }
-      ])
+      ]);
     }
     if (currentRow.type === 1) {
       setSchema([
@@ -373,7 +373,7 @@ watch(
           path: 'componentProps.disabled',
           value: false
         }
-      ])
+      ]);
     } else {
       setSchema([
         {
@@ -381,26 +381,26 @@ watch(
           path: 'componentProps.disabled',
           value: true
         }
-      ])
+      ]);
     }
-    setValues(currentRow)
+    setValues(currentRow);
   },
   {
     deep: true,
     immediate: true
   }
-)
+);
 
 defineExpose({
   submit
-})
+});
 
 const confirm = async (data: any) => {
-  const formData = await getFormData()
+  const formData = await getFormData();
   setValues({
     permissionList: [...(formData?.permissionList || []), data]
-  })
-}
+  });
+};
 </script>
 
 <template>

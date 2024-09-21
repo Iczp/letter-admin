@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { Form, FormSchema } from '@/components/Form'
-import { useValidator } from '@/hooks/web/useValidator'
-import { useForm } from '@/hooks/web/useForm'
-import { reactive } from 'vue'
-import { FormItemRule } from 'element-plus'
+import { ContentWrap } from '@/components/ContentWrap';
+import { Form, FormSchema } from '@/components/Form';
+import { useValidator } from '@/hooks/web/useValidator';
+import { useForm } from '@/hooks/web/useForm';
+import { reactive } from 'vue';
+import { FormItemRule } from 'element-plus';
 
-const { formRegister, formMethods } = useForm()
+const { formRegister, formMethods } = useForm();
 
-const { getFormData } = formMethods
+const { getFormData } = formMethods;
 
-const { required, lengthRange, notSpace, notSpecialCharacters } = useValidator()
+const { required, lengthRange, notSpace, notSpecialCharacters } = useValidator();
 
 const formSchema = reactive<FormSchema[]>([
   {
@@ -43,10 +43,10 @@ const formSchema = reactive<FormSchema[]>([
     label: '是否相等-值2',
     component: 'Input'
   }
-])
+]);
 
 const rules = reactive<{
-  [key: string]: FormItemRule[]
+  [key: string]: FormItemRule[];
 }>({
   field1: [required()],
   field2: [
@@ -60,17 +60,17 @@ const rules = reactive<{
   field5: [
     {
       asyncValidator: async (_, val, callback) => {
-        const formData = await getFormData()
-        const { field6 } = formData
+        const formData = await getFormData();
+        const { field6 } = formData;
         if (val !== field6) {
-          callback(new Error('两个值不相等'))
+          callback(new Error('两个值不相等'));
         } else {
-          callback()
+          callback();
         }
       }
     }
   ]
-})
+});
 </script>
 
 <template>

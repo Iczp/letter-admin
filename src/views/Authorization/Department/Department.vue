@@ -1,54 +1,54 @@
 <script setup lang="tsx">
-import { ContentWrap } from '@/components/ContentWrap'
-import { Search } from '@/components/Search'
-import { Dialog } from '@/components/Dialog'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ElTag } from 'element-plus'
-import { Table } from '@/components/Table'
+import { ContentWrap } from '@/components/ContentWrap';
+import { Search } from '@/components/Search';
+import { Dialog } from '@/components/Dialog';
+import { useI18n } from '@/hooks/web/useI18n';
+import { ElTag } from 'element-plus';
+import { Table } from '@/components/Table';
 import {
   getDepartmentApi,
   getDepartmentTableApi,
   saveDepartmentApi,
   deleteDepartmentApi
-} from '@/api/department'
-import type { DepartmentItem } from '@/api/department/types'
-import { useTable } from '@/hooks/web/useTable'
-import { ref, unref, reactive } from 'vue'
-import Write from './components/Write.vue'
-import Detail from './components/Detail.vue'
-import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas'
-import { BaseButton } from '@/components/Button'
+} from '@/api/department';
+import type { DepartmentItem } from '@/api/department/types';
+import { useTable } from '@/hooks/web/useTable';
+import { ref, unref, reactive } from 'vue';
+import Write from './components/Write.vue';
+import Detail from './components/Detail.vue';
+import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
+import { BaseButton } from '@/components/Button';
 
-const ids = ref<string[]>([])
+const ids = ref<string[]>([]);
 
 const { tableRegister, tableState, tableMethods } = useTable({
   fetchDataApi: async () => {
-    const { currentPage, pageSize } = tableState
+    const { currentPage, pageSize } = tableState;
     const res = await getDepartmentTableApi({
       pageIndex: unref(currentPage),
       pageSize: unref(pageSize),
       ...unref(searchParams)
-    })
+    });
     return {
       list: res.data.list,
       total: res.data.total
-    }
+    };
   },
   fetchDelApi: async () => {
-    const res = await deleteDepartmentApi(unref(ids))
-    return !!res
+    const res = await deleteDepartmentApi(unref(ids));
+    return !!res;
   }
-})
-const { loading, dataList, total, currentPage, pageSize } = tableState
-const { getList, getElTableExpose, delList } = tableMethods
+});
+const { loading, dataList, total, currentPage, pageSize } = tableState;
+const { getList, getElTableExpose, delList } = tableMethods;
 
-const searchParams = ref({})
+const searchParams = ref({});
 const setSearchParams = (params: any) => {
-  searchParams.value = params
-  getList()
-}
+  searchParams.value = params;
+  getList();
+};
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const crudSchemas = reactive<CrudSchema[]>([
   {
@@ -86,7 +86,7 @@ const crudSchemas = reactive<CrudSchema[]>([
     table: {
       slots: {
         default: (data: any) => {
-          return <>{data.row.departmentName}</>
+          return <>{data.row.departmentName}</>;
         }
       }
     },
@@ -99,14 +99,14 @@ const crudSchemas = reactive<CrudSchema[]>([
         }
       },
       optionApi: async () => {
-        const res = await getDepartmentApi()
-        return res.data.list
+        const res = await getDepartmentApi();
+        return res.data.list;
       }
     },
     detail: {
       slots: {
         default: (data: any) => {
-          return <>{data.departmentName}</>
+          return <>{data.departmentName}</>;
         }
       }
     }
@@ -120,14 +120,14 @@ const crudSchemas = reactive<CrudSchema[]>([
     table: {
       slots: {
         default: (data: any) => {
-          const status = data.row.status
+          const status = data.row.status;
           return (
             <>
               <ElTag type={status === 0 ? 'danger' : 'success'}>
                 {status === 1 ? t('userDemo.enable') : t('userDemo.disable')}
               </ElTag>
             </>
-          )
+          );
         }
       }
     },
@@ -155,7 +155,7 @@ const crudSchemas = reactive<CrudSchema[]>([
                 {data.status === 1 ? t('userDemo.enable') : t('userDemo.disable')}
               </ElTag>
             </>
-          )
+          );
         }
       }
     }
@@ -189,7 +189,7 @@ const crudSchemas = reactive<CrudSchema[]>([
     detail: {
       slots: {
         default: (data: any) => {
-          return <>{data.remark}</>
+          return <>{data.remark}</>;
         }
       }
     }
@@ -222,70 +222,70 @@ const crudSchemas = reactive<CrudSchema[]>([
                 {t('exampleDemo.del')}
               </BaseButton>
             </>
-          )
+          );
         }
       }
     }
   }
-])
+]);
 
 // @ts-ignore
-const { allSchemas } = useCrudSchemas(crudSchemas)
+const { allSchemas } = useCrudSchemas(crudSchemas);
 
-const dialogVisible = ref(false)
-const dialogTitle = ref('')
+const dialogVisible = ref(false);
+const dialogTitle = ref('');
 
-const currentRow = ref<DepartmentItem | null>(null)
-const actionType = ref('')
+const currentRow = ref<DepartmentItem | null>(null);
+const actionType = ref('');
 
 const AddAction = () => {
-  dialogTitle.value = t('exampleDemo.add')
-  currentRow.value = null
-  dialogVisible.value = true
-  actionType.value = ''
-}
+  dialogTitle.value = t('exampleDemo.add');
+  currentRow.value = null;
+  dialogVisible.value = true;
+  actionType.value = '';
+};
 
-const delLoading = ref(false)
+const delLoading = ref(false);
 
 const delData = async (row: DepartmentItem | null) => {
-  const elTableExpose = await getElTableExpose()
+  const elTableExpose = await getElTableExpose();
   ids.value = row
     ? [row.id]
-    : elTableExpose?.getSelectionRows().map((v: DepartmentItem) => v.id) || []
-  delLoading.value = true
+    : elTableExpose?.getSelectionRows().map((v: DepartmentItem) => v.id) || [];
+  delLoading.value = true;
   await delList(unref(ids).length).finally(() => {
-    delLoading.value = false
-  })
-}
+    delLoading.value = false;
+  });
+};
 
 const action = (row: DepartmentItem, type: string) => {
-  dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail')
-  actionType.value = type
-  currentRow.value = row
-  dialogVisible.value = true
-}
+  dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail');
+  actionType.value = type;
+  currentRow.value = row;
+  dialogVisible.value = true;
+};
 
-const writeRef = ref<ComponentRef<typeof Write>>()
+const writeRef = ref<ComponentRef<typeof Write>>();
 
-const saveLoading = ref(false)
+const saveLoading = ref(false);
 
 const save = async () => {
-  const write = unref(writeRef)
-  const formData = await write?.submit()
+  const write = unref(writeRef);
+  const formData = await write?.submit();
   if (formData) {
-    saveLoading.value = true
+    saveLoading.value = true;
     const res = await saveDepartmentApi(formData)
       .catch(() => {})
       .finally(() => {
-        saveLoading.value = false
-      })
+        saveLoading.value = false;
+      });
     if (res) {
-      dialogVisible.value = false
-      currentPage.value = 1
-      getList()
+      dialogVisible.value = false;
+      currentPage.value = 1;
+      getList();
     }
   }
-}
+};
 </script>
 
 <template>

@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useGuide } from '@/hooks/web/useGuide'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useGuide } from '@/hooks/web/useGuide';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const { drive } = useGuide()
+const { drive } = useGuide();
 
 const guideStart = () => {
-  drive()
-}
+  drive();
+};
 </script>
 
 <template>

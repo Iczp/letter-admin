@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Form, FormSchema } from '@/components/Form'
-import { useForm } from '@/hooks/web/useForm'
-import { reactive, ref } from 'vue'
-import { useValidator } from '@/hooks/web/useValidator'
-import { ElMessage, ElMessageBox, ElDivider } from 'element-plus'
+import { Form, FormSchema } from '@/components/Form';
+import { useForm } from '@/hooks/web/useForm';
+import { reactive, ref } from 'vue';
+import { useValidator } from '@/hooks/web/useValidator';
+import { ElMessage, ElMessageBox, ElDivider } from 'element-plus';
 
-const { required } = useValidator()
+const { required } = useValidator();
 
 const formSchema = reactive<FormSchema[]>([
   {
@@ -38,7 +38,7 @@ const formSchema = reactive<FormSchema[]>([
       strength: true
     }
   }
-])
+]);
 
 const rules = reactive({
   password: [required()],
@@ -46,12 +46,12 @@ const rules = reactive({
     required(),
     {
       asyncValidator: async (_, val, callback) => {
-        const formData = await getFormData()
-        const { newPassword2 } = formData
+        const formData = await getFormData();
+        const { newPassword2 } = formData;
         if (val !== newPassword2) {
-          callback(new Error('新密码与确认新密码不一致'))
+          callback(new Error('新密码与确认新密码不一致'));
         } else {
-          callback()
+          callback();
         }
       }
     }
@@ -60,27 +60,27 @@ const rules = reactive({
     required(),
     {
       asyncValidator: async (_, val, callback) => {
-        const formData = await getFormData()
-        const { newPassword } = formData
+        const formData = await getFormData();
+        const { newPassword } = formData;
         if (val !== newPassword) {
-          callback(new Error('确认新密码与新密码不一致'))
+          callback(new Error('确认新密码与新密码不一致'));
         } else {
-          callback()
+          callback();
         }
       }
     }
   ]
-})
+});
 
-const { formRegister, formMethods } = useForm()
-const { getFormData, getElFormExpose } = formMethods
+const { formRegister, formMethods } = useForm();
+const { getFormData, getElFormExpose } = formMethods;
 
-const saveLoading = ref(false)
+const saveLoading = ref(false);
 const save = async () => {
-  const elForm = await getElFormExpose()
+  const elForm = await getElFormExpose();
   const valid = await elForm?.validate().catch((err) => {
-    console.log(err)
-  })
+    console.log(err);
+  });
   if (valid) {
     ElMessageBox.confirm('是否确认修改?', '提示', {
       confirmButtonText: '确认',
@@ -89,18 +89,18 @@ const save = async () => {
     })
       .then(async () => {
         try {
-          saveLoading.value = true
+          saveLoading.value = true;
           // 这里可以调用修改密码的接口
-          ElMessage.success('修改成功')
+          ElMessage.success('修改成功');
         } catch (error) {
-          console.log(error)
+          console.log(error);
         } finally {
-          saveLoading.value = false
+          saveLoading.value = false;
         }
       })
-      .catch(() => {})
+      .catch(() => {});
   }
-}
+};
 </script>
 
 <template>

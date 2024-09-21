@@ -1,3 +1,3 @@
-import BaseButton from './src/Button.vue'
+import BaseButton from './src/Button.vue';
 
-export { BaseButton }
+export { BaseButton };

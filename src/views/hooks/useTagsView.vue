@@ -1,48 +1,48 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useTagsView } from '@/hooks/web/useTagsView'
-import { useRouter } from 'vue-router'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useTagsView } from '@/hooks/web/useTagsView';
+import { useRouter } from 'vue-router';
 
-const { push } = useRouter()
+const { push } = useRouter();
 
 const { closeAll, closeLeft, closeRight, closeOther, closeCurrent, refreshPage, setTitle } =
-  useTagsView()
+  useTagsView();
 
 const closeAllTabs = () => {
   closeAll(() => {
-    push('/dashboard/analysis')
-  })
-}
+    push('/dashboard/analysis');
+  });
+};
 
 const closeLeftTabs = () => {
-  closeLeft()
-}
+  closeLeft();
+};
 
 const closeRightTabs = () => {
-  closeRight()
-}
+  closeRight();
+};
 
 const closeOtherTabs = () => {
-  closeOther()
-}
+  closeOther();
+};
 
 const refresh = () => {
-  refreshPage()
-}
+  refreshPage();
+};
 
 const closeCurrentTab = () => {
   closeCurrent(undefined, () => {
-    push('/dashboard/analysis')
-  })
-}
+    push('/dashboard/analysis');
+  });
+};
 
 const setTabTitle = () => {
-  setTitle(new Date().getTime().toString())
-}
+  setTitle(new Date().getTime().toString());
+};
 
 const setAnalysisTitle = () => {
-  setTitle(`分析页-${new Date().getTime().toString()}`, '/dashboard/analysis')
-}
+  setTitle(`分析页-${new Date().getTime().toString()}`, '/dashboard/analysis');
+};
 </script>
 
 <template>

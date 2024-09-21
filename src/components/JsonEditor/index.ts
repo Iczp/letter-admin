@@ -1,4 +1,4 @@
-import JsonEditor from './src/JsonEditor.vue'
-export type { JsonEditorProps } from './src/types'
+import JsonEditor from './src/JsonEditor.vue';
+export type { JsonEditorProps } from './src/types';
 
-export { JsonEditor }
+export { JsonEditor };

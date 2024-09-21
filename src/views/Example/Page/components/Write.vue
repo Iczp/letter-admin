@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { Form, FormSchema } from '@/components/Form'
-import { useForm } from '@/hooks/web/useForm'
-import { PropType, reactive, watch } from 'vue'
-import { TableData } from '@/api/table/types'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useValidator } from '@/hooks/web/useValidator'
-import { IDomEditor } from '@wangeditor/editor'
+import { Form, FormSchema } from '@/components/Form';
+import { useForm } from '@/hooks/web/useForm';
+import { PropType, reactive, watch } from 'vue';
+import { TableData } from '@/api/table/types';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useValidator } from '@/hooks/web/useValidator';
+import { IDomEditor } from '@wangeditor/editor';
 
-const { required } = useValidator()
+const { required } = useValidator();
 
 const props = defineProps({
   currentRow: {
     type: Object as PropType<Nullable<TableData>>,
     default: () => null
   }
-})
+});
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const { formRegister, formMethods } = useForm()
-const { setValues, getFormData, getElFormExpose, setSchema } = formMethods
+const { formRegister, formMethods } = useForm();
+const { setValues, getFormData, getElFormExpose, setSchema } = formMethods;
 
 const schema = reactive<FormSchema[]>([
   {
@@ -98,12 +98,12 @@ const schema = reactive<FormSchema[]>([
       onChange: (edit: IDomEditor) => {
         setValues({
           content: edit.getHtml()
-        })
+        });
       }
     },
     label: t('exampleDemo.content')
   }
-])
+]);
 
 const rules = reactive({
   title: [required()],
@@ -112,41 +112,41 @@ const rules = reactive({
   pageviews: [required()],
   display_time: [required()],
   content: [required()]
-})
+});
 
 const submit = async () => {
-  const elForm = await getElFormExpose()
+  const elForm = await getElFormExpose();
   const valid = await elForm?.validate().catch((err) => {
-    console.log(err)
-  })
+    console.log(err);
+  });
   if (valid) {
-    const formData = await getFormData()
-    return formData
+    const formData = await getFormData();
+    return formData;
   }
-}
+};
 
 watch(
   () => props.currentRow,
   (currentRow) => {
-    if (!currentRow) return
-    setValues(currentRow)
+    if (!currentRow) return;
+    setValues(currentRow);
     setSchema([
       {
         field: 'content',
         path: 'componentProps.defaultHtml',
         value: currentRow.content
       }
-    ])
+    ]);
   },
   {
     deep: true,
     immediate: true
   }
-)
+);
 
 defineExpose({
   submit
-})
+});
 </script>
 
 <template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Player from 'xgplayer'
-import { ref, unref, onMounted, watch, onBeforeUnmount, nextTick } from 'vue'
-import 'xgplayer/dist/index.min.css'
+import Player from 'xgplayer';
+import { ref, unref, onMounted, watch, onBeforeUnmount, nextTick } from 'vue';
+import 'xgplayer/dist/index.min.css';
 
 const props = defineProps({
   url: {
@@ -13,45 +13,45 @@ const props = defineProps({
     type: String,
     default: ''
   }
-})
+});
 
-const playerRef = ref<Player>()
+const playerRef = ref<Player>();
 
-const videoEl = ref<HTMLDivElement>()
+const videoEl = ref<HTMLDivElement>();
 
 const intiPlayer = () => {
-  if (!unref(videoEl)) return
+  if (!unref(videoEl)) return;
   new Player({
     autoplay: false,
     ...props,
     el: unref(videoEl)
-  })
-}
+  });
+};
 
 onMounted(() => {
-  intiPlayer()
-})
+  intiPlayer();
+});
 
 watch(
   () => props,
   async (newProps) => {
-    await nextTick()
+    await nextTick();
     if (newProps) {
-      unref(playerRef)?.setConfig(newProps)
+      unref(playerRef)?.setConfig(newProps);
     }
   },
   {
     deep: true
   }
-)
+);
 
 onBeforeUnmount(() => {
-  unref(playerRef)?.destroy()
-})
+  unref(playerRef)?.destroy();
+});
 
 defineExpose({
   playerExpose: () => unref(playerRef)
-})
+});
 </script>
 
 <template>

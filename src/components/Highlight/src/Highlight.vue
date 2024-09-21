@@ -1,6 +1,6 @@
 <script lang="tsx">
-import { defineComponent, PropType, computed, h, unref } from 'vue'
-import { propTypes } from '@/utils/propTypes'
+import { defineComponent, PropType, computed, h, unref } from 'vue';
+import { propTypes } from '@/utils/propTypes';
 
 export default defineComponent({
   name: 'Highlight',
@@ -20,7 +20,7 @@ export default defineComponent({
           'span',
           {
             onClick: () => {
-              emit('click', key)
+              emit('click', key);
             },
             style: {
               color: props.color,
@@ -28,38 +28,38 @@ export default defineComponent({
             }
           },
           key
-        )
-      })
-    })
+        );
+      });
+    });
 
     const parseText = (text: string) => {
       props.keys.forEach((key, index) => {
-        const regexp = new RegExp(key, 'g')
-        text = text.replace(regexp, `{{${index}}}`)
-      })
-      return text.split(/{{|}}/)
-    }
+        const regexp = new RegExp(key, 'g');
+        text = text.replace(regexp, `{{${index}}}`);
+      });
+      return text.split(/{{|}}/);
+    };
 
     const renderText = () => {
-      if (!slots?.default) return null
-      const node = slots?.default()[0].children
+      if (!slots?.default) return null;
+      const node = slots?.default()[0].children;
 
       if (!node) {
-        return slots?.default()[0]
+        return slots?.default()[0];
       }
 
-      const textArray = parseText(node as string)
-      const regexp = /^[0-9]*$/
+      const textArray = parseText(node as string);
+      const regexp = /^[0-9]*$/;
       const nodes = textArray.map((t) => {
         if (regexp.test(t)) {
-          return unref(keyNodes)[t] || t
+          return unref(keyNodes)[t] || t;
         }
-        return t
-      })
-      return h(props.tag, nodes)
-    }
+        return t;
+      });
+      return h(props.tag, nodes);
+    };
 
-    return () => renderText()
+    return () => renderText();
   }
-})
+});
 </script>

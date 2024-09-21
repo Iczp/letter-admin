@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Search } from '@/components/Search'
-import { reactive, ref, unref } from 'vue'
-import { getDictOneApi } from '@/api/common'
-import { FormSchema } from '@/components/Form'
-import { useSearch } from '@/hooks/web/useSearch'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Search } from '@/components/Search';
+import { reactive, ref, unref } from 'vue';
+import { getDictOneApi } from '@/api/common';
+import { FormSchema } from '@/components/Form';
+import { useSearch } from '@/hooks/web/useSearch';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const { searchRegister, searchMethods } = useSearch()
-const { setSchema, setProps, setValues, getFormData } = searchMethods
+const { searchRegister, searchMethods } = useSearch();
+const { setSchema, setProps, setValues, getFormData } = searchMethods;
 
 const treeSelectData = [
   {
@@ -81,16 +81,16 @@ const treeSelectData = [
       }
     ]
   }
-]
+];
 
 // 模拟远程加载
 const getTreeSelectData = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(treeSelectData)
-    }, 3000)
-  })
-}
+      resolve(treeSelectData);
+    }, 3000);
+  });
+};
 
 const schema = reactive<FormSchema[]>([
   {
@@ -115,7 +115,7 @@ const schema = reactive<FormSchema[]>([
       ],
       on: {
         change: (value: string) => {
-          console.log(value)
+          console.log(value);
         }
       }
     }
@@ -211,36 +211,36 @@ const schema = reactive<FormSchema[]>([
     component: 'TreeSelect',
     // 远程加载option
     optionApi: async () => {
-      const res = await getTreeSelectData()
-      return res
+      const res = await getTreeSelectData();
+      return res;
     }
   }
-])
+]);
 
-const isGrid = ref(false)
+const isGrid = ref(false);
 
 const changeGrid = (grid: boolean) => {
   setProps({
     isCol: grid
-  })
+  });
   // isGrid.value = grid
-}
+};
 
-const layout = ref('inline')
+const layout = ref('inline');
 
 const changeLayout = () => {
-  layout.value = unref(layout) === 'inline' ? 'bottom' : 'inline'
-}
+  layout.value = unref(layout) === 'inline' ? 'bottom' : 'inline';
+};
 
-const buttonPosition = ref('left')
+const buttonPosition = ref('left');
 
 const changePosition = (position: string) => {
-  layout.value = 'bottom'
-  buttonPosition.value = position
-}
+  layout.value = 'bottom';
+  buttonPosition.value = position;
+};
 
 const getDictOne = async () => {
-  const res = await getDictOneApi()
+  const res = await getDictOneApi();
   if (res) {
     setSchema([
       {
@@ -248,15 +248,15 @@ const getDictOne = async () => {
         path: 'componentProps.options',
         value: res.data
       }
-    ])
+    ]);
   }
-}
+};
 
 const handleSearch = async (data: any) => {
-  const formData = await getFormData()
-  console.log(formData)
-  console.log(data)
-}
+  const formData = await getFormData();
+  console.log(formData);
+  console.log(data);
+};
 
 const delRadio = () => {
   setSchema([
@@ -265,8 +265,8 @@ const delRadio = () => {
       path: 'remove',
       value: true
     }
-  ])
-}
+  ]);
+};
 
 const restoreRadio = () => {
   setSchema([
@@ -275,30 +275,30 @@ const restoreRadio = () => {
       path: 'remove',
       value: false
     }
-  ])
-}
+  ]);
+};
 
 const setValue = () => {
   setValues({
     field1: 'Joy'
-  })
-}
+  });
+};
 
-const searchLoading = ref(false)
+const searchLoading = ref(false);
 const changeSearchLoading = () => {
-  searchLoading.value = true
+  searchLoading.value = true;
   setTimeout(() => {
-    searchLoading.value = false
-  }, 2000)
-}
+    searchLoading.value = false;
+  }, 2000);
+};
 
-const resetLoading = ref(false)
+const resetLoading = ref(false);
 const changeResetLoading = () => {
-  resetLoading.value = true
+  resetLoading.value = true;
   setTimeout(() => {
-    resetLoading.value = false
-  }, 2000)
-}
+    resetLoading.value = false;
+  }, 2000);
+};
 </script>
 
 <template>

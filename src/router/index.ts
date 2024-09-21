@@ -1,11 +1,11 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
-import type { App } from 'vue'
-import { Layout, getParentLayout } from '@/utils/routerHelper'
-import { useI18n } from '@/hooks/web/useI18n'
-import { NO_RESET_WHITE_LIST } from '@/constants'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import type { RouteRecordRaw } from 'vue-router';
+import type { App } from 'vue';
+import { Layout, getParentLayout } from '@/utils/routerHelper';
+import { useI18n } from '@/hooks/web/useI18n';
+import { NO_RESET_WHITE_LIST } from '@/constants';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 export const constantRouterMap: AppRouteRecordRaw[] = [
   {
@@ -77,7 +77,7 @@ export const constantRouterMap: AppRouteRecordRaw[] = [
       noTagsView: true
     }
   }
-]
+];
 
 export const asyncRouterMap: AppRouteRecordRaw[] = [
   {
@@ -134,10 +134,19 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     name: 'Guide',
     meta: {},
     children: [
+      // {
+      //   path: 'index',
+      //   component: () => import('@/views/Guide/Guide.vue'),
+      //   name: 'GuideDemo',
+      //   meta: {
+      //     title: t('router.guide'),
+      //     icon: 'vi-cib:telegram-plane'
+      //   }
+      // },
       {
-        path: 'index',
+        path: 'index1',
         component: () => import('@/views/Guide/Guide.vue'),
-        name: 'GuideDemo',
+        name: 'GuideDemo1',
         meta: {
           title: t('router.guide'),
           icon: 'vi-cib:telegram-plane'
@@ -150,7 +159,8 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     component: Layout,
     name: 'ComponentsDemo',
     meta: {
-      title: t('router.component'),
+      // title: t('router.component'),
+      title: 'componets--------',
       icon: 'vi-bx:bxs-component',
       alwaysShow: true
     },
@@ -410,12 +420,34 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     ]
   },
   {
+    path: '/activity',
+    component: Layout,
+    redirect: '/activity/activity',
+    name: 'Activity',
+    meta: {
+      title: 'activity',
+      icon: 'vi-ri:function-fill',
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: 'activity',
+        component: () => import('@/views/Activity/Activity.vue'),
+        name: 'ActivityList',
+        meta: {
+          title: t('activity'),
+          permission: ['add', 'edit', 'delete']
+        }
+      }
+    ]
+  },
+  {
     path: '/function',
     component: Layout,
     redirect: '/function/multipleTabs',
     name: 'Function',
     meta: {
-      title: t('router.function'),
+      title: t('router.function') + 'ddd',
       icon: 'vi-ri:function-fill',
       alwaysShow: true
     },
@@ -425,7 +457,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         component: () => import('@/views/Function/MultipleTabs.vue'),
         name: 'MultipleTabs',
         meta: {
-          title: t('router.multipleTabs')
+          title: t('router.multipleTabs') + '555'
         }
       },
       {
@@ -589,12 +621,20 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       alwaysShow: true
     },
     children: [
+      // {
+      //   path: 'example-dialog',
+      //   component: () => import('@/views/Example/Dialog/ExampleDialog.vue'),
+      //   name: 'ExampleDialog',
+      //   meta: {
+      //     title: t('router.exampleDialog')
+      //   }
+      // },
       {
-        path: 'example-dialog',
+        path: 'example-dialog1',
         component: () => import('@/views/Example/Dialog/ExampleDialog.vue'),
-        name: 'ExampleDialog',
+        name: 'ExampleDialog11',
         meta: {
-          title: t('router.exampleDialog')
+          title: '111'
         }
       },
       {
@@ -728,26 +768,26 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
       }
     ]
   }
-]
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
   strict: true,
   routes: constantRouterMap as RouteRecordRaw[],
   scrollBehavior: () => ({ left: 0, top: 0 })
-})
+});
 
 export const resetRouter = (): void => {
   router.getRoutes().forEach((route) => {
-    const { name } = route
+    const { name } = route;
     if (name && !NO_RESET_WHITE_LIST.includes(name as string)) {
-      router.hasRoute(name) && router.removeRoute(name)
+      router.hasRoute(name) && router.removeRoute(name);
     }
-  })
-}
+  });
+};
 
 export const setupRouter = (app: App<Element>) => {
-  app.use(router)
-}
+  app.use(router);
+};
 
-export default router
+export default router;

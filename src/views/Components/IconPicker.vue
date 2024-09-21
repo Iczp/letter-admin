@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { IconPicker } from '@/components/IconPicker'
-import { ref } from 'vue'
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
+import { IconPicker } from '@/components/IconPicker';
+import { ref } from 'vue';
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const currentIcon = ref('')
+const currentIcon = ref('');
 </script>
 
 <template>

@@ -1206,4 +1206,4 @@ export default {
     'vi-tdesign:zoom-in',
     'vi-tdesign:zoom-out'
   ]
-}
+};

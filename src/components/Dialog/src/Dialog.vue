@@ -1,59 +1,59 @@
 <script setup lang="ts">
-import { ElDialog, ElScrollbar } from 'element-plus'
-import { propTypes } from '@/utils/propTypes'
-import { computed, useAttrs, ref, unref, useSlots, watch, nextTick } from 'vue'
-import { isNumber } from '@/utils/is'
+import { ElDialog, ElScrollbar } from 'element-plus';
+import { propTypes } from '@/utils/propTypes';
+import { computed, useAttrs, ref, unref, useSlots, watch, nextTick } from 'vue';
+import { isNumber } from '@/utils/is';
 
-const slots = useSlots()
+const slots = useSlots();
 
 const props = defineProps({
   modelValue: propTypes.bool.def(false),
   title: propTypes.string.def('Dialog'),
   fullscreen: propTypes.bool.def(true),
   maxHeight: propTypes.oneOfType([String, Number]).def('400px')
-})
+});
 
 const getBindValue = computed(() => {
-  const delArr: string[] = ['fullscreen', 'title', 'maxHeight']
-  const attrs = useAttrs()
-  const obj = { ...attrs, ...props }
+  const delArr: string[] = ['fullscreen', 'title', 'maxHeight'];
+  const attrs = useAttrs();
+  const obj = { ...attrs, ...props };
   for (const key in obj) {
     if (delArr.indexOf(key) !== -1) {
-      delete obj[key]
+      delete obj[key];
     }
   }
-  return obj
-})
+  return obj;
+});
 
-const isFullscreen = ref(false)
+const isFullscreen = ref(false);
 
 const toggleFull = () => {
-  isFullscreen.value = !unref(isFullscreen)
-}
+  isFullscreen.value = !unref(isFullscreen);
+};
 
-const dialogHeight = ref(isNumber(props.maxHeight) ? `${props.maxHeight}px` : props.maxHeight)
+const dialogHeight = ref(isNumber(props.maxHeight) ? `${props.maxHeight}px` : props.maxHeight);
 
 watch(
   () => isFullscreen.value,
   async (val: boolean) => {
-    await nextTick()
+    await nextTick();
     if (val) {
-      const windowHeight = document.documentElement.offsetHeight
-      dialogHeight.value = `${windowHeight - 55 - 60 - (slots.footer ? 63 : 0)}px`
+      const windowHeight = document.documentElement.offsetHeight;
+      dialogHeight.value = `${windowHeight - 55 - 60 - (slots.footer ? 63 : 0)}px`;
     } else {
-      dialogHeight.value = isNumber(props.maxHeight) ? `${props.maxHeight}px` : props.maxHeight
+      dialogHeight.value = isNumber(props.maxHeight) ? `${props.maxHeight}px` : props.maxHeight;
     }
   },
   {
     immediate: true
   }
-)
+);
 
 const dialogStyle = computed(() => {
   return {
     height: unref(dialogHeight)
-  }
-})
+  };
+});
 </script>
 
 <template>

@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import { ContentWrap } from '@/components/ContentWrap'
-import { Dialog } from '@/components/Dialog'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ref, reactive } from 'vue'
-import { Form, FormSchema } from '@/components/Form'
-import { useValidator } from '@/hooks/web/useValidator'
-import { getDictOneApi } from '@/api/common'
-import { useForm } from '@/hooks/web/useForm'
-import Echart from './Echart.vue'
+import { ContentWrap } from '@/components/ContentWrap';
+import { Dialog } from '@/components/Dialog';
+import { useI18n } from '@/hooks/web/useI18n';
+import { ref, reactive } from 'vue';
+import { Form, FormSchema } from '@/components/Form';
+import { useValidator } from '@/hooks/web/useValidator';
+import { getDictOneApi } from '@/api/common';
+import { useForm } from '@/hooks/web/useForm';
+import Echart from './Echart.vue';
 
-const { required } = useValidator()
+const { required } = useValidator();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const dialogVisible = ref(false)
+const dialogVisible = ref(false);
 
-const dialogVisible2 = ref(false)
+const dialogVisible2 = ref(false);
 
-const { formRegister, formMethods } = useForm()
-const { getElFormExpose } = formMethods
+const { formRegister, formMethods } = useForm();
+const { getElFormExpose } = formMethods;
 
 const schema = reactive<FormSchema[]>([
   {
@@ -37,8 +37,8 @@ const schema = reactive<FormSchema[]>([
     //   options: []
     // },
     optionApi: async () => {
-      const res = await getDictOneApi()
-      return res.data
+      const res = await getDictOneApi();
+      return res.data;
     }
   },
   {
@@ -89,18 +89,18 @@ const schema = reactive<FormSchema[]>([
     component: 'TimeSelect',
     label: t('formDemo.timeSelect')
   }
-])
+]);
 
 const formSubmit = async () => {
-  const elFormExpose = await getElFormExpose()
+  const elFormExpose = await getElFormExpose();
   elFormExpose?.validate((valid) => {
     if (valid) {
-      console.log('submit success')
+      console.log('submit success');
     } else {
-      console.log('submit fail')
+      console.log('submit fail');
     }
-  })
-}
+  });
+};
 </script>
 
 <template>

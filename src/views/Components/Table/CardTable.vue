@@ -1,21 +1,21 @@
 <script setup lang="tsx">
-import { ContentWrap } from '@/components/ContentWrap'
-import { useI18n } from '@/hooks/web/useI18n'
-import { Table } from '@/components/Table'
-import { getCardTableListApi } from '@/api/table'
-import { ref } from 'vue'
-import { ElLink, ElDivider } from 'element-plus'
+import { ContentWrap } from '@/components/ContentWrap';
+import { useI18n } from '@/hooks/web/useI18n';
+import { Table } from '@/components/Table';
+import { getCardTableListApi } from '@/api/table';
+import { ref } from 'vue';
+import { ElLink, ElDivider } from 'element-plus';
 
 interface Params {
-  pageIndex?: number
-  pageSize?: number
+  pageIndex?: number;
+  pageSize?: number;
 }
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const loading = ref(true)
+const loading = ref(true);
 
-const tableDataList = ref<any[]>([])
+const tableDataList = ref<any[]>([]);
 
 const getTableList = async (params?: Params) => {
   const res = await getCardTableListApi(
@@ -26,18 +26,18 @@ const getTableList = async (params?: Params) => {
   )
     .catch(() => {})
     .finally(() => {
-      loading.value = false
-    })
+      loading.value = false;
+    });
   if (res) {
-    tableDataList.value = res.data.list
+    tableDataList.value = res.data.list;
   }
-}
+};
 
-getTableList()
+getTableList();
 
 const actionClick = (row?: any) => {
-  console.log(row)
-}
+  console.log(row);
+};
 </script>
 
 <template>

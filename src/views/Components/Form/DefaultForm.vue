@@ -1,10 +1,10 @@
 <script setup lang="tsx">
-import { Form } from '@/components/Form'
-import { reactive, ref, onMounted, computed } from 'vue'
-import { useI18n } from '@/hooks/web/useI18n'
-import { ContentWrap } from '@/components/ContentWrap'
-import { useAppStore } from '@/store/modules/app'
-import { SelectOption, RadioOption, CheckboxOption, FormSchema } from '@/components/Form'
+import { Form } from '@/components/Form';
+import { reactive, ref, onMounted, computed } from 'vue';
+import { useI18n } from '@/hooks/web/useI18n';
+import { ContentWrap } from '@/components/ContentWrap';
+import { useAppStore } from '@/store/modules/app';
+import { SelectOption, RadioOption, CheckboxOption, FormSchema } from '@/components/Form';
 import {
   ElOption,
   ElOptionGroup,
@@ -16,41 +16,41 @@ import {
   ElMessage,
   ElMessageBox,
   ElIcon
-} from 'element-plus'
-import { getDictOneApi } from '@/api/common'
-import { Icon } from '@/components/Icon'
-import { BaseButton } from '@/components/Button'
+} from 'element-plus';
+import { getDictOneApi } from '@/api/common';
+import { Icon } from '@/components/Icon';
+import { BaseButton } from '@/components/Button';
 
-const appStore = useAppStore()
+const appStore = useAppStore();
 
-const { t } = useI18n()
+const { t } = useI18n();
 
-const isMobile = computed(() => appStore.getMobile)
+const isMobile = computed(() => appStore.getMobile);
 
-const restaurants = ref<Recordable[]>([])
+const restaurants = ref<Recordable[]>([]);
 const querySearch = (queryString: string, cb: Fn) => {
   const results = queryString
     ? restaurants.value.filter(createFilter(queryString))
-    : restaurants.value
+    : restaurants.value;
   // call callback function to return suggestions
-  cb(results)
-}
-let timeout: NodeJS.Timeout
+  cb(results);
+};
+let timeout: NodeJS.Timeout;
 const querySearchAsync = (queryString: string, cb: (arg: any) => void) => {
   const results = queryString
     ? restaurants.value.filter(createFilter(queryString))
-    : restaurants.value
+    : restaurants.value;
 
-  clearTimeout(timeout)
+  clearTimeout(timeout);
   timeout = setTimeout(() => {
-    cb(results)
-  }, 3000 * Math.random())
-}
+    cb(results);
+  }, 3000 * Math.random());
+};
 const createFilter = (queryString: string) => {
   return (restaurant: Recordable) => {
-    return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-  }
-}
+    return restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
+  };
+};
 const loadAll = () => {
   return [
     { value: 'vue', link: 'https://github.com/vuejs/vue' },
@@ -60,25 +60,25 @@ const loadAll = () => {
     { value: 'vuex', link: 'https://github.com/vuejs/vuex' },
     { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
     { value: 'babel', link: 'https://github.com/babel/babel' }
-  ]
-}
+  ];
+};
 const handleSelect = (item: Recordable) => {
-  console.log(item)
-}
+  console.log(item);
+};
 onMounted(() => {
-  restaurants.value = loadAll()
-})
+  restaurants.value = loadAll();
+});
 
-const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
 const options = ref(
   Array.from({ length: 1000 }).map((_, idx) => ({
     value: `Option ${idx + 1}`,
     label: `${initials[idx % 10]}${idx}`
   }))
-)
+);
 const options2 = ref(
   Array.from({ length: 10 }).map((_, idx) => {
-    const label = idx + 1
+    const label = idx + 1;
     return {
       value: `Group ${label}`,
       label: `Group ${label}`,
@@ -86,9 +86,9 @@ const options2 = ref(
         value: `Option ${idx + 1 + 10 * label}`,
         label: `${initials[idx % 10]}${idx + 1 + 10 * label}`
       }))
-    }
+    };
   })
-)
+);
 
 const options3 = [
   {
@@ -339,23 +339,23 @@ const options3 = [
       }
     ]
   }
-]
+];
 
 const generateData = () => {
   const data: {
-    value: number
-    desc: string
-    disabled: boolean
-  }[] = []
+    value: number;
+    desc: string;
+    disabled: boolean;
+  }[] = [];
   for (let i = 1; i <= 15; i++) {
     data.push({
       value: i,
       desc: `Option ${i}`,
       disabled: i % 4 === 0
-    })
+    });
   }
-  return data
-}
+  return data;
+};
 
 const holidays = [
   '2021-10-01',
@@ -365,11 +365,11 @@ const holidays = [
   '2021-10-05',
   '2021-10-06',
   '2021-10-07'
-]
+];
 
 const isHoliday = ({ dayjs }) => {
-  return holidays.includes(dayjs.format('YYYY-MM-DD'))
-}
+  return holidays.includes(dayjs.format('YYYY-MM-DD'));
+};
 
 const treeSelectData = [
   {
@@ -440,20 +440,20 @@ const treeSelectData = [
       }
     ]
   }
-]
+];
 
 // 模拟远程加载
 const getTreeSelectData = () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve(treeSelectData)
-    }, 3000)
-  })
-}
+      resolve(treeSelectData);
+    }, 3000);
+  });
+};
 
-let id = 0
+let id = 0;
 
-const imageUrl = ref('')
+const imageUrl = ref('');
 
 const schema = reactive<FormSchema[]>([
   {
@@ -486,7 +486,7 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       slots: {
         suffix: () => {
-          return <Icon icon="vi-ep:share" />
+          return <Icon icon="vi-ep:share" />;
         },
         prefix: () => <Icon icon="vi-ep:calendar" />
       }
@@ -552,7 +552,7 @@ const schema = reactive<FormSchema[]>([
               <div class="value">{item?.value}</div>
               <span class="link">{item?.link}</span>
             </>
-          )
+          );
         }
       }
     }
@@ -630,10 +630,10 @@ const schema = reactive<FormSchema[]>([
         default: (options: SelectOption[]) => {
           if (options.length) {
             return options?.map((v) => {
-              return <ElOption key={v.value} label={v.label} value={v.value} />
-            })
+              return <ElOption key={v.value} label={v.label} value={v.value} />;
+            });
           } else {
-            return null
+            return null;
           }
         },
         prefix: () => <Icon icon="vi-ep:calendar" />
@@ -680,7 +680,7 @@ const schema = reactive<FormSchema[]>([
                 {option.value}
               </span>
             </>
-          )
+          );
         }
       }
     }
@@ -759,10 +759,10 @@ const schema = reactive<FormSchema[]>([
           return (
             <ElOptionGroup key={option.label} label={`${option.label} ${option.label}`}>
               {option?.options?.map((v) => {
-                return <ElOption key={v.value} label={v.label} value={v.value} />
+                return <ElOption key={v.value} label={v.label} value={v.value} />;
               })}
             </ElOptionGroup>
-          )
+          );
         }
       }
     }
@@ -796,7 +796,7 @@ const schema = reactive<FormSchema[]>([
                 {option?.value}
               </span>
             </>
-          )
+          );
         }
       }
     }
@@ -824,7 +824,7 @@ const schema = reactive<FormSchema[]>([
                 {option?.value}
               </span>
             </>
-          )
+          );
         }
       }
     }
@@ -858,7 +858,7 @@ const schema = reactive<FormSchema[]>([
               <span>{data.label}</span>
               {!node.isLeaf ? <span> ({data.children.length}) </span> : null}
             </>
-          )
+          );
         }
       }
     }
@@ -965,21 +965,21 @@ const schema = reactive<FormSchema[]>([
             <span>
               {option.value} - {option.desc}
             </span>
-          )
+          );
         },
         leftFooter: () => {
           return (
             <BaseButton class="transfer-footer" size="small">
               Operation
             </BaseButton>
-          )
+          );
         },
         rightFooter: () => {
           return (
             <BaseButton class="transfer-footer" size="small">
               Operation
             </BaseButton>
-          )
+          );
         }
       }
     },
@@ -1002,7 +1002,7 @@ const schema = reactive<FormSchema[]>([
       rightDefaultChecked: [1],
       data: generateData(),
       renderContent: (h, option) => {
-        return h('span', null, `${option.value} - ${option.desc}`)
+        return h('span', null, `${option.value} - ${option.desc}`);
       }
     },
     value: [1],
@@ -1052,8 +1052,8 @@ const schema = reactive<FormSchema[]>([
       slots: {
         default: (options: RadioOption[]) => {
           return options?.map((v) => {
-            return <ElRadio label={v.label + `(${v.value})`} value={v.value} />
-          })
+            return <ElRadio label={v.label + `(${v.value})`} value={v.value} />;
+          });
         }
       }
     }
@@ -1093,8 +1093,8 @@ const schema = reactive<FormSchema[]>([
       slots: {
         default: (options: RadioOption[]) => {
           return options?.map((v) => {
-            return <ElRadioButton label={v.label + `(${v.value})`} value={v.value} />
-          })
+            return <ElRadioButton label={v.label + `(${v.value})`} value={v.value} />;
+          });
         }
       }
     }
@@ -1149,8 +1149,8 @@ const schema = reactive<FormSchema[]>([
       slots: {
         default: (options: CheckboxOption[]) => {
           return options?.map((v) => {
-            return <ElCheckbox label={v.label + `(${v.value})`} value={v.value} />
-          })
+            return <ElCheckbox label={v.label + `(${v.value})`} value={v.value} />;
+          });
         }
       }
     }
@@ -1202,8 +1202,8 @@ const schema = reactive<FormSchema[]>([
       slots: {
         default: (options: CheckboxOption[]) => {
           return options?.map((v) => {
-            return <ElCheckboxButton label={v.label + `(${v.value})`} value={v.value} />
-          })
+            return <ElCheckboxButton label={v.label + `(${v.value})`} value={v.value} />;
+          });
         }
       }
     }
@@ -1239,7 +1239,7 @@ const schema = reactive<FormSchema[]>([
     componentProps: {
       type: 'date',
       disabledDate: (time: Date) => {
-        return time.getTime() > Date.now()
+        return time.getTime() > Date.now();
       },
       shortcuts: [
         {
@@ -1249,17 +1249,17 @@ const schema = reactive<FormSchema[]>([
         {
           text: t('formDemo.yesterday'),
           value: () => {
-            const date = new Date()
-            date.setTime(date.getTime() - 3600 * 1000 * 24)
-            return date
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            return date;
           }
         },
         {
           text: t('formDemo.aWeekAgo'),
           value: () => {
-            const date = new Date()
-            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
-            return date
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            return date;
           }
         }
       ]
@@ -1279,7 +1279,7 @@ const schema = reactive<FormSchema[]>([
               <span class="text">{cell.text}</span>
               {isHoliday(cell) ? <span class="holiday" /> : null}
             </div>
-          )
+          );
         }
       }
     }
@@ -1360,17 +1360,17 @@ const schema = reactive<FormSchema[]>([
         {
           text: t('formDemo.yesterday'),
           value: () => {
-            const date = new Date()
-            date.setTime(date.getTime() - 3600 * 1000 * 24)
-            return date
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24);
+            return date;
           }
         },
         {
           text: t('formDemo.aWeekAgo'),
           value: () => {
-            const date = new Date()
-            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
-            return date
+            const date = new Date();
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
+            return date;
           }
         }
       ]
@@ -1447,7 +1447,7 @@ const schema = reactive<FormSchema[]>([
             <div class="custom-label">
               <span class="label-text">custom {label}</span>
             </div>
-          )
+          );
         }
       }
     }
@@ -1459,7 +1459,7 @@ const schema = reactive<FormSchema[]>([
     formItemProps: {
       slots: {
         default: (formModel: any) => {
-          return <ElInput v-model={formModel['field69-1']} />
+          return <ElInput v-model={formModel['field69-1']} />;
         }
       }
     }
@@ -1478,8 +1478,8 @@ const schema = reactive<FormSchema[]>([
     },
     // 远程加载option
     optionApi: async () => {
-      const res = await getDictOneApi()
-      return res.data
+      const res = await getDictOneApi();
+      return res.data;
     }
   },
   {
@@ -1491,8 +1491,8 @@ const schema = reactive<FormSchema[]>([
     },
     // 远程加载option
     optionApi: async () => {
-      const res = await getDictOneApi()
-      return res.data
+      const res = await getDictOneApi();
+      return res.data;
     }
   },
   {
@@ -1504,8 +1504,8 @@ const schema = reactive<FormSchema[]>([
     },
     // 远程加载option
     optionApi: async () => {
-      const res = await getDictOneApi()
-      return res.data
+      const res = await getDictOneApi();
+      return res.data;
     }
   },
   {
@@ -1517,8 +1517,8 @@ const schema = reactive<FormSchema[]>([
     },
     // 远程加载option
     optionApi: async () => {
-      const res = await getDictOneApi()
-      return res.data
+      const res = await getDictOneApi();
+      return res.data;
     }
   },
   {
@@ -1527,8 +1527,8 @@ const schema = reactive<FormSchema[]>([
     component: 'TreeSelect',
     // 远程加载option
     optionApi: async () => {
-      const res = await getTreeSelectData()
-      return res
+      const res = await getTreeSelectData();
+      return res;
     }
   },
   {
@@ -1614,7 +1614,7 @@ const schema = reactive<FormSchema[]>([
               {label}
               <span style="color: gray">(suffix)</span>
             </>
-          )
+          );
         }
       },
       data: treeSelectData
@@ -1628,7 +1628,7 @@ const schema = reactive<FormSchema[]>([
       renderAfterExpand: false,
       lazy: true,
       load: (node, resolve) => {
-        if (node.isLeaf) return resolve([])
+        if (node.isLeaf) return resolve([]);
 
         setTimeout(() => {
           resolve([
@@ -1641,8 +1641,8 @@ const schema = reactive<FormSchema[]>([
               label: `lazy load node${id}`,
               isLeaf: true
             }
-          ])
-        }, 400)
+          ]);
+        }, 400);
       },
       multiple: true,
       filterable: true,
@@ -1657,7 +1657,7 @@ const schema = reactive<FormSchema[]>([
               {label}
               <span style="color: gray">(suffix)</span>
             </>
-          )
+          );
         }
       },
       data: treeSelectData
@@ -1687,23 +1687,23 @@ const schema = reactive<FormSchema[]>([
       ],
       multiple: true,
       onPreview: (uploadFile) => {
-        console.log(uploadFile)
+        console.log(uploadFile);
       },
       onRemove: (file) => {
-        console.log(file)
+        console.log(file);
       },
       beforeRemove: (uploadFile) => {
         return ElMessageBox.confirm(`Cancel the transfer of ${uploadFile.name} ?`).then(
           () => true,
           () => false
-        )
+        );
       },
       onExceed: (files, uploadFiles) => {
         ElMessage.warning(
           `The limit is 3, you selected ${files.length} files this time, add up to ${
             files.length + uploadFiles.length
           } totally`
-        )
+        );
       },
       slots: {
         default: () => <BaseButton type="primary">Click to upload</BaseButton>,
@@ -1719,17 +1719,17 @@ const schema = reactive<FormSchema[]>([
       action: 'https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15',
       showFileList: false,
       onSuccess: (_response, uploadFile) => {
-        imageUrl.value = URL.createObjectURL(uploadFile.raw!)
+        imageUrl.value = URL.createObjectURL(uploadFile.raw!);
       },
       beforeUpload: (rawFile) => {
         if (rawFile.type !== 'image/jpeg') {
-          ElMessage.error('Avatar picture must be JPG format!')
-          return false
+          ElMessage.error('Avatar picture must be JPG format!');
+          return false;
         } else if (rawFile.size / 1024 / 1024 > 2) {
-          ElMessage.error('Avatar picture size can not exceed 2MB!')
-          return false
+          ElMessage.error('Avatar picture size can not exceed 2MB!');
+          return false;
         }
-        return true
+        return true;
       },
       slots: {
         default: () => (
@@ -1789,7 +1789,7 @@ const schema = reactive<FormSchema[]>([
       ]
     }
   }
-])
+]);
 </script>
 
 <template>

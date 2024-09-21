@@ -1,15 +1,15 @@
 <script setup lang="tsx">
-import { Form, FormSchema, FormSetProps } from '@/components/Form'
-import { PropType, computed, unref, ref, watch, onMounted } from 'vue'
-import { propTypes } from '@/utils/propTypes'
-import { useForm } from '@/hooks/web/useForm'
-import { findIndex } from '@/utils'
-import { cloneDeep, set } from 'lodash-es'
-import { initModel } from '@/components/Form/src/helper'
-import ActionButton from './components/ActionButton.vue'
-import { SearchProps } from './types'
-import { FormItemProp } from 'element-plus'
-import { isObject, isEmptyVal } from '@/utils/is'
+import { Form, FormSchema, FormSetProps } from '@/components/Form';
+import { PropType, computed, unref, ref, watch, onMounted } from 'vue';
+import { propTypes } from '@/utils/propTypes';
+import { useForm } from '@/hooks/web/useForm';
+import { findIndex } from '@/utils';
+import { cloneDeep, set } from 'lodash-es';
+import { initModel } from '@/components/Form/src/helper';
+import ActionButton from './components/ActionButton.vue';
+import { SearchProps } from './types';
+import { FormItemProp } from 'element-plus';
+import { isObject, isEmptyVal } from '@/utils/is';
 
 const props = defineProps({
   // 生成Form的布局结构数组
@@ -42,28 +42,28 @@ const props = defineProps({
   },
   searchLoading: propTypes.bool.def(false),
   resetLoading: propTypes.bool.def(false)
-})
+});
 
-const emit = defineEmits(['search', 'reset', 'register', 'validate'])
+const emit = defineEmits(['search', 'reset', 'register', 'validate']);
 
-const visible = ref(true)
+const visible = ref(true);
 
 // 表单数据
-const formModel = ref<Recordable>(props.model)
+const formModel = ref<Recordable>(props.model);
 
 const newSchema = computed(() => {
-  const propsComputed = unref(getProps)
-  let schema: FormSchema[] = cloneDeep(propsComputed.schema)
+  const propsComputed = unref(getProps);
+  let schema: FormSchema[] = cloneDeep(propsComputed.schema);
   if (propsComputed.showExpand && propsComputed.expandField && !unref(visible)) {
-    const index = findIndex(schema, (v: FormSchema) => v.field === propsComputed.expandField)
+    const index = findIndex(schema, (v: FormSchema) => v.field === propsComputed.expandField);
     schema.map((v, i) => {
       if (i >= index) {
-        v.hidden = true
+        v.hidden = true;
       } else {
-        v.hidden = false
+        v.hidden = false;
       }
-      return v
-    })
+      return v;
+    });
   }
   if (propsComputed.layout === 'inline') {
     schema = schema.concat([
@@ -87,137 +87,137 @@ const newSchema = computed(() => {
                     onSearch={search}
                   />
                 </div>
-              )
+              );
             },
             label: () => {
-              return <span>&nbsp;</span>
+              return <span>&nbsp;</span>;
             }
           }
         }
       }
-    ])
+    ]);
   }
-  return schema
-})
+  return schema;
+});
 
-const { formRegister, formMethods } = useForm()
-const { getElFormExpose, getFormData, getFormExpose } = formMethods
+const { formRegister, formMethods } = useForm();
+const { getElFormExpose, getFormData, getFormExpose } = formMethods;
 
 // useSearch传入的props
-const outsideProps = ref<SearchProps>({})
+const outsideProps = ref<SearchProps>({});
 
-const mergeProps = ref<SearchProps>({})
+const mergeProps = ref<SearchProps>({});
 
 const getProps = computed(() => {
-  const propsObj = { ...props }
-  Object.assign(propsObj, unref(mergeProps))
-  return propsObj
-})
+  const propsObj = { ...props };
+  Object.assign(propsObj, unref(mergeProps));
+  return propsObj;
+});
 
 const setProps = (props: SearchProps = {}) => {
-  mergeProps.value = Object.assign(unref(mergeProps), props)
+  mergeProps.value = Object.assign(unref(mergeProps), props);
   // @ts-ignore
-  outsideProps.value = props
-}
+  outsideProps.value = props;
+};
 
-const schemaRef = ref<FormSchema[]>([])
+const schemaRef = ref<FormSchema[]>([]);
 
 // 监听表单结构化数组，重新生成formModel
 watch(
   () => unref(newSchema),
   async (schema = []) => {
-    formModel.value = initModel(schema, unref(formModel))
-    schemaRef.value = schema
+    formModel.value = initModel(schema, unref(formModel));
+    schemaRef.value = schema;
   },
   {
     immediate: true,
     deep: true
   }
-)
+);
 
 const filterModel = async () => {
-  const model = await getFormData()
+  const model = await getFormData();
   if (unref(getProps).removeNoValueItem) {
     // 使用reduce过滤空值，并返回一个新对象
     return Object.keys(model).reduce((prev, next) => {
-      const value = model[next]
+      const value = model[next];
       if (!isEmptyVal(value)) {
         if (isObject(value)) {
           if (Object.keys(value).length > 0) {
-            prev[next] = value
+            prev[next] = value;
           }
         } else {
-          prev[next] = value
+          prev[next] = value;
         }
       }
-      return prev
-    }, {})
+      return prev;
+    }, {});
   }
-  return model
-}
+  return model;
+};
 
 const search = async () => {
-  const elFormExpose = await getElFormExpose()
+  const elFormExpose = await getElFormExpose();
   await elFormExpose?.validate(async (isValid) => {
     if (isValid) {
-      const model = await filterModel()
-      emit('search', model)
+      const model = await filterModel();
+      emit('search', model);
     }
-  })
-}
+  });
+};
 
 const reset = async () => {
-  const elFormExpose = await getElFormExpose()
-  elFormExpose?.resetFields()
-  const model = await filterModel()
-  emit('reset', model)
-}
+  const elFormExpose = await getElFormExpose();
+  elFormExpose?.resetFields();
+  const model = await filterModel();
+  emit('reset', model);
+};
 
 const bottomButtonStyle = computed(() => {
   return {
     textAlign: unref(getProps).buttonPosition as unknown as 'left' | 'center' | 'right'
-  }
-})
+  };
+});
 
 const setVisible = async () => {
-  visible.value = !unref(visible)
-}
+  visible.value = !unref(visible);
+};
 
 const setSchema = (schemaProps: FormSetProps[]) => {
-  const { schema } = unref(getProps)
+  const { schema } = unref(getProps);
   for (const v of schema) {
     for (const item of schemaProps) {
       if (v.field === item.field) {
-        set(v, item.path, item.value)
+        set(v, item.path, item.value);
       }
     }
   }
-}
+};
 
 // 对表单赋值
 const setValues = async (data: Recordable = {}) => {
-  formModel.value = Object.assign(props.model, unref(formModel), data)
-  const formExpose = await getFormExpose()
-  formExpose?.setValues(data)
-}
+  formModel.value = Object.assign(props.model, unref(formModel), data);
+  const formExpose = await getFormExpose();
+  formExpose?.setValues(data);
+};
 
 const delSchema = (field: string) => {
-  const { schema } = unref(getProps)
+  const { schema } = unref(getProps);
 
-  const index = findIndex(schema, (v: FormSchema) => v.field === field)
+  const index = findIndex(schema, (v: FormSchema) => v.field === field);
   if (index > -1) {
-    schema.splice(index, 1)
+    schema.splice(index, 1);
   }
-}
+};
 
 const addSchema = (formSchema: FormSchema, index?: number) => {
-  const { schema } = unref(getProps)
+  const { schema } = unref(getProps);
   if (index !== void 0) {
-    schema.splice(index, 0, formSchema)
-    return
+    schema.splice(index, 0, formSchema);
+    return;
   }
-  schema.push(formSchema)
-}
+  schema.push(formSchema);
+};
 
 const defaultExpose = {
   getElFormExpose,
@@ -227,17 +227,17 @@ const defaultExpose = {
   delSchema,
   addSchema,
   getFormData
-}
+};
 
 onMounted(() => {
-  emit('register', defaultExpose)
-})
+  emit('register', defaultExpose);
+});
 
-defineExpose(defaultExpose)
+defineExpose(defaultExpose);
 
 const onFormValidate = (prop: FormItemProp, isValid: boolean, message: string) => {
-  emit('validate', prop, isValid, message)
-}
+  emit('validate', prop, isValid, message);
+};
 </script>
 
 <template>

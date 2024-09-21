@@ -1,77 +1,90 @@
-import axios, { AxiosError } from 'axios'
-import { defaultRequestInterceptors, defaultResponseInterceptors } from './config'
+import axios, { AxiosError } from 'axios';
+import { defaultRequestInterceptors, defaultResponseInterceptors } from './config';
 
-import { AxiosInstance, InternalAxiosRequestConfig, RequestConfig, AxiosResponse } from './types'
-import { ElMessage } from 'element-plus'
-import { REQUEST_TIMEOUT } from '@/constants'
+import { AxiosInstance, InternalAxiosRequestConfig, RequestConfig, AxiosResponse } from './types';
+import { ElMessage } from 'element-plus';
+import { REQUEST_TIMEOUT } from '@/constants';
 
-export const PATH_URL = import.meta.env.VITE_API_BASE_PATH
+export const PATH_URL = import.meta.env.VITE_API_BASE_PATH;
 
-const abortControllerMap: Map<string, AbortController> = new Map()
+const abortControllerMap: Map<string, AbortController> = new Map();
 
 const axiosInstance: AxiosInstance = axios.create({
   timeout: REQUEST_TIMEOUT,
   baseURL: PATH_URL
-})
+});
 
 axiosInstance.interceptors.request.use((res: InternalAxiosRequestConfig) => {
-  const controller = new AbortController()
-  const url = res.url || ''
-  res.signal = controller.signal
+  const controller = new AbortController();
+  const url = res.url || '';
+  res.signal = controller.signal;
+
+  if (url.startsWith('/mock')) {
+    res.baseURL = '';
+  }
+  console.log('url' + url, res);
   abortControllerMap.set(
     import.meta.env.VITE_USE_MOCK === 'true' ? url.replace('/mock', '') : url,
     controller
-  )
-  return res
-})
+  );
+  return res;
+});
 
 axiosInstance.interceptors.response.use(
   (res: AxiosResponse) => {
-    const url = res.config.url || ''
-    abortControllerMap.delete(url)
+    const url = res.config.url || '';
+    abortControllerMap.delete(url);
     // 这里不能做任何处理，否则后面的 interceptors 拿不到完整的上下文了
-    return res
+    return res;
   },
   (error: AxiosError) => {
-    console.log('err： ' + error) // for debug
-    ElMessage.error(error.message)
-    return Promise.reject(error)
-  }
-)
+    console.error('err', error);
 
-axiosInstance.interceptors.request.use(defaultRequestInterceptors)
-axiosInstance.interceptors.response.use(defaultResponseInterceptors)
+    const data = error.response?.data as any;
+    const message = data?.message || error.message || `未知错误`;
+
+    ElMessage.error(message);
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.request.use(defaultRequestInterceptors);
+axiosInstance.interceptors.response.use(defaultResponseInterceptors);
 
 const service = {
   request: (config: RequestConfig) => {
     return new Promise((resolve, reject) => {
+      console.log('config: ', config);
+
       if (config.interceptors?.requestInterceptors) {
-        config = config.interceptors.requestInterceptors(config as any)
+        config = config.interceptors.requestInterceptors(config as any);
+        console.log('interceptors config: ', config); // for debug
       }
 
       axiosInstance
         .request(config)
         .then((res) => {
-          resolve(res)
+          console.log('res: ', res, config); // for debug
+          resolve(res);
         })
         .catch((err: any) => {
-          reject(err)
-        })
-    })
+          reject(err);
+        });
+    });
   },
   cancelRequest: (url: string | string[]) => {
-    const urlList = Array.isArray(url) ? url : [url]
+    const urlList = Array.isArray(url) ? url : [url];
     for (const _url of urlList) {
-      abortControllerMap.get(_url)?.abort()
-      abortControllerMap.delete(_url)
+      abortControllerMap.get(_url)?.abort();
+      abortControllerMap.delete(_url);
     }
   },
   cancelAllRequest() {
     for (const [_, controller] of abortControllerMap) {
-      controller.abort()
+      controller.abort();
     }
-    abortControllerMap.clear()
+    abortControllerMap.clear();
   }
-}
+};
 
-export default service
+export default service;

@@ -1,4 +1,4 @@
-import type { Component } from 'vue'
+import type { Component } from 'vue';
 import {
   ElCascader,
   ElCheckboxGroup,
@@ -19,13 +19,13 @@ import {
   ElDivider,
   ElTreeSelect,
   ElUpload
-} from 'element-plus'
-import { InputPassword } from '@/components/InputPassword'
-import { Editor } from '@/components/Editor'
-import { JsonEditor } from '@/components/JsonEditor'
-import { IconPicker } from '@/components/IconPicker'
-import { IAgree } from '@/components/IAgree'
-import { ComponentName } from '../types'
+} from 'element-plus';
+import { InputPassword } from '@/components/InputPassword';
+import { Editor } from '@/components/Editor';
+import { JsonEditor } from '@/components/JsonEditor';
+import { IconPicker } from '@/components/IconPicker';
+import { IAgree } from '@/components/IAgree';
+import { ComponentName } from '../types';
 
 const componentMap: Recordable<Component, ComponentName> = {
   RadioGroup: ElRadioGroup,
@@ -54,6 +54,6 @@ const componentMap: Recordable<Component, ComponentName> = {
   JsonEditor: JsonEditor,
   IconPicker: IconPicker,
   IAgree: IAgree
-}
+};
 
-export { componentMap }
+export { componentMap };

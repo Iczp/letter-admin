@@ -296,4 +296,4 @@ export default {
     'vi-ep:zoom-in',
     'vi-ep:zoom-out'
   ]
-}
+};

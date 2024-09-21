@@ -1,18 +1,18 @@
-import { defineStore } from 'pinia'
-import { asyncRouterMap, constantRouterMap } from '@/router'
+import { defineStore } from 'pinia';
+import { asyncRouterMap, constantRouterMap } from '@/router';
 import {
   generateRoutesByFrontEnd,
   generateRoutesByServer,
   flatMultiLevelRoutes
-} from '@/utils/routerHelper'
-import { store } from '../index'
-import { cloneDeep } from 'lodash-es'
+} from '@/utils/routerHelper';
+import { store } from '../index';
+import { cloneDeep } from 'lodash-es';
 
 export interface PermissionState {
-  routers: AppRouteRecordRaw[]
-  addRouters: AppRouteRecordRaw[]
-  isAddRouters: boolean
-  menuTabRouters: AppRouteRecordRaw[]
+  routers: AppRouteRecordRaw[];
+  addRouters: AppRouteRecordRaw[];
+  isAddRouters: boolean;
+  menuTabRouters: AppRouteRecordRaw[];
 }
 
 export const usePermissionStore = defineStore('permission', {
@@ -24,16 +24,16 @@ export const usePermissionStore = defineStore('permission', {
   }),
   getters: {
     getRouters(): AppRouteRecordRaw[] {
-      return this.routers
+      return this.routers;
     },
     getAddRouters(): AppRouteRecordRaw[] {
-      return flatMultiLevelRoutes(cloneDeep(this.addRouters))
+      return flatMultiLevelRoutes(cloneDeep(this.addRouters));
     },
     getIsAddRouters(): boolean {
-      return this.isAddRouters
+      return this.isAddRouters;
     },
     getMenuTabRouters(): AppRouteRecordRaw[] {
-      return this.menuTabRouters
+      return this.menuTabRouters;
     }
   },
   actions: {
@@ -41,17 +41,18 @@ export const usePermissionStore = defineStore('permission', {
       type: 'server' | 'frontEnd' | 'static',
       routers?: AppCustomRouteRecordRaw[] | string[]
     ): Promise<unknown> {
+      console.log('type', type, 'routers', routers);
       return new Promise<void>((resolve) => {
-        let routerMap: AppRouteRecordRaw[] = []
+        let routerMap: AppRouteRecordRaw[] = [];
         if (type === 'server') {
           // 模拟后端过滤菜单
-          routerMap = generateRoutesByServer(routers as AppCustomRouteRecordRaw[])
+          routerMap = generateRoutesByServer(routers as AppCustomRouteRecordRaw[]);
         } else if (type === 'frontEnd') {
           // 模拟前端过滤菜单
-          routerMap = generateRoutesByFrontEnd(cloneDeep(asyncRouterMap), routers as string[])
+          routerMap = generateRoutesByFrontEnd(cloneDeep(asyncRouterMap), routers as string[]);
         } else {
           // 直接读取静态路由表
-          routerMap = cloneDeep(asyncRouterMap)
+          routerMap = cloneDeep(asyncRouterMap);
         }
         // 动态路由，404一定要放到最后面
         this.addRouters = routerMap.concat([
@@ -64,24 +65,24 @@ export const usePermissionStore = defineStore('permission', {
               breadcrumb: false
             }
           }
-        ])
+        ]);
         // 渲染菜单的所有路由
-        this.routers = cloneDeep(constantRouterMap).concat(routerMap)
-        resolve()
-      })
+        this.routers = cloneDeep(constantRouterMap).concat(routerMap);
+        resolve();
+      });
     },
     setIsAddRouters(state: boolean): void {
-      this.isAddRouters = state
+      this.isAddRouters = state;
     },
     setMenuTabRouters(routers: AppRouteRecordRaw[]): void {
-      this.menuTabRouters = routers
+      this.menuTabRouters = routers;
     }
   },
   persist: {
     paths: ['routers', 'addRouters', 'menuTabRouters']
   }
-})
+});
 
 export const usePermissionStoreWithOut = () => {
-  return usePermissionStore(store)
-}
+  return usePermissionStore(store);
+};
