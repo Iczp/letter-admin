@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ActivityGetListResult } from '../models/ActivityGetListResult';
+import type { ActivityPagedResult } from '../models/ActivityPagedResult';
 import type { InviterConfigDetailDto } from '../models/InviterConfigDetailDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -10,10 +10,10 @@ import { request as __request } from '../core/request';
 export class CurrentUserApiService {
     /**
      * 活动列表
-     * @returns ActivityGetListResult
+     * @returns ActivityPagedResult
      * @throws ApiError
      */
-    public static activitiesControllerGetListByCurrentUser(): CancelablePromise<ActivityGetListResult> {
+    public static activitiesControllerGetListByCurrentUser(): CancelablePromise<ActivityPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activities/current-user/list',

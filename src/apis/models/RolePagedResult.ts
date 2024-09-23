@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ActivityDto } from './ActivityDto';
-export type ActivityGetListResult = {
-    items: Array<ActivityDto>;
+import type { RoleDto } from './RoleDto';
+export type RolePagedResult = {
+    items: Array<RoleDto>;
 };
 

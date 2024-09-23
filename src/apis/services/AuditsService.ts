@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { AuditLogDetailDto } from '../models/AuditLogDetailDto';
+import type { AuditLogPagedResult } from '../models/AuditLogPagedResult';
 import type { ExcelUploadInput } from '../models/ExcelUploadInput';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -23,7 +24,7 @@ export class AuditsService {
      * @param className class_name
      * @param handlerName handler_name
      * @param ip IP
-     * @returns any
+     * @returns AuditLogPagedResult
      * @throws ApiError
      */
     public static auditsControllerGetList(
@@ -40,7 +41,7 @@ export class AuditsService {
         className?: string,
         handlerName?: string,
         ip?: string,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<AuditLogPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audits',

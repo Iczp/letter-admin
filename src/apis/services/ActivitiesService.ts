@@ -4,7 +4,7 @@
 /* eslint-disable */
 import type { ActivityCreateInput } from '../models/ActivityCreateInput';
 import type { ActivityDetailDto } from '../models/ActivityDetailDto';
-import type { ActivityGetListResult } from '../models/ActivityGetListResult';
+import type { ActivityPagedResult } from '../models/ActivityPagedResult';
 import type { ActivityUpdateInput } from '../models/ActivityUpdateInput';
 import type { ExcelUploadInput } from '../models/ExcelUploadInput';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -22,7 +22,7 @@ export class ActivitiesService {
      * @param erpUserId ERP用户ID
      * @param startTime 起始时间
      * @param endTime 结束时间
-     * @returns ActivityGetListResult
+     * @returns ActivityPagedResult
      * @throws ApiError
      */
     public static activitiesControllerGetList(
@@ -35,7 +35,7 @@ export class ActivitiesService {
         erpUserId?: string,
         startTime?: string,
         endTime?: string,
-    ): CancelablePromise<ActivityGetListResult> {
+    ): CancelablePromise<ActivityPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activities',
@@ -70,10 +70,10 @@ export class ActivitiesService {
     }
     /**
      * 活动列表
-     * @returns ActivityGetListResult
+     * @returns ActivityPagedResult
      * @throws ApiError
      */
-    public static activitiesControllerGetListByCurrentUser(): CancelablePromise<ActivityGetListResult> {
+    public static activitiesControllerGetListByCurrentUser(): CancelablePromise<ActivityPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activities/current-user/list',

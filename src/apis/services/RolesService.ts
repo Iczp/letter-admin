@@ -5,6 +5,7 @@
 import type { ExcelUploadInput } from '../models/ExcelUploadInput';
 import type { RoleCreateInput } from '../models/RoleCreateInput';
 import type { RoleDetailDto } from '../models/RoleDetailDto';
+import type { RolePagedResult } from '../models/RolePagedResult';
 import type { RoleUpdateInput } from '../models/RoleUpdateInput';
 import type { SetPermissionsInput } from '../models/SetPermissionsInput';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -23,7 +24,7 @@ export class RolesService {
      * @param isStatic 是否固定
      * @param isDefault 是否默认
      * @param isEnabled 是否可用
-     * @returns any
+     * @returns RolePagedResult
      * @throws ApiError
      */
     public static rolesControllerGetList(
@@ -37,7 +38,7 @@ export class RolesService {
         isStatic?: boolean,
         isDefault?: boolean,
         isEnabled?: boolean,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<RolePagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/roles',

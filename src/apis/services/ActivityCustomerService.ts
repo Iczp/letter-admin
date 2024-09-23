@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { ActivityCustomerCreateInput } from '../models/ActivityCustomerCreateInput';
 import type { ActivityCustomerDetailDto } from '../models/ActivityCustomerDetailDto';
+import type { ActivityCustomerPagedResult } from '../models/ActivityCustomerPagedResult';
 import type { ActivityCustomerUpdateInput } from '../models/ActivityCustomerUpdateInput';
 import type { ExcelUploadInput } from '../models/ExcelUploadInput';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -22,7 +23,7 @@ export class ActivityCustomerService {
      * @param isInvited
      * @param isChecked
      * @param isEnabled 是否可用
-     * @returns any
+     * @returns ActivityCustomerPagedResult
      * @throws ApiError
      */
     public static activityCustomerControllerGetList(
@@ -36,7 +37,7 @@ export class ActivityCustomerService {
         isInvited?: boolean,
         isChecked?: boolean,
         isEnabled?: boolean,
-    ): CancelablePromise<any> {
+    ): CancelablePromise<ActivityCustomerPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activity-customer',
