@@ -16,7 +16,7 @@
     "serve:pro": "pnpm vite preview --mode pro",
     "serve:dev": "pnpm vite preview --mode dev",
     "serve:test": "pnpm vite preview --mode test",
-    "swagger:g": "openapi --input http://localhost:3000/swagger.json --output ./apis --client axios",
+    "swagger:g": "openapi --input http://localhost:3000/swagger.json --output ./src/apis --client axios",
     "swagger:rm": "pnpx rimraf ./apis",
     "npm:check": "pnpx npm-check-updates -u",
     "clean": "pnpx rimraf node_modules",
