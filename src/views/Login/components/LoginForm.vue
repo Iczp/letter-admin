@@ -246,6 +246,7 @@ const signIn = async () => {
         // return;
 
         if (token) {
+          userStore.setToken(token);
           // 是否记住我
           if (remember.value) {
             userStore.setLoginInfo({
