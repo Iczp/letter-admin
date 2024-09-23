@@ -5,7 +5,7 @@
 import type { ExcelUploadInput } from '../models/ExcelUploadInput';
 import type { UserCreateInput } from '../models/UserCreateInput';
 import type { UserDetailDto } from '../models/UserDetailDto';
-import type { UserDto } from '../models/UserDto';
+import type { UserPagedResult } from '../models/UserPagedResult';
 import type { UserUpdateInput } from '../models/UserUpdateInput';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -22,7 +22,7 @@ export class UsersService {
      * @param userType
      * @param gender
      * @param isEnabled
-     * @returns UserDto
+     * @returns UserPagedResult
      * @throws ApiError
      */
     public static usersControllerGetList(
@@ -35,7 +35,7 @@ export class UsersService {
         userType?: 'Unset' | 'Customer' | 'ShopManager',
         gender?: 'Unknown' | 'Male' | 'Female',
         isEnabled?: boolean,
-    ): CancelablePromise<Array<UserDto>> {
+    ): CancelablePromise<UserPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/user',

@@ -42,6 +42,7 @@ export type { TokenResult } from './models/TokenResult';
 export { UserCreateInput } from './models/UserCreateInput';
 export { UserDetailDto } from './models/UserDetailDto';
 export { UserDto } from './models/UserDto';
+export type { UserPagedResult } from './models/UserPagedResult';
 export { UserUpdateInput } from './models/UserUpdateInput';
 
 export { ActivitiesService } from './services/ActivitiesService';

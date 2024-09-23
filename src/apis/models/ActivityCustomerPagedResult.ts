@@ -7,7 +7,7 @@ export type ActivityCustomerPagedResult = {
     /**
      * 输入参数
      */
-    input: Record<string, any>;
+    input?: Record<string, any>;
     /**
      * 总数
      */

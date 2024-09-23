@@ -2,8 +2,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { RoleDto } from './RoleDto';
-export type RolePagedResult = {
+import type { UserDto } from './UserDto';
+export type UserPagedResult = {
     /**
      * 输入参数
      */
@@ -15,6 +15,6 @@ export type RolePagedResult = {
     /**
      * 列表项
      */
-    items: Array<RoleDto>;
+    items: Array<UserDto>;
 };
 
