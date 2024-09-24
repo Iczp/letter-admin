@@ -36,13 +36,13 @@ import App from './App.vue';
 
 import './permission';
 
-import { configOpenAPI } from './configOpenAPI';
+import { configClient } from './configClient';
 
 // 创建实例
 const setupAll = async () => {
   const app = createApp(App);
 
-  configOpenAPI(app);
+  configClient(app);
 
   await setupI18n(app);
 

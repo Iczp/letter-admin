@@ -61,8 +61,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         : undefined,
       EslintPlugin({
         cache: false,
-        failOnWarning: false,
+        failOnWarning: true,
         failOnError: false,
+        exclude: ['src/client/**', 'src/apis/**'],
         include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx'] // 检查的文件
       }),
       VueI18nPlugin({
