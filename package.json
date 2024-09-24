@@ -30,6 +30,7 @@
     "icon": "esno ./scripts/icon.ts"
   },
   "dependencies": {
+    "@hey-api/client-axios": "^0.2.5",
     "@iconify/iconify": "^3.1.1",
     "@iconify/vue": "^4.1.2",
     "@vueuse/core": "^10.11.0",
@@ -65,6 +66,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@hey-api/openapi-ts": "^0.53.3",
     "@iconify/json": "^2.2.229",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@types/fs-extra": "^11.0.4",
