@@ -2,7 +2,7 @@ import { defineConfig } from '@hey-api/openapi-ts';
 
 export default defineConfig({
   client: '@hey-api/client-axios',
-  input: 'path/to/openapi.json',
+  input: 'http://localhost:3005/swagger.json',
   output: {
     format: 'prettier',
     path: 'src/client',
@@ -16,6 +16,6 @@ export default defineConfig({
     enums: 'typescript'
   },
   schemas: {
-    type: 'json'
+    type: 'form'
   }
 });

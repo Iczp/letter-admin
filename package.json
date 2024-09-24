@@ -18,6 +18,7 @@
     "serve:test": "pnpm vite preview --mode test",
     "swagger:g": "openapi --input http://localhost:3005/swagger.json --output ./src/apis --client axios --useOptions --request ./src/apis/core/request.ts",
     "swagger:rm": "pnpx rimraf ./apis",
+    "openapi-ts": "openapi-ts",
     "npm:check": "pnpx npm-check-updates -u",
     "clean": "pnpx rimraf node_modules",
     "clean:cache": "pnpx rimraf node_modules/.cache",
