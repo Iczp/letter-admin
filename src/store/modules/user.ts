@@ -6,12 +6,13 @@ import { useI18n } from '@/hooks/web/useI18n';
 import { loginOutApi } from '@/api/login';
 import { useTagsViewStore } from './tagsView';
 import router from '@/router';
-import { TokenDto } from '@/api/auth/types';
+
+import { TokenResult } from '@/apis';
 
 interface UserState {
   userInfo?: UserType;
   tokenKey: string;
-  token: TokenDto | null;
+  token: TokenResult | null;
   roleRouters?: string[] | AppCustomRouteRecordRaw[];
   rememberMe: boolean;
   loginInfo?: UserLoginType;
@@ -33,7 +34,7 @@ export const useUserStore = defineStore('user', {
     getTokenKey(): string {
       return this.tokenKey;
     },
-    getToken(): TokenDto | null {
+    getToken(): TokenResult | null {
       return this.token;
     },
     getUserInfo(): UserType | undefined {
@@ -53,9 +54,9 @@ export const useUserStore = defineStore('user', {
     setTokenKey(tokenKey: string) {
       this.tokenKey = tokenKey;
     },
-    setToken(token: TokenDto | null) {
+    setToken(token: TokenResult | null) {
       if (token && !token.creation_time) {
-        token.creation_time = new Date();
+        token.creation_time = new Date().toISOString();
       }
       this.token = token;
     },

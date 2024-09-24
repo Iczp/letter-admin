@@ -234,9 +234,11 @@ const signIn = async () => {
 
       try {
         const token = await AuthService.authControllerSignIn({
-          account: formData.username,
-          password: formData.password,
-          validate_code: '1q2w3e*'
+          requestBody: {
+            account: formData.username,
+            password: formData.password,
+            validate_code: '1q2w3e*'
+          }
         });
         console.log('登录 token', token);
 
