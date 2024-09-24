@@ -12,25 +12,47 @@ import { request as __request } from '../core/request';
 export class InviterConfigService {
     /**
      * 邀请人列表
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param activityId 活动ID
-     * @param inviterUserId 邀请人用户ID
-     * @param inviterErpUserId 邀请人ERP User ID
      * @returns any
      * @throws ApiError
      */
-    public static inviterConfigControllerGetList(
+    public static inviterConfigControllerGetList({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        activityId,
+        inviterUserId,
+        inviterErpUserId,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
+        /**
+         * 活动ID
+         */
         activityId?: string,
+        /**
+         * 邀请人用户ID
+         */
         inviterUserId?: string,
+        /**
+         * 邀请人ERP User ID
+         */
         inviterErpUserId?: string,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/inviter-config',
@@ -47,13 +69,14 @@ export class InviterConfigService {
     }
     /**
      * 创建邀请人
-     * @param requestBody
      * @returns InviterConfigDetailDto
      * @throws ApiError
      */
-    public static inviterConfigControllerCreate(
+    public static inviterConfigControllerCreate({
+        requestBody,
+    }: {
         requestBody: InviterConfigCreateInput,
-    ): CancelablePromise<InviterConfigDetailDto> {
+    }): CancelablePromise<InviterConfigDetailDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/inviter-config',
@@ -63,13 +86,14 @@ export class InviterConfigService {
     }
     /**
      * 邀请人详情
-     * @param id
      * @returns InviterConfigDetailDto
      * @throws ApiError
      */
-    public static inviterConfigControllerGetItem(
+    public static inviterConfigControllerGetItem({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<InviterConfigDetailDto> {
+    }): CancelablePromise<InviterConfigDetailDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/inviter-config/{id}',
@@ -80,15 +104,16 @@ export class InviterConfigService {
     }
     /**
      * 修改邀请人
-     * @param id
-     * @param requestBody
      * @returns InviterConfigDetailDto
      * @throws ApiError
      */
-    public static inviterConfigControllerUpdate(
+    public static inviterConfigControllerUpdate({
+        id,
+        requestBody,
+    }: {
         id: string,
         requestBody: InviterConfigUpdateInput,
-    ): CancelablePromise<InviterConfigDetailDto> {
+    }): CancelablePromise<InviterConfigDetailDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/inviter-config/{id}',
@@ -101,13 +126,14 @@ export class InviterConfigService {
     }
     /**
      * 删除邀请人
-     * @param id
      * @returns any
      * @throws ApiError
      */
-    public static inviterConfigControllerDelete(
+    public static inviterConfigControllerDelete({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/inviter-config/{id}',
@@ -130,15 +156,16 @@ export class InviterConfigService {
     /**
      * 启用/禁用
      * 启用/禁用
-     * @param id
-     * @param isEnabled
      * @returns any
      * @throws ApiError
      */
-    public static inviterConfigControllerSetIsEnabled(
+    public static inviterConfigControllerSetIsEnabled({
+        id,
+        isEnabled,
+    }: {
         id: string,
         isEnabled: boolean,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/inviter-config/enabled/{id}',
@@ -177,13 +204,17 @@ export class InviterConfigService {
     /**
      * 导入数据
      * 请从 "/xxx/excel/tpl" 中下载模板
-     * @param formData Excel
      * @returns any
      * @throws ApiError
      */
-    public static inviterConfigControllerImportExcel(
+    public static inviterConfigControllerImportExcel({
+        formData,
+    }: {
+        /**
+         * Excel
+         */
         formData: ExcelUploadInput,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/inviter-config/excel/import',

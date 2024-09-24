@@ -14,31 +14,62 @@ import { request as __request } from '../core/request';
 export class RolesService {
     /**
      * 角色列表
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param permissionCode 权限编码
-     * @param userId 用户ID
-     * @param isPublic 是否公开
-     * @param isStatic 是否固定
-     * @param isDefault 是否默认
-     * @param isEnabled 是否可用
      * @returns RolePagedResult
      * @throws ApiError
      */
-    public static rolesControllerGetList(
+    public static rolesControllerGetList({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        permissionCode,
+        userId,
+        isPublic,
+        isStatic,
+        isDefault,
+        isEnabled,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
+        /**
+         * 权限编码
+         */
         permissionCode?: 'Users_Create' | 'Users_Update' | 'Users_GetItem' | 'Users_GetList' | 'Users_Delete' | 'Users_Excel_Tpl' | 'Users_Excel_Import' | 'Users_Excel_Ouput' | 'Users_Set_IsEnabled' | 'Roles_Create' | 'Roles_Update' | 'Roles_GetItem' | 'Roles_GetList' | 'Roles_Delete' | 'Roles_Excel_Tpl' | 'Roles_Excel_Import' | 'Roles_Excel_Ouput' | 'Roles_Set_IsEnabled' | 'Roles_Set_Permissions' | 'AuditLog_Create' | 'AuditLog_Update' | 'AuditLog_GetItem' | 'AuditLog_GetList' | 'AuditLog_Delete' | 'AuditLog_Excel_Tpl' | 'AuditLog_Excel_Import' | 'AuditLog_Excel_Ouput' | 'AuditLog_Set_Permissions' | 'Activity_Create' | 'Activity_Update' | 'Activity_GetItem' | 'Activity_GetList' | 'Activity_Delete' | 'Activity_Excel_Tpl' | 'Activity_Excel_Import' | 'Activity_Excel_Ouput' | 'Activity_Set_IsEnabled' | 'Activity_GetList_ByCurrentUser' | 'ActivityCustomer_Create' | 'ActivityCustomer_Update' | 'ActivityCustomer_GetItem' | 'ActivityCustomer_GetList' | 'ActivityCustomer_Delete' | 'ActivityCustomer_Excel_Tpl' | 'ActivityCustomer_Excel_Import' | 'ActivityCustomer_Excel_Ouput' | 'ActivityCustomer_Set_IsChecked' | 'ActivityCustomer_Set_IsInvited' | 'ActivityCustomer_Set_IsGifed' | 'ActivityCustomer_Set_IsEnabled' | 'ErpUsers_GetItem' | 'ErpUsers_GetList' | 'InviterConfig_Create' | 'InviterConfig_Update' | 'InviterConfig_GetItem' | 'InviterConfig_GetList' | 'InviterConfig_Delete' | 'InviterConfig_Excel_Tpl' | 'InviterConfig_Excel_Import' | 'InviterConfig_Excel_Ouput' | 'InviterConfig_Set_IsEnabled' | 'InviterConfig_GetItem_ByCurrentUser' | 'ActivityCustomerInviters_Create' | 'ActivityCustomerInviters_Update' | 'ActivityCustomerInviters_GetItem' | 'ActivityCustomerInviters_GetList' | 'ActivityCustomerInviters_Delete' | 'ActivityCustomerInviters_Excel_Tpl' | 'ActivityCustomerInviters_Excel_Import' | 'ActivityCustomerInviters_Excel_Ouput' | 'ActivityCustomerInviters_Set_IsEnabled',
+        /**
+         * 用户ID
+         */
         userId?: string,
+        /**
+         * 是否公开
+         */
         isPublic?: boolean,
+        /**
+         * 是否固定
+         */
         isStatic?: boolean,
+        /**
+         * 是否默认
+         */
         isDefault?: boolean,
+        /**
+         * 是否可用
+         */
         isEnabled?: boolean,
-    ): CancelablePromise<RolePagedResult> {
+    }): CancelablePromise<RolePagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/roles',
@@ -58,13 +89,14 @@ export class RolesService {
     }
     /**
      * 创建角色
-     * @param requestBody
      * @returns RoleDetailDto
      * @throws ApiError
      */
-    public static rolesControllerCreate(
+    public static rolesControllerCreate({
+        requestBody,
+    }: {
         requestBody: RoleCreateInput,
-    ): CancelablePromise<RoleDetailDto> {
+    }): CancelablePromise<RoleDetailDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/roles',
@@ -74,13 +106,14 @@ export class RolesService {
     }
     /**
      * 角色详情
-     * @param id
      * @returns RoleDetailDto
      * @throws ApiError
      */
-    public static rolesControllerGetItem(
+    public static rolesControllerGetItem({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<RoleDetailDto> {
+    }): CancelablePromise<RoleDetailDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/roles/{id}',
@@ -91,15 +124,16 @@ export class RolesService {
     }
     /**
      * 修改角色
-     * @param id
-     * @param requestBody
      * @returns RoleDetailDto
      * @throws ApiError
      */
-    public static rolesControllerUpdate(
+    public static rolesControllerUpdate({
+        id,
+        requestBody,
+    }: {
         id: string,
         requestBody: RoleUpdateInput,
-    ): CancelablePromise<RoleDetailDto> {
+    }): CancelablePromise<RoleDetailDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/roles/{id}',
@@ -112,13 +146,14 @@ export class RolesService {
     }
     /**
      * 删除角色
-     * @param id
      * @returns any
      * @throws ApiError
      */
-    public static rolesControllerDelete(
+    public static rolesControllerDelete({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/roles/{id}',
@@ -129,15 +164,16 @@ export class RolesService {
     }
     /**
      * 设置权限
-     * @param id
-     * @param requestBody
      * @returns any
      * @throws ApiError
      */
-    public static rolesControllerSetPermissions(
+    public static rolesControllerSetPermissions({
+        id,
+        requestBody,
+    }: {
         id: string,
         requestBody: SetPermissionsInput,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/roles/permissions/{id}',
@@ -151,15 +187,16 @@ export class RolesService {
     /**
      * 启用/禁用
      * 启用/禁用
-     * @param id
-     * @param isEnabled
      * @returns any
      * @throws ApiError
      */
-    public static rolesControllerSetIsEnabled(
+    public static rolesControllerSetIsEnabled({
+        id,
+        isEnabled,
+    }: {
         id: string,
         isEnabled: boolean,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/roles/enabled/{id}',
@@ -198,13 +235,17 @@ export class RolesService {
     /**
      * 导入数据
      * 请从 "/xxx/excel/tpl" 中下载模板
-     * @param formData Excel
      * @returns any
      * @throws ApiError
      */
-    public static rolesControllerImportExcel(
+    public static rolesControllerImportExcel({
+        formData,
+    }: {
+        /**
+         * Excel
+         */
         formData: ExcelUploadInput,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/roles/excel/import',

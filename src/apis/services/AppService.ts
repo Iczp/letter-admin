@@ -31,13 +31,14 @@ export class AppService {
     }
     /**
      * get table
-     * @param name
      * @returns any
      * @throws ApiError
      */
-    public static appControllerGetTable(
+    public static appControllerGetTable({
+        name,
+    }: {
         name: string,
-    ): CancelablePromise<Record<string, any>> {
+    }): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/table',

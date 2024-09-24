@@ -13,29 +13,48 @@ import { request as __request } from '../core/request';
 export class UsersService {
     /**
      * 用户列表
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param role 角色ID/角色名称/角色code
-     * @param erpUserId ERP 用户ID
-     * @param userType
-     * @param gender
-     * @param isEnabled
      * @returns UserPagedResult
      * @throws ApiError
      */
-    public static usersControllerGetList(
+    public static usersControllerGetList({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        role,
+        erpUserId,
+        userType,
+        gender,
+        isEnabled,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
+        /**
+         * 角色ID/角色名称/角色code
+         */
         role?: string,
+        /**
+         * ERP 用户ID
+         */
         erpUserId?: string,
         userType?: 'Unset' | 'Customer' | 'ShopManager',
         gender?: 'Unknown' | 'Male' | 'Female',
         isEnabled?: boolean,
-    ): CancelablePromise<UserPagedResult> {
+    }): CancelablePromise<UserPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/user',
@@ -54,13 +73,14 @@ export class UsersService {
     }
     /**
      * 创建用户
-     * @param requestBody
      * @returns UserDetailDto
      * @throws ApiError
      */
-    public static usersControllerCreate(
+    public static usersControllerCreate({
+        requestBody,
+    }: {
         requestBody: UserCreateInput,
-    ): CancelablePromise<UserDetailDto> {
+    }): CancelablePromise<UserDetailDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/user',
@@ -70,13 +90,14 @@ export class UsersService {
     }
     /**
      * 用户详情
-     * @param id
      * @returns UserDetailDto
      * @throws ApiError
      */
-    public static usersControllerGetItem(
+    public static usersControllerGetItem({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<UserDetailDto> {
+    }): CancelablePromise<UserDetailDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/user/{id}',
@@ -87,15 +108,16 @@ export class UsersService {
     }
     /**
      * 修改用户
-     * @param id
-     * @param requestBody
      * @returns UserDetailDto
      * @throws ApiError
      */
-    public static usersControllerUpdate(
+    public static usersControllerUpdate({
+        id,
+        requestBody,
+    }: {
         id: string,
         requestBody: UserUpdateInput,
-    ): CancelablePromise<UserDetailDto> {
+    }): CancelablePromise<UserDetailDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/user/{id}',
@@ -109,15 +131,16 @@ export class UsersService {
     /**
      * 启用/禁用
      * 启用/禁用
-     * @param id
-     * @param isEnabled
      * @returns any
      * @throws ApiError
      */
-    public static usersControllerSetIsEnabled(
+    public static usersControllerSetIsEnabled({
+        id,
+        isEnabled,
+    }: {
         id: string,
         isEnabled: boolean,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/user/enabled/{id}',
@@ -156,13 +179,17 @@ export class UsersService {
     /**
      * 导入数据
      * 请从 "/xxx/excel/tpl" 中下载模板
-     * @param formData Excel
      * @returns any
      * @throws ApiError
      */
-    public static usersControllerImportExcel(
+    public static usersControllerImportExcel({
+        formData,
+    }: {
+        /**
+         * Excel
+         */
         formData: ExcelUploadInput,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/user/excel/import',

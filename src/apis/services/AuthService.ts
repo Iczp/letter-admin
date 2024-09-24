@@ -9,13 +9,14 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 export class AuthService {
     /**
-     * @param requestBody
      * @returns TokenResult
      * @throws ApiError
      */
-    public static authControllerSignIn(
+    public static authControllerSignIn({
+        requestBody,
+    }: {
         requestBody: AuthInput,
-    ): CancelablePromise<TokenResult> {
+    }): CancelablePromise<TokenResult> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/auth/login',

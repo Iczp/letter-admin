@@ -54,6 +54,9 @@ export const useUserStore = defineStore('user', {
       this.tokenKey = tokenKey;
     },
     setToken(token: TokenDto | null) {
+      if (token && !token.creation_time) {
+        token.creation_time = new Date();
+      }
       this.token = token;
     },
     setUserInfo(userInfo?: UserType) {

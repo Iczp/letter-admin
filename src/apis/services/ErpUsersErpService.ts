@@ -8,21 +8,37 @@ import { request as __request } from '../core/request';
 export class ErpUsersErpService {
     /**
      * ERP 用户列表
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param httpStatus http_status
      * @returns any
      * @throws ApiError
      */
-    public static erpUsersControllerFindAll(
+    public static erpUsersControllerFindAll({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        httpStatus,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
+        /**
+         * http_status
+         */
         httpStatus?: number,
-    ): CancelablePromise<Record<string, any>> {
+    }): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/erp-users',
@@ -37,13 +53,14 @@ export class ErpUsersErpService {
     }
     /**
      * ERP 用户详情
-     * @param id
      * @returns any
      * @throws ApiError
      */
-    public static erpUsersControllerFindOne(
+    public static erpUsersControllerFindOne({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<Record<string, any>> {
+    }): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/erp-users/{id}',

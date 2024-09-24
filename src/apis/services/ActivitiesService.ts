@@ -13,29 +13,54 @@ import { request as __request } from '../core/request';
 export class ActivitiesService {
     /**
      * 活动列表
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param isEnabled
-     * @param userId 用户ID
-     * @param erpUserId ERP用户ID
-     * @param startTime 起始时间
-     * @param endTime 结束时间
      * @returns ActivityPagedResult
      * @throws ApiError
      */
-    public static activitiesControllerGetList(
+    public static activitiesControllerGetList({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        isEnabled,
+        userId,
+        erpUserId,
+        startTime,
+        endTime,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
         isEnabled?: boolean,
+        /**
+         * 用户ID
+         */
         userId?: string,
+        /**
+         * ERP用户ID
+         */
         erpUserId?: string,
+        /**
+         * 起始时间
+         */
         startTime?: string,
+        /**
+         * 结束时间
+         */
         endTime?: string,
-    ): CancelablePromise<ActivityPagedResult> {
+    }): CancelablePromise<ActivityPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activities',
@@ -54,13 +79,14 @@ export class ActivitiesService {
     }
     /**
      * 创建活动
-     * @param requestBody
      * @returns ActivityDetailDto
      * @throws ApiError
      */
-    public static activitiesControllerCreate(
+    public static activitiesControllerCreate({
+        requestBody,
+    }: {
         requestBody: ActivityCreateInput,
-    ): CancelablePromise<ActivityDetailDto> {
+    }): CancelablePromise<ActivityDetailDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activities',
@@ -81,13 +107,14 @@ export class ActivitiesService {
     }
     /**
      * 活动详情
-     * @param id
      * @returns ActivityDetailDto
      * @throws ApiError
      */
-    public static activitiesControllerGetItem(
+    public static activitiesControllerGetItem({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<ActivityDetailDto> {
+    }): CancelablePromise<ActivityDetailDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activities/{id}',
@@ -98,15 +125,16 @@ export class ActivitiesService {
     }
     /**
      * 修改活动
-     * @param id
-     * @param requestBody
      * @returns ActivityDetailDto
      * @throws ApiError
      */
-    public static activitiesControllerUpdate(
+    public static activitiesControllerUpdate({
+        id,
+        requestBody,
+    }: {
         id: string,
         requestBody: ActivityUpdateInput,
-    ): CancelablePromise<ActivityDetailDto> {
+    }): CancelablePromise<ActivityDetailDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/activities/{id}',
@@ -119,13 +147,14 @@ export class ActivitiesService {
     }
     /**
      * 删除活动
-     * @param id
      * @returns any
      * @throws ApiError
      */
-    public static activitiesControllerDelete(
+    public static activitiesControllerDelete({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/activities/{id}',
@@ -137,15 +166,16 @@ export class ActivitiesService {
     /**
      * 启用/禁用
      * 启用/禁用
-     * @param id
-     * @param isEnabled
      * @returns any
      * @throws ApiError
      */
-    public static activitiesControllerSetIsEnabled(
+    public static activitiesControllerSetIsEnabled({
+        id,
+        isEnabled,
+    }: {
         id: string,
         isEnabled: boolean,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activities/enabled/{id}',
@@ -184,13 +214,17 @@ export class ActivitiesService {
     /**
      * 导入数据
      * 请从 "/xxx/excel/tpl" 中下载模板
-     * @param formData Excel
      * @returns any
      * @throws ApiError
      */
-    public static activitiesControllerImportExcel(
+    public static activitiesControllerImportExcel({
+        formData,
+    }: {
+        /**
+         * Excel
+         */
         formData: ExcelUploadInput,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activities/excel/import',

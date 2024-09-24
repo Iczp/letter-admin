@@ -13,31 +13,56 @@ import { request as __request } from '../core/request';
 export class ActivityCustomerService {
     /**
      * [活动客户]列表
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param activityId 活动Id
-     * @param inviterUserId 邀请人用户Id
-     * @param inviterErpUserId 邀请人用户ErpUserId
-     * @param isInvited
-     * @param isChecked
-     * @param isEnabled 是否可用
      * @returns ActivityCustomerPagedResult
      * @throws ApiError
      */
-    public static activityCustomerControllerGetList(
+    public static activityCustomerControllerGetList({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        activityId,
+        inviterUserId,
+        inviterErpUserId,
+        isInvited,
+        isChecked,
+        isEnabled,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
+        /**
+         * 活动Id
+         */
         activityId?: string,
+        /**
+         * 邀请人用户Id
+         */
         inviterUserId?: string,
+        /**
+         * 邀请人用户ErpUserId
+         */
         inviterErpUserId?: string,
         isInvited?: boolean,
         isChecked?: boolean,
+        /**
+         * 是否可用
+         */
         isEnabled?: boolean,
-    ): CancelablePromise<ActivityCustomerPagedResult> {
+    }): CancelablePromise<ActivityCustomerPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activity-customer',
@@ -57,13 +82,14 @@ export class ActivityCustomerService {
     }
     /**
      * 创建[活动客户]
-     * @param requestBody
      * @returns ActivityCustomerDetailDto
      * @throws ApiError
      */
-    public static activityCustomerControllerCreate(
+    public static activityCustomerControllerCreate({
+        requestBody,
+    }: {
         requestBody: ActivityCustomerCreateInput,
-    ): CancelablePromise<ActivityCustomerDetailDto> {
+    }): CancelablePromise<ActivityCustomerDetailDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activity-customer',
@@ -73,13 +99,14 @@ export class ActivityCustomerService {
     }
     /**
      * [活动客户]详情
-     * @param id
      * @returns ActivityCustomerDetailDto
      * @throws ApiError
      */
-    public static activityCustomerControllerGetItem(
+    public static activityCustomerControllerGetItem({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<ActivityCustomerDetailDto> {
+    }): CancelablePromise<ActivityCustomerDetailDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activity-customer/{id}',
@@ -90,15 +117,16 @@ export class ActivityCustomerService {
     }
     /**
      * 修改[活动客户]
-     * @param id
-     * @param requestBody
      * @returns ActivityCustomerDetailDto
      * @throws ApiError
      */
-    public static activityCustomerControllerUpdate(
+    public static activityCustomerControllerUpdate({
+        id,
+        requestBody,
+    }: {
         id: string,
         requestBody: ActivityCustomerUpdateInput,
-    ): CancelablePromise<ActivityCustomerDetailDto> {
+    }): CancelablePromise<ActivityCustomerDetailDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/activity-customer/{id}',
@@ -111,13 +139,14 @@ export class ActivityCustomerService {
     }
     /**
      * 删除[活动客户]
-     * @param id
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerControllerDelete(
+    public static activityCustomerControllerDelete({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/activity-customer/{id}',
@@ -128,15 +157,16 @@ export class ActivityCustomerService {
     }
     /**
      * 设置 是否签到
-     * @param id
-     * @param isChecked
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerControllerSetIsChecked(
+    public static activityCustomerControllerSetIsChecked({
+        id,
+        isChecked,
+    }: {
         id: string,
         isChecked: boolean,
-    ): CancelablePromise<Record<string, any>> {
+    }): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activity-customer/checked/{id}',
@@ -150,15 +180,16 @@ export class ActivityCustomerService {
     }
     /**
      * 设置 是否已邀请
-     * @param id
-     * @param isInvited
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerControllerSetIsActived(
+    public static activityCustomerControllerSetIsActived({
+        id,
+        isInvited,
+    }: {
         id: string,
         isInvited: boolean,
-    ): CancelablePromise<Record<string, any>> {
+    }): CancelablePromise<Record<string, any>> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activity-customer/invited/{id}',
@@ -173,31 +204,56 @@ export class ActivityCustomerService {
     /**
      * [活动客户]导出 excel
      * 导出excel 单次导出数据不能太多
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param activityId 活动Id
-     * @param inviterUserId 邀请人用户Id
-     * @param inviterErpUserId 邀请人用户ErpUserId
-     * @param isInvited
-     * @param isChecked
-     * @param isEnabled 是否可用
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerControllerExportExcel(
+    public static activityCustomerControllerExportExcel({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        activityId,
+        inviterUserId,
+        inviterErpUserId,
+        isInvited,
+        isChecked,
+        isEnabled,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
+        /**
+         * 活动Id
+         */
         activityId?: string,
+        /**
+         * 邀请人用户Id
+         */
         inviterUserId?: string,
+        /**
+         * 邀请人用户ErpUserId
+         */
         inviterErpUserId?: string,
         isInvited?: boolean,
         isChecked?: boolean,
+        /**
+         * 是否可用
+         */
         isEnabled?: boolean,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activity-customer/excel/output',
@@ -218,15 +274,16 @@ export class ActivityCustomerService {
     /**
      * 启用/禁用
      * 启用/禁用
-     * @param id
-     * @param isEnabled
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerControllerSetIsEnabled(
+    public static activityCustomerControllerSetIsEnabled({
+        id,
+        isEnabled,
+    }: {
         id: string,
         isEnabled: boolean,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activity-customer/enabled/{id}',
@@ -253,13 +310,17 @@ export class ActivityCustomerService {
     /**
      * 导入数据
      * 请从 "/xxx/excel/tpl" 中下载模板
-     * @param formData Excel
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerControllerImportExcel(
+    public static activityCustomerControllerImportExcel({
+        formData,
+    }: {
+        /**
+         * Excel
+         */
         formData: ExcelUploadInput,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activity-customer/excel/import',

@@ -13,31 +13,56 @@ import { request as __request } from '../core/request';
 export class ActivityCustomerInvitersService {
     /**
      * 客户列表
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param activityId 活动Id
-     * @param inviterUserId 邀请人用户Id
-     * @param inviterErpUserId 邀请人用户ErpUserId
-     * @param isInvited
-     * @param isChecked
-     * @param isEnabled 是否可用
      * @returns ActivityCustomerInvitersDto
      * @throws ApiError
      */
-    public static activityCustomerInvitersControllerGetList(
+    public static activityCustomerInvitersControllerGetList({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        activityId,
+        inviterUserId,
+        inviterErpUserId,
+        isInvited,
+        isChecked,
+        isEnabled,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
+        /**
+         * 活动Id
+         */
         activityId?: string,
+        /**
+         * 邀请人用户Id
+         */
         inviterUserId?: string,
+        /**
+         * 邀请人用户ErpUserId
+         */
         inviterErpUserId?: string,
         isInvited?: boolean,
         isChecked?: boolean,
+        /**
+         * 是否可用
+         */
         isEnabled?: boolean,
-    ): CancelablePromise<Array<ActivityCustomerInvitersDto>> {
+    }): CancelablePromise<Array<ActivityCustomerInvitersDto>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activity-customer-inviters',
@@ -57,13 +82,14 @@ export class ActivityCustomerInvitersService {
     }
     /**
      * 创建客户
-     * @param requestBody
      * @returns ActivityCustomerInvitersDetailDto
      * @throws ApiError
      */
-    public static activityCustomerInvitersControllerCreate(
+    public static activityCustomerInvitersControllerCreate({
+        requestBody,
+    }: {
         requestBody: ActivityCustomerInvitersCreateInput,
-    ): CancelablePromise<ActivityCustomerInvitersDetailDto> {
+    }): CancelablePromise<ActivityCustomerInvitersDetailDto> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activity-customer-inviters',
@@ -73,13 +99,14 @@ export class ActivityCustomerInvitersService {
     }
     /**
      * 客户详情
-     * @param id
      * @returns ActivityCustomerInvitersDetailDto
      * @throws ApiError
      */
-    public static activityCustomerInvitersControllerGetItem(
+    public static activityCustomerInvitersControllerGetItem({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<ActivityCustomerInvitersDetailDto> {
+    }): CancelablePromise<ActivityCustomerInvitersDetailDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/activity-customer-inviters/{id}',
@@ -90,15 +117,16 @@ export class ActivityCustomerInvitersService {
     }
     /**
      * 修改客户
-     * @param id
-     * @param requestBody
      * @returns ActivityCustomerInvitersDetailDto
      * @throws ApiError
      */
-    public static activityCustomerInvitersControllerUpdate(
+    public static activityCustomerInvitersControllerUpdate({
+        id,
+        requestBody,
+    }: {
         id: string,
         requestBody: ActivityCustomerInvitersUpdateInput,
-    ): CancelablePromise<ActivityCustomerInvitersDetailDto> {
+    }): CancelablePromise<ActivityCustomerInvitersDetailDto> {
         return __request(OpenAPI, {
             method: 'PUT',
             url: '/api/activity-customer-inviters/{id}',
@@ -111,13 +139,14 @@ export class ActivityCustomerInvitersService {
     }
     /**
      * 删除客户
-     * @param id
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerInvitersControllerDelete(
+    public static activityCustomerInvitersControllerDelete({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/activity-customer-inviters/{id}',
@@ -129,15 +158,16 @@ export class ActivityCustomerInvitersService {
     /**
      * 启用/禁用
      * 启用/禁用
-     * @param id
-     * @param isEnabled
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerInvitersControllerSetIsEnabled(
+    public static activityCustomerInvitersControllerSetIsEnabled({
+        id,
+        isEnabled,
+    }: {
         id: string,
         isEnabled: boolean,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activity-customer-inviters/enabled/{id}',
@@ -176,13 +206,17 @@ export class ActivityCustomerInvitersService {
     /**
      * 导入数据
      * 请从 "/xxx/excel/tpl" 中下载模板
-     * @param formData Excel
      * @returns any
      * @throws ApiError
      */
-    public static activityCustomerInvitersControllerImportExcel(
+    public static activityCustomerInvitersControllerImportExcel({
+        formData,
+    }: {
+        /**
+         * Excel
+         */
         formData: ExcelUploadInput,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/activity-customer-inviters/excel/import',

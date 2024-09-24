@@ -14,7 +14,7 @@ import { useValidator } from '@/hooks/web/useValidator';
 import { Icon } from '@/components/Icon';
 import { useUserStore } from '@/store/modules/user';
 import { BaseButton } from '@/components/Button';
-import { AuthService } from '@/api/auth/AuthService';
+import { AuthService } from '@/apis';
 
 const { required } = useValidator();
 
@@ -233,7 +233,7 @@ const signIn = async () => {
       const formData = await getFormData<UserType>();
 
       try {
-        const token = await AuthService.login({
+        const token = await AuthService.authControllerSignIn({
           account: formData.username,
           password: formData.password,
           validate_code: '1q2w3e*'
@@ -263,6 +263,7 @@ const signIn = async () => {
             role: 'admin',
             roleId: '1'
           });
+          return;
           // 是否使用动态路由
           if (appStore.getDynamicRouter) {
             getRole();

@@ -25,5 +25,9 @@ export type TokenResult = {
      * @memberof TokenResult
      */
     refresh_token?: string;
+    /**
+     * 创建时间
+     */
+    creation_time?: string;
 };
 

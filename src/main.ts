@@ -36,9 +36,13 @@ import App from './App.vue';
 
 import './permission';
 
+import { configOpenAPI } from './configOpenAPI';
+
 // 创建实例
 const setupAll = async () => {
   const app = createApp(App);
+
+  configOpenAPI(app);
 
   await setupI18n(app);
 

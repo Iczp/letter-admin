@@ -11,37 +11,77 @@ import { request as __request } from '../core/request';
 export class AuditsService {
     /**
      * 审计日志列表
-     * @param keyword 关键字
-     * @param maxResultCount 每页显示数量
-     * @param skip skin
-     * @param sort 排序
-     * @param httpStatus http_status
-     * @param startHttpStatus http_status
-     * @param endHttpStatus http_status
-     * @param httpMethod http_method
-     * @param clientId client_id
-     * @param userId user_id
-     * @param className class_name
-     * @param handlerName handler_name
-     * @param ip IP
      * @returns AuditLogPagedResult
      * @throws ApiError
      */
-    public static auditsControllerGetList(
+    public static auditsControllerGetList({
+        keyword,
+        maxResultCount,
+        skip,
+        sort,
+        httpStatus,
+        startHttpStatus,
+        endHttpStatus,
+        httpMethod,
+        clientId,
+        userId,
+        className,
+        handlerName,
+        ip,
+    }: {
+        /**
+         * 关键字
+         */
         keyword?: string,
+        /**
+         * 每页显示数量
+         */
         maxResultCount?: number,
+        /**
+         * skin
+         */
         skip?: number,
+        /**
+         * 排序
+         */
         sort?: string,
+        /**
+         * http_status
+         */
         httpStatus?: number,
+        /**
+         * http_status
+         */
         startHttpStatus?: number,
+        /**
+         * http_status
+         */
         endHttpStatus?: number,
+        /**
+         * http_method
+         */
         httpMethod?: string,
+        /**
+         * client_id
+         */
         clientId?: string,
+        /**
+         * user_id
+         */
         userId?: string,
+        /**
+         * class_name
+         */
         className?: string,
+        /**
+         * handler_name
+         */
         handlerName?: string,
+        /**
+         * IP
+         */
         ip?: string,
-    ): CancelablePromise<AuditLogPagedResult> {
+    }): CancelablePromise<AuditLogPagedResult> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audits',
@@ -64,13 +104,14 @@ export class AuditsService {
     }
     /**
      * 审计日志详情
-     * @param id
      * @returns AuditLogDetailDto
      * @throws ApiError
      */
-    public static auditsControllerGetItem(
+    public static auditsControllerGetItem({
+        id,
+    }: {
         id: string,
-    ): CancelablePromise<AuditLogDetailDto> {
+    }): CancelablePromise<AuditLogDetailDto> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/audits/{id}',
@@ -82,15 +123,16 @@ export class AuditsService {
     /**
      * 启用/禁用
      * 启用/禁用
-     * @param id
-     * @param isEnabled
      * @returns any
      * @throws ApiError
      */
-    public static auditsControllerSetIsEnabled(
+    public static auditsControllerSetIsEnabled({
+        id,
+        isEnabled,
+    }: {
         id: string,
         isEnabled: boolean,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/audits/enabled/{id}',
@@ -129,13 +171,17 @@ export class AuditsService {
     /**
      * 导入数据
      * 请从 "/xxx/excel/tpl" 中下载模板
-     * @param formData Excel
      * @returns any
      * @throws ApiError
      */
-    public static auditsControllerImportExcel(
+    public static auditsControllerImportExcel({
+        formData,
+    }: {
+        /**
+         * Excel
+         */
         formData: ExcelUploadInput,
-    ): CancelablePromise<any> {
+    }): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/audits/excel/import',
