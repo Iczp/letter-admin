@@ -15,6 +15,7 @@ import { getRoleListApi } from '@/api/role';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 import { ActivityService } from '@/api/activities/ActivityService';
+import { activitiesControllerGetList, ActivityDto } from '@/client';
 
 const { t } = useI18n();
 
@@ -203,13 +204,17 @@ const treeEl = ref<typeof ElTree>();
 
 const currentNodeKey = ref('');
 const departmentList = ref<DepartmentItem[]>([]);
+const activitiyItems = ref<ActivityDto[]>([]);
 const fetchDepartment = async () => {
   const ret = await ActivityService.getList({});
 
   console.log(ret, ActivityService.name);
 
+  const activities = await activitiesControllerGetList();
+  activitiyItems.value = activities.data?.items || [];
   const res = await getDepartmentApi();
   departmentList.value = res.data.list;
+
   currentNodeKey.value =
     (res.data.list[0] && res.data.list[0]?.children && res.data.list[0].children[0].id) || '';
   await nextTick();
@@ -310,9 +315,14 @@ const save = async () => {
         />
       </div>
       <ElDivider />
+      <ul>
+        <li v-for="(item, index) in activitiyItems" :key="item?.id">
+          {{ index }} - {{ item.title }}
+        </li>
+      </ul>
       <ElTree
         ref="treeEl"
-        :data="departmentList"
+        :data="activitiyItems"
         default-expand-all
         :expand-on-click-node="false"
         node-key="id"
@@ -324,11 +334,8 @@ const save = async () => {
         @current-change="currentChange"
       >
         <template #default="{ data }">
-          <div
-            :title="data.departmentName"
-            class="whitespace-nowrap overflow-ellipsis overflow-hidden"
-          >
-            {{ data.departmentName }}
+          <div :title="data.title" class="whitespace-nowrap overflow-ellipsis overflow-hidden">
+            {{ data.title }}
           </div>
         </template>
       </ElTree>

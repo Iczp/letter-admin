@@ -33,8 +33,18 @@ export const useUserStore = defineStore('user', {
     getTokenKey(): string {
       return this.tokenKey;
     },
-    getToken(): TokenResult | null {
-      return this.token;
+    getToken(): string | undefined {
+      let token = this.token;
+      if (!token) {
+        const tokenJson = localStorage.getItem(this.tokenKey);
+        if (tokenJson) {
+          token = JSON.parse(tokenJson) as TokenResult | null;
+        }
+      }
+      if (token) {
+        return `${token?.token_type} ${token?.access_token}`;
+      }
+      console.log('getToken', this.tokenKey, token);
     },
     getUserInfo(): UserType | undefined {
       return this.userInfo;
