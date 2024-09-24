@@ -6,8 +6,7 @@ export default defineConfig({
   output: {
     format: 'prettier',
     path: 'src/client',
-
-    lint: false
+    lint: 'eslint'
   },
   services: {
     asClass: false

@@ -6,8 +6,7 @@ import { useI18n } from '@/hooks/web/useI18n';
 import { loginOutApi } from '@/api/login';
 import { useTagsViewStore } from './tagsView';
 import router from '@/router';
-
-import { TokenResult } from '@/apis';
+import { TokenResult } from '@/client';
 
 interface UserState {
   userInfo?: UserType;
@@ -58,6 +57,8 @@ export const useUserStore = defineStore('user', {
       if (token && !token.creation_time) {
         token.creation_time = new Date().toISOString();
       }
+      console.log('token', this.tokenKey, token);
+      localStorage.setItem(this.tokenKey, JSON.stringify(token));
       this.token = token;
     },
     setUserInfo(userInfo?: UserType) {

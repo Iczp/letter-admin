@@ -233,7 +233,7 @@ const signIn = async () => {
       const formData = await getFormData<UserType>();
 
       try {
-        const token = await authControllerSignIn({
+        const { data: token } = await authControllerSignIn({
           body: {
             account: formData.username,
             password: formData.password,
@@ -265,7 +265,9 @@ const signIn = async () => {
             role: 'admin',
             roleId: '1'
           });
-          return;
+
+          console.log('appStore.getDynamicRouter', appStore.getDynamicRouter);
+          // return;
           // 是否使用动态路由
           if (appStore.getDynamicRouter) {
             getRole();

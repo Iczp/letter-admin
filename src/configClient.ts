@@ -24,6 +24,10 @@ export const configClient = (app: App<Element>) => {
   });
   client.instance.interceptors.response.use((axiosResponse) => {
     console.log('axiosResponse', axiosResponse);
+    const { status, data } = axiosResponse;
+    if (status >= 200 && status < 300) {
+      return data;
+    }
     return axiosResponse;
   });
 
