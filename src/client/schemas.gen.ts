@@ -37,6 +37,24 @@ export const UserDtoSchema = {
     id: {
       type: 'string'
     },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     account: {
       type: 'string'
     },
@@ -50,14 +68,19 @@ export const UserDtoSchema = {
       type: 'string',
       enum: ['Unset', 'Customer', 'ShopManager']
     },
-    is_enabled: {
-      type: 'boolean'
-    },
     erp_user_id: {
       type: 'string'
     }
   },
-  required: ['id', 'account', 'name']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'account',
+    'name'
+  ]
 } as const;
 
 export const UserPagedResultSchema = {
@@ -85,6 +108,24 @@ export const UserDetailDtoSchema = {
     id: {
       type: 'string'
     },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     account: {
       type: 'string'
     },
@@ -98,14 +139,19 @@ export const UserDetailDtoSchema = {
       type: 'string',
       enum: ['Unset', 'Customer', 'ShopManager']
     },
-    is_enabled: {
-      type: 'boolean'
-    },
     erp_user_id: {
       type: 'string'
     }
   },
-  required: ['id', 'account', 'name']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'account',
+    'name'
+  ]
 } as const;
 
 export const UserCreateInputSchema = {
@@ -190,6 +236,27 @@ export const ExcelUploadInputSchema = {
 export const ActivityDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     name: {
       type: 'string'
     },
@@ -198,12 +265,9 @@ export const ActivityDtoSchema = {
     },
     user_type: {
       type: 'object'
-    },
-    is_enabled: {
-      type: 'boolean'
     }
   },
-  required: ['name']
+  required: ['id', 'creation_time', 'last_modification_time', 'deletion_time', 'is_deleted', 'name']
 } as const;
 
 export const ActivityPagedResultSchema = {
@@ -228,6 +292,27 @@ export const ActivityPagedResultSchema = {
 export const ActivityDetailDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     name: {
       type: 'string'
     },
@@ -236,12 +321,9 @@ export const ActivityDetailDtoSchema = {
     },
     user_type: {
       type: 'object'
-    },
-    is_enabled: {
-      type: 'boolean'
     }
   },
-  required: ['name']
+  required: ['id', 'creation_time', 'last_modification_time', 'deletion_time', 'is_deleted', 'name']
 } as const;
 
 export const ActivityCreateInputSchema = {
@@ -322,6 +404,27 @@ export const ActivityUpdateInputSchema = {
 export const ActivityCustomerDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     customer_name: {
       type: 'string'
     },
@@ -345,14 +448,18 @@ export const ActivityCustomerDtoSchema = {
     is_checked: {
       type: 'boolean'
     },
-    is_enabled: {
-      type: 'boolean'
-    },
     activity: {
       $ref: '#/components/schemas/ActivityDto'
     }
   },
-  required: ['customer_name']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'customer_name'
+  ]
 } as const;
 
 export const ActivityCustomerPagedResultSchema = {
@@ -377,6 +484,27 @@ export const ActivityCustomerPagedResultSchema = {
 export const ActivityCustomerDetailDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     customer_name: {
       type: 'string'
     },
@@ -400,14 +528,18 @@ export const ActivityCustomerDetailDtoSchema = {
     is_checked: {
       type: 'boolean'
     },
-    is_enabled: {
-      type: 'boolean'
-    },
     activity: {
       $ref: '#/components/schemas/ActivityDto'
     }
   },
-  required: ['customer_name']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'customer_name'
+  ]
 } as const;
 
 export const ActivityCustomerCreateInputSchema = {
@@ -466,6 +598,27 @@ export const ActivityCustomerUpdateInputSchema = {
 export const ActivityCustomerInvitersDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     customer_name: {
       type: 'string'
     },
@@ -489,19 +642,44 @@ export const ActivityCustomerInvitersDtoSchema = {
     is_checked: {
       type: 'boolean'
     },
-    is_enabled: {
-      type: 'boolean'
-    },
     activity: {
       $ref: '#/components/schemas/ActivityDto'
     }
   },
-  required: ['customer_name']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'customer_name'
+  ]
 } as const;
 
 export const ActivityCustomerInvitersDetailDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     customer_name: {
       type: 'string'
     },
@@ -525,14 +703,18 @@ export const ActivityCustomerInvitersDetailDtoSchema = {
     is_checked: {
       type: 'boolean'
     },
-    is_enabled: {
-      type: 'boolean'
-    },
     activity: {
       $ref: '#/components/schemas/ActivityDto'
     }
   },
-  required: ['customer_name']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'customer_name'
+  ]
 } as const;
 
 export const ActivityCustomerInvitersCreateInputSchema = {
@@ -620,6 +802,7 @@ export const TokenResultSchema = {
       type: 'string'
     },
     creation_time: {
+      format: 'date-time',
       type: 'string'
     }
   },
@@ -629,6 +812,27 @@ export const TokenResultSchema = {
 export const RoleDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     name: {
       type: 'string'
     },
@@ -643,12 +847,17 @@ export const RoleDtoSchema = {
     },
     is_default: {
       type: 'boolean'
-    },
-    is_enabled: {
-      type: 'boolean'
     }
   },
-  required: ['name', 'code']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'name',
+    'code'
+  ]
 } as const;
 
 export const RolePagedResultSchema = {
@@ -673,6 +882,27 @@ export const RolePagedResultSchema = {
 export const RoleDetailDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     name: {
       type: 'string'
     },
@@ -687,12 +917,17 @@ export const RoleDetailDtoSchema = {
     },
     is_default: {
       type: 'boolean'
-    },
-    is_enabled: {
-      type: 'boolean'
     }
   },
-  required: ['name', 'code']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'name',
+    'code'
+  ]
 } as const;
 
 export const RoleCreateInputSchema = {
@@ -762,6 +997,27 @@ export const SetPermissionsInputSchema = {
 export const AuditLogDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     app_name: {
       type: 'string'
     },
@@ -824,6 +1080,12 @@ export const AuditLogDtoSchema = {
     }
   },
   required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'is_enabled',
+    'deletion_time',
+    'is_deleted',
     'app_name',
     'user_id',
     'user_name',
@@ -869,6 +1131,27 @@ export const AuditLogPagedResultSchema = {
 export const AuditLogDetailDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     app_name: {
       type: 'string'
     },
@@ -931,6 +1214,12 @@ export const AuditLogDetailDtoSchema = {
     }
   },
   required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'is_enabled',
+    'deletion_time',
+    'is_deleted',
     'app_name',
     'user_id',
     'user_name',
@@ -957,6 +1246,27 @@ export const AuditLogDetailDtoSchema = {
 export const AuditLogCreateInputSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     app_name: {
       type: 'string'
     },
@@ -1019,6 +1329,12 @@ export const AuditLogCreateInputSchema = {
     }
   },
   required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'is_enabled',
+    'deletion_time',
+    'is_deleted',
     'app_name',
     'user_id',
     'user_name',
@@ -1045,6 +1361,27 @@ export const AuditLogCreateInputSchema = {
 export const AuditLogUpdateInputSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     app_name: {
       type: 'string'
     },
@@ -1107,6 +1444,12 @@ export const AuditLogUpdateInputSchema = {
     }
   },
   required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'is_enabled',
+    'deletion_time',
+    'is_deleted',
     'app_name',
     'user_id',
     'user_name',
@@ -1133,6 +1476,27 @@ export const AuditLogUpdateInputSchema = {
 export const InviterConfigDetailDtoSchema = {
   type: 'object',
   properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
     name: {
       type: 'string'
     },
@@ -1147,12 +1511,17 @@ export const InviterConfigDetailDtoSchema = {
     },
     is_default: {
       type: 'boolean'
-    },
-    is_enabled: {
-      type: 'boolean'
     }
   },
-  required: ['name', 'code']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'name',
+    'code'
+  ]
 } as const;
 
 export const InviterConfigCreateInputSchema = {

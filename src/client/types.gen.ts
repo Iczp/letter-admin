@@ -10,7 +10,30 @@ export type AppInfo = {
 };
 
 export type UserDto = {
+  /**
+   * id
+   */
   id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   /**
    * 账号
    */
@@ -18,7 +41,6 @@ export type UserDto = {
   name: string;
   phone?: string;
   user_type?: 'Unset' | 'Customer' | 'ShopManager';
-  is_enabled?: boolean;
   erp_user_id?: string;
 };
 
@@ -46,7 +68,30 @@ export type UserPagedResult = {
 };
 
 export type UserDetailDto = {
+  /**
+   * id
+   */
   id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   /**
    * 账号
    */
@@ -54,7 +99,6 @@ export type UserDetailDto = {
   name: string;
   phone?: string;
   user_type?: 'Unset' | 'Customer' | 'ShopManager';
-  is_enabled?: boolean;
   erp_user_id?: string;
 };
 
@@ -113,12 +157,35 @@ export type ExcelUploadInput = {
 };
 
 export type ActivityDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   name: string;
   phone?: string;
   user_type?: {
     [key: string]: unknown;
   };
-  is_enabled?: boolean;
 };
 
 export type ActivityPagedResult = {
@@ -139,12 +206,35 @@ export type ActivityPagedResult = {
 };
 
 export type ActivityDetailDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   name: string;
   phone?: string;
   user_type?: {
     [key: string]: unknown;
   };
-  is_enabled?: boolean;
 };
 
 export type ActivityCreateInput = {
@@ -173,6 +263,30 @@ export type ActivityUpdateInput = {
 };
 
 export type ActivityCustomerDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   customer_name: string;
   customer_phone?: string;
   customer_gender?: 'Unknown' | 'Male' | 'Female';
@@ -180,7 +294,6 @@ export type ActivityCustomerDto = {
   inviter_name?: string;
   is_invited?: boolean;
   is_checked?: boolean;
-  is_enabled?: boolean;
   activity?: ActivityDto;
 };
 
@@ -208,6 +321,30 @@ export type ActivityCustomerPagedResult = {
 };
 
 export type ActivityCustomerDetailDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   customer_name: string;
   customer_phone?: string;
   customer_gender?: 'Unknown' | 'Male' | 'Female';
@@ -215,7 +352,6 @@ export type ActivityCustomerDetailDto = {
   inviter_name?: string;
   is_invited?: boolean;
   is_checked?: boolean;
-  is_enabled?: boolean;
   activity?: ActivityDto;
 };
 
@@ -237,6 +373,30 @@ export type ActivityCustomerUpdateInput = {
 };
 
 export type ActivityCustomerInvitersDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   customer_name: string;
   customer_phone?: string;
   customer_gender?: 'Unknown' | 'Male' | 'Female';
@@ -244,11 +404,34 @@ export type ActivityCustomerInvitersDto = {
   inviter_name?: string;
   is_invited?: boolean;
   is_checked?: boolean;
-  is_enabled?: boolean;
   activity?: ActivityDto;
 };
 
 export type ActivityCustomerInvitersDetailDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   customer_name: string;
   customer_phone?: string;
   customer_gender?: 'Unknown' | 'Male' | 'Female';
@@ -256,7 +439,6 @@ export type ActivityCustomerInvitersDetailDto = {
   inviter_name?: string;
   is_invited?: boolean;
   is_checked?: boolean;
-  is_enabled?: boolean;
   activity?: ActivityDto;
 };
 
@@ -313,6 +495,30 @@ export type TokenResult = {
 };
 
 export type RoleDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否启用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   name: string;
   code: string;
   /**
@@ -327,10 +533,6 @@ export type RoleDto = {
    * 是否默认
    */
   is_default?: boolean;
-  /**
-   * 是否启用
-   */
-  is_enabled?: boolean;
 };
 
 export type RolePagedResult = {
@@ -351,6 +553,30 @@ export type RolePagedResult = {
 };
 
 export type RoleDetailDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否启用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   name: string;
   code: string;
   /**
@@ -365,10 +591,6 @@ export type RoleDetailDto = {
    * 是否默认
    */
   is_default?: boolean;
-  /**
-   * 是否启用
-   */
-  is_enabled?: boolean;
 };
 
 export type RoleCreateInput = {
@@ -416,6 +638,30 @@ export type SetPermissionsInput = {
 };
 
 export type AuditLogDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   /**
    * 应用名称
    */
@@ -517,6 +763,30 @@ export type AuditLogPagedResult = {
 
 export type AuditLogDetailDto = {
   /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
+  /**
    * 应用名称
    */
   app_name: string;
@@ -599,6 +869,30 @@ export type AuditLogDetailDto = {
 };
 
 export type AuditLogCreateInput = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   /**
    * 应用名称
    */
@@ -683,6 +977,30 @@ export type AuditLogCreateInput = {
 
 export type AuditLogUpdateInput = {
   /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
+  /**
    * 应用名称
    */
   app_name: string;
@@ -765,6 +1083,30 @@ export type AuditLogUpdateInput = {
 };
 
 export type InviterConfigDetailDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否启用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
   name: string;
   code: string;
   /**
@@ -779,10 +1121,6 @@ export type InviterConfigDetailDto = {
    * 是否默认
    */
   is_default?: boolean;
-  /**
-   * 是否启用
-   */
-  is_enabled?: boolean;
 };
 
 export type InviterConfigCreateInput = {
