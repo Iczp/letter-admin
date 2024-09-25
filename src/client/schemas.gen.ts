@@ -9,7 +9,7 @@ export const AppInfoSchema = {
     },
     version: {
       type: 'string',
-      default: '0.0.11'
+      default: '0.0.19'
     },
     description: {
       type: 'string',

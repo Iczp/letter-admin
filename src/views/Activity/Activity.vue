@@ -15,7 +15,7 @@ import { getRoleListApi } from '@/api/role';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 import { ActivityService } from '@/api/activities/ActivityService';
-import { activitiesControllerGetList, ActivityDto } from '@/client';
+import { activitiesGetList, ActivityDto } from '@/client';
 
 const { t } = useI18n();
 
@@ -210,7 +210,12 @@ const fetchDepartment = async () => {
 
   console.log(ret, ActivityService.name);
 
-  const activities = await activitiesControllerGetList();
+  const activities = await activitiesGetList({
+    query: {
+      skip: 0,
+      limit: 999
+    }
+  });
   activitiyItems.value = activities.data?.items || [];
   const res = await getDepartmentApi();
   departmentList.value = res.data.list;

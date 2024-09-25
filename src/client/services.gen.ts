@@ -215,7 +215,7 @@ export const client = createClient(createConfig());
 /**
  * 关于 App Test
  */
-export const appControllerGetInfo = <ThrowOnError extends boolean = false>(
+export const appGetInfo = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -231,7 +231,7 @@ export const appControllerGetInfo = <ThrowOnError extends boolean = false>(
 /**
  * get tables
  */
-export const appControllerGetTables = <ThrowOnError extends boolean = false>(
+export const appGetTables = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -247,7 +247,7 @@ export const appControllerGetTables = <ThrowOnError extends boolean = false>(
 /**
  * get table
  */
-export const appControllerGetTable = <ThrowOnError extends boolean = false>(
+export const appGetTable = <ThrowOnError extends boolean = false>(
   options: Options<AppControllerGetTableData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -264,7 +264,7 @@ export const appControllerGetTable = <ThrowOnError extends boolean = false>(
  * 关于 App 信息
  * 返回 AppInfo
  */
-export const appControllerGetAbout = <ThrowOnError extends boolean = false>(
+export const appGetAbout = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -280,7 +280,7 @@ export const appControllerGetAbout = <ThrowOnError extends boolean = false>(
 /**
  * 用户列表
  */
-export const usersControllerGetList = <ThrowOnError extends boolean = false>(
+export const usersGetList = <ThrowOnError extends boolean = false>(
   options?: Options<UsersControllerGetListData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -296,7 +296,7 @@ export const usersControllerGetList = <ThrowOnError extends boolean = false>(
 /**
  * 创建用户
  */
-export const usersControllerCreate = <ThrowOnError extends boolean = false>(
+export const usersCreate = <ThrowOnError extends boolean = false>(
   options: Options<UsersControllerCreateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -312,7 +312,7 @@ export const usersControllerCreate = <ThrowOnError extends boolean = false>(
 /**
  * 用户详情
  */
-export const usersControllerGetItem = <ThrowOnError extends boolean = false>(
+export const usersGetItem = <ThrowOnError extends boolean = false>(
   options: Options<UsersControllerGetItemData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -328,7 +328,7 @@ export const usersControllerGetItem = <ThrowOnError extends boolean = false>(
 /**
  * 修改用户
  */
-export const usersControllerUpdate = <ThrowOnError extends boolean = false>(
+export const usersUpdate = <ThrowOnError extends boolean = false>(
   options: Options<UsersControllerUpdateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).put<
@@ -345,7 +345,7 @@ export const usersControllerUpdate = <ThrowOnError extends boolean = false>(
  * 启用/禁用
  * 启用/禁用
  */
-export const usersControllerSetIsEnabled = <ThrowOnError extends boolean = false>(
+export const usersSetIsEnabled = <ThrowOnError extends boolean = false>(
   options: Options<UsersControllerSetIsEnabledData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -362,7 +362,7 @@ export const usersControllerSetIsEnabled = <ThrowOnError extends boolean = false
  * excel 模板
  * excel 模板
  */
-export const usersControllerGetExcelTemplate = <ThrowOnError extends boolean = false>(
+export const usersGetExcelTemplate = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -379,7 +379,7 @@ export const usersControllerGetExcelTemplate = <ThrowOnError extends boolean = f
  * 导出数据到 Excel
  * Excel 数据
  */
-export const usersControllerExportExcel = <ThrowOnError extends boolean = false>(
+export const usersExportExcel = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -396,7 +396,7 @@ export const usersControllerExportExcel = <ThrowOnError extends boolean = false>
  * 导入数据
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
-export const usersControllerImportExcel = <ThrowOnError extends boolean = false>(
+export const usersImportExcel = <ThrowOnError extends boolean = false>(
   options: Options<UsersControllerImportExcelData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -417,7 +417,7 @@ export const usersControllerImportExcel = <ThrowOnError extends boolean = false>
 /**
  * 活动列表
  */
-export const activitiesControllerGetList = <ThrowOnError extends boolean = false>(
+export const activitiesGetList = <ThrowOnError extends boolean = false>(
   options?: Options<ActivitiesControllerGetListData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -433,7 +433,7 @@ export const activitiesControllerGetList = <ThrowOnError extends boolean = false
 /**
  * 创建活动
  */
-export const activitiesControllerCreate = <ThrowOnError extends boolean = false>(
+export const activitiesCreate = <ThrowOnError extends boolean = false>(
   options: Options<ActivitiesControllerCreateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -449,7 +449,7 @@ export const activitiesControllerCreate = <ThrowOnError extends boolean = false>
 /**
  * 活动列表
  */
-export const activitiesControllerGetListByCurrentUser = <ThrowOnError extends boolean = false>(
+export const activitiesGetListByCurrentUser = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -465,7 +465,7 @@ export const activitiesControllerGetListByCurrentUser = <ThrowOnError extends bo
 /**
  * 活动详情
  */
-export const activitiesControllerGetItem = <ThrowOnError extends boolean = false>(
+export const activitiesGetItem = <ThrowOnError extends boolean = false>(
   options: Options<ActivitiesControllerGetItemData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -481,7 +481,7 @@ export const activitiesControllerGetItem = <ThrowOnError extends boolean = false
 /**
  * 修改活动
  */
-export const activitiesControllerUpdate = <ThrowOnError extends boolean = false>(
+export const activitiesUpdate = <ThrowOnError extends boolean = false>(
   options: Options<ActivitiesControllerUpdateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).put<
@@ -497,7 +497,7 @@ export const activitiesControllerUpdate = <ThrowOnError extends boolean = false>
 /**
  * 删除活动
  */
-export const activitiesControllerDelete = <ThrowOnError extends boolean = false>(
+export const activitiesDelete = <ThrowOnError extends boolean = false>(
   options: Options<ActivitiesControllerDeleteData, ThrowOnError>
 ) => {
   return (options?.client ?? client).delete<
@@ -514,7 +514,7 @@ export const activitiesControllerDelete = <ThrowOnError extends boolean = false>
  * 启用/禁用
  * 启用/禁用
  */
-export const activitiesControllerSetIsEnabled = <ThrowOnError extends boolean = false>(
+export const activitiesSetIsEnabled = <ThrowOnError extends boolean = false>(
   options: Options<ActivitiesControllerSetIsEnabledData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -531,7 +531,7 @@ export const activitiesControllerSetIsEnabled = <ThrowOnError extends boolean = 
  * excel 模板
  * excel 模板
  */
-export const activitiesControllerGetExcelTemplate = <ThrowOnError extends boolean = false>(
+export const activitiesGetExcelTemplate = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -548,7 +548,7 @@ export const activitiesControllerGetExcelTemplate = <ThrowOnError extends boolea
  * 导出数据到 Excel
  * Excel 数据
  */
-export const activitiesControllerExportExcel = <ThrowOnError extends boolean = false>(
+export const activitiesExportExcel = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -565,7 +565,7 @@ export const activitiesControllerExportExcel = <ThrowOnError extends boolean = f
  * 导入数据
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
-export const activitiesControllerImportExcel = <ThrowOnError extends boolean = false>(
+export const activitiesImportExcel = <ThrowOnError extends boolean = false>(
   options: Options<ActivitiesControllerImportExcelData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -586,7 +586,7 @@ export const activitiesControllerImportExcel = <ThrowOnError extends boolean = f
 /**
  * [活动客户]列表
  */
-export const activityCustomerControllerGetList = <ThrowOnError extends boolean = false>(
+export const activityCustomerGetList = <ThrowOnError extends boolean = false>(
   options?: Options<ActivityCustomerControllerGetListData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -602,7 +602,7 @@ export const activityCustomerControllerGetList = <ThrowOnError extends boolean =
 /**
  * 创建[活动客户]
  */
-export const activityCustomerControllerCreate = <ThrowOnError extends boolean = false>(
+export const activityCustomerCreate = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerControllerCreateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -618,7 +618,7 @@ export const activityCustomerControllerCreate = <ThrowOnError extends boolean = 
 /**
  * [活动客户]详情
  */
-export const activityCustomerControllerGetItem = <ThrowOnError extends boolean = false>(
+export const activityCustomerGetItem = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerControllerGetItemData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -634,7 +634,7 @@ export const activityCustomerControllerGetItem = <ThrowOnError extends boolean =
 /**
  * 修改[活动客户]
  */
-export const activityCustomerControllerUpdate = <ThrowOnError extends boolean = false>(
+export const activityCustomerUpdate = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerControllerUpdateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).put<
@@ -650,7 +650,7 @@ export const activityCustomerControllerUpdate = <ThrowOnError extends boolean = 
 /**
  * 删除[活动客户]
  */
-export const activityCustomerControllerDelete = <ThrowOnError extends boolean = false>(
+export const activityCustomerDelete = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerControllerDeleteData, ThrowOnError>
 ) => {
   return (options?.client ?? client).delete<
@@ -666,7 +666,7 @@ export const activityCustomerControllerDelete = <ThrowOnError extends boolean = 
 /**
  * 设置 是否签到
  */
-export const activityCustomerControllerSetIsChecked = <ThrowOnError extends boolean = false>(
+export const activityCustomerSetIsChecked = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerControllerSetIsCheckedData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -682,8 +682,8 @@ export const activityCustomerControllerSetIsChecked = <ThrowOnError extends bool
 /**
  * 设置 是否已邀请
  */
-export const activityCustomerControllerSetIsActived = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerSetIsActivedData, ThrowOnError>
+export const activityCustomerSetIsActived = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerControllerGetListData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerControllerSetIsActivedResponse,
@@ -699,7 +699,7 @@ export const activityCustomerControllerSetIsActived = <ThrowOnError extends bool
  * [活动客户]导出 excel
  * 导出excel 单次导出数据不能太多
  */
-export const activityCustomerControllerExportExcel = <ThrowOnError extends boolean = false>(
+export const activityCustomerExportExcel = <ThrowOnError extends boolean = false>(
   options?: Options<ActivityCustomerControllerExportExcelData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -716,7 +716,7 @@ export const activityCustomerControllerExportExcel = <ThrowOnError extends boole
  * 启用/禁用
  * 启用/禁用
  */
-export const activityCustomerControllerSetIsEnabled = <ThrowOnError extends boolean = false>(
+export const activityCustomerSetIsEnabled = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerControllerSetIsEnabledData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -733,7 +733,7 @@ export const activityCustomerControllerSetIsEnabled = <ThrowOnError extends bool
  * excel 模板
  * excel 模板
  */
-export const activityCustomerControllerGetExcelTemplate = <ThrowOnError extends boolean = false>(
+export const activityCustomerGetExcelTemplate = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -750,7 +750,7 @@ export const activityCustomerControllerGetExcelTemplate = <ThrowOnError extends 
  * 导入数据
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
-export const activityCustomerControllerImportExcel = <ThrowOnError extends boolean = false>(
+export const activityCustomerImportExcel = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerControllerImportExcelData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -771,7 +771,7 @@ export const activityCustomerControllerImportExcel = <ThrowOnError extends boole
 /**
  * 客户列表
  */
-export const activityCustomerInvitersControllerGetList = <ThrowOnError extends boolean = false>(
+export const activityCustomerInvitersGetList = <ThrowOnError extends boolean = false>(
   options?: Options<ActivityCustomerInvitersControllerGetListData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -787,7 +787,7 @@ export const activityCustomerInvitersControllerGetList = <ThrowOnError extends b
 /**
  * 创建客户
  */
-export const activityCustomerInvitersControllerCreate = <ThrowOnError extends boolean = false>(
+export const activityCustomerInvitersCreate = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerInvitersControllerCreateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -803,7 +803,7 @@ export const activityCustomerInvitersControllerCreate = <ThrowOnError extends bo
 /**
  * 客户详情
  */
-export const activityCustomerInvitersControllerGetItem = <ThrowOnError extends boolean = false>(
+export const activityCustomerInvitersGetItem = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerInvitersControllerGetItemData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -819,7 +819,7 @@ export const activityCustomerInvitersControllerGetItem = <ThrowOnError extends b
 /**
  * 修改客户
  */
-export const activityCustomerInvitersControllerUpdate = <ThrowOnError extends boolean = false>(
+export const activityCustomerInvitersUpdate = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerInvitersControllerUpdateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).put<
@@ -835,7 +835,7 @@ export const activityCustomerInvitersControllerUpdate = <ThrowOnError extends bo
 /**
  * 删除客户
  */
-export const activityCustomerInvitersControllerDelete = <ThrowOnError extends boolean = false>(
+export const activityCustomerInvitersDelete = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerInvitersControllerDeleteData, ThrowOnError>
 ) => {
   return (options?.client ?? client).delete<
@@ -852,9 +852,7 @@ export const activityCustomerInvitersControllerDelete = <ThrowOnError extends bo
  * 启用/禁用
  * 启用/禁用
  */
-export const activityCustomerInvitersControllerSetIsEnabled = <
-  ThrowOnError extends boolean = false
->(
+export const activityCustomerInvitersSetIsEnabled = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerInvitersControllerSetIsEnabledData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -871,9 +869,7 @@ export const activityCustomerInvitersControllerSetIsEnabled = <
  * excel 模板
  * excel 模板
  */
-export const activityCustomerInvitersControllerGetExcelTemplate = <
-  ThrowOnError extends boolean = false
->(
+export const activityCustomerInvitersGetExcelTemplate = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -890,7 +886,7 @@ export const activityCustomerInvitersControllerGetExcelTemplate = <
  * 导出数据到 Excel
  * Excel 数据
  */
-export const activityCustomerInvitersControllerExportExcel = <ThrowOnError extends boolean = false>(
+export const activityCustomerInvitersExportExcel = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -907,7 +903,7 @@ export const activityCustomerInvitersControllerExportExcel = <ThrowOnError exten
  * 导入数据
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
-export const activityCustomerInvitersControllerImportExcel = <ThrowOnError extends boolean = false>(
+export const activityCustomerInvitersImportExcel = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerInvitersControllerImportExcelData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -925,7 +921,7 @@ export const activityCustomerInvitersControllerImportExcel = <ThrowOnError exten
   });
 };
 
-export const authControllerSignIn = <ThrowOnError extends boolean = false>(
+export const authSignIn = <ThrowOnError extends boolean = false>(
   options: Options<AuthControllerSignInData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -938,7 +934,7 @@ export const authControllerSignIn = <ThrowOnError extends boolean = false>(
   });
 };
 
-export const authControllerGetProfile = <ThrowOnError extends boolean = false>(
+export const authGetProfile = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -951,7 +947,7 @@ export const authControllerGetProfile = <ThrowOnError extends boolean = false>(
   });
 };
 
-export const authControllerRefreshToken = <ThrowOnError extends boolean = false>(
+export const authRefreshToken = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -967,7 +963,7 @@ export const authControllerRefreshToken = <ThrowOnError extends boolean = false>
 /**
  * 种子数据
  */
-export const seedControllerSeed = <ThrowOnError extends boolean = false>(
+export const seedSeed = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -983,7 +979,7 @@ export const seedControllerSeed = <ThrowOnError extends boolean = false>(
 /**
  * 角色列表
  */
-export const rolesControllerGetList = <ThrowOnError extends boolean = false>(
+export const rolesGetList = <ThrowOnError extends boolean = false>(
   options?: Options<RolesControllerGetListData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -999,7 +995,7 @@ export const rolesControllerGetList = <ThrowOnError extends boolean = false>(
 /**
  * 创建角色
  */
-export const rolesControllerCreate = <ThrowOnError extends boolean = false>(
+export const rolesCreate = <ThrowOnError extends boolean = false>(
   options: Options<RolesControllerCreateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -1015,7 +1011,7 @@ export const rolesControllerCreate = <ThrowOnError extends boolean = false>(
 /**
  * 角色详情
  */
-export const rolesControllerGetItem = <ThrowOnError extends boolean = false>(
+export const rolesGetItem = <ThrowOnError extends boolean = false>(
   options: Options<RolesControllerGetItemData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1031,7 +1027,7 @@ export const rolesControllerGetItem = <ThrowOnError extends boolean = false>(
 /**
  * 修改角色
  */
-export const rolesControllerUpdate = <ThrowOnError extends boolean = false>(
+export const rolesUpdate = <ThrowOnError extends boolean = false>(
   options: Options<RolesControllerUpdateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).put<
@@ -1047,7 +1043,7 @@ export const rolesControllerUpdate = <ThrowOnError extends boolean = false>(
 /**
  * 删除角色
  */
-export const rolesControllerDelete = <ThrowOnError extends boolean = false>(
+export const rolesDelete = <ThrowOnError extends boolean = false>(
   options: Options<RolesControllerDeleteData, ThrowOnError>
 ) => {
   return (options?.client ?? client).delete<
@@ -1063,7 +1059,7 @@ export const rolesControllerDelete = <ThrowOnError extends boolean = false>(
 /**
  * 设置权限
  */
-export const rolesControllerSetPermissions = <ThrowOnError extends boolean = false>(
+export const rolesSetPermissions = <ThrowOnError extends boolean = false>(
   options: Options<RolesControllerSetPermissionsData, ThrowOnError>
 ) => {
   return (options?.client ?? client).put<
@@ -1080,7 +1076,7 @@ export const rolesControllerSetPermissions = <ThrowOnError extends boolean = fal
  * 启用/禁用
  * 启用/禁用
  */
-export const rolesControllerSetIsEnabled = <ThrowOnError extends boolean = false>(
+export const rolesSetIsEnabled = <ThrowOnError extends boolean = false>(
   options: Options<RolesControllerSetIsEnabledData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -1097,7 +1093,7 @@ export const rolesControllerSetIsEnabled = <ThrowOnError extends boolean = false
  * excel 模板
  * excel 模板
  */
-export const rolesControllerGetExcelTemplate = <ThrowOnError extends boolean = false>(
+export const rolesGetExcelTemplate = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1114,7 +1110,7 @@ export const rolesControllerGetExcelTemplate = <ThrowOnError extends boolean = f
  * 导出数据到 Excel
  * Excel 数据
  */
-export const rolesControllerExportExcel = <ThrowOnError extends boolean = false>(
+export const rolesExportExcel = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1131,7 +1127,7 @@ export const rolesControllerExportExcel = <ThrowOnError extends boolean = false>
  * 导入数据
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
-export const rolesControllerImportExcel = <ThrowOnError extends boolean = false>(
+export const rolesImportExcel = <ThrowOnError extends boolean = false>(
   options: Options<RolesControllerImportExcelData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -1152,7 +1148,7 @@ export const rolesControllerImportExcel = <ThrowOnError extends boolean = false>
 /**
  * 审计日志列表
  */
-export const auditsControllerGetList = <ThrowOnError extends boolean = false>(
+export const auditsGetList = <ThrowOnError extends boolean = false>(
   options?: Options<AuditsControllerGetListData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1168,7 +1164,7 @@ export const auditsControllerGetList = <ThrowOnError extends boolean = false>(
 /**
  * 审计日志详情
  */
-export const auditsControllerGetItem = <ThrowOnError extends boolean = false>(
+export const auditsGetItem = <ThrowOnError extends boolean = false>(
   options: Options<AuditsControllerGetItemData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1185,7 +1181,7 @@ export const auditsControllerGetItem = <ThrowOnError extends boolean = false>(
  * 启用/禁用
  * 启用/禁用
  */
-export const auditsControllerSetIsEnabled = <ThrowOnError extends boolean = false>(
+export const auditsSetIsEnabled = <ThrowOnError extends boolean = false>(
   options: Options<AuditsControllerSetIsEnabledData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -1202,7 +1198,7 @@ export const auditsControllerSetIsEnabled = <ThrowOnError extends boolean = fals
  * excel 模板
  * excel 模板
  */
-export const auditsControllerGetExcelTemplate = <ThrowOnError extends boolean = false>(
+export const auditsGetExcelTemplate = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1219,7 +1215,7 @@ export const auditsControllerGetExcelTemplate = <ThrowOnError extends boolean = 
  * 导出数据到 Excel
  * Excel 数据
  */
-export const auditsControllerExportExcel = <ThrowOnError extends boolean = false>(
+export const auditsExportExcel = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1236,7 +1232,7 @@ export const auditsControllerExportExcel = <ThrowOnError extends boolean = false
  * 导入数据
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
-export const auditsControllerImportExcel = <ThrowOnError extends boolean = false>(
+export const auditsImportExcel = <ThrowOnError extends boolean = false>(
   options: Options<AuditsControllerImportExcelData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -1257,7 +1253,7 @@ export const auditsControllerImportExcel = <ThrowOnError extends boolean = false
 /**
  * ERP 用户列表
  */
-export const erpUsersControllerFindAll = <ThrowOnError extends boolean = false>(
+export const erpUsersFindAll = <ThrowOnError extends boolean = false>(
   options?: Options<ErpUsersControllerFindAllData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1273,7 +1269,7 @@ export const erpUsersControllerFindAll = <ThrowOnError extends boolean = false>(
 /**
  * ERP 用户详情
  */
-export const erpUsersControllerFindOne = <ThrowOnError extends boolean = false>(
+export const erpUsersFindOne = <ThrowOnError extends boolean = false>(
   options: Options<ErpUsersControllerFindOneData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1289,7 +1285,7 @@ export const erpUsersControllerFindOne = <ThrowOnError extends boolean = false>(
 /**
  * 邀请人列表
  */
-export const inviterConfigControllerGetList = <ThrowOnError extends boolean = false>(
+export const inviterConfigGetList = <ThrowOnError extends boolean = false>(
   options?: Options<InviterConfigControllerGetListData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1305,7 +1301,7 @@ export const inviterConfigControllerGetList = <ThrowOnError extends boolean = fa
 /**
  * 创建邀请人
  */
-export const inviterConfigControllerCreate = <ThrowOnError extends boolean = false>(
+export const inviterConfigCreate = <ThrowOnError extends boolean = false>(
   options: Options<InviterConfigControllerCreateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -1321,7 +1317,7 @@ export const inviterConfigControllerCreate = <ThrowOnError extends boolean = fal
 /**
  * 邀请人详情
  */
-export const inviterConfigControllerGetItem = <ThrowOnError extends boolean = false>(
+export const inviterConfigGetItem = <ThrowOnError extends boolean = false>(
   options: Options<InviterConfigControllerGetItemData, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1337,7 +1333,7 @@ export const inviterConfigControllerGetItem = <ThrowOnError extends boolean = fa
 /**
  * 修改邀请人
  */
-export const inviterConfigControllerUpdate = <ThrowOnError extends boolean = false>(
+export const inviterConfigUpdate = <ThrowOnError extends boolean = false>(
   options: Options<InviterConfigControllerUpdateData, ThrowOnError>
 ) => {
   return (options?.client ?? client).put<
@@ -1353,7 +1349,7 @@ export const inviterConfigControllerUpdate = <ThrowOnError extends boolean = fal
 /**
  * 删除邀请人
  */
-export const inviterConfigControllerDelete = <ThrowOnError extends boolean = false>(
+export const inviterConfigDelete = <ThrowOnError extends boolean = false>(
   options: Options<InviterConfigControllerDeleteData, ThrowOnError>
 ) => {
   return (options?.client ?? client).delete<
@@ -1369,7 +1365,7 @@ export const inviterConfigControllerDelete = <ThrowOnError extends boolean = fal
 /**
  * 邀请人详情
  */
-export const inviterConfigControllerGetItemByCurrentUser = <ThrowOnError extends boolean = false>(
+export const inviterConfigGetItemByCurrentUser = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1386,7 +1382,7 @@ export const inviterConfigControllerGetItemByCurrentUser = <ThrowOnError extends
  * 启用/禁用
  * 启用/禁用
  */
-export const inviterConfigControllerSetIsEnabled = <ThrowOnError extends boolean = false>(
+export const inviterConfigSetIsEnabled = <ThrowOnError extends boolean = false>(
   options: Options<InviterConfigControllerSetIsEnabledData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
@@ -1403,7 +1399,7 @@ export const inviterConfigControllerSetIsEnabled = <ThrowOnError extends boolean
  * excel 模板
  * excel 模板
  */
-export const inviterConfigControllerGetExcelTemplate = <ThrowOnError extends boolean = false>(
+export const inviterConfigGetExcelTemplate = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1420,7 +1416,7 @@ export const inviterConfigControllerGetExcelTemplate = <ThrowOnError extends boo
  * 导出数据到 Excel
  * Excel 数据
  */
-export const inviterConfigControllerExportExcel = <ThrowOnError extends boolean = false>(
+export const inviterConfigExportExcel = <ThrowOnError extends boolean = false>(
   options?: Options<unknown, ThrowOnError>
 ) => {
   return (options?.client ?? client).get<
@@ -1437,7 +1433,7 @@ export const inviterConfigControllerExportExcel = <ThrowOnError extends boolean 
  * 导入数据
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
-export const inviterConfigControllerImportExcel = <ThrowOnError extends boolean = false>(
+export const inviterConfigImportExcel = <ThrowOnError extends boolean = false>(
   options: Options<InviterConfigControllerImportExcelData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
