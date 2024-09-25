@@ -14,7 +14,7 @@ import { useValidator } from '@/hooks/web/useValidator';
 import { Icon } from '@/components/Icon';
 import { useUserStore } from '@/store/modules/user';
 import { BaseButton } from '@/components/Button';
-import { authControllerSignIn } from '@/client';
+import { authSignIn } from '@/client';
 
 const { required } = useValidator();
 
@@ -233,7 +233,7 @@ const signIn = async () => {
       const formData = await getFormData<UserType>();
 
       try {
-        const { data: token } = await authControllerSignIn({
+        const { data: token } = await authSignIn({
           body: {
             account: formData.username,
             password: formData.password,
