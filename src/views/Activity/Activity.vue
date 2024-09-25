@@ -230,9 +230,10 @@ watch(
   }
 );
 
-const currentChange = (data: DepartmentItem) => {
+const currentChange = (item: ActivityDto) => {
   // if (data.children) return
-  currentNodeKey.value = data.id;
+  console.log('currentChange', item);
+  currentNodeKey.value = item.id;
   currentPage.value = 1;
   getList();
 };
@@ -315,11 +316,11 @@ const save = async () => {
         />
       </div>
       <ElDivider />
-      <ul>
+      <!-- <ul>
         <li v-for="(item, index) in activitiyItems" :key="item?.id">
           {{ index }} - {{ item.title }}
         </li>
-      </ul>
+      </ul> -->
       <ElTree
         ref="treeEl"
         :data="activitiyItems"

@@ -9,7 +9,7 @@ export const AppInfoSchema = {
     },
     version: {
       type: 'string',
-      default: '0.0.10'
+      default: '0.0.11'
     },
     description: {
       type: 'string',
@@ -257,7 +257,7 @@ export const ActivityDtoSchema = {
     is_deleted: {
       type: 'boolean'
     },
-    name: {
+    title: {
       type: 'string'
     },
     phone: {
@@ -267,7 +267,14 @@ export const ActivityDtoSchema = {
       type: 'object'
     }
   },
-  required: ['id', 'creation_time', 'last_modification_time', 'deletion_time', 'is_deleted', 'name']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'title'
+  ]
 } as const;
 
 export const ActivityPagedResultSchema = {
@@ -313,7 +320,7 @@ export const ActivityDetailDtoSchema = {
     is_deleted: {
       type: 'boolean'
     },
-    name: {
+    title: {
       type: 'string'
     },
     phone: {
@@ -323,7 +330,14 @@ export const ActivityDetailDtoSchema = {
       type: 'object'
     }
   },
-  required: ['id', 'creation_time', 'last_modification_time', 'deletion_time', 'is_deleted', 'name']
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'title'
+  ]
 } as const;
 
 export const ActivityCreateInputSchema = {

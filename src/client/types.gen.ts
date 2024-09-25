@@ -181,7 +181,7 @@ export type ActivityDto = {
    * 是否删除
    */
   is_deleted: boolean;
-  name: string;
+  title: string;
   phone?: string;
   user_type?: {
     [key: string]: unknown;
@@ -230,7 +230,7 @@ export type ActivityDetailDto = {
    * 是否删除
    */
   is_deleted: boolean;
-  name: string;
+  title: string;
   phone?: string;
   user_type?: {
     [key: string]: unknown;
