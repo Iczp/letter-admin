@@ -18,20 +18,36 @@ import Write from './components/Write.vue';
 import Detail from './components/Detail.vue';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
+import {
+  activitiesCreate,
+  activitiesGetList,
+  activitiesUpdate,
+  ActivityCreateInput,
+  activityCustomerGetList,
+  ActivityUpdateInput
+} from '@/client';
+import { formatToDate } from '@/utils/dateUtil';
 
 const ids = ref<string[]>([]);
 
 const { tableRegister, tableState, tableMethods } = useTable({
   fetchDataApi: async () => {
     const { currentPage, pageSize } = tableState;
-    const res = await getDepartmentTableApi({
-      pageIndex: unref(currentPage),
-      pageSize: unref(pageSize),
-      ...unref(searchParams)
+
+    const res = await activitiesGetList({
+      query: {
+        // id: unref(currentNodeKey),
+        skip: currentPage.value ? 0 : (currentPage.value - 1) * pageSize.value,
+        pageSize: unref(pageSize),
+        ...unref(searchParams)
+      }
     });
+
+    console.log('activitiesGetList', res);
+
     return {
-      list: res.data.list,
-      total: res.data.total
+      list: res.data?.items || [],
+      total: res.data?.totalCount || 0
     };
   },
   fetchDelApi: async () => {
@@ -81,21 +97,21 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
-    field: 'id',
-    label: t('userDemo.departmentName'),
+    field: 'title',
+    label: '活动标题',
     table: {
       slots: {
         default: (data: any) => {
-          return <>{data.row.departmentName}</>;
+          return <>{data.row.title}</>;
         }
       }
     },
     form: {
-      component: 'TreeSelect',
+      component: 'Input',
       componentProps: {
-        nodeKey: 'id',
+        nodeKey: 'title',
         props: {
-          label: 'departmentName'
+          label: 'title'
         }
       },
       optionApi: async () => {
@@ -106,62 +122,91 @@ const crudSchemas = reactive<CrudSchema[]>([
     detail: {
       slots: {
         default: (data: any) => {
-          return <>{data.departmentName}</>;
+          return <>{data.title}</>;
         }
       }
     }
   },
   {
-    field: 'status',
-    label: t('userDemo.status'),
+    field: 'max_count',
+    label: 'max_count',
     search: {
       hidden: true
     },
+    form: {
+      component: 'InputNumber',
+      colProps: {
+        span: 8
+      }
+    }
+  },
+  {
+    field: 'address',
+    label: 'address',
     table: {
       slots: {
         default: (data: any) => {
-          const status = data.row.status;
-          return (
-            <>
-              <ElTag type={status === 0 ? 'danger' : 'success'}>
-                {status === 1 ? t('userDemo.enable') : t('userDemo.disable')}
-              </ElTag>
-            </>
-          );
+          return <>{data.row.address}</>;
         }
       }
     },
     form: {
-      component: 'Select',
+      component: 'Input',
+      colProps: {
+        span: 24
+      },
       componentProps: {
-        options: [
-          {
-            value: 0,
-            label: t('userDemo.disable')
-          },
-          {
-            value: 1,
-            label: t('userDemo.enable')
-          }
-        ]
+        nodeKey: 'address',
+        props: {
+          label: 'address'
+        }
       }
     },
     detail: {
       slots: {
         default: (data: any) => {
-          return (
-            <>
-              <ElTag type={data.status === 0 ? 'danger' : 'success'}>
-                {data.status === 1 ? t('userDemo.enable') : t('userDemo.disable')}
-              </ElTag>
-            </>
-          );
+          return <>{data.title}</>;
         }
       }
     }
   },
   {
-    field: 'createTime',
+    field: 'start_time',
+    label: t('start_time'),
+    table: {
+      slots: {
+        default: (data: any) => {
+          return <>{formatToDate(data.row.start_time)}</>;
+        }
+      }
+    },
+    form: {
+      component: 'DatePicker'
+    },
+    search: {
+      hidden: true
+    }
+  },
+  {
+    field: 'end_time',
+    label: t('end_time'),
+    table: {
+      slots: {
+        default: (data: any) => {
+          return <>{formatToDate(data.row.end_time)}</>;
+        }
+      }
+    },
+    form: {
+      component: 'DatePicker'
+    },
+    search: {
+      hidden: true
+    }
+  },
+
+  {
+    field: 'creation_time',
     label: t('tableDemo.displayTime'),
     search: {
       hidden: true
@@ -171,7 +216,7 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
-    field: 'remark',
+    field: 'description',
     label: t('userDemo.remark'),
     search: {
       hidden: true
@@ -189,7 +234,56 @@ const crudSchemas = reactive<CrudSchema[]>([
     detail: {
       slots: {
         default: (data: any) => {
-          return <>{data.remark}</>;
+          return <>{data.description}</>;
+        }
+      }
+    }
+  },
+  {
+    field: 'is_enabled',
+    label: t('userDemo.status'),
+    search: {
+      hidden: true
+    },
+    table: {
+      slots: {
+        default: (data: any) => {
+          const is_enabled = data.row.is_enabled;
+          return (
+            <>
+              <ElTag type={is_enabled ? 'success' : 'danger'}>
+                {is_enabled ? t('userDemo.enable') : t('userDemo.disable')}
+              </ElTag>
+            </>
+          );
+        }
+      }
+    },
+    form: {
+      component: 'Select',
+      componentProps: {
+        options: [
+          {
+            value: false,
+            label: t('userDemo.disable')
+          },
+          {
+            value: true,
+            label: t('userDemo.enable')
+          }
+        ]
+      }
+    },
+    detail: {
+      slots: {
+        default: (data: any) => {
+          return (
+            <>
+              <ElTag type={data.status === 0 ? 'danger' : 'success'}>
+                {data.status === 1 ? t('userDemo.enable') : t('userDemo.disable')}
+              </ElTag>
+            </>
+          );
         }
       }
     }
@@ -272,18 +366,34 @@ const saveLoading = ref(false);
 const save = async () => {
   const write = unref(writeRef);
   const formData = await write?.submit();
+  console.log('save formData', formData);
+
   if (formData) {
+    const isEdit = formData.id !== undefined;
     saveLoading.value = true;
-    const res = await saveDepartmentApi(formData)
-      .catch(() => {})
-      .finally(() => {
-        saveLoading.value = false;
+    let res: any = null;
+    const body = {
+      ...(formData as ActivityUpdateInput)
+    };
+    console.log('save formData', JSON.stringify(body, null, 2));
+    if (isEdit) {
+      delete body['id'];
+      res = await activitiesUpdate({
+        path: {
+          id: formData.id
+        },
+        body
       });
+    } else {
+      res = await activitiesCreate({ body });
+    }
+
     if (res) {
       dialogVisible.value = false;
       currentPage.value = 1;
       getList();
     }
+    saveLoading.value = false;
   }
 };
 </script>

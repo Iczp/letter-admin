@@ -7,7 +7,7 @@ import { useUserStore } from './store/modules/user';
 
 export const configClient = (app: App<Element>) => {
   // https://github.com/softonic/axios-retry
-  axiosRetry(client.instance, { retries: 3 });
+  axiosRetry(client.instance, { retries: 1 });
 
   client.setConfig({
     baseURL: import.meta.env.VITE_API_BASE_PATH

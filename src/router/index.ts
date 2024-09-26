@@ -438,6 +438,15 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           title: 'Activities',
           permission: ['add', 'edit', 'delete']
         }
+      },
+      {
+        path: 'Inviter',
+        component: () => import('@/views/Letters/Inviter/InviterConfig.vue'),
+        name: 'InviterConfig',
+        meta: {
+          title: 'InviterConfig',
+          permission: ['add', 'edit', 'delete']
+        }
       }
     ]
   },
