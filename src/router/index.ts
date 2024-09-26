@@ -420,6 +420,28 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     ]
   },
   {
+    path: '/letters',
+    component: Layout,
+    redirect: '/letters/activities',
+    name: 'Letters',
+    meta: {
+      title: 'Letters',
+      icon: 'vi-ri:function-fill',
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: 'activities',
+        component: () => import('@/views/Letters/Activities/Activities.vue'),
+        name: 'Activities',
+        meta: {
+          title: 'Activities',
+          permission: ['add', 'edit', 'delete']
+        }
+      }
+    ]
+  },
+  {
     path: '/activity',
     component: Layout,
     redirect: '/activity/activity',
