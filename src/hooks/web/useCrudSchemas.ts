@@ -40,7 +40,7 @@ interface AllSchemas {
 }
 
 /**
- * @deprecated 不推荐使用，感觉过于繁琐，不是很灵活 可能会在某个版本中删除
+ * @ deprecated 不推荐使用，感觉过于繁琐，不是很灵活 可能会在某个版本中删除
  */
 export const useCrudSchemas = (
   crudSchema: CrudSchema[]

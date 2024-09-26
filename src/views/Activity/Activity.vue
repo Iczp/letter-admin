@@ -15,22 +15,27 @@ import { getRoleListApi } from '@/api/role';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 import { ActivityService } from '@/api/activities/ActivityService';
-import { activitiesGetList, ActivityDto } from '@/client';
+import { activitiesGetList, activityCustomerGetList, ActivityDto } from '@/client';
 
 const { t } = useI18n();
 
 const { tableRegister, tableState, tableMethods } = useTable({
   fetchDataApi: async () => {
     const { pageSize, currentPage } = tableState;
-    const res = await getUserByIdApi({
-      id: unref(currentNodeKey),
-      pageIndex: unref(currentPage),
-      pageSize: unref(pageSize),
-      ...unref(searchParams)
+    const res = await activityCustomerGetList({
+      query: {
+        id: unref(currentNodeKey),
+        skip: currentPage.value ? 0 : (currentPage.value - 1) * pageSize.value,
+        pageSize: unref(pageSize),
+        ...unref(searchParams)
+      }
     });
+
+    console.log('activityCustomerGetList', res);
+
     return {
-      list: res.data.list || [],
-      total: res.data.total || 0
+      list: res.data?.items || [],
+      total: res.data?.totalCount || 0
     };
   },
   fetchDelApi: async () => {
@@ -74,18 +79,59 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
-    field: 'username',
-    label: t('userDemo.username')
+    field: 'activity.title',
+    label: '活动名称',
+    form: {
+      component: 'Select',
+      value: [],
+      componentProps: {
+        multiple: false,
+        collapseTags: true,
+        maxCollapseTags: 1
+      },
+      optionApi: async () => {
+        const res = await activitiesGetList();
+        return res.data?.items?.map((x) => ({
+          label: x.title,
+          value: x.id
+        }));
+      }
+    }
   },
   {
-    field: 'account',
-    label: t('userDemo.account')
+    field: 'activity.id',
+    label: '活动名称',
+    form: {
+      component: 'Select',
+      value: [],
+      componentProps: {
+        multiple: false,
+        collapseTags: true,
+        maxCollapseTags: 1
+      },
+      optionApi: async () => {
+        const res = await activitiesGetList();
+        return res.data?.items?.map((x) => ({
+          label: x.title,
+          value: x.id
+        }));
+      }
+    }
   },
   {
-    field: 'department.id',
-    label: t('userDemo.department'),
+    field: 'customer_name',
+    label: '客户名称'
+  },
+  {
+    field: 'customer_gender',
+    label: '性别'
+  },
+  {
+    field: 'customer_name',
+    label: '活动名称1',
     detail: {
-      hidden: true
+      hidden: false
+
       // slots: {
       //   default: (data: DepartmentUserItem) => {
       //     return <>{data.department.departmentName}</>
@@ -114,7 +160,7 @@ const crudSchemas = reactive<CrudSchema[]>([
   },
   {
     field: 'role',
-    label: t('userDemo.role'),
+    label: '电话',
     search: {
       hidden: true
     },
@@ -136,8 +182,12 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
-    field: 'email',
-    label: t('userDemo.email'),
+    field: 'inviterConfig_Name',
+    label: '邀请人'
+  },
+  {
+    field: 'remarks',
+    label: '备注',
     form: {
       component: 'Input'
     },
@@ -146,7 +196,7 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
-    field: 'createTime',
+    field: 'creation_time',
     label: t('userDemo.createTime'),
     form: {
       component: 'Input'
@@ -306,6 +356,9 @@ const save = async () => {
     }
   }
 };
+
+const excelExportVisible = ref(false);
+const excelExportTitle = ref(t('excel.export'));
 </script>
 
 <template>
@@ -355,6 +408,10 @@ const save = async () => {
 
       <div class="mb-10px">
         <BaseButton type="primary" @click="AddAction">{{ t('exampleDemo.add') }}</BaseButton>
+        <BaseButton type="primary" @click="excelExportVisible = true">{{
+          t('excel.export')
+        }}</BaseButton>
+        <BaseButton type="primary" @click="AddAction">{{ t('excel.import') }}</BaseButton>
         <BaseButton :loading="delLoading" type="danger" @click="delData()">
           {{ t('exampleDemo.del') }}
         </BaseButton>
@@ -396,6 +453,23 @@ const save = async () => {
           {{ t('exampleDemo.save') }}
         </BaseButton>
         <BaseButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</BaseButton>
+      </template>
+    </Dialog>
+
+    <Dialog v-model="excelExportVisible" :title="excelExportTitle">
+      excel export
+
+      <Detail
+        v-if="actionType === 'detail'"
+        :detail-schema="allSchemas.detailSchema"
+        :current-row="currentRow"
+      />
+
+      <template #footer>
+        <BaseButton type="primary" :loading="saveLoading" @click="excelExportVisible = false">
+          {{ t('excel.export') }}
+        </BaseButton>
+        <BaseButton @click="excelExportVisible = false">{{ t('dialogDemo.close') }}</BaseButton>
       </template>
     </Dialog>
   </div>

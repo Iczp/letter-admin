@@ -438,6 +438,15 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
           title: t('activity'),
           permission: ['add', 'edit', 'delete']
         }
+      },
+      {
+        path: 'list',
+        component: () => import('@/views/Activity/List.vue'),
+        name: 'Activity-List',
+        meta: {
+          title: 'Activity List',
+          permission: ['add', 'edit', 'delete']
+        }
       }
     ]
   },
