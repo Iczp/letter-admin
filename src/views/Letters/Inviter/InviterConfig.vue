@@ -4,17 +4,16 @@ import { useI18n } from '@/hooks/web/useI18n';
 import { Table } from '@/components/Table';
 import { ref, unref, nextTick, watch, reactive } from 'vue';
 import { ElTree, ElInput, ElDivider } from 'element-plus';
-import { getDepartmentApi, getUserByIdApi, saveUserApi, deleteUserByIdApi } from '@/api/department';
-import type { DepartmentItem, DepartmentUserItem } from '@/api/department/types';
+import { saveUserApi, deleteUserByIdApi } from '@/api/department';
 import { useTable } from '@/hooks/web/useTable';
 import { Search } from '@/components/Search';
 import Write from './components/Write.vue';
 import Detail from './components/Detail.vue';
 import { Dialog } from '@/components/Dialog';
-import { getRoleListApi } from '@/api/role';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
-import { inviterConfigGetList } from '@/client';
+import { activitiesGetList, ActivityDto, InviterConfigDto, inviterConfigGetList } from '@/client';
+import Form from './components/Form.vue';
 
 const { t } = useI18n();
 
@@ -23,14 +22,14 @@ const { tableRegister, tableState, tableMethods } = useTable({
     const { pageSize, currentPage } = tableState;
     const res = await inviterConfigGetList({
       query: {
-        id: unref(currentNodeKey),
+        activity_id: unref(currentNodeKey),
         skip: currentPage.value ? 0 : (currentPage.value - 1) * pageSize.value,
         pageSize: unref(pageSize),
         ...unref(searchParams)
       }
     });
 
-    console.log('activityCustomerGetList', res);
+    console.log('inviterConfigGetList', res);
 
     return {
       list: res.data?.items || [],
@@ -78,79 +77,90 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
-    field: 'username',
-    label: t('userDemo.username')
-  },
-  {
-    field: 'account',
-    label: t('userDemo.account')
-  },
-  {
-    field: 'department.id',
-    label: t('userDemo.department'),
-    detail: {
-      hidden: true
-      // slots: {
-      //   default: (data: DepartmentUserItem) => {
-      //     return <>{data.department.departmentName}</>
-      //   }
-      // }
-    },
-    search: {
-      hidden: true
-    },
-    form: {
-      component: 'TreeSelect',
-      componentProps: {
-        nodeKey: 'id',
-        props: {
-          label: 'departmentName'
-        }
-      },
-      optionApi: async () => {
-        const res = await getDepartmentApi();
-        return res.data.list;
-      }
-    },
-    table: {
-      hidden: true
-    }
-  },
-  {
-    field: 'role',
-    label: t('userDemo.role'),
-    search: {
-      hidden: true
-    },
+    field: 'inviter_name',
+    label: '邀请人',
     form: {
       component: 'Select',
       value: [],
       componentProps: {
-        multiple: true,
+        disabled: false,
+        multiple: false,
         collapseTags: true,
-        maxCollapseTags: 1
+        maxCollapseTags: 1,
+        remote: true,
+        filterable: true,
+        async remoteMethod(query: string) {
+          console.log('query', this, query);
+          if (query) {
+            loading.value = true;
+            setTimeout(() => {
+              loading.value = false;
+              // options.value = list.value.filter((item) => {
+              //   return item.label.toLowerCase().includes(query.toLowerCase());
+              // });
+            }, 200);
+          }
+          return [];
+        }
       },
-      optionApi: async () => {
-        const res = await getRoleListApi();
-        return res.data?.list?.map((v) => ({
-          label: v.roleName,
-          value: v.id
+      async optionApi(...args: any[]) {
+        console.log('optionApi', this, args);
+        const res = await activitiesGetList();
+        return res.data?.items?.map((x) => ({
+          label: x.title,
+          value: x.id
         }));
       }
     }
   },
   {
-    field: 'email',
-    label: t('userDemo.email'),
-    form: {
-      component: 'Input'
-    },
+    field: 'max_count',
+    label: '最大邀请数',
     search: {
       hidden: true
     }
   },
   {
-    field: 'createTime',
+    field: 'activity.id',
+    label: '活动名称',
+    search: {
+      hidden: true
+    },
+    table: {
+      slots: {
+        default: (data: any) => {
+          return <>{data.row.activity?.title}</>;
+        }
+      }
+    },
+    form: {
+      component: 'Select',
+      value: [],
+      componentProps: {
+        disabled: false,
+        multiple: false,
+        collapseTags: true,
+        maxCollapseTags: 1
+      },
+      optionApi: async () => {
+        const res = await activitiesGetList();
+        return res.data?.items?.map((x) => ({
+          label: x.title,
+          value: x.id
+        }));
+      }
+    },
+    detail: {
+      slots: {
+        default: (data: any) => {
+          return <>{data.activity?.title}</>;
+        }
+      }
+    }
+  },
+
+  {
+    field: 'creation_time',
     label: t('userDemo.createTime'),
     form: {
       component: 'Input'
@@ -175,7 +185,7 @@ const crudSchemas = reactive<CrudSchema[]>([
       width: 240,
       slots: {
         default: (data: any) => {
-          const row = data.row as DepartmentUserItem;
+          const row = data.row as InviterConfigDto;
           return (
             <>
               <BaseButton type="primary" onClick={() => action(row, 'edit')}>
@@ -207,12 +217,11 @@ const setSearchParams = (params: any) => {
 const treeEl = ref<typeof ElTree>();
 
 const currentNodeKey = ref('');
-const departmentList = ref<DepartmentItem[]>([]);
+const departmentList = ref<ActivityDto[]>([]);
 const fetchDepartment = async () => {
-  const res = await getDepartmentApi();
-  departmentList.value = res.data.list;
-  currentNodeKey.value =
-    (res.data.list[0] && res.data.list[0]?.children && res.data.list[0].children[0].id) || '';
+  const res = await activitiesGetList();
+  departmentList.value = res.data?.items || [];
+  currentNodeKey.value = res.data?.items[0].id || '';
   await nextTick();
   unref(treeEl)?.setCurrentKey(currentNodeKey.value);
 };
@@ -226,22 +235,22 @@ watch(
   }
 );
 
-const currentChange = (data: DepartmentItem) => {
+const currentChange = (data: InviterConfigDto) => {
   // if (data.children) return
   currentNodeKey.value = data.id;
   currentPage.value = 1;
   getList();
 };
 
-const filterNode = (value: string, data: DepartmentItem) => {
+const filterNode = (value: string, data: ActivityDto) => {
   if (!value) return true;
-  return data.departmentName.includes(value);
+  return data.title.includes(value);
 };
 
 const dialogVisible = ref(false);
 const dialogTitle = ref('');
 
-const currentRow = ref<DepartmentUserItem>();
+const currentRow = ref<InviterConfigDto>();
 const actionType = ref('');
 
 const AddAction = () => {
@@ -254,11 +263,11 @@ const AddAction = () => {
 const delLoading = ref(false);
 const ids = ref<string[]>([]);
 
-const delData = async (row?: DepartmentUserItem) => {
+const delData = async (row?: InviterConfigDto) => {
   const elTableExpose = await getElTableExpose();
   ids.value = row
     ? [row.id]
-    : elTableExpose?.getSelectionRows().map((v: DepartmentUserItem) => v.id) || [];
+    : elTableExpose?.getSelectionRows().map((v: InviterConfigDto) => v.id) || [];
   delLoading.value = true;
 
   await delList(unref(ids).length).finally(() => {
@@ -266,10 +275,19 @@ const delData = async (row?: DepartmentUserItem) => {
   });
 };
 
-const action = (row: DepartmentUserItem, type: string) => {
+const action = (row: InviterConfigDto, type: string) => {
+  rowId.value = row.id;
+
+  formDialog.visible = true;
+  return;
+
+  console.log('rowId.value', rowId.value);
   dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail');
   actionType.value = type;
-  currentRow.value = { ...row, department: unref(treeEl)?.getCurrentNode() || {} };
+  currentRow.value = {
+    ...row
+    // department: unref(treeEl)?.getCurrentNode() || {}
+  };
   dialogVisible.value = true;
 };
 
@@ -296,19 +314,25 @@ const save = async () => {
     }
   }
 };
+
+const formDialog = reactive({
+  visible: false,
+  title: '表单'
+});
+const rowId = ref<string>();
+const formRef = ref<InstanceType<typeof Form> | null>();
+
+const formAction = () => {
+  formDialog.visible = true;
+};
 </script>
 
 <template>
   <div class="flex w-100% h-100%">
     <ContentWrap class="w-250px">
       <div class="flex justify-center items-center">
-        <div class="flex-1">{{ t('userDemo.departmentList') }}</div>
-        <ElInput
-          v-model="currentDepartment"
-          class="flex-[2]"
-          :placeholder="t('userDemo.searchDepartment')"
-          clearable
-        />
+        <div class="flex-1">活动列表</div>
+        <ElInput v-model="currentDepartment" class="flex-[2]" :placeholder="'搜索活动'" clearable />
       </div>
       <ElDivider />
       <ElTree
@@ -319,17 +343,14 @@ const save = async () => {
         node-key="id"
         :current-node-key="currentNodeKey"
         :props="{
-          label: 'departmentName'
+          label: 'activityTitle'
         }"
         :filter-node-method="filterNode"
         @current-change="currentChange"
       >
         <template #default="{ data }">
-          <div
-            :title="data.departmentName"
-            class="whitespace-nowrap overflow-ellipsis overflow-hidden"
-          >
-            {{ data.departmentName }}
+          <div :title="data.title" class="whitespace-nowrap overflow-ellipsis overflow-hidden">
+            {{ data.title }}
           </div>
         </template>
       </ElTree>
@@ -342,6 +363,7 @@ const save = async () => {
       />
 
       <div class="mb-10px">
+        <BaseButton type="primary" @click="formAction">{{ t('exampleDemo.add') }}</BaseButton>
         <BaseButton type="primary" @click="AddAction">{{ t('exampleDemo.add') }}</BaseButton>
         <BaseButton :loading="delLoading" type="danger" @click="delData()">
           {{ t('exampleDemo.del') }}
@@ -359,6 +381,16 @@ const save = async () => {
         }"
       />
     </ContentWrap>
+
+    <Dialog v-model="formDialog.visible" :title="formDialog.title">
+      <Form ref="formRef" :row-id="rowId">5</Form>
+      <template #footer>
+        <BaseButton type="primary">
+          {{ t('exampleDemo.save') }}
+        </BaseButton>
+        <BaseButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</BaseButton>
+      </template>
+    </Dialog>
 
     <Dialog v-model="dialogVisible" :title="dialogTitle">
       <Write

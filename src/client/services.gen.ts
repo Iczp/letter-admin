@@ -683,7 +683,7 @@ export const activityCustomerSetIsChecked = <ThrowOnError extends boolean = fals
  * 设置 是否已邀请
  */
 export const activityCustomerSetIsActived = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerGetListData, ThrowOnError>
+  options: Options<ActivityCustomerControllerSetIsActivedData, ThrowOnError>
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerControllerSetIsActivedResponse,

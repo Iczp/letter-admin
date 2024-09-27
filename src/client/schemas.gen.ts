@@ -9,7 +9,7 @@ export const AppInfoSchema = {
     },
     version: {
       type: 'string',
-      default: '0.0.19'
+      default: '0.0.21'
     },
     description: {
       type: 'string',
@@ -1485,6 +1485,76 @@ export const AuditLogUpdateInputSchema = {
     'duration',
     'excution_time'
   ]
+} as const;
+
+export const InviterConfigDtoSchema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
+    name: {
+      type: 'string'
+    },
+    code: {
+      type: 'string'
+    },
+    is_public: {
+      type: 'boolean'
+    },
+    is_static: {
+      type: 'boolean'
+    },
+    is_default: {
+      type: 'boolean'
+    }
+  },
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'name',
+    'code'
+  ]
+} as const;
+
+export const InviterConfigPagedResultSchema = {
+  type: 'object',
+  properties: {
+    input: {
+      type: 'object'
+    },
+    totalCount: {
+      type: 'number'
+    },
+    items: {
+      type: 'array',
+      items: {
+        $ref: '#/components/schemas/InviterConfigDto'
+      }
+    }
+  },
+  required: ['totalCount', 'items']
 } as const;
 
 export const InviterConfigDetailDtoSchema = {
