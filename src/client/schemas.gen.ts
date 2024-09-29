@@ -1487,6 +1487,97 @@ export const AuditLogUpdateInputSchema = {
   ]
 } as const;
 
+export const ErpUsersDtoSchema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
+    },
+    name: {
+      type: 'string'
+    },
+    employeeNo: {
+      type: 'string'
+    },
+    organizationId: {
+      type: 'string'
+    },
+    organizationName: {
+      type: 'string'
+    },
+    departmentId: {
+      type: 'string'
+    },
+    departmentName: {
+      type: 'string'
+    },
+    departmentShortName: {
+      type: 'string'
+    },
+    departmentEnCode: {
+      type: 'string'
+    },
+    parentDeptId: {
+      type: 'string'
+    },
+    parentDeptName: {
+      type: 'string'
+    },
+    parentDeptShortName: {
+      type: 'string'
+    },
+    grade: {
+      type: 'string'
+    },
+    employmentStatusName: {
+      type: 'string'
+    },
+    employmentStatusId: {
+      type: 'string'
+    },
+    headImage: {
+      type: 'string'
+    },
+    jobType: {
+      type: 'number'
+    },
+    mobile: {
+      type: 'string'
+    },
+    spelling: {
+      type: 'string'
+    },
+    simpleSpelling: {
+      type: 'string'
+    },
+    spellingFlag: {
+      type: 'string'
+    },
+    gender: {
+      type: 'string'
+    }
+  }
+} as const;
+
+export const ErpUsersPagedResultSchema = {
+  type: 'object',
+  properties: {
+    input: {
+      type: 'object'
+    },
+    totalCount: {
+      type: 'number'
+    },
+    items: {
+      type: 'array',
+      items: {
+        $ref: '#/components/schemas/ErpUsersDto'
+      }
+    }
+  },
+  required: ['totalCount', 'items']
+} as const;
+
 export const InviterConfigDtoSchema = {
   type: 'object',
   properties: {

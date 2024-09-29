@@ -234,11 +234,12 @@ watch(
     unref(treeEl)!.filter(val);
   }
 );
-
-const currentChange = (data: InviterConfigDto) => {
+const activity = ref<ActivityDto>();
+const currentChange = (item: ActivityDto) => {
   // if (data.children) return
-  currentNodeKey.value = data.id;
+  currentNodeKey.value = item.id;
   currentPage.value = 1;
+  activity.value = item;
   getList();
 };
 
@@ -277,7 +278,7 @@ const delData = async (row?: InviterConfigDto) => {
 
 const action = (row: InviterConfigDto, type: string) => {
   rowId.value = row.id;
-
+  rowItem.value = row;
   formDialog.visible = true;
   return;
 
@@ -320,10 +321,17 @@ const formDialog = reactive({
   title: '表单'
 });
 const rowId = ref<string>();
+const rowItem = ref<InviterConfigDto>();
 const formRef = ref<InstanceType<typeof Form> | null>();
 
 const formAction = () => {
   formDialog.visible = true;
+};
+
+const onSave = () => {
+  formRef.value!.submit().then(() => {
+    formDialog.visible = false;
+  });
 };
 </script>
 
@@ -383,9 +391,9 @@ const formAction = () => {
     </ContentWrap>
 
     <Dialog v-model="formDialog.visible" :title="formDialog.title">
-      <Form ref="formRef" :row-id="rowId">5</Form>
+      <Form ref="formRef" :row-id="rowId" :row="rowItem" :activity="activity" />
       <template #footer>
-        <BaseButton type="primary">
+        <BaseButton type="primary" @click="onSave">
           {{ t('exampleDemo.save') }}
         </BaseButton>
         <BaseButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</BaseButton>

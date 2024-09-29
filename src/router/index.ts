@@ -440,7 +440,7 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
         }
       },
       {
-        path: 'Inviter',
+        path: 'inviter',
         component: () => import('@/views/Letters/Inviter/InviterConfig.vue'),
         name: 'InviterConfig',
         meta: {

@@ -284,12 +284,13 @@ watch(
     unref(treeEl)!.filter(val);
   }
 );
-
+const activity = ref<ActivityDto>();
 const currentChange = (item: ActivityDto) => {
   // if (data.children) return
   console.log('currentChange', item);
   currentNodeKey.value = item.id;
   currentPage.value = 1;
+  activity.value = item;
   getList();
 };
 

@@ -3,6 +3,7 @@ import { onMounted, reactive, ref, watch } from 'vue';
 import {
   ElForm,
   ElInput,
+  ElTag,
   ElSelect,
   ElButton,
   ElFormItem,
@@ -20,28 +21,25 @@ import {
   ElAffix,
   ElSwitch,
   ElTimeSelect,
-  ElAutocomplete
+  ElAutocomplete,
+  ElMessage
 } from 'element-plus';
 
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus';
 
-import { InviterConfigDetailDto, InviterConfigDto, inviterConfigGetItem } from '@/client';
+import {
+  ActivityDto,
+  inviterConfigCreate,
+  InviterConfigDetailDto,
+  InviterConfigDto,
+  inviterConfigGetItem,
+  inviterConfigUpdate
+} from '@/client';
 import { useFetchDetail } from '@/hooks/useFetchDetail';
 
 import ErpUserPicker from '@/views/Letters/ErpUsers/ErpUserPicker.vue';
-import { set } from 'nprogress';
 
-interface RuleForm {
-  name: string;
-  region: string;
-  count: string;
-  date1: string;
-  date2: string;
-  delivery: boolean;
-  location: string;
-  type: string[];
-  resource: string;
-  desc: string;
+interface IForm {
   maxCount: number;
   inviterId: string;
   activityId: string;
@@ -49,131 +47,105 @@ interface RuleForm {
 
 const props = defineProps<{
   rowId?: string | undefined;
-  // item: InviterConfigDetailDto | undefined;
+  activity?: ActivityDto;
+  row?: InviterConfigDetailDto | undefined;
 }>();
 
 const erpUserPicker = ref<InstanceType<typeof ErpUserPicker>>();
-const ruleForm = reactive({
-  name: 'Hello',
-
-  count: '',
-  date1: '',
-  date2: '',
-  delivery: false,
-  location: '',
-  type: [],
-  resource: '',
-  desc: '',
+const form = reactive({
   maxCount: 0,
   inviterId: '',
   activityId: ''
 });
-const { item, isLoading, refresh } = useFetchDetail<InviterConfigDetailDto>({
+
+const item = ref<InviterConfigDetailDto>();
+const { isLoading, refresh } = useFetchDetail<InviterConfigDetailDto>({
   rowId: props.rowId,
   service: inviterConfigGetItem,
   loaded: (item) => {
     console.log('loaded', item);
-    Object.keys(ruleForm).forEach((key) => {
-      if (item[key as keyof InviterConfigDetailDto]) {
-        ruleForm[key] = item[key];
-      }
-    });
+    form.inviterId = item.activity.id;
+    form.activityId = item.inviter.id;
+    form.maxCount = item.max_count || 0;
+    // Object.keys(form).forEach((key) => {
+    //   if (item[key as keyof InviterConfigDetailDto]) {
+    //     form[key] = item[key];
+    //   }
+    // });
   }
 });
 
-const formSize = ref<ComponentSize>('default');
-const ruleFormRef = ref<FormInstance>();
+watch(
+  () => props.row,
+  (v) => {
+    console.log('#watch[props.row]', v);
+    if (v) {
+      item.value = v;
 
-console.log('ruleForm', Object.keys(ruleForm));
+      form.maxCount = v.max_count || 0;
+    }
+  },
+  {
+    immediate: true
+  }
+);
+
+const formSize = ref<ComponentSize>('default');
+const formRef = ref<FormInstance>();
+
+console.log('form', Object.keys(form));
 
 const locationOptions = ['Home', 'Company', 'School'];
 
-const rules = reactive<FormRules<RuleForm>>({
-  name: [
-    { required: true, message: 'Please input Activity name', trigger: 'blur' },
-    { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
-  ],
-  region: [
-    {
-      required: true,
-      message: 'Please select Activity zone',
-      trigger: 'change'
-    }
-  ],
-  count: [
-    {
-      required: true,
-      message: 'Please select Activity count',
-      trigger: 'change'
-    }
-  ],
-  date1: [
-    {
-      type: 'date',
-      required: true,
-      message: 'Please pick a date',
-      trigger: 'change'
-    }
-  ],
-  date2: [
-    {
-      type: 'date',
-      required: true,
-      message: 'Please pick a time',
-      trigger: 'change'
-    }
-  ],
-  location: [
-    {
-      required: true,
-      message: 'Please select a location',
-      trigger: 'change'
-    }
-  ],
-  type: [
-    {
-      type: 'array',
-      required: true,
-      message: 'Please select at least one activity type',
-      trigger: 'change'
-    }
-  ],
-  resource: [
-    {
-      required: true,
-      message: 'Please select activity resource',
-      trigger: 'change'
-    }
-  ],
-  desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }]
+const rules = reactive<FormRules<IForm>>({
+  inviterId: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
+  activityId: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
+  maxCount: [{ required: true, message: 'Please select maxCount', trigger: 'change' }]
 });
 
-const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  await formEl.validate((valid, fields) => {
+const submit = async () => {
+  if (!formRef.value) return;
+  await formRef.value.validate(async (valid, fields) => {
     if (valid) {
-      console.log('submit!');
+      console.log('submit! props.rowId', props.rowId);
+
+      const res = props.rowId
+        ? await inviterConfigUpdate({
+            path: {
+              id: props.rowId
+            },
+            body: {
+              max_count: form.maxCount
+            }
+          })
+        : await inviterConfigCreate({
+            body: {
+              max_count: form.maxCount,
+              activity_id: form.activityId,
+              inviter_user_id: form.inviterId
+            }
+          });
+
+      console.log(res);
     } else {
       console.log('error submit!', fields);
     }
   });
 };
 
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.resetFields();
+const reset = () => {
+  if (!formRef.value) return;
+  formRef.value!.resetFields();
 };
 
 const options = Array.from({ length: 10000 }).map((_, idx) => ({
   value: `${idx + 1}`,
   label: `${idx + 1}`
 }));
-const submit = () => {};
 
 const maxCountChange = (val: number) => {
-  // ruleForm.maxCount = val;
+  // form.maxCount = val;
 };
-defineExpose({ submit });
 
 const state = ref('');
 
@@ -222,46 +194,77 @@ const inviterName = ref('Inviter');
 
 const subDialogVisible = ref(true);
 
+const onPick = ({ items }) => {
+  if (items.length == 0) {
+    ElMessage({
+      message: '请选择邀请人',
+      type: 'warning'
+    });
+    return;
+  }
+  form.inviterId = items[0].id;
+};
 const showErpUserPicker = () => {
   erpUserPicker.value?.set({});
 };
+
+defineExpose({
+  submit,
+  reset
+});
 </script>
 
 <template>
   <div>
-    <ErpUserPicker ref="erpUserPicker" />
+    <ErpUserPicker ref="erpUserPicker" @pick="onPick" height="360" />
     <el-form
-      ref="ruleFormRef"
+      ref="formRef"
       style="max-width: 600px"
-      :model="ruleForm"
+      :model="form"
       :rules="rules"
       label-width="auto"
-      class="demo-ruleForm"
+      class="demo-form"
       :size="formSize"
       :disabled="isLoading"
       status-icon
     >
       <el-form-item label="活动名称" prop="region">
-        <el-select v-model="ruleForm.activityId" placeholder="Activity zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
+        <el-select
+          v-model="form.activityId"
+          :placeholder="activity?.title ?? '活动名称'"
+          :disabled="true"
+        >
+          <!-- <el-option :label="activity?.title!" :checked="true" :value="activity?.id!" /> -->
         </el-select>
       </el-form-item>
 
       <el-form-item label="邀请人" required>
-        <el-col :span="16"> <el-input v-model="ruleForm.name" /></el-col>
-        <el-col :span="4" style="text-align: center">
-          <el-button @click="showErpUserPicker"> 选择 </el-button>
+        <el-col :span="24">
+          <!-- <el-input v-model="form.name" :readonly="true" /> -->
+
+          <div class="flex gap-2">
+            <el-tag type="primary" size="large">
+              {{ item?.inviter?.name }}
+            </el-tag>
+            <el-tag size="large" type="primary" @click="showErpUserPicker">
+              <Icon
+                :size="18"
+                @click="showErpUserPicker"
+                icon="vi-mdi:account-plus-outline"
+                class="cursor-pointer"
+              />
+            </el-tag>
+          </div>
         </el-col>
       </el-form-item>
 
-      <el-form-item label="Activity count" prop="count">
-        <el-input-number v-model="ruleForm.maxCount" :min="1" :max="10" @change="maxCountChange" />
+      <el-form-item label="最大邀请人数" prop="count">
+        <el-input-number v-model="form.maxCount" :min="1" :max="100" @change="maxCountChange" />
       </el-form-item>
 
       <!-- <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"> Create </el-button>
-      <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
+      <el-button type="primary" @click="submit()"> Create </el-button>
+      <el-button @click="reset(formRef)">Reset</el-button>
     </el-form-item> -->
     </el-form>
   </div>

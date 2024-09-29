@@ -9,6 +9,15 @@ export type AppInfo = {
   website: string;
 };
 
+export type UserSimpleDto = {
+  /**
+   * id
+   */
+  id: string;
+  account: string;
+  name: string;
+};
+
 export type UserDto = {
   /**
    * id
@@ -1082,6 +1091,114 @@ export type AuditLogUpdateInput = {
   excution_time: string;
 };
 
+export type ErpUsersDto = {
+  /**
+   * id
+   */
+  id?: string;
+  /**
+   * name
+   */
+  name?: string;
+  /**
+   * employeeNo
+   */
+  employeeNo?: string;
+  /**
+   * organizationId
+   */
+  organizationId?: string;
+  /**
+   * http_status
+   */
+  organizationName?: string;
+  /**
+   * departmentId
+   */
+  departmentId?: string;
+  /**
+   * departmentName
+   */
+  departmentName?: string;
+  /**
+   * departmentShortName
+   */
+  departmentShortName?: string;
+  /**
+   * departmentEnCode
+   */
+  departmentEnCode?: string;
+  /**
+   * parentDeptId
+   */
+  parentDeptId?: string;
+  /**
+   * parentDeptName
+   */
+  parentDeptName?: string;
+  /**
+   * parentDeptShortName
+   */
+  parentDeptShortName?: string;
+  /**
+   * grade
+   */
+  grade?: string;
+  /**
+   * employmentStatusName
+   */
+  employmentStatusName?: string;
+  /**
+   * employmentStatusId
+   */
+  employmentStatusId?: string;
+  /**
+   * headImage
+   */
+  headImage?: string;
+  /**
+   * http_status
+   */
+  jobType?: number;
+  /**
+   * mobile
+   */
+  mobile?: string;
+  /**
+   * spelling
+   */
+  spelling?: string;
+  /**
+   * simpleSpelling
+   */
+  simpleSpelling?: string;
+  /**
+   * spellingFlag
+   */
+  spellingFlag?: string;
+  /**
+   * gender
+   */
+  gender?: string;
+};
+
+export type ErpUsersPagedResult = {
+  /**
+   * 输入参数
+   */
+  input?: {
+    [key: string]: unknown;
+  };
+  /**
+   * 总数
+   */
+  totalCount: number;
+  /**
+   * 列表项
+   */
+  items: Array<ErpUsersDto>;
+};
+
 export type InviterConfigDto = {
   /**
    * id
@@ -1121,6 +1238,12 @@ export type InviterConfigDto = {
    * 是否默认
    */
   is_default?: boolean;
+
+  max_count: number;
+
+  activity: ActivityDto;
+
+  inviter: UserDto;
 };
 
 export type InviterConfigPagedResult = {
@@ -1140,7 +1263,7 @@ export type InviterConfigPagedResult = {
   items: Array<InviterConfigDto>;
 };
 
-export type InviterConfigDetailDto = {
+export type InviterConfigDetailDto = InviterConfigDto & {
   /**
    * id
    */
@@ -2098,9 +2221,7 @@ export type ErpUsersControllerFindAllData = {
   };
 };
 
-export type ErpUsersControllerFindAllResponse = {
-  [key: string]: unknown;
-};
+export type ErpUsersControllerFindAllResponse = ErpUsersPagedResult;
 
 export type ErpUsersControllerFindAllError = unknown;
 
@@ -2110,9 +2231,7 @@ export type ErpUsersControllerFindOneData = {
   };
 };
 
-export type ErpUsersControllerFindOneResponse = {
-  [key: string]: unknown;
-};
+export type ErpUsersControllerFindOneResponse = ErpUsersDto;
 
 export type ErpUsersControllerFindOneError = unknown;
 
