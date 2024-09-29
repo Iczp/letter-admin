@@ -22,6 +22,9 @@ import type {
   UsersControllerCreateData,
   UsersControllerCreateError,
   UsersControllerCreateResponse,
+  UsersControllerDeleteManyData,
+  UsersControllerDeleteManyError,
+  UsersControllerDeleteManyResponse,
   UsersControllerGetItemData,
   UsersControllerGetItemError,
   UsersControllerGetItemResponse,
@@ -44,6 +47,9 @@ import type {
   ActivitiesControllerCreateData,
   ActivitiesControllerCreateError,
   ActivitiesControllerCreateResponse,
+  ActivitiesControllerDeleteManyData,
+  ActivitiesControllerDeleteManyError,
+  ActivitiesControllerDeleteManyResponse,
   ActivitiesControllerGetListByCurrentUserError,
   ActivitiesControllerGetListByCurrentUserResponse,
   ActivitiesControllerGetItemData,
@@ -52,9 +58,6 @@ import type {
   ActivitiesControllerUpdateData,
   ActivitiesControllerUpdateError,
   ActivitiesControllerUpdateResponse,
-  ActivitiesControllerDeleteData,
-  ActivitiesControllerDeleteError,
-  ActivitiesControllerDeleteResponse,
   ActivitiesControllerSetIsEnabledData,
   ActivitiesControllerSetIsEnabledError,
   ActivitiesControllerSetIsEnabledResponse,
@@ -71,15 +74,15 @@ import type {
   ActivityCustomerControllerCreateData,
   ActivityCustomerControllerCreateError,
   ActivityCustomerControllerCreateResponse,
+  ActivityCustomerControllerDeleteManyData,
+  ActivityCustomerControllerDeleteManyError,
+  ActivityCustomerControllerDeleteManyResponse,
   ActivityCustomerControllerGetItemData,
   ActivityCustomerControllerGetItemError,
   ActivityCustomerControllerGetItemResponse,
   ActivityCustomerControllerUpdateData,
   ActivityCustomerControllerUpdateError,
   ActivityCustomerControllerUpdateResponse,
-  ActivityCustomerControllerDeleteData,
-  ActivityCustomerControllerDeleteError,
-  ActivityCustomerControllerDeleteResponse,
   ActivityCustomerControllerSetIsCheckedData,
   ActivityCustomerControllerSetIsCheckedError,
   ActivityCustomerControllerSetIsCheckedResponse,
@@ -103,15 +106,15 @@ import type {
   ActivityCustomerInvitersControllerCreateData,
   ActivityCustomerInvitersControllerCreateError,
   ActivityCustomerInvitersControllerCreateResponse,
+  ActivityCustomerInvitersControllerDeleteManyData,
+  ActivityCustomerInvitersControllerDeleteManyError,
+  ActivityCustomerInvitersControllerDeleteManyResponse,
   ActivityCustomerInvitersControllerGetItemData,
   ActivityCustomerInvitersControllerGetItemError,
   ActivityCustomerInvitersControllerGetItemResponse,
   ActivityCustomerInvitersControllerUpdateData,
   ActivityCustomerInvitersControllerUpdateError,
   ActivityCustomerInvitersControllerUpdateResponse,
-  ActivityCustomerInvitersControllerDeleteData,
-  ActivityCustomerInvitersControllerDeleteError,
-  ActivityCustomerInvitersControllerDeleteResponse,
   ActivityCustomerInvitersControllerSetIsEnabledData,
   ActivityCustomerInvitersControllerSetIsEnabledError,
   ActivityCustomerInvitersControllerSetIsEnabledResponse,
@@ -137,15 +140,15 @@ import type {
   RolesControllerCreateData,
   RolesControllerCreateError,
   RolesControllerCreateResponse,
+  RolesControllerDeleteManyData,
+  RolesControllerDeleteManyError,
+  RolesControllerDeleteManyResponse,
   RolesControllerGetItemData,
   RolesControllerGetItemError,
   RolesControllerGetItemResponse,
   RolesControllerUpdateData,
   RolesControllerUpdateError,
   RolesControllerUpdateResponse,
-  RolesControllerDeleteData,
-  RolesControllerDeleteError,
-  RolesControllerDeleteResponse,
   RolesControllerSetPermissionsData,
   RolesControllerSetPermissionsError,
   RolesControllerSetPermissionsResponse,
@@ -162,6 +165,9 @@ import type {
   AuditsControllerGetListData,
   AuditsControllerGetListError,
   AuditsControllerGetListResponse,
+  AuditsControllerDeleteManyData,
+  AuditsControllerDeleteManyError,
+  AuditsControllerDeleteManyResponse,
   AuditsControllerGetItemData,
   AuditsControllerGetItemError,
   AuditsControllerGetItemResponse,
@@ -187,15 +193,15 @@ import type {
   InviterConfigControllerCreateData,
   InviterConfigControllerCreateError,
   InviterConfigControllerCreateResponse,
+  InviterConfigControllerDeleteManyData,
+  InviterConfigControllerDeleteManyError,
+  InviterConfigControllerDeleteManyResponse,
   InviterConfigControllerGetItemData,
   InviterConfigControllerGetItemError,
   InviterConfigControllerGetItemResponse,
   InviterConfigControllerUpdateData,
   InviterConfigControllerUpdateError,
   InviterConfigControllerUpdateResponse,
-  InviterConfigControllerDeleteData,
-  InviterConfigControllerDeleteError,
-  InviterConfigControllerDeleteResponse,
   InviterConfigControllerGetItemByCurrentUserError,
   InviterConfigControllerGetItemByCurrentUserResponse,
   InviterConfigControllerSetIsEnabledData,
@@ -302,6 +308,22 @@ export const usersCreate = <ThrowOnError extends boolean = false>(
   return (options?.client ?? client).post<
     UsersControllerCreateResponse,
     UsersControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/user'
+  });
+};
+
+/**
+ * 删除
+ */
+export const usersDeleteMany = <ThrowOnError extends boolean = false>(
+  options: Options<UsersControllerDeleteManyData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    UsersControllerDeleteManyResponse,
+    UsersControllerDeleteManyError,
     ThrowOnError
   >({
     ...options,
@@ -447,6 +469,22 @@ export const activitiesCreate = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * 删除
+ */
+export const activitiesDeleteMany = <ThrowOnError extends boolean = false>(
+  options: Options<ActivitiesControllerDeleteManyData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    ActivitiesControllerDeleteManyResponse,
+    ActivitiesControllerDeleteManyError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/activities'
+  });
+};
+
+/**
  * 活动列表
  */
 export const activitiesGetListByCurrentUser = <ThrowOnError extends boolean = false>(
@@ -487,22 +525,6 @@ export const activitiesUpdate = <ThrowOnError extends boolean = false>(
   return (options?.client ?? client).put<
     ActivitiesControllerUpdateResponse,
     ActivitiesControllerUpdateError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/api/activities/{id}'
-  });
-};
-
-/**
- * 删除活动
- */
-export const activitiesDelete = <ThrowOnError extends boolean = false>(
-  options: Options<ActivitiesControllerDeleteData, ThrowOnError>
-) => {
-  return (options?.client ?? client).delete<
-    ActivitiesControllerDeleteResponse,
-    ActivitiesControllerDeleteError,
     ThrowOnError
   >({
     ...options,
@@ -616,6 +638,22 @@ export const activityCustomerCreate = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * 删除
+ */
+export const activityCustomerDeleteMany = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerControllerDeleteManyData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    ActivityCustomerControllerDeleteManyResponse,
+    ActivityCustomerControllerDeleteManyError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/activity-customer'
+  });
+};
+
+/**
  * [活动客户]详情
  */
 export const activityCustomerGetItem = <ThrowOnError extends boolean = false>(
@@ -640,22 +678,6 @@ export const activityCustomerUpdate = <ThrowOnError extends boolean = false>(
   return (options?.client ?? client).put<
     ActivityCustomerControllerUpdateResponse,
     ActivityCustomerControllerUpdateError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/api/activity-customer/{id}'
-  });
-};
-
-/**
- * 删除[活动客户]
- */
-export const activityCustomerDelete = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerDeleteData, ThrowOnError>
-) => {
-  return (options?.client ?? client).delete<
-    ActivityCustomerControllerDeleteResponse,
-    ActivityCustomerControllerDeleteError,
     ThrowOnError
   >({
     ...options,
@@ -801,6 +823,22 @@ export const activityCustomerInvitersCreate = <ThrowOnError extends boolean = fa
 };
 
 /**
+ * 删除
+ */
+export const activityCustomerInvitersDeleteMany = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerInvitersControllerDeleteManyData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    ActivityCustomerInvitersControllerDeleteManyResponse,
+    ActivityCustomerInvitersControllerDeleteManyError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/activity-customer-inviters'
+  });
+};
+
+/**
  * 客户详情
  */
 export const activityCustomerInvitersGetItem = <ThrowOnError extends boolean = false>(
@@ -825,22 +863,6 @@ export const activityCustomerInvitersUpdate = <ThrowOnError extends boolean = fa
   return (options?.client ?? client).put<
     ActivityCustomerInvitersControllerUpdateResponse,
     ActivityCustomerInvitersControllerUpdateError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/api/activity-customer-inviters/{id}'
-  });
-};
-
-/**
- * 删除客户
- */
-export const activityCustomerInvitersDelete = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerInvitersControllerDeleteData, ThrowOnError>
-) => {
-  return (options?.client ?? client).delete<
-    ActivityCustomerInvitersControllerDeleteResponse,
-    ActivityCustomerInvitersControllerDeleteError,
     ThrowOnError
   >({
     ...options,
@@ -1009,6 +1031,22 @@ export const rolesCreate = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * 删除
+ */
+export const rolesDeleteMany = <ThrowOnError extends boolean = false>(
+  options: Options<RolesControllerDeleteManyData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    RolesControllerDeleteManyResponse,
+    RolesControllerDeleteManyError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/roles'
+  });
+};
+
+/**
  * 角色详情
  */
 export const rolesGetItem = <ThrowOnError extends boolean = false>(
@@ -1033,22 +1071,6 @@ export const rolesUpdate = <ThrowOnError extends boolean = false>(
   return (options?.client ?? client).put<
     RolesControllerUpdateResponse,
     RolesControllerUpdateError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/api/roles/{id}'
-  });
-};
-
-/**
- * 删除角色
- */
-export const rolesDelete = <ThrowOnError extends boolean = false>(
-  options: Options<RolesControllerDeleteData, ThrowOnError>
-) => {
-  return (options?.client ?? client).delete<
-    RolesControllerDeleteResponse,
-    RolesControllerDeleteError,
     ThrowOnError
   >({
     ...options,
@@ -1154,6 +1176,22 @@ export const auditsGetList = <ThrowOnError extends boolean = false>(
   return (options?.client ?? client).get<
     AuditsControllerGetListResponse,
     AuditsControllerGetListError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/audits'
+  });
+};
+
+/**
+ * 删除
+ */
+export const auditsDeleteMany = <ThrowOnError extends boolean = false>(
+  options: Options<AuditsControllerDeleteManyData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    AuditsControllerDeleteManyResponse,
+    AuditsControllerDeleteManyError,
     ThrowOnError
   >({
     ...options,
@@ -1315,6 +1353,22 @@ export const inviterConfigCreate = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * 删除
+ */
+export const inviterConfigDeleteMany = <ThrowOnError extends boolean = false>(
+  options: Options<InviterConfigControllerDeleteManyData, ThrowOnError>
+) => {
+  return (options?.client ?? client).delete<
+    InviterConfigControllerDeleteManyResponse,
+    InviterConfigControllerDeleteManyError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/inviter-config'
+  });
+};
+
+/**
  * 邀请人详情
  */
 export const inviterConfigGetItem = <ThrowOnError extends boolean = false>(
@@ -1339,22 +1393,6 @@ export const inviterConfigUpdate = <ThrowOnError extends boolean = false>(
   return (options?.client ?? client).put<
     InviterConfigControllerUpdateResponse,
     InviterConfigControllerUpdateError,
-    ThrowOnError
-  >({
-    ...options,
-    url: '/api/inviter-config/{id}'
-  });
-};
-
-/**
- * 删除邀请人
- */
-export const inviterConfigDelete = <ThrowOnError extends boolean = false>(
-  options: Options<InviterConfigControllerDeleteData, ThrowOnError>
-) => {
-  return (options?.client ?? client).delete<
-    InviterConfigControllerDeleteResponse,
-    InviterConfigControllerDeleteError,
     ThrowOnError
   >({
     ...options,

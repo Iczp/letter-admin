@@ -9,15 +9,6 @@ export type AppInfo = {
   website: string;
 };
 
-export type UserSimpleDto = {
-  /**
-   * id
-   */
-  id: string;
-  account: string;
-  name: string;
-};
-
 export type UserDto = {
   /**
    * id
@@ -47,6 +38,9 @@ export type UserDto = {
    * 账号
    */
   account: string;
+  /**
+   * 名称
+   */
   name: string;
   phone?: string;
   user_type?: 'Unset' | 'Customer' | 'ShopManager';
@@ -105,6 +99,9 @@ export type UserDetailDto = {
    * 账号
    */
   account: string;
+  /**
+   * 名称
+   */
   name: string;
   phone?: string;
   user_type?: 'Unset' | 'Customer' | 'ShopManager';
@@ -1095,7 +1092,7 @@ export type ErpUsersDto = {
   /**
    * id
    */
-  id?: string;
+  id: string;
   /**
    * name
    */
@@ -1199,6 +1196,41 @@ export type ErpUsersPagedResult = {
   items: Array<ErpUsersDto>;
 };
 
+export type UserSimpleDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否可用
+   */
+  is_enabled: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
+  /**
+   * 账号
+   */
+  account: string;
+  /**
+   * 名称
+   */
+  name: string;
+};
+
 export type InviterConfigDto = {
   /**
    * id
@@ -1213,9 +1245,9 @@ export type InviterConfigDto = {
    */
   last_modification_time: string;
   /**
-   * 是否启用
+   * 是否可用
    */
-  is_enabled?: boolean;
+  is_enabled: boolean;
   /**
    * 删除时间
    */
@@ -1224,26 +1256,18 @@ export type InviterConfigDto = {
    * 是否删除
    */
   is_deleted: boolean;
-  name: string;
-  code: string;
   /**
-   * 是否公开
+   * 最大邀请人数
    */
-  is_public?: boolean;
-  /**
-   * 是否固定
-   */
-  is_static?: boolean;
-  /**
-   * 是否默认
-   */
-  is_default?: boolean;
-
   max_count: number;
-
+  /**
+   * 活动
+   */
   activity: ActivityDto;
-
-  inviter: UserDto;
+  /**
+   * 邀请人
+   */
+  inviter: UserSimpleDto;
 };
 
 export type InviterConfigPagedResult = {
@@ -1263,7 +1287,7 @@ export type InviterConfigPagedResult = {
   items: Array<InviterConfigDto>;
 };
 
-export type InviterConfigDetailDto = InviterConfigDto & {
+export type InviterConfigDetailDto = {
   /**
    * id
    */
@@ -1277,9 +1301,9 @@ export type InviterConfigDetailDto = InviterConfigDto & {
    */
   last_modification_time: string;
   /**
-   * 是否启用
+   * 是否可用
    */
-  is_enabled?: boolean;
+  is_enabled: boolean;
   /**
    * 删除时间
    */
@@ -1288,20 +1312,18 @@ export type InviterConfigDetailDto = InviterConfigDto & {
    * 是否删除
    */
   is_deleted: boolean;
-  name: string;
-  code: string;
   /**
-   * 是否公开
+   * 最大邀请人数
    */
-  is_public?: boolean;
+  max_count: number;
   /**
-   * 是否固定
+   * 活动
    */
-  is_static?: boolean;
+  activity: ActivityDto;
   /**
-   * 是否默认
+   * 邀请人
    */
-  is_default?: boolean;
+  inviter: UserSimpleDto;
 };
 
 export type InviterConfigCreateInput = {
@@ -1401,6 +1423,16 @@ export type UsersControllerCreateData = {
 export type UsersControllerCreateResponse = UserDetailDto;
 
 export type UsersControllerCreateError = unknown;
+
+export type UsersControllerDeleteManyData = {
+  query: {
+    id: Array<string>;
+  };
+};
+
+export type UsersControllerDeleteManyResponse = unknown;
+
+export type UsersControllerDeleteManyError = unknown;
 
 export type UsersControllerGetItemData = {
   path: {
@@ -1505,6 +1537,16 @@ export type ActivitiesControllerCreateResponse = ActivityDetailDto;
 
 export type ActivitiesControllerCreateError = unknown;
 
+export type ActivitiesControllerDeleteManyData = {
+  query: {
+    id: Array<string>;
+  };
+};
+
+export type ActivitiesControllerDeleteManyResponse = unknown;
+
+export type ActivitiesControllerDeleteManyError = unknown;
+
 export type ActivitiesControllerGetListByCurrentUserResponse = ActivityPagedResult;
 
 export type ActivitiesControllerGetListByCurrentUserError = unknown;
@@ -1529,16 +1571,6 @@ export type ActivitiesControllerUpdateData = {
 export type ActivitiesControllerUpdateResponse = ActivityDetailDto;
 
 export type ActivitiesControllerUpdateError = unknown;
-
-export type ActivitiesControllerDeleteData = {
-  query: {
-    id: string;
-  };
-};
-
-export type ActivitiesControllerDeleteResponse = unknown;
-
-export type ActivitiesControllerDeleteError = unknown;
 
 export type ActivitiesControllerSetIsEnabledData = {
   path: {
@@ -1623,6 +1655,16 @@ export type ActivityCustomerControllerCreateResponse = ActivityCustomerDetailDto
 
 export type ActivityCustomerControllerCreateError = unknown;
 
+export type ActivityCustomerControllerDeleteManyData = {
+  query: {
+    id: Array<string>;
+  };
+};
+
+export type ActivityCustomerControllerDeleteManyResponse = unknown;
+
+export type ActivityCustomerControllerDeleteManyError = unknown;
+
 export type ActivityCustomerControllerGetItemData = {
   path: {
     id: string;
@@ -1643,16 +1685,6 @@ export type ActivityCustomerControllerUpdateData = {
 export type ActivityCustomerControllerUpdateResponse = ActivityCustomerDetailDto;
 
 export type ActivityCustomerControllerUpdateError = unknown;
-
-export type ActivityCustomerControllerDeleteData = {
-  query: {
-    id: string;
-  };
-};
-
-export type ActivityCustomerControllerDeleteResponse = unknown;
-
-export type ActivityCustomerControllerDeleteError = unknown;
 
 export type ActivityCustomerControllerSetIsCheckedData = {
   path: {
@@ -1806,6 +1838,16 @@ export type ActivityCustomerInvitersControllerCreateResponse = ActivityCustomerI
 
 export type ActivityCustomerInvitersControllerCreateError = unknown;
 
+export type ActivityCustomerInvitersControllerDeleteManyData = {
+  query: {
+    id: Array<string>;
+  };
+};
+
+export type ActivityCustomerInvitersControllerDeleteManyResponse = unknown;
+
+export type ActivityCustomerInvitersControllerDeleteManyError = unknown;
+
 export type ActivityCustomerInvitersControllerGetItemData = {
   path: {
     id: string;
@@ -1826,16 +1868,6 @@ export type ActivityCustomerInvitersControllerUpdateData = {
 export type ActivityCustomerInvitersControllerUpdateResponse = ActivityCustomerInvitersDetailDto;
 
 export type ActivityCustomerInvitersControllerUpdateError = unknown;
-
-export type ActivityCustomerInvitersControllerDeleteData = {
-  query: {
-    id: string;
-  };
-};
-
-export type ActivityCustomerInvitersControllerDeleteResponse = unknown;
-
-export type ActivityCustomerInvitersControllerDeleteError = unknown;
 
 export type ActivityCustomerInvitersControllerSetIsEnabledData = {
   path: {
@@ -2019,6 +2051,16 @@ export type RolesControllerCreateResponse = RoleDetailDto;
 
 export type RolesControllerCreateError = unknown;
 
+export type RolesControllerDeleteManyData = {
+  query: {
+    id: Array<string>;
+  };
+};
+
+export type RolesControllerDeleteManyResponse = unknown;
+
+export type RolesControllerDeleteManyError = unknown;
+
 export type RolesControllerGetItemData = {
   path: {
     id: string;
@@ -2039,16 +2081,6 @@ export type RolesControllerUpdateData = {
 export type RolesControllerUpdateResponse = RoleDetailDto;
 
 export type RolesControllerUpdateError = unknown;
-
-export type RolesControllerDeleteData = {
-  query: {
-    id: string;
-  };
-};
-
-export type RolesControllerDeleteResponse = unknown;
-
-export type RolesControllerDeleteError = unknown;
 
 export type RolesControllerSetPermissionsData = {
   body: SetPermissionsInput;
@@ -2153,6 +2185,16 @@ export type AuditsControllerGetListData = {
 export type AuditsControllerGetListResponse = AuditLogPagedResult;
 
 export type AuditsControllerGetListError = unknown;
+
+export type AuditsControllerDeleteManyData = {
+  query: {
+    id: Array<string>;
+  };
+};
+
+export type AuditsControllerDeleteManyResponse = unknown;
+
+export type AuditsControllerDeleteManyError = unknown;
 
 export type AuditsControllerGetItemData = {
   path: {
@@ -2280,6 +2322,16 @@ export type InviterConfigControllerCreateResponse = InviterConfigDetailDto;
 
 export type InviterConfigControllerCreateError = unknown;
 
+export type InviterConfigControllerDeleteManyData = {
+  query: {
+    id: Array<string>;
+  };
+};
+
+export type InviterConfigControllerDeleteManyResponse = unknown;
+
+export type InviterConfigControllerDeleteManyError = unknown;
+
 export type InviterConfigControllerGetItemData = {
   path: {
     id: string;
@@ -2300,16 +2352,6 @@ export type InviterConfigControllerUpdateData = {
 export type InviterConfigControllerUpdateResponse = InviterConfigDetailDto;
 
 export type InviterConfigControllerUpdateError = unknown;
-
-export type InviterConfigControllerDeleteData = {
-  query: {
-    id: string;
-  };
-};
-
-export type InviterConfigControllerDeleteResponse = unknown;
-
-export type InviterConfigControllerDeleteError = unknown;
 
 export type InviterConfigControllerGetItemByCurrentUserResponse = InviterConfigDetailDto;
 

@@ -1556,7 +1556,8 @@ export const ErpUsersDtoSchema = {
     gender: {
       type: 'string'
     }
-  }
+  },
+  required: ['id']
 } as const;
 
 export const ErpUsersPagedResultSchema = {
@@ -1576,6 +1577,49 @@ export const ErpUsersPagedResultSchema = {
     }
   },
   required: ['totalCount', 'items']
+} as const;
+
+export const UserSimpleDtoSchema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string'
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_enabled: {
+      type: 'boolean'
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string'
+    },
+    is_deleted: {
+      type: 'boolean'
+    },
+    account: {
+      type: 'string'
+    },
+    name: {
+      type: 'string'
+    }
+  },
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'is_enabled',
+    'deletion_time',
+    'is_deleted',
+    'account',
+    'name'
+  ]
 } as const;
 
 export const InviterConfigDtoSchema = {
@@ -1602,30 +1646,34 @@ export const InviterConfigDtoSchema = {
     is_deleted: {
       type: 'boolean'
     },
-    name: {
-      type: 'string'
+    max_count: {
+      type: 'number'
     },
-    code: {
-      type: 'string'
+    activity: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/ActivityDto'
+        }
+      ]
     },
-    is_public: {
-      type: 'boolean'
-    },
-    is_static: {
-      type: 'boolean'
-    },
-    is_default: {
-      type: 'boolean'
+    inviter: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/UserSimpleDto'
+        }
+      ]
     }
   },
   required: [
     'id',
     'creation_time',
     'last_modification_time',
+    'is_enabled',
     'deletion_time',
     'is_deleted',
-    'name',
-    'code'
+    'max_count',
+    'activity',
+    'inviter'
   ]
 } as const;
 
@@ -1672,30 +1720,34 @@ export const InviterConfigDetailDtoSchema = {
     is_deleted: {
       type: 'boolean'
     },
-    name: {
-      type: 'string'
+    max_count: {
+      type: 'number'
     },
-    code: {
-      type: 'string'
+    activity: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/ActivityDto'
+        }
+      ]
     },
-    is_public: {
-      type: 'boolean'
-    },
-    is_static: {
-      type: 'boolean'
-    },
-    is_default: {
-      type: 'boolean'
+    inviter: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/UserSimpleDto'
+        }
+      ]
     }
   },
   required: [
     'id',
     'creation_time',
     'last_modification_time',
+    'is_enabled',
     'deletion_time',
     'is_deleted',
-    'name',
-    'code'
+    'max_count',
+    'activity',
+    'inviter'
   ]
 } as const;
 

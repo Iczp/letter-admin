@@ -15,7 +15,7 @@ import { BaseButton } from '@/components/Button';
 import {
   activitiesGetList,
   ActivityDto,
-  inviterConfigDelete,
+  inviterConfigDeleteMany,
   InviterConfigDto,
   inviterConfigGetList
 } from '@/client';
@@ -299,7 +299,7 @@ const delData = async (row?: InviterConfigDto) => {
     : elTableExpose?.getSelectionRows().map((v: InviterConfigDto) => v.id) || [];
   delLoading.value = true;
 
-  await inviterConfigDelete({
+  await inviterConfigDeleteMany({
     query: {
       id: unref(ids)
     }
