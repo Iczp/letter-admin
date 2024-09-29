@@ -3,7 +3,7 @@ import { ContentWrap } from '@/components/ContentWrap';
 import { useI18n } from '@/hooks/web/useI18n';
 import { Table } from '@/components/Table';
 import { ref, unref, nextTick, watch, reactive } from 'vue';
-import { ElTree, ElInput, ElDivider } from 'element-plus';
+import { ElTree, ElInput, ElDivider, ElTag } from 'element-plus';
 import { saveUserApi, deleteUserByIdApi } from '@/api/department';
 import { useTable } from '@/hooks/web/useTable';
 import { Search } from '@/components/Search';
@@ -12,7 +12,13 @@ import Detail from './components/Detail.vue';
 import { Dialog } from '@/components/Dialog';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
-import { activitiesGetList, ActivityDto, InviterConfigDto, inviterConfigGetList } from '@/client';
+import {
+  activitiesGetList,
+  ActivityDto,
+  inviterConfigDelete,
+  InviterConfigDto,
+  inviterConfigGetList
+} from '@/client';
 import Form from './components/Form.vue';
 
 const { t } = useI18n();
@@ -169,6 +175,31 @@ const crudSchemas = reactive<CrudSchema[]>([
       hidden: true
     }
   },
+
+  {
+    field: 'is_enabled',
+    label: '是否启用',
+    table: {
+      slots: {
+        default: (data: any) => {
+          const is_enabled = data.row.is_enabled;
+          return (
+            <>
+              <ElTag type={is_enabled ? 'success' : 'danger'}>
+                {is_enabled ? t('userDemo.enable') : t('userDemo.disable')}
+              </ElTag>
+            </>
+          );
+        }
+      }
+    },
+    form: {
+      component: 'Input'
+    },
+    search: {
+      hidden: true
+    }
+  },
   {
     field: 'action',
     label: t('userDemo.action'),
@@ -190,9 +221,6 @@ const crudSchemas = reactive<CrudSchema[]>([
             <>
               <BaseButton type="primary" onClick={() => action(row, 'edit')}>
                 {t('exampleDemo.edit')}
-              </BaseButton>
-              <BaseButton type="success" onClick={() => action(row, 'detail')}>
-                {t('exampleDemo.detail')}
               </BaseButton>
               <BaseButton type="danger" onClick={() => delData(row)}>
                 {t('exampleDemo.del')}
@@ -217,10 +245,10 @@ const setSearchParams = (params: any) => {
 const treeEl = ref<typeof ElTree>();
 
 const currentNodeKey = ref('');
-const departmentList = ref<ActivityDto[]>([]);
+const activitiesList = ref<ActivityDto[]>([]);
 const fetchDepartment = async () => {
   const res = await activitiesGetList();
-  departmentList.value = res.data?.items || [];
+  activitiesList.value = res.data?.items || [];
   currentNodeKey.value = res.data?.items[0].id || '';
   await nextTick();
   unref(treeEl)?.setCurrentKey(currentNodeKey.value);
@@ -271,7 +299,11 @@ const delData = async (row?: InviterConfigDto) => {
     : elTableExpose?.getSelectionRows().map((v: InviterConfigDto) => v.id) || [];
   delLoading.value = true;
 
-  await delList(unref(ids).length).finally(() => {
+  await inviterConfigDelete({
+    query: {
+      id: unref(ids)
+    }
+  }).finally(() => {
     delLoading.value = false;
   });
 };
@@ -325,12 +357,19 @@ const rowItem = ref<InviterConfigDto>();
 const formRef = ref<InstanceType<typeof Form> | null>();
 
 const formAction = () => {
+  if (!activity.value) {
+    activity.value = activitiesList.value[0];
+  }
+
   formDialog.visible = true;
+  rowId.value = '';
+  rowItem.value = undefined;
 };
 
 const onSave = () => {
   formRef.value!.submit().then(() => {
     formDialog.visible = false;
+    getList();
   });
 };
 </script>
@@ -345,7 +384,7 @@ const onSave = () => {
       <ElDivider />
       <ElTree
         ref="treeEl"
-        :data="departmentList"
+        :data="activitiesList"
         default-expand-all
         :expand-on-click-node="false"
         node-key="id"
@@ -372,7 +411,6 @@ const onSave = () => {
 
       <div class="mb-10px">
         <BaseButton type="primary" @click="formAction">{{ t('exampleDemo.add') }}</BaseButton>
-        <BaseButton type="primary" @click="AddAction">{{ t('exampleDemo.add') }}</BaseButton>
         <BaseButton :loading="delLoading" type="danger" @click="delData()">
           {{ t('exampleDemo.del') }}
         </BaseButton>
@@ -396,7 +434,7 @@ const onSave = () => {
         <BaseButton type="primary" @click="onSave">
           {{ t('exampleDemo.save') }}
         </BaseButton>
-        <BaseButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</BaseButton>
+        <BaseButton @click="formDialog.visible = false">{{ t('dialogDemo.close') }}</BaseButton>
       </template>
     </Dialog>
 

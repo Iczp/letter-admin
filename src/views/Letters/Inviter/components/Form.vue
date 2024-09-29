@@ -33,16 +33,19 @@ import {
   InviterConfigDetailDto,
   InviterConfigDto,
   inviterConfigGetItem,
-  inviterConfigUpdate
+  inviterConfigUpdate,
+  UserDto,
+  usersGetList
 } from '@/client';
 import { useFetchDetail } from '@/hooks/useFetchDetail';
 
-import ErpUserPicker from '@/views/Letters/ErpUsers/ErpUserPicker.vue';
+import UsersPicker from '@/views/Letters/Users/UsersPicker.vue';
 
 interface IForm {
   maxCount: number;
   inviterId: string;
   activityId: string;
+  isEnabled: boolean;
 }
 
 const props = defineProps<{
@@ -51,11 +54,13 @@ const props = defineProps<{
   row?: InviterConfigDetailDto | undefined;
 }>();
 
-const erpUserPicker = ref<InstanceType<typeof ErpUserPicker>>();
+const inviter = ref<UserDto>();
+const erpUserPicker = ref<InstanceType<typeof UsersPicker>>();
 const form = reactive({
   maxCount: 0,
   inviterId: '',
-  activityId: ''
+  activityId: '',
+  isEnabled: true
 });
 
 const item = ref<InviterConfigDetailDto>();
@@ -67,6 +72,9 @@ const { isLoading, refresh } = useFetchDetail<InviterConfigDetailDto>({
     form.inviterId = item.activity.id;
     form.activityId = item.inviter.id;
     form.maxCount = item.max_count || 0;
+    form.isEnabled = item.is_enabled || false;
+    inviter.value = item.inviter;
+
     // Object.keys(form).forEach((key) => {
     //   if (item[key as keyof InviterConfigDetailDto]) {
     //     form[key] = item[key];
@@ -76,13 +84,28 @@ const { isLoading, refresh } = useFetchDetail<InviterConfigDetailDto>({
 });
 
 watch(
+  () => props.activity,
+  (v) => {
+    if (v) {
+      form.activityId = v.id;
+    }
+  },
+  {
+    immediate: true
+  }
+);
+
+watch(
   () => props.row,
   (v) => {
     console.log('#watch[props.row]', v);
     if (v) {
       item.value = v;
-
       form.maxCount = v.max_count || 0;
+      form.inviterId = v.activity.id;
+      form.activityId = v.inviter.id;
+      form.isEnabled = v.is_enabled || false;
+      inviter.value = v.inviter;
     }
   },
   {
@@ -115,7 +138,8 @@ const submit = async () => {
               id: props.rowId
             },
             body: {
-              max_count: form.maxCount
+              max_count: form.maxCount,
+              is_enabled: form.isEnabled
             }
           })
         : await inviterConfigCreate({
@@ -202,9 +226,11 @@ const onPick = ({ items }) => {
     });
     return;
   }
-  form.inviterId = items[0].id;
+  const user = items[0] as UserDto;
+  form.inviterId = user.id;
+  inviter.value = user;
 };
-const showErpUserPicker = () => {
+const showUsersPicker = () => {
   erpUserPicker.value?.set({});
 };
 
@@ -216,7 +242,7 @@ defineExpose({
 
 <template>
   <div>
-    <ErpUserPicker ref="erpUserPicker" @pick="onPick" height="360" />
+    <UsersPicker ref="erpUserPicker" @pick="onPick" height="360" />
     <el-form
       ref="formRef"
       style="max-width: 600px"
@@ -243,13 +269,13 @@ defineExpose({
           <!-- <el-input v-model="form.name" :readonly="true" /> -->
 
           <div class="flex gap-2">
-            <el-tag type="primary" size="large">
-              {{ item?.inviter?.name }}
+            <el-tag type="primary" size="large" @click="showUsersPicker" class="cursor-pointer">
+              {{ inviter?.name }}
             </el-tag>
-            <el-tag size="large" type="primary" @click="showErpUserPicker">
+            <el-tag size="large" type="primary" @click="showUsersPicker">
               <Icon
                 :size="18"
-                @click="showErpUserPicker"
+                @click="showUsersPicker"
                 icon="vi-mdi:account-plus-outline"
                 class="cursor-pointer"
               />
@@ -258,8 +284,12 @@ defineExpose({
         </el-col>
       </el-form-item>
 
-      <el-form-item label="最大邀请人数" prop="count">
+      <el-form-item label="最大邀请人数" prop="maxCount">
         <el-input-number v-model="form.maxCount" :min="1" :max="100" @change="maxCountChange" />
+      </el-form-item>
+
+      <el-form-item label="是否启用" prop="isEnabled">
+        <el-switch v-model="form.isEnabled" />
       </el-form-item>
 
       <!-- <el-form-item>
