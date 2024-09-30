@@ -3,7 +3,7 @@ import { ContentWrap } from '@/components/ContentWrap';
 import { useI18n } from '@/hooks/web/useI18n';
 import { Table } from '@/components/Table';
 import { ref, unref, nextTick, watch, reactive } from 'vue';
-import { ElTree, ElInput, ElDivider, ElTag } from 'element-plus';
+import { ElTree, ElInput, ElDivider, ElTag, ElMessageBox, ElMessage } from 'element-plus';
 import { saveUserApi, deleteUserByIdApi } from '@/api/department';
 import { useTable } from '@/hooks/web/useTable';
 import { Search } from '@/components/Search';
@@ -297,15 +297,39 @@ const delData = async (row?: InviterConfigDto) => {
   ids.value = row
     ? [row.id]
     : elTableExpose?.getSelectionRows().map((v: InviterConfigDto) => v.id) || [];
-  delLoading.value = true;
+  if (!ids.value.length) {
+    return ElMessage({ message: '请选择要删除的记录', type: 'warning' });
+  }
 
-  await inviterConfigDeleteMany({
-    query: {
-      id: unref(ids)
-    }
-  }).finally(() => {
-    delLoading.value = false;
+  ElMessageBox.confirm(`是否要删除选中记录(${ids.value.length})?`, '删除', {
+    confirmButtonText: '删除',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    delLoading.value = true;
+    await inviterConfigDeleteMany({
+      query: {
+        id: unref(ids)
+      }
+    })
+      .then((res) => {
+        console.log(res);
+        getList();
+        ElMessage({
+          type: 'success',
+          message: '删除成功'
+        });
+      })
+      .finally(() => {
+        delLoading.value = false;
+      });
   });
+  // .catch(() => {
+  //   ElMessage({
+  //     type: 'info',
+  //     message: 'Delete canceled'
+  //   });
+  // });
 };
 
 const action = (row: InviterConfigDto, type: string) => {
@@ -356,7 +380,7 @@ const rowId = ref<string>();
 const rowItem = ref<InviterConfigDto>();
 const formRef = ref<InstanceType<typeof Form> | null>();
 
-const formAction = () => {
+const addAction = () => {
   if (!activity.value) {
     activity.value = activitiesList.value[0];
   }
@@ -410,7 +434,7 @@ const onSave = () => {
       />
 
       <div class="mb-10px">
-        <BaseButton type="primary" @click="formAction">{{ t('exampleDemo.add') }}</BaseButton>
+        <BaseButton type="primary" @click="addAction">{{ t('exampleDemo.add') }}</BaseButton>
         <BaseButton :loading="delLoading" type="danger" @click="delData()">
           {{ t('exampleDemo.del') }}
         </BaseButton>

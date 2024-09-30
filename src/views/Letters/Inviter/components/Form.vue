@@ -69,8 +69,8 @@ const { isLoading, refresh } = useFetchDetail<InviterConfigDetailDto>({
   service: inviterConfigGetItem,
   loaded: (item) => {
     console.log('loaded', item);
-    form.inviterId = item.activity.id;
-    form.activityId = item.inviter.id;
+    form.inviterId = item.inviter.id;
+    form.activityId = item.activity.id;
     form.maxCount = item.max_count || 0;
     form.isEnabled = item.is_enabled || false;
     inviter.value = item.inviter;
@@ -254,13 +254,15 @@ defineExpose({
       :disabled="isLoading"
       status-icon
     >
-      <el-form-item label="活动名称" prop="region">
+      <el-form-item label="活动名称" prop="activityId">
+        <!-- {{ form.activityId }}
+        {{ activity }} -->
         <el-select
           v-model="form.activityId"
           :placeholder="activity?.title ?? '活动名称'"
-          :disabled="true"
+          :disabled="!!form.activityId"
         >
-          <!-- <el-option :label="activity?.title!" :checked="true" :value="activity?.id!" /> -->
+          <el-option :label="activity?.title!" :checked="true" :value="activity?.id!" />
         </el-select>
       </el-form-item>
 

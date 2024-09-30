@@ -4,6 +4,7 @@ import { AxiosError, AxiosHeaders, InternalAxiosRequestConfig } from 'axios';
 import { client } from './client';
 import { ElMessage } from 'element-plus';
 import { useUserStore } from './store/modules/user';
+import QueryString from 'qs';
 
 export const configClient = (app: App<Element>) => {
   // https://github.com/softonic/axios-retry
@@ -17,6 +18,20 @@ export const configClient = (app: App<Element>) => {
     const userStore = useUserStore();
     console.log('requestConfig userStore', userStore.getToken);
     config.headers['Authorization'] = userStore.getToken || '';
+
+    // fix lib bug: openapi-ts
+    if (config.method === 'delete' && Array.isArray(config.params?.id)) {
+      const idList = config.params.id as string[];
+      // 手动构建查询字符串
+      const queryString = idList.map((id) => `id=${encodeURIComponent(id)}`).join('&');
+      const url = config.url + '?' + queryString;
+      config.url = url;
+      // const queryString = QueryString.stringify({ id: idList }, {});
+      config['query'] = { id: undefined };
+      config['params'] = { id: undefined };
+      console.log('requestConfig aa', config);
+    }
+
     return config;
   });
   client.instance.interceptors.response.use(
