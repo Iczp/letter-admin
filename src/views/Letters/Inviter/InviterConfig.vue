@@ -124,6 +124,16 @@ const crudSchemas = reactive<CrudSchema[]>([
     label: '最大邀请数',
     search: {
       hidden: true
+    },
+    form: {
+      hidden: true
+    }
+  },
+  {
+    field: 'customers_count',
+    label: '客户数量',
+    search: {
+      hidden: true
     }
   },
   {

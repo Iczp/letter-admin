@@ -1261,6 +1261,10 @@ export type InviterConfigDto = {
    */
   max_count: number;
   /**
+   * 客户数量
+   */
+  customers_count: number;
+  /**
    * 活动
    */
   activity: ActivityDto;
@@ -1316,6 +1320,10 @@ export type InviterConfigDetailDto = {
    * 最大邀请人数
    */
   max_count: number;
+  /**
+   * 客户数量
+   */
+  customers_count: number;
   /**
    * 活动
    */

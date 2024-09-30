@@ -9,7 +9,7 @@ export const AppInfoSchema = {
     },
     version: {
       type: 'string',
-      default: '0.0.21'
+      default: '0.0.22'
     },
     description: {
       type: 'string',
@@ -1649,6 +1649,9 @@ export const InviterConfigDtoSchema = {
     max_count: {
       type: 'number'
     },
+    customers_count: {
+      type: 'number'
+    },
     activity: {
       allOf: [
         {
@@ -1672,6 +1675,7 @@ export const InviterConfigDtoSchema = {
     'deletion_time',
     'is_deleted',
     'max_count',
+    'customers_count',
     'activity',
     'inviter'
   ]
@@ -1723,6 +1727,9 @@ export const InviterConfigDetailDtoSchema = {
     max_count: {
       type: 'number'
     },
+    customers_count: {
+      type: 'number'
+    },
     activity: {
       allOf: [
         {
@@ -1746,6 +1753,7 @@ export const InviterConfigDetailDtoSchema = {
     'deletion_time',
     'is_deleted',
     'max_count',
+    'customers_count',
     'activity',
     'inviter'
   ]
