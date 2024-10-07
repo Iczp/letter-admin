@@ -29,11 +29,11 @@ import type { ComponentSize, FormInstance, FormRules } from 'element-plus';
 
 import {
   ActivityDto,
-  inviterConfigCreate,
+  activityCustomerCreate,
   InviterConfigDetailDto,
   InviterConfigDto,
-  inviterConfigGetItem,
-  inviterConfigUpdate,
+  activityCustomerGetItem,
+  activityCustomerUpdate,
   UserDto,
   usersGetList
 } from '@/client';
@@ -66,10 +66,10 @@ const form = reactive({
 const item = ref<InviterConfigDetailDto>();
 const { isLoading, refresh } = useFetchDetail<InviterConfigDetailDto>({
   rowId: props.rowId,
-  service: inviterConfigGetItem,
+  service: activityCustomerGetItem,
   loaded: (item) => {
     console.log('loaded', item);
-    form.inviterId = item.inviter.id;
+    // form.inviterId = item.inviter.id;
     form.activityId = item.activity.id;
     form.maxCount = item.max_count || 0;
     form.isEnabled = item.is_enabled || false;
@@ -102,10 +102,10 @@ watch(
     if (v) {
       item.value = v;
       form.maxCount = v.max_count || 0;
-      form.inviterId = v.activity.id;
-      form.activityId = v.inviter.id;
+      // form.inviterId = v.activity.id;
+      // form.activityId = v.inviter.id;
       form.isEnabled = v.is_enabled || false;
-      inviter.value = v.inviter;
+      // inviter.value = v.inviter;
     }
   },
   {
@@ -133,7 +133,7 @@ const submit = async () => {
       console.log('submit! props.rowId', props.rowId);
 
       const res = props.rowId
-        ? await inviterConfigUpdate({
+        ? await activityCustomerUpdate({
             path: {
               id: props.rowId
             },
@@ -142,7 +142,7 @@ const submit = async () => {
               is_enabled: form.isEnabled
             }
           })
-        : await inviterConfigCreate({
+        : await activityCustomerCreate({
             body: {
               max_count: form.maxCount,
               activity_id: form.activityId,

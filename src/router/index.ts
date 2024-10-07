@@ -431,6 +431,15 @@ export const asyncRouterMap: AppRouteRecordRaw[] = [
     },
     children: [
       {
+        path: 'customers',
+        component: () => import('@/views/Letters/Customers/Customers.vue'),
+        name: 'Customers',
+        meta: {
+          title: 'Customers',
+          permission: ['add', 'edit', 'delete']
+        }
+      },
+      {
         path: 'activities',
         component: () => import('@/views/Letters/Activities/Activities.vue'),
         name: 'Activities',

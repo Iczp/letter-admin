@@ -3,7 +3,7 @@ import { ContentWrap } from '@/components/ContentWrap';
 import { Search } from '@/components/Search';
 import { Dialog } from '@/components/Dialog';
 import { useI18n } from '@/hooks/web/useI18n';
-import { ElTag } from 'element-plus';
+import { ElMessage, ElMessageBox, ElTag } from 'element-plus';
 import { Table } from '@/components/Table';
 import {
   getDepartmentApi,
@@ -20,6 +20,7 @@ import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 import {
   activitiesCreate,
+  activitiesDeleteMany,
   activitiesGetList,
   activitiesUpdate,
   ActivityCreateInput,
@@ -27,6 +28,7 @@ import {
   ActivityUpdateInput
 } from '@/client';
 import { formatToDate } from '@/utils/dateUtil';
+import { IdDto } from '@/api/dtos/IdDto';
 
 const ids = ref<string[]>([]);
 
@@ -97,8 +99,34 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
+    field: 'keyword',
+    label: '搜索关键字',
+    form: {
+      hidden: true,
+      component: 'Input',
+      componentProps: {
+        nodeKey: 'keyword',
+        props: {
+          label: 'keyword'
+        }
+      }
+    },
+    search: {
+      hidden: false
+    },
+    detail: {
+      hidden: true
+    },
+    table: {
+      hidden: true
+    }
+  },
+  {
     field: 'title',
     label: '活动标题',
+    search: {
+      hidden: true
+    },
     table: {
       slots: {
         default: (data: any) => {
@@ -143,6 +171,9 @@ const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'address',
     label: 'address',
+    search: {
+      hidden: true
+    },
     table: {
       slots: {
         default: (data: any) => {
@@ -290,7 +321,7 @@ const crudSchemas = reactive<CrudSchema[]>([
   },
   {
     field: 'action',
-    width: '260px',
+    width: '240px',
     label: t('tableDemo.action'),
     search: {
       hidden: true
@@ -343,12 +374,33 @@ const delLoading = ref(false);
 
 const delData = async (row: DepartmentItem | null) => {
   const elTableExpose = await getElTableExpose();
-  ids.value = row
-    ? [row.id]
-    : elTableExpose?.getSelectionRows().map((v: DepartmentItem) => v.id) || [];
-  delLoading.value = true;
-  await delList(unref(ids).length).finally(() => {
-    delLoading.value = false;
+  ids.value = row ? [row.id] : elTableExpose?.getSelectionRows().map((v: IdDto) => v.id) || [];
+  if (!ids.value.length) {
+    return ElMessage({ message: '请选择要删除的记录', type: 'warning' });
+  }
+
+  ElMessageBox.confirm(`是否要删除选中记录(${ids.value.length})?`, '删除', {
+    confirmButtonText: '删除',
+    cancelButtonText: '取消',
+    type: 'warning'
+  }).then(async () => {
+    delLoading.value = true;
+    await activitiesDeleteMany({
+      query: {
+        id: unref(ids)
+      }
+    })
+      .then((res) => {
+        console.log(res);
+        getList();
+        ElMessage({
+          type: 'success',
+          message: '删除成功'
+        });
+      })
+      .finally(() => {
+        delLoading.value = false;
+      });
   });
 };
 

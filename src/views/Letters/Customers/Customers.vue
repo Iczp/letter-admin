@@ -14,10 +14,10 @@ import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 import {
   activitiesGetList,
+  activityCustomerGetList,
   ActivityDto,
-  inviterConfigDeleteMany,
-  InviterConfigDto,
-  inviterConfigGetList
+  activityCustomerDeleteMany,
+  InviterConfigDto
 } from '@/client';
 import Form from './components/Form.vue';
 
@@ -26,7 +26,7 @@ const { t } = useI18n();
 const { tableRegister, tableState, tableMethods } = useTable({
   fetchDataApi: async () => {
     const { pageSize, currentPage } = tableState;
-    const res = await inviterConfigGetList({
+    const res = await activityCustomerGetList({
       query: {
         activity_id: unref(currentNodeKey),
         skip: currentPage.value ? 0 : (currentPage.value - 1) * pageSize.value,
@@ -35,7 +35,7 @@ const { tableRegister, tableState, tableMethods } = useTable({
       }
     });
 
-    console.log('inviterConfigGetList', res);
+    console.log('activityCustomerGetList', res);
 
     return {
       list: res.data?.items || [],
@@ -99,64 +99,48 @@ const crudSchemas = reactive<CrudSchema[]>([
     }
   },
   {
-    field: 'inviter_name',
+    field: 'customer_name',
+    label: '客户名称',
+    search: {
+      hidden: true
+    },
+    form: {
+      hidden: true
+    }
+  },
+  {
+    field: 'customer_gender',
+    label: '性别',
+    search: {
+      hidden: true
+    },
+    form: {
+      hidden: true
+    }
+  },
+  {
+    field: 'customer_phone',
+    label: '电话',
+    search: {
+      hidden: true
+    },
+    form: {
+      hidden: true
+    }
+  },
+  {
+    field: 'inviterConfig_Name',
     label: '邀请人',
     search: {
       hidden: true
     },
     form: {
-      component: 'Select',
-      value: [],
-      componentProps: {
-        disabled: false,
-        multiple: false,
-        collapseTags: true,
-        maxCollapseTags: 1,
-        remote: true,
-        filterable: true,
-        async remoteMethod(query: string) {
-          console.log('query', this, query);
-          if (query) {
-            loading.value = true;
-            setTimeout(() => {
-              loading.value = false;
-              // options.value = list.value.filter((item) => {
-              //   return item.label.toLowerCase().includes(query.toLowerCase());
-              // });
-            }, 200);
-          }
-          return [];
-        }
-      },
-      async optionApi(...args: any[]) {
-        console.log('optionApi', this, args);
-        const res = await activitiesGetList();
-        return res.data?.items?.map((x) => ({
-          label: x.title,
-          value: x.id
-        }));
-      }
-    }
-  },
-  {
-    field: 'max_count',
-    label: '最大邀请数',
-    search: {
-      hidden: true
-    },
-    form: {
       hidden: true
     }
   },
+
   {
-    field: 'customers_count',
-    label: '客户数量',
-    search: {
-      hidden: true
-    }
-  },
-  {
-    field: 'activity.id',
+    field: 'activity_title',
     label: '活动名称',
     search: {
       hidden: true
@@ -164,7 +148,7 @@ const crudSchemas = reactive<CrudSchema[]>([
     table: {
       slots: {
         default: (data: any) => {
-          return <>{data.row.activity?.title}</>;
+          return <>{data.row.activity_title}</>;
         }
       }
     },
@@ -193,10 +177,23 @@ const crudSchemas = reactive<CrudSchema[]>([
       }
     }
   },
-
   {
-    field: 'creation_time',
-    label: t('userDemo.createTime'),
+    field: 'is_invited',
+    label: '是否邀请',
+    table: {
+      slots: {
+        default: (data: any) => {
+          const is_invited = data.row.is_invited;
+          return (
+            <>
+              <ElTag type={is_invited ? 'success' : 'danger'}>
+                {is_invited ? '已邀请' : '未邀请'}
+              </ElTag>
+            </>
+          );
+        }
+      }
+    },
     form: {
       component: 'Input'
     },
@@ -204,7 +201,54 @@ const crudSchemas = reactive<CrudSchema[]>([
       hidden: true
     }
   },
-
+  {
+    field: 'is_signed',
+    label: '是否签到',
+    table: {
+      slots: {
+        default: (data: any) => {
+          const is_signed = data.row.is_signed;
+          return (
+            <>
+              <ElTag type={is_signed ? 'success' : 'danger'}>
+                {is_signed ? '已签到' : '未签到'}
+              </ElTag>
+            </>
+          );
+        }
+      }
+    },
+    form: {
+      component: 'Input'
+    },
+    search: {
+      hidden: true
+    }
+  },
+  {
+    field: 'is_gifted',
+    label: '发放礼品',
+    table: {
+      slots: {
+        default: (data: any) => {
+          const is_gifted = data.row.is_gifted;
+          return (
+            <>
+              <ElTag type={is_gifted ? 'success' : 'danger'}>
+                {is_gifted ? '已发放' : '未发放'}
+              </ElTag>
+            </>
+          );
+        }
+      }
+    },
+    form: {
+      component: 'Input'
+    },
+    search: {
+      hidden: true
+    }
+  },
   {
     field: 'is_enabled',
     label: '是否启用',
@@ -229,6 +273,7 @@ const crudSchemas = reactive<CrudSchema[]>([
       hidden: true
     }
   },
+
   {
     field: 'action',
     label: t('userDemo.action'),
@@ -336,7 +381,7 @@ const delData = async (row?: InviterConfigDto) => {
     type: 'warning'
   }).then(async () => {
     delLoading.value = true;
-    await inviterConfigDeleteMany({
+    await activityCustomerDeleteMany({
       query: {
         id: unref(ids)
       }
