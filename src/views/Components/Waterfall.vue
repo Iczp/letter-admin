@@ -20,8 +20,8 @@ const getList = () => {
         height,
         id: toAnyString(),
         // http更换为https
-        image_uri: Mock.Random.image(`${width}x${height}`).replace('http://', 'https://')
-      })
+        image_uri: Mock.Random.image(`${width}x${height}`).replace('http://', 'https://'),
+      }),
     );
   }
   data.value = [...unref(data), ...list];
@@ -54,7 +54,7 @@ const loadMore = () => {
       :end="end"
       :props="{
         src: 'image_uri',
-        height: 'height'
+        height: 'height',
       }"
       @load-more="loadMore"
     />

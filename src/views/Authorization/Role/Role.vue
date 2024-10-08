@@ -20,9 +20,9 @@ const { tableRegister, tableState, tableMethods } = useTable({
     const res = await getRoleListApi();
     return {
       list: res.data.list || [],
-      total: res.data.total
+      total: res.data.total,
     };
-  }
+  },
 });
 
 const { dataList, loading, total } = tableState;
@@ -32,11 +32,11 @@ const tableColumns = reactive<TableColumn[]>([
   {
     field: 'index',
     label: t('userDemo.index'),
-    type: 'index'
+    type: 'index',
   },
   {
     field: 'roleName',
-    label: t('role.roleName')
+    label: t('role.roleName'),
   },
   {
     field: 'status',
@@ -50,16 +50,16 @@ const tableColumns = reactive<TableColumn[]>([
             </ElTag>
           </>
         );
-      }
-    }
+      },
+    },
   },
   {
     field: 'createTime',
-    label: t('tableDemo.displayTime')
+    label: t('tableDemo.displayTime'),
   },
   {
     field: 'remark',
-    label: t('userDemo.remark')
+    label: t('userDemo.remark'),
   },
   {
     field: 'action',
@@ -79,17 +79,17 @@ const tableColumns = reactive<TableColumn[]>([
             <BaseButton type="danger">{t('exampleDemo.del')}</BaseButton>
           </>
         );
-      }
-    }
-  }
+      },
+    },
+  },
 ]);
 
 const searchSchema = reactive<FormSchema[]>([
   {
     field: 'roleName',
     label: t('role.roleName'),
-    component: 'Input'
-  }
+    component: 'Input',
+  },
 ]);
 
 const searchParams = ref({});
@@ -148,7 +148,7 @@ const save = async () => {
       :data="dataList"
       :loading="loading"
       :pagination="{
-        total
+        total,
       }"
       @register="tableRegister"
     />

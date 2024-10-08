@@ -35,15 +35,15 @@ const schema = reactive<FormSchema[]>([
   {
     field: 'title',
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
         default: () => {
           return <h2 class="text-2xl font-bold text-center w-[100%]">{t('login.register')}</h2>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'username',
@@ -51,11 +51,11 @@ const schema = reactive<FormSchema[]>([
     value: '',
     component: 'Input',
     colProps: {
-      span: 24
+      span: 24,
     },
     componentProps: {
-      placeholder: t('login.usernamePlaceholder')
-    }
+      placeholder: t('login.usernamePlaceholder'),
+    },
   },
   {
     field: 'password',
@@ -63,15 +63,15 @@ const schema = reactive<FormSchema[]>([
     value: '',
     component: 'InputPassword',
     colProps: {
-      span: 24
+      span: 24,
     },
     componentProps: {
       style: {
-        width: '100%'
+        width: '100%',
       },
       strength: true,
-      placeholder: t('login.passwordPlaceholder')
-    }
+      placeholder: t('login.passwordPlaceholder'),
+    },
   },
   {
     field: 'check_password',
@@ -79,21 +79,21 @@ const schema = reactive<FormSchema[]>([
     value: '',
     component: 'InputPassword',
     colProps: {
-      span: 24
+      span: 24,
     },
     componentProps: {
       style: {
-        width: '100%'
+        width: '100%',
       },
       strength: true,
-      placeholder: t('login.passwordPlaceholder')
-    }
+      placeholder: t('login.passwordPlaceholder'),
+    },
   },
   {
     field: 'code',
     label: t('login.code'),
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
@@ -112,15 +112,15 @@ const schema = reactive<FormSchema[]>([
               </BaseButton>
             </div>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   },
 
   {
     field: 'iAgree',
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
@@ -133,20 +133,20 @@ const schema = reactive<FormSchema[]>([
                 link={[
                   {
                     text: '《用户协议》',
-                    url: 'https://element-plus.org/'
-                  }
+                    url: 'https://element-plus.org/',
+                  },
                 ]}
               />
             </>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'register',
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
@@ -170,10 +170,10 @@ const schema = reactive<FormSchema[]>([
               </div>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 const rules: FormRules = {
@@ -181,7 +181,7 @@ const rules: FormRules = {
   password: [required()],
   check_password: [required()],
   code: [required()],
-  iAgree: [required(), check()]
+  iAgree: [required(), check()],
 };
 
 const toLogin = () => {

@@ -4,7 +4,7 @@ import { computed, Ref, ref, watch } from 'vue';
 export const useFetchDetail = <T>({
   rowId,
   service,
-  loaded
+  loaded,
 }: {
   rowId: string | undefined;
 
@@ -37,7 +37,7 @@ export const useFetchDetail = <T>({
         refresh(id);
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
   return { item, isLoading, refresh, isCreate };
 };

@@ -9,7 +9,7 @@ import {
   getDepartmentApi,
   getDepartmentTableApi,
   saveDepartmentApi,
-  deleteDepartmentApi
+  deleteDepartmentApi,
 } from '@/api/department';
 
 import { useTable } from '@/hooks/web/useTable';
@@ -25,7 +25,7 @@ import {
   activitiesGetList,
   activitiesUpdate,
   ActivityDto,
-  ActivityUpdateInput
+  ActivityUpdateInput,
 } from '@/client';
 import { formatToDate } from '@/utils/dateUtil';
 import { IdDto } from '@/api/dtos/IdDto';
@@ -42,21 +42,21 @@ const { tableRegister, tableState, tableMethods } = useTable({
         // id: unref(currentNodeKey),
         skip: currentPage.value ? 0 : (currentPage.value - 1) * pageSize.value,
         pageSize: unref(pageSize),
-        ...unref(searchParams)
-      }
+        ...unref(searchParams),
+      },
     });
 
     console.log('activitiesGetList', res);
 
     return {
       list: res.data?.items || [],
-      total: res.data?.totalCount || 0
+      total: res.data?.totalCount || 0,
     };
   },
   fetchDelApi: async () => {
     const res = await deleteDepartmentApi(unref(ids));
     return !!res;
-  }
+  },
 });
 const { loading, dataList, total, currentPage, pageSize } = tableState;
 const { getList, getElTableExpose, delList } = tableMethods;
@@ -73,31 +73,31 @@ const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'selection',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'selection'
-    }
+      type: 'selection',
+    },
   },
   {
     field: 'index',
     label: t('tableDemo.index'),
     type: 'index',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'keyword',
@@ -108,99 +108,99 @@ const crudSchemas = reactive<CrudSchema[]>([
       componentProps: {
         nodeKey: 'keyword',
         props: {
-          label: 'keyword'
-        }
-      }
+          label: 'keyword',
+        },
+      },
     },
     search: {
-      hidden: false
+      hidden: false,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'title',
     label: '活动标题',
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
         default: (data: any) => {
           return <>{data.row.title}</>;
-        }
-      }
+        },
+      },
     },
     form: {
       component: 'Input',
       componentProps: {
         nodeKey: 'title',
         props: {
-          label: 'title'
-        }
+          label: 'title',
+        },
       },
       optionApi: async () => {
         const res = await getDepartmentApi();
         return res.data.list;
-      }
+      },
     },
     detail: {
       slots: {
         default: (data: any) => {
           return <>{data.title}</>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'max_count',
     label: 'max_count',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'InputNumber',
       colProps: {
-        span: 8
-      }
-    }
+        span: 8,
+      },
+    },
   },
   {
     field: 'address',
     label: 'address',
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
         default: (data: any) => {
           return <>{data.row.address}</>;
-        }
-      }
+        },
+      },
     },
     form: {
       component: 'Input',
       colProps: {
-        span: 24
+        span: 24,
       },
       componentProps: {
         nodeKey: 'address',
         props: {
-          label: 'address'
-        }
-      }
+          label: 'address',
+        },
+      },
     },
     detail: {
       slots: {
         default: (data: any) => {
           return <>{data.title}</>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'start_time',
@@ -209,15 +209,15 @@ const crudSchemas = reactive<CrudSchema[]>([
       slots: {
         default: (data: any) => {
           return <>{formatToDate(data.row.start_time)}</>;
-        }
-      }
+        },
+      },
     },
     form: {
-      component: 'DatePicker'
+      component: 'DatePicker',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'end_time',
@@ -226,56 +226,56 @@ const crudSchemas = reactive<CrudSchema[]>([
       slots: {
         default: (data: any) => {
           return <>{formatToDate(data.row.end_time)}</>;
-        }
-      }
+        },
+      },
     },
     form: {
-      component: 'DatePicker'
+      component: 'DatePicker',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
 
   {
     field: 'creation_time',
     label: t('tableDemo.displayTime'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'description',
     label: t('userDemo.remark'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'Input',
       componentProps: {
         type: 'textarea',
-        rows: 5
+        rows: 5,
       },
       colProps: {
-        span: 24
-      }
+        span: 24,
+      },
     },
     detail: {
       slots: {
         default: (data: any) => {
           return <>{data.description}</>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'is_enabled',
     label: t('userDemo.status'),
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
@@ -288,8 +288,8 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
+        },
+      },
     },
     form: {
       component: 'Select',
@@ -297,14 +297,14 @@ const crudSchemas = reactive<CrudSchema[]>([
         options: [
           {
             value: false,
-            label: t('userDemo.disable')
+            label: t('userDemo.disable'),
           },
           {
             value: true,
-            label: t('userDemo.enable')
-          }
-        ]
-      }
+            label: t('userDemo.enable'),
+          },
+        ],
+      },
     },
     detail: {
       slots: {
@@ -316,22 +316,22 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'action',
     width: '320px',
     label: t('tableDemo.action'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
@@ -352,10 +352,10 @@ const crudSchemas = reactive<CrudSchema[]>([
               </BaseButton>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 // @ts-ignore
@@ -386,20 +386,20 @@ const delData = async (row: ActivityDto | null) => {
   ElMessageBox.confirm(`是否要删除选中记录(${ids.value.length})?`, '删除', {
     confirmButtonText: '删除',
     cancelButtonText: '取消',
-    type: 'warning'
+    type: 'warning',
   }).then(async () => {
     delLoading.value = true;
     await activitiesDeleteMany({
       query: {
-        id: unref(ids)
-      }
+        id: unref(ids),
+      },
     })
       .then((res) => {
         console.log(res);
         getList();
         ElMessage({
           type: 'success',
-          message: '删除成功'
+          message: '删除成功',
         });
       })
       .finally(() => {
@@ -433,16 +433,16 @@ const save = async () => {
     saveLoading.value = true;
     let res: any = null;
     const body = {
-      ...(formData as ActivityUpdateInput)
+      ...(formData as ActivityUpdateInput),
     };
     console.log('save formData', JSON.stringify(body, null, 2));
     if (isEdit) {
       delete body['id'];
       res = await activitiesUpdate({
         path: {
-          id: formData.id
+          id: formData.id,
         },
-        body
+        body,
       });
     } else {
       res = await activitiesCreate({ body });
@@ -476,7 +476,7 @@ const save = async () => {
       :data="dataList"
       :loading="loading"
       :pagination="{
-        total: total
+        total: total,
       }"
       @register="tableRegister"
     />

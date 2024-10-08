@@ -61,7 +61,7 @@ export default defineComponent({
         {!unref(hideSetting) && <Setting></Setting>}
       </section>
     );
-  }
+  },
 });
 </script>
 

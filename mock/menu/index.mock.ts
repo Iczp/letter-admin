@@ -27,7 +27,7 @@ export default [
               meta: {
                 title: '首页**',
                 icon: 'vi-ant-design:dashboard-filled',
-                alwaysShow: true
+                alwaysShow: true,
               },
               children: [
                 {
@@ -43,19 +43,19 @@ export default [
                     {
                       id: 1,
                       label: '新增',
-                      value: 'add'
+                      value: 'add',
                     },
                     {
                       id: 2,
                       label: '编辑',
-                      value: 'edit'
-                    }
+                      value: 'edit',
+                    },
                   ],
                   meta: {
                     title: '分析页',
                     noCache: true,
-                    permission: ['add', 'edit']
-                  }
+                    permission: ['add', 'edit'],
+                  },
                 },
                 {
                   path: 'workplace',
@@ -70,32 +70,32 @@ export default [
                     {
                       id: 1,
                       label: '新增',
-                      value: 'add'
+                      value: 'add',
                     },
                     {
                       id: 2,
                       label: '编辑',
-                      value: 'edit'
+                      value: 'edit',
                     },
                     {
                       id: 3,
                       label: '删除',
-                      value: 'delete'
-                    }
+                      value: 'delete',
+                    },
                   ],
                   meta: {
                     title: '工作台',
-                    noCache: true
-                  }
-                }
-              ]
+                    noCache: true,
+                  },
+                },
+              ],
             },
             {
               path: '/external-link',
               component: '#',
               meta: {
                 title: '文档555',
-                icon: 'vi-clarity:document-solid'
+                icon: 'vi-clarity:document-solid',
               },
               name: 'ExternalLink',
               status: Mock.Random.integer(0, 1),
@@ -113,10 +113,10 @@ export default [
                   parentId: 4,
                   title: '文档555',
                   meta: {
-                    title: '文档555'
-                  }
-                }
-              ]
+                    title: '文档555',
+                  },
+                },
+              ],
             },
             {
               path: '/level',
@@ -130,7 +130,7 @@ export default [
               title: '菜单',
               meta: {
                 title: '菜单',
-                icon: 'vi-carbon:skill-level-advanced'
+                icon: 'vi-carbon:skill-level-advanced',
               },
               children: [
                 {
@@ -144,7 +144,7 @@ export default [
                   title: '菜单1',
                   redirect: '/level/menu1/menu1-1/menu1-1-1',
                   meta: {
-                    title: '菜单1'
+                    title: '菜单1',
                   },
                   children: [
                     {
@@ -159,7 +159,7 @@ export default [
                       redirect: '/level/menu1/menu1-1/menu1-1-1',
                       meta: {
                         title: '菜单1-1',
-                        alwaysShow: true
+                        alwaysShow: true,
                       },
                       children: [
                         {
@@ -172,10 +172,10 @@ export default [
                           parentId: 8,
                           title: '菜单1-1-1',
                           meta: {
-                            title: '菜单1-1-1'
-                          }
-                        }
-                      ]
+                            title: '菜单1-1-1',
+                          },
+                        },
+                      ],
                     },
                     {
                       path: 'menu1-2',
@@ -187,10 +187,10 @@ export default [
                       parentId: 7,
                       title: '菜单1-2',
                       meta: {
-                        title: '菜单1-2'
-                      }
-                    }
-                  ]
+                        title: '菜单1-2',
+                      },
+                    },
+                  ],
                 },
                 {
                   path: 'menu2',
@@ -202,10 +202,10 @@ export default [
                   parentId: 6,
                   title: '菜单2',
                   meta: {
-                    title: '菜单2'
-                  }
-                }
-              ]
+                    title: '菜单2',
+                  },
+                },
+              ],
             },
             {
               path: '/example',
@@ -220,7 +220,7 @@ export default [
               meta: {
                 title: '综合示例',
                 icon: 'vi-ep:management',
-                alwaysShow: true
+                alwaysShow: true,
               },
               children: [
                 {
@@ -236,27 +236,27 @@ export default [
                     {
                       id: 1,
                       label: '新增',
-                      value: 'add'
+                      value: 'add',
                     },
                     {
                       id: 2,
                       label: '编辑',
-                      value: 'edit'
+                      value: 'edit',
                     },
                     {
                       id: 3,
                       label: '删除',
-                      value: 'delete'
+                      value: 'delete',
                     },
                     {
                       id: 4,
                       label: '查看',
-                      value: 'view'
-                    }
+                      value: 'view',
+                    },
                   ],
                   meta: {
-                    title: '综合示例-弹窗'
-                  }
+                    title: '综合示例-弹窗',
+                  },
                 },
                 {
                   path: 'example-page',
@@ -271,27 +271,27 @@ export default [
                     {
                       id: 1,
                       label: '新增',
-                      value: 'add'
+                      value: 'add',
                     },
                     {
                       id: 2,
                       label: '编辑',
-                      value: 'edit'
+                      value: 'edit',
                     },
                     {
                       id: 3,
                       label: '删除',
-                      value: 'delete'
+                      value: 'delete',
                     },
                     {
                       id: 4,
                       label: '查看',
-                      value: 'view'
-                    }
+                      value: 'view',
+                    },
                   ],
                   meta: {
-                    title: '综合示例-页面'
-                  }
+                    title: '综合示例-页面',
+                  },
                 },
                 {
                   path: 'example-add',
@@ -308,8 +308,8 @@ export default [
                     noCache: true,
                     hidden: true,
                     showMainRoute: true,
-                    activeMenu: '/example/example-page'
-                  }
+                    activeMenu: '/example/example-page',
+                  },
                 },
                 {
                   path: 'example-edit',
@@ -326,8 +326,8 @@ export default [
                     noCache: true,
                     hidden: true,
                     showMainRoute: true,
-                    activeMenu: '/example/example-page'
-                  }
+                    activeMenu: '/example/example-page',
+                  },
                 },
                 {
                   path: 'example-detail',
@@ -344,14 +344,14 @@ export default [
                     noCache: true,
                     hidden: true,
                     showMainRoute: true,
-                    activeMenu: '/example/example-page'
-                  }
-                }
-              ]
-            }
-          ]
-        }
+                    activeMenu: '/example/example-page',
+                  },
+                },
+              ],
+            },
+          ],
+        },
       };
-    }
-  }
+    },
+  },
 ];

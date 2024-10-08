@@ -24,17 +24,17 @@ const { tableRegister, tableState, tableMethods } = useTable({
       id: unref(currentNodeKey),
       pageIndex: unref(currentPage),
       pageSize: unref(pageSize),
-      ...unref(searchParams)
+      ...unref(searchParams),
     });
     return {
       list: res.data.list || [],
-      total: res.data.total || 0
+      total: res.data.total || 0,
     };
   },
   fetchDelApi: async () => {
     const res = await deleteUserByIdApi(unref(ids));
     return !!res;
-  }
+  },
 });
 const { total, loading, dataList, pageSize, currentPage } = tableState;
 const { getList, getElTableExpose, delList } = tableMethods;
@@ -43,47 +43,47 @@ const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'selection',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'selection'
-    }
+      type: 'selection',
+    },
   },
   {
     field: 'index',
     label: t('userDemo.index'),
     form: {
-      hidden: true
+      hidden: true,
     },
     search: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'index'
-    }
+      type: 'index',
+    },
   },
   {
     field: 'username',
-    label: t('userDemo.username')
+    label: t('userDemo.username'),
   },
   {
     field: 'account',
-    label: t('userDemo.account')
+    label: t('userDemo.account'),
   },
   {
     field: 'department.id',
     label: t('userDemo.department'),
     detail: {
-      hidden: true
+      hidden: true,
       // slots: {
       //   default: (data: DepartmentUserItem) => {
       //     return <>{data.department.departmentName}</>
@@ -91,30 +91,30 @@ const crudSchemas = reactive<CrudSchema[]>([
       // }
     },
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'TreeSelect',
       componentProps: {
         nodeKey: 'id',
         props: {
-          label: 'departmentName'
-        }
+          label: 'departmentName',
+        },
       },
       optionApi: async () => {
         const res = await getDepartmentApi();
         return res.data.list;
-      }
+      },
     },
     table: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'role',
     label: t('userDemo.role'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'Select',
@@ -122,48 +122,48 @@ const crudSchemas = reactive<CrudSchema[]>([
       componentProps: {
         multiple: true,
         collapseTags: true,
-        maxCollapseTags: 1
+        maxCollapseTags: 1,
       },
       optionApi: async () => {
         const res = await getRoleListApi();
         return res.data?.list?.map((v) => ({
           label: v.roleName,
-          value: v.id
+          value: v.id,
         }));
-      }
-    }
+      },
+    },
   },
   {
     field: 'email',
     label: t('userDemo.email'),
     form: {
-      component: 'Input'
+      component: 'Input',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'createTime',
     label: t('userDemo.createTime'),
     form: {
-      component: 'Input'
+      component: 'Input',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'action',
     label: t('userDemo.action'),
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
       width: 240,
@@ -183,10 +183,10 @@ const crudSchemas = reactive<CrudSchema[]>([
               </BaseButton>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 const { allSchemas } = useCrudSchemas(crudSchemas);
@@ -217,7 +217,7 @@ watch(
   () => currentDepartment.value,
   (val) => {
     unref(treeEl)!.filter(val);
-  }
+  },
 );
 
 const currentChange = (data: DepartmentItem) => {
@@ -313,7 +313,7 @@ const save = async () => {
         node-key="id"
         :current-node-key="currentNodeKey"
         :props="{
-          label: 'departmentName'
+          label: 'departmentName',
         }"
         :filter-node-method="filterNode"
         @current-change="currentChange"
@@ -349,7 +349,7 @@ const save = async () => {
         :loading="loading"
         @register="tableRegister"
         :pagination="{
-          total
+          total,
         }"
       />
     </ContentWrap>

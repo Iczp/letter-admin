@@ -6,7 +6,7 @@ import {
   ElRow,
   ElCol,
   FormRules,
-  ComponentSize
+  ComponentSize,
   // FormItemProp
 } from 'element-plus';
 import { componentMap } from './helper/componentMap';
@@ -17,7 +17,7 @@ import {
   setGridProp,
   setComponentProps,
   setItemComponentSlots,
-  initModel
+  initModel,
 } from './helper';
 import { useRenderSelect } from './components/useRenderSelect';
 import { useRenderRadio } from './components/useRenderRadio';
@@ -32,7 +32,7 @@ import {
   ComponentNameEnum,
   SelectComponentProps,
   RadioGroupComponentProps,
-  CheckboxGroupComponentProps
+  CheckboxGroupComponentProps,
 } from './types';
 
 const { renderSelectOptions } = useRenderSelect();
@@ -49,14 +49,14 @@ export default defineComponent({
     // 生成Form的布局结构数组
     schema: {
       type: Array as PropType<FormSchema[]>,
-      default: () => []
+      default: () => [],
     },
     // 是否需要栅格布局
     isCol: propTypes.bool.def(true),
     // 表单数据对象
     model: {
       type: Object as PropType<any>,
-      default: () => ({})
+      default: () => ({}),
     },
     // 是否自动设置placeholder
     autoSetPlaceholder: propTypes.bool.def(true),
@@ -66,7 +66,7 @@ export default defineComponent({
     labelWidth: propTypes.oneOfType([String, Number]).def('auto'),
     rules: {
       type: Object as PropType<FormRules>,
-      default: () => ({})
+      default: () => ({}),
     },
     labelPosition: propTypes.oneOf(['left', 'right', 'top']).def('right'),
     labelSuffix: propTypes.string.def(''),
@@ -78,11 +78,11 @@ export default defineComponent({
     validateOnRuleChange: propTypes.bool.def(true),
     size: {
       type: String as PropType<ComponentSize>,
-      default: undefined
+      default: undefined,
     },
     disabled: propTypes.bool.def(false),
     scrollToError: propTypes.bool.def(false),
-    scrollToErrorOffset: propTypes.oneOfType([Boolean, Object]).def(undefined)
+    scrollToErrorOffset: propTypes.oneOfType([Boolean, Object]).def(undefined),
     // onValidate: {
     //   type: Function as PropType<(prop: FormItemProp, isValid: boolean, message: string) => void>,
     //   default: () => {}
@@ -162,8 +162,8 @@ export default defineComponent({
             item.component === ComponentNameEnum.TRANSFER
               ? 'componentProps.data'
               : 'componentProps.options',
-          value: options
-        }
+          value: options,
+        },
       ]);
     };
 
@@ -199,7 +199,7 @@ export default defineComponent({
       addSchema,
       setSchema,
       getComponentExpose,
-      getFormItemExpose
+      getFormItemExpose,
     });
 
     // 监听表单结构化数组，重新生成formModel
@@ -210,8 +210,8 @@ export default defineComponent({
       },
       {
         immediate: true,
-        deep: true
-      }
+        deep: true,
+      },
     );
 
     // 渲染包裹标签，是否使用栅格布局
@@ -270,7 +270,7 @@ export default defineComponent({
 
             const componentSlots = (item?.componentProps as any)?.slots || {};
             const slotsMap: Recordable = {
-              ...setItemComponentSlots(componentSlots)
+              ...setItemComponentSlots(componentSlots),
             };
             // // 如果是select组件，并且没有自定义模板，自动渲染options
             if (item.component === ComponentNameEnum.SELECT) {
@@ -278,7 +278,7 @@ export default defineComponent({
                 ? () => renderSelectOptions(item)
                 : () => {
                     return componentSlots.default(
-                      unref((item?.componentProps as SelectComponentProps)?.options)
+                      unref((item?.componentProps as SelectComponentProps)?.options),
                     );
                   };
             }
@@ -299,7 +299,7 @@ export default defineComponent({
                 ? () => renderRadioOptions(item)
                 : () => {
                     return componentSlots.default(
-                      unref((item?.componentProps as CheckboxGroupComponentProps)?.options)
+                      unref((item?.componentProps as CheckboxGroupComponentProps)?.options),
                     );
                   };
             }
@@ -313,7 +313,7 @@ export default defineComponent({
                 ? () => renderCheckboxOptions(item)
                 : () => {
                     return componentSlots.default(
-                      unref((item?.componentProps as RadioGroupComponentProps)?.options)
+                      unref((item?.componentProps as RadioGroupComponentProps)?.options),
                     );
                   };
             }
@@ -326,7 +326,7 @@ export default defineComponent({
                 },
                 set: (val) => {
                   set(formModel.value, item.field, val);
-                }
+                },
               });
 
               return item.component === ComponentNameEnum.UPLOAD ? (
@@ -337,7 +337,7 @@ export default defineComponent({
                   {...setComponentProps(item)}
                   style={
                     item.componentProps?.style || {
-                      width: '100%'
+                      width: '100%',
                     }
                   }
                 >
@@ -351,7 +351,7 @@ export default defineComponent({
                   {...setComponentProps(item)}
                   style={
                     item.componentProps?.style || {
-                      width: '100%'
+                      width: '100%',
                     }
                   }
                 >
@@ -362,7 +362,7 @@ export default defineComponent({
 
             return <>{Comp()}</>;
           }
-        }
+        },
       };
       if (item?.formItemProps?.slots?.label) {
         formItemSlots.label = (...args: any[]) => {
@@ -416,11 +416,11 @@ export default defineComponent({
           default: () => {
             const { isCustom } = unref(getProps);
             return isCustom ? getSlot(slots, 'default') : renderWrap();
-          }
+          },
         }}
       </ElForm>
     );
-  }
+  },
 });
 </script>
 

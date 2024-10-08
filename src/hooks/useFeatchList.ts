@@ -3,7 +3,7 @@ import {
   ActivitiesControllerGetListResponse,
   activitiesGetList,
   ActivityDto,
-  ActivityPagedResult
+  ActivityPagedResult,
 } from '@/client';
 import type { Config } from '@hey-api/client-axios';
 import { AxiosError, AxiosResponse } from 'axios';
@@ -30,17 +30,17 @@ interface RequestOptions<T> {
 
 type UseFetchListArgs<
   TReq extends RequestOptions<TReq>,
-  TDto extends AxiosResponse<PagedResult<TDto>>
+  TDto extends AxiosResponse<PagedResult<TDto>>,
 > = {
   service: (options: TReq) => Promise<AxiosResponse<PagedResult<TDto>>>;
   input?: TReq;
 };
 export const useFetchList = async <
   TReq extends RequestOptions<TReq>,
-  TDto extends AxiosResponse<PagedResult<TDto>>
+  TDto extends AxiosResponse<PagedResult<TDto>>,
 >({
   service,
-  input
+  input,
 }: UseFetchListArgs<TReq, TDto>) => {
   const res = await service(input as any);
   const items = ref<TDto[]>([]);
@@ -49,10 +49,10 @@ export const useFetchList = async <
     () => {},
     {
       immediate: true,
-      deep: true
-    }
+      deep: true,
+    },
   );
   return {
-    items
+    items,
   };
 };

@@ -17,15 +17,15 @@ const { required } = useValidator();
 const props = defineProps({
   currentRow: {
     type: Object as PropType<any>,
-    default: () => null
-  }
+    default: () => null,
+  },
 });
 
 const handleClose = async (tag: any) => {
   const formData = await getFormData();
   // 删除对应的权限
   setValues({
-    permissionList: formData?.permissionList?.filter((v: any) => v.value !== tag.value)
+    permissionList: formData?.permissionList?.filter((v: any) => v.value !== tag.value),
   });
 };
 
@@ -54,18 +54,18 @@ const formSchema = reactive<FormSchema[]>([
     component: 'RadioButton',
     value: 0,
     colProps: {
-      span: 24
+      span: 24,
     },
     componentProps: {
       options: [
         {
           label: '目录',
-          value: 0
+          value: 0,
         },
         {
           label: '菜单',
-          value: 1
-        }
+          value: 1,
+        },
       ],
       on: {
         change: async (val: number) => {
@@ -75,34 +75,34 @@ const formSchema = reactive<FormSchema[]>([
               {
                 field: 'component',
                 path: 'componentProps.disabled',
-                value: false
-              }
+                value: false,
+              },
             ]);
             setValues({
-              component: unref(cacheComponent)
+              component: unref(cacheComponent),
             });
           } else {
             setSchema([
               {
                 field: 'component',
                 path: 'componentProps.disabled',
-                value: true
-              }
+                value: true,
+              },
             ]);
 
             if (formData.parentId === void 0) {
               setValues({
-                component: '#'
+                component: '#',
               });
             } else {
               setValues({
-                component: '##'
+                component: '##',
               });
             }
           }
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'parentId',
@@ -113,7 +113,7 @@ const formSchema = reactive<FormSchema[]>([
       props: {
         label: 'title',
         value: 'id',
-        children: 'children'
+        children: 'children',
       },
       highlightCurrent: true,
       expandOnClickNode: false,
@@ -125,29 +125,29 @@ const formSchema = reactive<FormSchema[]>([
           const formData = await getFormData();
           if (val && formData.type === 0) {
             setValues({
-              component: '##'
+              component: '##',
             });
           } else if (!val && formData.type === 0) {
             setValues({
-              component: '#'
+              component: '#',
             });
           } else if (formData.type === 1) {
             setValues({
-              component: unref(cacheComponent) ?? ''
+              component: unref(cacheComponent) ?? '',
             });
           }
-        }
-      }
+        },
+      },
     },
     optionApi: async () => {
       const res = await getMenuListApi();
       return res.data.list || [];
-    }
+    },
   },
   {
     field: 'meta.title',
     label: t('menu.menuName'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'component',
@@ -160,29 +160,29 @@ const formSchema = reactive<FormSchema[]>([
       on: {
         change: (val: string) => {
           cacheComponent.value = val;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'name',
     label: t('menu.name'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'meta.icon',
     label: t('menu.icon'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'path',
     label: t('menu.path'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'meta.activeMenu',
     label: t('menu.activeMenu'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'status',
@@ -192,21 +192,21 @@ const formSchema = reactive<FormSchema[]>([
       options: [
         {
           label: t('userDemo.disable'),
-          value: 0
+          value: 0,
         },
         {
           label: t('userDemo.enable'),
-          value: 1
-        }
-      ]
-    }
+          value: 1,
+        },
+      ],
+    },
   },
   {
     field: 'permissionList',
     label: t('menu.permission'),
     component: 'CheckboxGroup',
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
@@ -231,7 +231,7 @@ const formSchema = reactive<FormSchema[]>([
                       <ElInput v-model={permissionEditingRow.value.value} size="small" />
                     ) : (
                       <span>{row.value}</span>
-                    )
+                    ),
                 }}
               />
               <ElTableColumn
@@ -245,7 +245,7 @@ const formSchema = reactive<FormSchema[]>([
                       <ElTag class="mr-1" key={row.value}>
                         {row.label}
                       </ElTag>
-                    )
+                    ),
                 }}
               />
               <ElTableColumn
@@ -271,60 +271,60 @@ const formSchema = reactive<FormSchema[]>([
                               <ElButton size="small" type="danger">
                                 删除
                               </ElButton>
-                            )
+                            ),
                           }}
                         </ElPopconfirm>
                       </>
-                    )
+                    ),
                 }}
               />
             </ElTable>
           </>
-        )
-      }
-    }
+        ),
+      },
+    },
   },
   {
     field: 'meta.hidden',
     label: t('menu.hidden'),
-    component: 'Switch'
+    component: 'Switch',
   },
   {
     field: 'meta.alwaysShow',
     label: t('menu.alwaysShow'),
-    component: 'Switch'
+    component: 'Switch',
   },
   {
     field: 'meta.noCache',
     label: t('menu.noCache'),
-    component: 'Switch'
+    component: 'Switch',
   },
   {
     field: 'meta.breadcrumb',
     label: t('menu.breadcrumb'),
-    component: 'Switch'
+    component: 'Switch',
   },
   {
     field: 'meta.affix',
     label: t('menu.affix'),
-    component: 'Switch'
+    component: 'Switch',
   },
   {
     field: 'meta.noTagsView',
     label: t('menu.noTagsView'),
-    component: 'Switch'
+    component: 'Switch',
   },
   {
     field: 'meta.canTo',
     label: t('menu.canTo'),
-    component: 'Switch'
-  }
+    component: 'Switch',
+  },
 ]);
 
 const rules = reactive({
   component: [required()],
   path: [required()],
-  'meta.title': [required()]
+  'meta.title': [required()],
 });
 
 const { formRegister, formMethods } = useForm();
@@ -354,16 +354,16 @@ watch(
         {
           field: 'component',
           path: 'componentProps.disabled',
-          value: true
-        }
+          value: true,
+        },
       ]);
     } else {
       setSchema([
         {
           field: 'component',
           path: 'componentProps.disabled',
-          value: false
-        }
+          value: false,
+        },
       ]);
     }
     if (currentRow.type === 1) {
@@ -371,34 +371,34 @@ watch(
         {
           field: 'component',
           path: 'componentProps.disabled',
-          value: false
-        }
+          value: false,
+        },
       ]);
     } else {
       setSchema([
         {
           field: 'component',
           path: 'componentProps.disabled',
-          value: true
-        }
+          value: true,
+        },
       ]);
     }
     setValues(currentRow);
   },
   {
     deep: true,
-    immediate: true
-  }
+    immediate: true,
+  },
 );
 
 defineExpose({
-  submit
+  submit,
 });
 
 const confirm = async (data: any) => {
   const formData = await getFormData();
   setValues({
-    permissionList: [...(formData?.permissionList || []), data]
+    permissionList: [...(formData?.permissionList || []), data],
   });
 };
 </script>

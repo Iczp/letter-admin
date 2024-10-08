@@ -24,11 +24,11 @@ const treeSelectData = [
         children: [
           {
             value: '1-1-1',
-            label: 'Level three 1-1-1'
-          }
-        ]
-      }
-    ]
+            label: 'Level three 1-1-1',
+          },
+        ],
+      },
+    ],
   },
   {
     value: '2',
@@ -40,9 +40,9 @@ const treeSelectData = [
         children: [
           {
             value: '2-1-1',
-            label: 'Level three 2-1-1'
-          }
-        ]
+            label: 'Level three 2-1-1',
+          },
+        ],
       },
       {
         value: '2-2',
@@ -50,11 +50,11 @@ const treeSelectData = [
         children: [
           {
             value: '2-2-1',
-            label: 'Level three 2-2-1'
-          }
-        ]
-      }
-    ]
+            label: 'Level three 2-2-1',
+          },
+        ],
+      },
+    ],
   },
   {
     value: '3',
@@ -66,9 +66,9 @@ const treeSelectData = [
         children: [
           {
             value: '3-1-1',
-            label: 'Level three 3-1-1'
-          }
-        ]
+            label: 'Level three 3-1-1',
+          },
+        ],
       },
       {
         value: '3-2',
@@ -76,12 +76,12 @@ const treeSelectData = [
         children: [
           {
             value: '3-2-1',
-            label: 'Level three 3-2-1'
-          }
-        ]
-      }
-    ]
-  }
+            label: 'Level three 3-2-1',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 // 模拟远程加载
@@ -99,8 +99,8 @@ const schema = reactive<FormSchema[]>([
     label: t('formDemo.input'),
     component: 'Input',
     formItemProps: {
-      rules: [required()]
-    }
+      rules: [required()],
+    },
   },
   {
     field: 'field2',
@@ -110,17 +110,17 @@ const schema = reactive<FormSchema[]>([
       options: [
         {
           label: 'option1',
-          value: '1'
+          value: '1',
         },
         {
           label: 'option2',
-          value: '2'
-        }
-      ]
+          value: '2',
+        },
+      ],
     },
     formItemProps: {
-      rules: [required()]
-    }
+      rules: [required()],
+    },
   },
   {
     field: 'field3',
@@ -132,14 +132,14 @@ const schema = reactive<FormSchema[]>([
       options: [
         {
           label: 'option-1',
-          value: '1'
+          value: '1',
         },
         {
           label: 'option-2',
-          value: '2'
-        }
-      ]
-    }
+          value: '2',
+        },
+      ],
+    },
   },
   {
     field: 'field4',
@@ -151,31 +151,31 @@ const schema = reactive<FormSchema[]>([
       options: [
         {
           label: 'option-1',
-          value: '1'
+          value: '1',
         },
         {
           label: 'option-2',
-          value: '2'
+          value: '2',
         },
         {
           label: 'option-3',
-          value: '3'
-        }
-      ]
-    }
+          value: '3',
+        },
+      ],
+    },
   },
   {
     field: 'field5',
     component: 'DatePicker',
     label: t('formDemo.datePicker'),
     componentProps: {
-      type: 'date'
-    }
+      type: 'date',
+    },
   },
   {
     field: 'field6',
     component: 'TimeSelect',
-    label: t('formDemo.timeSelect')
+    label: t('formDemo.timeSelect'),
   },
   {
     field: 'field7',
@@ -185,7 +185,7 @@ const schema = reactive<FormSchema[]>([
     optionApi: async () => {
       const res = await getTreeSelectData();
       return res;
-    }
+    },
   },
   {
     field: 'field8',
@@ -205,22 +205,22 @@ const schema = reactive<FormSchema[]>([
       beforeRemove: (uploadFile) => {
         return ElMessageBox.confirm(`Cancel the transfer of ${uploadFile.name} ?`).then(
           () => true,
-          () => false
+          () => false,
         );
       },
       onExceed: (files, uploadFiles) => {
         ElMessage.warning(
           `The limit is 3, you selected ${files.length} files this time, add up to ${
             files.length + uploadFiles.length
-          } totally`
+          } totally`,
         );
       },
       slots: {
         default: () => <BaseButton type="primary">Click to upload</BaseButton>,
-        tip: () => <div class="el-upload__tip">jpg/png files with a size less than 500KB.</div>
-      }
-    }
-  }
+        tip: () => <div class="el-upload__tip">jpg/png files with a size less than 500KB.</div>,
+      },
+    },
+  },
 ]);
 
 const { formRegister, formMethods } = useForm();
@@ -233,24 +233,24 @@ const {
   getComponentExpose,
   getFormItemExpose,
   getElFormExpose,
-  getFormData
+  getFormData,
 } = formMethods;
 
 const changeLabelWidth = (width: number | string) => {
   setProps({
-    labelWidth: width
+    labelWidth: width,
   });
 };
 
 const changeSize = (size: ComponentSize) => {
   setProps({
-    size
+    size,
   });
 };
 
 const changeDisabled = (bool: boolean) => {
   setProps({
-    disabled: bool
+    disabled: bool,
   });
 };
 
@@ -267,16 +267,16 @@ const changeSchema = (del: boolean) => {
           options: [
             {
               label: 'option1',
-              value: '1'
+              value: '1',
             },
             {
               label: 'option2',
-              value: '2'
-            }
-          ]
-        }
+              value: '2',
+            },
+          ],
+        },
       },
-      1
+      1,
     );
   }
 };
@@ -296,13 +296,13 @@ const setValue = async (reset: boolean) => {
       field8: [
         {
           name: 'element-plus-logo.svg',
-          url: 'https://element-plus.org/images/element-plus-logo.svg'
+          url: 'https://element-plus.org/images/element-plus-logo.svg',
         },
         {
           name: 'element-plus-logo2.svg',
-          url: 'https://element-plus.org/images/element-plus-logo.svg'
-        }
-      ]
+          url: 'https://element-plus.org/images/element-plus-logo.svg',
+        },
+      ],
     });
     const formData = await getFormData();
     console.log(formData);
@@ -316,7 +316,7 @@ const setLabel = () => {
     {
       field: 'field2',
       path: 'label',
-      value: `${t('formDemo.select')} ${index.value}`
+      value: `${t('formDemo.select')} ${index.value}`,
     },
     {
       field: 'field2',
@@ -324,18 +324,18 @@ const setLabel = () => {
       value: [
         {
           label: 'option-1',
-          value: '1'
+          value: '1',
         },
         {
           label: 'option-2',
-          value: '2'
+          value: '2',
         },
         {
           label: 'option-3',
-          value: '3'
-        }
-      ]
-    }
+          value: '3',
+        },
+      ],
+    },
   ]);
   index.value++;
 };
@@ -345,16 +345,16 @@ const addItem = () => {
     addSchema({
       field: `field${unref(index)}`,
       label: `${t('formDemo.input')}${unref(index)}`,
-      component: 'Input'
+      component: 'Input',
     });
   } else {
     addSchema(
       {
         field: `field${unref(index)}`,
         label: `${t('formDemo.input')}${unref(index)}`,
-        component: 'Input'
+        component: 'Input',
       },
-      unref(index)
+      unref(index),
     );
   }
   index.value++;
@@ -379,8 +379,8 @@ const getDictOne = async () => {
       {
         field: 'field2',
         path: 'componentProps.options',
-        value: res.data
-      }
+        value: res.data,
+      },
     ]);
   }
 };

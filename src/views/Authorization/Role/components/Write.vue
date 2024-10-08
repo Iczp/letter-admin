@@ -16,8 +16,8 @@ const { required } = useValidator();
 const props = defineProps({
   currentRow: {
     type: Object as PropType<any>,
-    default: () => null
-  }
+    default: () => null,
+  },
 });
 
 const treeRef = ref<typeof ElTree>();
@@ -26,7 +26,7 @@ const formSchema = ref<FormSchema[]>([
   {
     field: 'roleName',
     label: t('role.roleName'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'status',
@@ -36,20 +36,20 @@ const formSchema = ref<FormSchema[]>([
       options: [
         {
           label: t('userDemo.disable'),
-          value: 0
+          value: 0,
         },
         {
           label: t('userDemo.enable'),
-          value: 1
-        }
-      ]
-    }
+          value: 1,
+        },
+      ],
+    },
   },
   {
     field: 'menu',
     label: t('role.menu'),
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
@@ -71,7 +71,7 @@ const formSchema = ref<FormSchema[]>([
                     {{
                       default: (data) => {
                         return <span>{data.data.meta.title}</span>;
-                      }
+                      },
                     }}
                   </ElTree>
                 </div>
@@ -87,10 +87,10 @@ const formSchema = ref<FormSchema[]>([
               </div>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 const currentTreeData = ref();
@@ -101,7 +101,7 @@ const nodeClick = (treeData: any) => {
 const rules = reactive({
   roleName: [required()],
   role: [required()],
-  status: [required()]
+  status: [required()],
 });
 
 const { formRegister, formMethods } = useForm();
@@ -118,7 +118,7 @@ const getMenuList = async () => {
     eachTree(props.currentRow.menu, (v) => {
       checked.push({
         id: v.id,
-        permission: v.meta?.permission || []
+        permission: v.meta?.permission || [],
       });
     });
     eachTree(treeData.value, (v) => {
@@ -167,12 +167,12 @@ watch(
   },
   {
     deep: true,
-    immediate: true
-  }
+    immediate: true,
+  },
 );
 
 defineExpose({
-  submit
+  submit,
 });
 </script>
 

@@ -4,17 +4,16 @@
 /* eslint-disable */
 import type { InviterConfigDto } from './InviterConfigDto';
 export type InviterConfigPagedResult = {
-    /**
-     * 输入参数
-     */
-    input?: Record<string, any>;
-    /**
-     * 总数
-     */
-    totalCount: number;
-    /**
-     * 列表项
-     */
-    items: Array<InviterConfigDto>;
+  /**
+   * 输入参数
+   */
+  input?: Record<string, any>;
+  /**
+   * 总数
+   */
+  totalCount: number;
+  /**
+   * 列表项
+   */
+  items: Array<InviterConfigDto>;
 };
-

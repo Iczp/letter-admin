@@ -14,7 +14,7 @@ import {
   getProjectApi,
   getDynamicApi,
   getTeamApi,
-  getRadarApi
+  getRadarApi,
 } from '@/api/dashboard/workplace';
 import type { WorkplaceTotal, Project, Dynamic, Team } from '@/api/dashboard/workplace/types';
 import { set } from 'lodash-es';
@@ -25,7 +25,7 @@ const loading = ref(true);
 let totalSate = reactive<WorkplaceTotal>({
   project: 0,
   access: 0,
-  todo: 0
+  todo: 0,
 });
 
 const getCount = async () => {
@@ -77,9 +77,9 @@ const getRadar = async () => {
       res.data.map((v) => {
         return {
           name: t(v.name),
-          max: v.max
+          max: v.max,
         };
-      })
+      }),
     );
     set(radarOptionData, 'series', [
       {
@@ -88,14 +88,14 @@ const getRadar = async () => {
         data: [
           {
             value: res.data.map((v) => v.personal),
-            name: t('workplace.personal')
+            name: t('workplace.personal'),
           },
           {
             value: res.data.map((v) => v.team),
-            name: t('workplace.team')
-          }
-        ]
-      }
+            name: t('workplace.team'),
+          },
+        ],
+      },
     ]);
   }
 };

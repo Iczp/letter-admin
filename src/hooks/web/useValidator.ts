@@ -13,7 +13,7 @@ export const useValidator = () => {
   const required = (message?: string): FormItemRule => {
     return {
       required: true,
-      message: message || t('common.required')
+      message: message || t('common.required'),
     };
   };
 
@@ -23,7 +23,7 @@ export const useValidator = () => {
     return {
       min,
       max,
-      message: message || t('common.lengthRange', { min, max })
+      message: message || t('common.lengthRange', { min, max }),
     };
   };
 
@@ -35,7 +35,7 @@ export const useValidator = () => {
         } else {
           callback();
         }
-      }
+      },
     };
   };
 
@@ -47,7 +47,7 @@ export const useValidator = () => {
         } else {
           callback();
         }
-      }
+      },
     };
   };
 
@@ -60,7 +60,7 @@ export const useValidator = () => {
         } else {
           callback();
         }
-      }
+      },
     };
   };
 
@@ -73,14 +73,14 @@ export const useValidator = () => {
         } else {
           callback();
         }
-      }
+      },
     };
   };
 
   const maxlength = (max: number): FormItemRule => {
     return {
       max,
-      message: '长度不能超过' + max + '个字符'
+      message: '长度不能超过' + max + '个字符',
     };
   };
 
@@ -92,7 +92,7 @@ export const useValidator = () => {
         } else {
           callback();
         }
-      }
+      },
     };
   };
 
@@ -104,6 +104,6 @@ export const useValidator = () => {
     phone,
     email,
     maxlength,
-    check
+    check,
   };
 };

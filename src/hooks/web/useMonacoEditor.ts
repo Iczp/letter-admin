@@ -21,7 +21,7 @@ self.MonacoEnvironment = {
       return new tsWorker();
     }
     return new editorWorker();
-  }
+  },
 };
 
 export function useMonacoEditor(language: string = 'javascript') {
@@ -47,7 +47,7 @@ export function useMonacoEditor(language: string = 'javascript') {
       // 滚动条
       scrollbar: {
         verticalScrollbarSize: 8,
-        horizontalScrollbarSize: 8
+        horizontalScrollbarSize: 8,
       },
       // 行号
       lineNumbers: 'on',
@@ -59,7 +59,7 @@ export function useMonacoEditor(language: string = 'javascript') {
       autoIndent: 'advanced',
       // 自动布局
       automaticLayout: true,
-      ...editorOption
+      ...editorOption,
     });
     return monacoEditor;
   }
@@ -124,6 +124,6 @@ export function useMonacoEditor(language: string = 'javascript') {
     getOption,
     formatDoc,
     changeLanguage,
-    changeTheme
+    changeTheme,
   };
 }

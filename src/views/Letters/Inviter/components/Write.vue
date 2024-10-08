@@ -11,18 +11,18 @@ const { required } = useValidator();
 const props = defineProps({
   currentRow: {
     type: Object as PropType<InviterConfigDto>,
-    default: () => undefined
+    default: () => undefined,
   },
   formSchema: {
     type: Array as PropType<FormSchema[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 
 const rules = reactive({
   username: [required()],
   account: [required()],
-  'department.id': [required()]
+  'department.id': [required()],
 });
 
 const { formRegister, formMethods } = useForm();
@@ -47,12 +47,12 @@ watch(
   },
   {
     deep: true,
-    immediate: true
-  }
+    immediate: true,
+  },
 );
 
 defineExpose({
-  submit
+  submit,
 });
 </script>
 

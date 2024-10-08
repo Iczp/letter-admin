@@ -15,17 +15,17 @@ const formSchema = reactive<FormSchema[]>([
     label: 'label',
     component: 'Input',
     colProps: {
-      span: 24
-    }
+      span: 24,
+    },
   },
   {
     field: 'value',
     label: 'value',
     component: 'Input',
     colProps: {
-      span: 24
-    }
-  }
+      span: 24,
+    },
+  },
 ]);
 
 const { formRegister, formMethods } = useForm();
@@ -35,7 +35,7 @@ const emit = defineEmits(['confirm']);
 
 const rules = reactive({
   label: [required()],
-  value: [required()]
+  value: [required()],
 });
 
 const confirm = async () => {

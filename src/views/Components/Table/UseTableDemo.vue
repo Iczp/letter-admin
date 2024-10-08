@@ -13,13 +13,13 @@ const { tableRegister, tableMethods, tableState } = useTable({
     const { currentPage, pageSize } = tableState;
     const res = await getTableListApi({
       pageIndex: unref(currentPage),
-      pageSize: unref(pageSize)
+      pageSize: unref(pageSize),
     });
     return {
       list: res.data.list,
-      total: res.data.total
+      total: res.data.total,
     };
-  }
+  },
 });
 const { loading, dataList, total, currentPage, pageSize } = tableState;
 const { setProps, setColumn, getElTableExpose, addColumn, delColumn, refresh } = tableMethods;
@@ -51,29 +51,29 @@ onMounted(() => {
                   </div>
                 </div>
               );
-            }
-          }
+            },
+          },
         },
         {
           field: 'selection',
-          type: 'selection'
+          type: 'selection',
         },
         {
           field: 'index',
           label: t('tableDemo.index'),
-          type: 'index'
+          type: 'index',
         },
         {
           field: 'title',
-          label: t('tableDemo.title')
+          label: t('tableDemo.title'),
         },
         {
           field: 'author',
-          label: t('tableDemo.author')
+          label: t('tableDemo.author'),
         },
         {
           field: 'display_time',
-          label: t('tableDemo.displayTime')
+          label: t('tableDemo.displayTime'),
         },
         {
           field: 'importance',
@@ -88,11 +88,11 @@ onMounted(() => {
                     : t('tableDemo.commonly')}
               </ElTag>
             );
-          }
+          },
         },
         {
           field: 'pageviews',
-          label: t('tableDemo.pageviews')
+          label: t('tableDemo.pageviews'),
         },
         {
           field: 'action',
@@ -104,10 +104,10 @@ onMounted(() => {
                   {t('tableDemo.action')}
                 </BaseButton>
               );
-            }
-          }
-        }
-      ]
+            },
+          },
+        },
+      ],
     });
   }, 2000);
 });
@@ -123,7 +123,7 @@ const showPagination = (show: boolean) => {
 
 const reserveIndex = (custom: boolean) => {
   setProps({
-    reserveIndex: custom
+    reserveIndex: custom,
   });
 };
 
@@ -132,8 +132,8 @@ const showSelections = (show: boolean) => {
     {
       field: 'selection',
       path: 'hidden',
-      value: !show
-    }
+      value: !show,
+    },
   ]);
 };
 
@@ -144,8 +144,8 @@ const changeTitle = () => {
     {
       field: 'title',
       path: 'label',
-      value: `${t('tableDemo.title')}${unref(index)}`
-    }
+      value: `${t('tableDemo.title')}${unref(index)}`,
+    },
   ]);
   index.value++;
 };
@@ -155,8 +155,8 @@ const showExpandedRows = (show: boolean) => {
     {
       field: 'expand',
       path: 'hidden',
-      value: !show
-    }
+      value: !show,
+    },
   ]);
 };
 
@@ -181,8 +181,8 @@ const delOrAddAction = () => {
               {t('tableDemo.action')}
             </BaseButton>
           );
-        }
-      }
+        },
+      },
     });
     showAction.value = true;
   }
@@ -191,7 +191,7 @@ const delOrAddAction = () => {
 const showStripe = ref(false);
 const showOrHiddenStripe = () => {
   setProps({
-    stripe: !unref(showStripe)
+    stripe: !unref(showStripe),
   });
   showStripe.value = !unref(showStripe);
 };
@@ -200,12 +200,12 @@ const height = ref<string | number>('auto');
 const fixedHeaderOrAuto = () => {
   if (unref(height) === 'auto') {
     setProps({
-      height: 300
+      height: 300,
     });
     height.value = 300;
   } else {
     setProps({
-      height: 'auto'
+      height: 'auto',
     });
     height.value = 'auto';
   }
@@ -266,7 +266,7 @@ const getSelections = async () => {
       :pagination="
         canShowPagination
           ? {
-              total: total
+              total: total,
             }
           : undefined
       "

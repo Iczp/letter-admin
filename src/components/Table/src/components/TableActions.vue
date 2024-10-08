@@ -10,13 +10,13 @@ import ColumnSetting from './ColumnSetting.vue';
 export default defineComponent({
   name: 'TableActions',
   components: {
-    ColumnSetting
+    ColumnSetting,
   },
   props: {
     columns: {
       type: Array as PropType<TableColumn[]>,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   emits: ['refresh', 'changSize', 'confirm'],
   setup(props, { emit }) {
@@ -77,11 +77,11 @@ export default defineComponent({
                             </ElDropdownItem>
                           );
                         });
-                      }
+                      },
                     }}
                   </ElDropdownMenu>
                 );
-              }
+              },
             }}
           </ElDropdown>
 
@@ -100,6 +100,6 @@ export default defineComponent({
         <ColumnSetting v-model={showSetting.value} columns={props.columns} onConfirm={confirm} />
       </>
     );
-  }
+  },
 });
 </script>

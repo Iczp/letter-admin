@@ -13,7 +13,7 @@ const adminList = [
     meta: {
       title: 'router.dashboard',
       icon: 'vi-ant-design:dashboard-filled',
-      alwaysShow: true
+      alwaysShow: true,
     },
     children: [
       {
@@ -23,8 +23,8 @@ const adminList = [
         meta: {
           title: 'router.analysis',
           noCache: true,
-          affix: true
-        }
+          affix: true,
+        },
       },
       {
         path: 'workplace',
@@ -33,10 +33,10 @@ const adminList = [
         meta: {
           title: 'router.workplace',
           noCache: true,
-          affix: true
-        }
-      }
-    ]
+          affix: true,
+        },
+      },
+    ],
   },
   {
     path: '/external-link',
@@ -49,10 +49,10 @@ const adminList = [
         name: 'DocumentLink',
         meta: {
           title: 'router.document',
-          icon: 'vi-clarity:document-solid'
-        }
-      }
-    ]
+          icon: 'vi-clarity:document-solid',
+        },
+      },
+    ],
   },
   {
     path: '/guide',
@@ -66,8 +66,8 @@ const adminList = [
         name: 'GuideDemo',
         meta: {
           title: 'router.guide',
-          icon: 'vi-cib:telegram-plane'
-        }
+          icon: 'vi-cib:telegram-plane',
+        },
       },
       {
         path: 'index1',
@@ -75,10 +75,10 @@ const adminList = [
         name: 'GuideDemo1',
         meta: {
           title: 'router.guide',
-          icon: 'vi-cib:telegram-plane'
-        }
-      }
-    ]
+          icon: 'vi-cib:telegram-plane',
+        },
+      },
+    ],
   },
   {
     path: '/components',
@@ -88,7 +88,7 @@ const adminList = [
     meta: {
       title: 'router.component',
       icon: 'vi-bx:bxs-component',
-      alwaysShow: true
+      alwaysShow: true,
     },
     children: [
       {
@@ -97,7 +97,7 @@ const adminList = [
         name: 'Form',
         meta: {
           title: 'router.form',
-          alwaysShow: true
+          alwaysShow: true,
         },
         children: [
           {
@@ -105,18 +105,18 @@ const adminList = [
             component: 'views/Components/Form/DefaultForm',
             name: 'DefaultForm',
             meta: {
-              title: 'router.defaultForm'
-            }
+              title: 'router.defaultForm',
+            },
           },
           {
             path: 'use-form',
             component: 'views/Components/Form/UseFormDemo',
             name: 'UseForm',
             meta: {
-              title: 'UseForm'
-            }
-          }
-        ]
+              title: 'UseForm',
+            },
+          },
+        ],
       },
       {
         path: 'table',
@@ -125,7 +125,7 @@ const adminList = [
         name: 'TableDemo',
         meta: {
           title: 'router.table',
-          alwaysShow: true
+          alwaysShow: true,
         },
         children: [
           {
@@ -133,49 +133,49 @@ const adminList = [
             component: 'views/Components/Table/DefaultTable',
             name: 'DefaultTable',
             meta: {
-              title: 'router.defaultTable'
-            }
+              title: 'router.defaultTable',
+            },
           },
           {
             path: 'use-table',
             component: 'views/Components/Table/UseTableDemo',
             name: 'UseTable',
             meta: {
-              title: 'UseTable'
-            }
+              title: 'UseTable',
+            },
           },
           {
             path: 'tree-table',
             component: 'views/Components/Table/TreeTable',
             name: 'TreeTable',
             meta: {
-              title: 'TreeTable'
-            }
+              title: 'TreeTable',
+            },
           },
           {
             path: 'table-image-preview',
             component: 'views/Components/Table/TableImagePreview',
             name: 'TableImagePreview',
             meta: {
-              title: 'router.PicturePreview'
-            }
+              title: 'router.PicturePreview',
+            },
           },
           {
             path: 'table-video-preview',
             component: 'views/Components/Table/TableVideoPreview',
             name: 'TableVideoPreview',
             meta: {
-              title: 'router.tableVideoPreview'
-            }
+              title: 'router.tableVideoPreview',
+            },
           },
           {
             path: 'card-table',
             component: 'views/Components/Table/CardTable',
             name: 'CardTable',
             meta: {
-              title: 'router.cardTable'
-            }
-          }
+              title: 'router.cardTable',
+            },
+          },
           // {
           //   path: 'ref-table',
           //   component: 'views/Components/Table/RefTable',
@@ -184,7 +184,7 @@ const adminList = [
           //     title: 'RefTable'
           //   }
           // }
-        ]
+        ],
       },
       {
         path: 'editor-demo',
@@ -193,7 +193,7 @@ const adminList = [
         name: 'EditorDemo',
         meta: {
           title: 'router.editor',
-          alwaysShow: true
+          alwaysShow: true,
         },
         children: [
           {
@@ -201,164 +201,164 @@ const adminList = [
             component: 'views/Components/Editor/Editor',
             name: 'Editor',
             meta: {
-              title: 'router.richText'
-            }
+              title: 'router.richText',
+            },
           },
           {
             path: 'json-editor',
             component: 'views/Components/Editor/JsonEditor',
             name: 'JsonEditor',
             meta: {
-              title: 'router.jsonEditor'
-            }
+              title: 'router.jsonEditor',
+            },
           },
           {
             path: 'code-editor',
             component: 'views/Components/Editor/CodeEditor',
             name: 'CodeEditor',
             meta: {
-              title: 'router.codeEditor'
-            }
-          }
-        ]
+              title: 'router.codeEditor',
+            },
+          },
+        ],
       },
       {
         path: 'search',
         component: 'views/Components/Search',
         name: 'Search',
         meta: {
-          title: 'router.search'
-        }
+          title: 'router.search',
+        },
       },
       {
         path: 'descriptions',
         component: 'views/Components/Descriptions',
         name: 'Descriptions',
         meta: {
-          title: 'router.descriptions'
-        }
+          title: 'router.descriptions',
+        },
       },
       {
         path: 'image-viewer',
         component: 'views/Components/ImageViewer',
         name: 'ImageViewer',
         meta: {
-          title: 'router.imageViewer'
-        }
+          title: 'router.imageViewer',
+        },
       },
       {
         path: 'dialog',
         component: 'views/Components/Dialog',
         name: 'Dialog',
         meta: {
-          title: 'router.dialog'
-        }
+          title: 'router.dialog',
+        },
       },
       {
         path: 'icon',
         component: 'views/Components/Icon',
         name: 'Icon',
         meta: {
-          title: 'router.icon'
-        }
+          title: 'router.icon',
+        },
       },
       {
         path: 'icon-picker',
         component: 'views/Components/IconPicker',
         name: 'IconPicker',
         meta: {
-          title: 'router.iconPicker'
-        }
+          title: 'router.iconPicker',
+        },
       },
       {
         path: 'echart',
         component: 'views/Components/Echart',
         name: 'Echart',
         meta: {
-          title: 'router.echart'
-        }
+          title: 'router.echart',
+        },
       },
       {
         path: 'count-to',
         component: 'views/Components/CountTo',
         name: 'CountTo',
         meta: {
-          title: 'router.countTo'
-        }
+          title: 'router.countTo',
+        },
       },
       {
         path: 'qrcode',
         component: 'views/Components/Qrcode',
         name: 'Qrcode',
         meta: {
-          title: 'router.qrcode'
-        }
+          title: 'router.qrcode',
+        },
       },
       {
         path: 'highlight',
         component: 'views/Components/Highlight',
         name: 'Highlight',
         meta: {
-          title: 'router.highlight'
-        }
+          title: 'router.highlight',
+        },
       },
       {
         path: 'infotip',
         component: 'views/Components/Infotip',
         name: 'Infotip',
         meta: {
-          title: 'router.infotip'
-        }
+          title: 'router.infotip',
+        },
       },
       {
         path: 'input-password',
         component: 'views/Components/InputPassword',
         name: 'InputPassword',
         meta: {
-          title: 'router.inputPassword'
-        }
+          title: 'router.inputPassword',
+        },
       },
       {
         path: 'waterfall',
         component: 'views/Components/Waterfall',
         name: 'Waterfall',
         meta: {
-          title: 'router.waterfall'
-        }
+          title: 'router.waterfall',
+        },
       },
       {
         path: 'image-cropping',
         component: 'views/Components/ImageCropping',
         name: 'ImageCropping',
         meta: {
-          title: 'router.imageCropping'
-        }
+          title: 'router.imageCropping',
+        },
       },
       {
         path: 'video-player',
         component: 'views/Components/VideoPlayer',
         name: 'VideoPlayer',
         meta: {
-          title: 'router.videoPlayer'
-        }
+          title: 'router.videoPlayer',
+        },
       },
       {
         path: 'avatars',
         component: 'views/Components/Avatars',
         name: 'Avatars',
         meta: {
-          title: 'router.avatars'
-        }
+          title: 'router.avatars',
+        },
       },
       {
         path: 'i-agree',
         component: 'views/Components/IAgree',
         name: 'IAgree',
         meta: {
-          title: 'router.iAgree'
-        }
-      }
-    ]
+          title: 'router.iAgree',
+        },
+      },
+    ],
   },
   {
     path: '/function',
@@ -368,7 +368,7 @@ const adminList = [
     meta: {
       title: 'router.function',
       icon: 'vi-ri:function-fill',
-      alwaysShow: true
+      alwaysShow: true,
     },
     children: [
       {
@@ -376,8 +376,8 @@ const adminList = [
         component: 'views/Function/MultipleTabs',
         name: 'MultipleTabs',
         meta: {
-          title: 'router.multipleTabs'
-        }
+          title: 'router.multipleTabs',
+        },
       },
       {
         path: 'multiple-tabs-demo/:id',
@@ -386,16 +386,16 @@ const adminList = [
         meta: {
           hidden: true,
           title: 'router.details',
-          canTo: true
-        }
+          canTo: true,
+        },
       },
       {
         path: 'request',
         component: 'views/Function/Request',
         name: 'Request',
         meta: {
-          title: 'router.request'
-        }
+          title: 'router.request',
+        },
       },
       {
         path: 'test',
@@ -403,10 +403,10 @@ const adminList = [
         name: 'Test',
         meta: {
           title: 'router.permission',
-          permission: ['add', 'edit', 'delete']
-        }
-      }
-    ]
+          permission: ['add', 'edit', 'delete'],
+        },
+      },
+    ],
   },
   {
     path: '/hooks',
@@ -416,7 +416,7 @@ const adminList = [
     meta: {
       title: 'hooks',
       icon: 'vi-ic:outline-webhook',
-      alwaysShow: true
+      alwaysShow: true,
     },
     children: [
       {
@@ -424,50 +424,50 @@ const adminList = [
         component: 'views/hooks/useWatermark',
         name: 'UseWatermark',
         meta: {
-          title: 'useWatermark'
-        }
+          title: 'useWatermark',
+        },
       },
       {
         path: 'useTagsView',
         component: 'views/hooks/useTagsView',
         name: 'UseTagsView',
         meta: {
-          title: 'useTagsView'
-        }
+          title: 'useTagsView',
+        },
       },
       {
         path: 'useValidator',
         component: 'views/hooks/useValidator',
         name: 'UseValidator',
         meta: {
-          title: 'useValidator'
-        }
+          title: 'useValidator',
+        },
       },
       {
         path: 'useCrudSchemas',
         component: 'views/hooks/useCrudSchemas',
         name: 'UseCrudSchemas',
         meta: {
-          title: 'useCrudSchemas'
-        }
+          title: 'useCrudSchemas',
+        },
       },
       {
         path: 'useClipboard',
         component: 'views/hooks/useClipboard',
         name: 'UseClipboard',
         meta: {
-          title: 'useClipboard'
-        }
+          title: 'useClipboard',
+        },
       },
       {
         path: 'useNetwork',
         component: 'views/hooks/useNetwork',
         name: 'UseNetwork',
         meta: {
-          title: 'useNetwork'
-        }
-      }
-    ]
+          title: 'useNetwork',
+        },
+      },
+    ],
   },
   {
     path: '/level',
@@ -476,7 +476,7 @@ const adminList = [
     name: 'Level',
     meta: {
       title: 'router.level',
-      icon: 'vi-carbon:skill-level-advanced'
+      icon: 'vi-carbon:skill-level-advanced',
     },
     children: [
       {
@@ -485,7 +485,7 @@ const adminList = [
         component: '##',
         redirect: '/level/menu1/menu1-1/menu1-1-1',
         meta: {
-          title: 'router.menu1'
+          title: 'router.menu1',
         },
         children: [
           {
@@ -495,7 +495,7 @@ const adminList = [
             redirect: '/level/menu1/menu1-1/menu1-1-1',
             meta: {
               title: 'router.menu11',
-              alwaysShow: true
+              alwaysShow: true,
             },
             children: [
               {
@@ -503,30 +503,30 @@ const adminList = [
                 name: 'Menu111',
                 component: 'views/Level/Menu111',
                 meta: {
-                  title: 'router.menu111'
-                }
-              }
-            ]
+                  title: 'router.menu111',
+                },
+              },
+            ],
           },
           {
             path: 'menu1-2',
             name: 'Menu12',
             component: 'views/Level/Menu12',
             meta: {
-              title: 'router.menu12'
-            }
-          }
-        ]
+              title: 'router.menu12',
+            },
+          },
+        ],
       },
       {
         path: 'menu2',
         name: 'Menu2Demo',
         component: 'views/Level/Menu2',
         meta: {
-          title: 'router.menu2'
-        }
-      }
-    ]
+          title: 'router.menu2',
+        },
+      },
+    ],
   },
   {
     path: '/example',
@@ -536,7 +536,7 @@ const adminList = [
     meta: {
       title: 'router.example',
       icon: 'vi-ep:management',
-      alwaysShow: true
+      alwaysShow: true,
     },
     children: [
       {
@@ -544,16 +544,16 @@ const adminList = [
         component: 'views/Example/Dialog/ExampleDialog',
         name: 'ExampleDialog',
         meta: {
-          title: 'router.exampleDialog'
-        }
+          title: 'router.exampleDialog',
+        },
       },
       {
         path: 'example-page',
         component: 'views/Example/Page/ExamplePage',
         name: 'ExamplePage',
         meta: {
-          title: 'router.examplePage'
-        }
+          title: 'router.examplePage',
+        },
       },
       {
         path: 'example-add',
@@ -565,8 +565,8 @@ const adminList = [
           noCache: true,
           hidden: true,
           showMainRoute: true,
-          activeMenu: '/example/example-page'
-        }
+          activeMenu: '/example/example-page',
+        },
       },
       {
         path: 'example-edit',
@@ -578,8 +578,8 @@ const adminList = [
           noCache: true,
           hidden: true,
           showMainRoute: true,
-          activeMenu: '/example/example-page'
-        }
+          activeMenu: '/example/example-page',
+        },
       },
       {
         path: 'example-detail',
@@ -591,10 +591,10 @@ const adminList = [
           noCache: true,
           hidden: true,
           showMainRoute: true,
-          activeMenu: '/example/example-page'
-        }
-      }
-    ]
+          activeMenu: '/example/example-page',
+        },
+      },
+    ],
   },
   {
     path: '/error',
@@ -604,7 +604,7 @@ const adminList = [
     meta: {
       title: 'router.errorPage',
       icon: 'vi-ci:error',
-      alwaysShow: true
+      alwaysShow: true,
     },
     children: [
       {
@@ -612,26 +612,26 @@ const adminList = [
         component: 'views/Error/404',
         name: '404Demo',
         meta: {
-          title: '404'
-        }
+          title: '404',
+        },
       },
       {
         path: '403-demo',
         component: 'views/Error/403',
         name: '403Demo',
         meta: {
-          title: '403'
-        }
+          title: '403',
+        },
       },
       {
         path: '500-demo',
         component: 'views/Error/500',
         name: '500Demo',
         meta: {
-          title: '500'
-        }
-      }
-    ]
+          title: '500',
+        },
+      },
+    ],
   },
   {
     path: '/authorization',
@@ -641,7 +641,7 @@ const adminList = [
     meta: {
       title: 'router.authorization',
       icon: 'vi-eos-icons:role-binding',
-      alwaysShow: true
+      alwaysShow: true,
     },
     children: [
       {
@@ -649,35 +649,35 @@ const adminList = [
         component: 'views/Authorization/Department/Department',
         name: 'Department',
         meta: {
-          title: 'router.department'
-        }
+          title: 'router.department',
+        },
       },
       {
         path: 'user',
         component: 'views/Authorization/User/User',
         name: 'User',
         meta: {
-          title: 'router.user'
-        }
+          title: 'router.user',
+        },
       },
       {
         path: 'menu',
         component: 'views/Authorization/Menu/Menu',
         name: 'Menu',
         meta: {
-          title: 'router.menuManagement'
-        }
+          title: 'router.menuManagement',
+        },
       },
       {
         path: 'role',
         component: 'views/Authorization/Role/Role',
         name: 'Role',
         meta: {
-          title: 'router.role'
-        }
-      }
-    ]
-  }
+          title: 'router.role',
+        },
+      },
+    ],
+  },
 ];
 
 const testList: string[] = [
@@ -757,7 +757,7 @@ const testList: string[] = [
   '/error',
   '/error/404-demo',
   '/error/403-demo',
-  '/error/500-demo'
+  '/error/500-demo',
 ];
 
 const List: any[] = [];
@@ -775,7 +775,7 @@ const menus = [
       meta: {
         title: '首页##',
         icon: 'vi-ant-design:dashboard-filled',
-        alwaysShow: true
+        alwaysShow: true,
       },
       children: [
         {
@@ -786,8 +786,8 @@ const menus = [
           id: 2,
           meta: {
             title: '分析页',
-            noCache: true
-          }
+            noCache: true,
+          },
         },
         {
           path: 'workplace',
@@ -797,17 +797,17 @@ const menus = [
           id: 3,
           meta: {
             title: '工作台',
-            noCache: true
-          }
-        }
-      ]
+            noCache: true,
+          },
+        },
+      ],
     },
     {
       path: '/external-link',
       component: '#',
       meta: {
         title: '文档55',
-        icon: 'vi-clarity:document-solid'
+        icon: 'vi-clarity:document-solid',
       },
       name: 'ExternalLink',
       status: Mock.Random.integer(0, 1),
@@ -819,10 +819,10 @@ const menus = [
           status: Mock.Random.integer(0, 1),
           id: 5,
           meta: {
-            title: '文档55'
-          }
-        }
-      ]
+            title: '文档55',
+          },
+        },
+      ],
     },
     {
       path: '/level',
@@ -833,7 +833,7 @@ const menus = [
       id: 6,
       meta: {
         title: '菜单',
-        icon: 'vi-carbon:skill-level-advanced'
+        icon: 'vi-carbon:skill-level-advanced',
       },
       children: [
         {
@@ -844,7 +844,7 @@ const menus = [
           id: 7,
           redirect: '/level/menu1/menu1-1/menu1-1-1',
           meta: {
-            title: '菜单1'
+            title: '菜单1',
           },
           children: [
             {
@@ -856,7 +856,7 @@ const menus = [
               redirect: '/level/menu1/menu1-1/menu1-1-1',
               meta: {
                 title: '菜单1-1',
-                alwaysShow: true
+                alwaysShow: true,
               },
               children: [
                 {
@@ -868,10 +868,10 @@ const menus = [
                   permission: ['edit', 'add', 'delete'],
                   meta: {
                     title: '菜单1-1-1',
-                    permission: ['edit', 'add', 'delete']
-                  }
-                }
-              ]
+                    permission: ['edit', 'add', 'delete'],
+                  },
+                },
+              ],
             },
             {
               path: 'menu1-2',
@@ -882,10 +882,10 @@ const menus = [
               permission: ['edit', 'add', 'delete'],
               meta: {
                 title: '菜单1-2',
-                permission: ['edit', 'add', 'delete']
-              }
-            }
-          ]
+                permission: ['edit', 'add', 'delete'],
+              },
+            },
+          ],
         },
         {
           path: 'menu2',
@@ -896,10 +896,10 @@ const menus = [
           permission: ['edit', 'add', 'delete'],
           meta: {
             title: '菜单2',
-            permission: ['edit', 'add', 'delete']
-          }
-        }
-      ]
+            permission: ['edit', 'add', 'delete'],
+          },
+        },
+      ],
     },
     {
       path: '/example',
@@ -911,7 +911,7 @@ const menus = [
       meta: {
         title: '综合示例',
         icon: 'vi-ep:management',
-        alwaysShow: true
+        alwaysShow: true,
       },
       children: [
         {
@@ -923,8 +923,8 @@ const menus = [
           permission: ['edit', 'add', 'delete'],
           meta: {
             title: '综合示例-弹窗',
-            permission: ['edit', 'add', 'delete']
-          }
+            permission: ['edit', 'add', 'delete'],
+          },
         },
         {
           path: 'example-page',
@@ -935,8 +935,8 @@ const menus = [
           permission: ['edit', 'add', 'delete'],
           meta: {
             title: '综合示例-页面',
-            permission: ['edit', 'add', 'delete']
-          }
+            permission: ['edit', 'add', 'delete'],
+          },
         },
         {
           path: 'example-add',
@@ -952,8 +952,8 @@ const menus = [
             hidden: true,
             showMainRoute: true,
             activeMenu: '/example/example-page',
-            permission: ['edit', 'add', 'delete']
-          }
+            permission: ['edit', 'add', 'delete'],
+          },
         },
         {
           path: 'example-edit',
@@ -969,8 +969,8 @@ const menus = [
             hidden: true,
             showMainRoute: true,
             activeMenu: '/example/example-page',
-            permission: ['edit', 'add', 'delete']
-          }
+            permission: ['edit', 'add', 'delete'],
+          },
         },
         {
           path: 'example-detail',
@@ -986,11 +986,11 @@ const menus = [
             hidden: true,
             showMainRoute: true,
             activeMenu: '/example/example-page',
-            permission: ['edit', 'add', 'delete']
-          }
-        }
-      ]
-    }
+            permission: ['edit', 'add', 'delete'],
+          },
+        },
+      ],
+    },
   ],
   [
     {
@@ -1003,7 +1003,7 @@ const menus = [
       meta: {
         title: '首页',
         icon: 'vi-ant-design:dashboard-filled',
-        alwaysShow: true
+        alwaysShow: true,
       },
       children: [
         {
@@ -1014,8 +1014,8 @@ const menus = [
           id: 2,
           meta: {
             title: '分析页',
-            noCache: true
-          }
+            noCache: true,
+          },
         },
         {
           path: 'workplace',
@@ -1025,11 +1025,11 @@ const menus = [
           id: 3,
           meta: {
             title: '工作台',
-            noCache: true
-          }
-        }
-      ]
-    }
+            noCache: true,
+          },
+        },
+      ],
+    },
   ],
   [
     {
@@ -1037,7 +1037,7 @@ const menus = [
       component: '#',
       meta: {
         title: '文档55',
-        icon: 'vi-clarity:document-solid'
+        icon: 'vi-clarity:document-solid',
       },
       name: 'ExternalLink',
       status: Mock.Random.integer(0, 1),
@@ -1049,10 +1049,10 @@ const menus = [
           status: Mock.Random.integer(0, 1),
           id: 5,
           meta: {
-            title: '文档55'
-          }
-        }
-      ]
+            title: '文档55',
+          },
+        },
+      ],
     },
     {
       path: '/level',
@@ -1063,7 +1063,7 @@ const menus = [
       id: 6,
       meta: {
         title: '菜单',
-        icon: 'vi-carbon:skill-level-advanced'
+        icon: 'vi-carbon:skill-level-advanced',
       },
       children: [
         {
@@ -1074,7 +1074,7 @@ const menus = [
           id: 7,
           redirect: '/level/menu1/menu1-1/menu1-1-1',
           meta: {
-            title: '菜单1'
+            title: '菜单1',
           },
           children: [
             {
@@ -1086,7 +1086,7 @@ const menus = [
               redirect: '/level/menu1/menu1-1/menu1-1-1',
               meta: {
                 title: '菜单1-1',
-                alwaysShow: true
+                alwaysShow: true,
               },
               children: [
                 {
@@ -1098,10 +1098,10 @@ const menus = [
                   permission: ['edit', 'add', 'delete'],
                   meta: {
                     title: '菜单1-1-1',
-                    permission: ['edit', 'add', 'delete']
-                  }
-                }
-              ]
+                    permission: ['edit', 'add', 'delete'],
+                  },
+                },
+              ],
             },
             {
               path: 'menu1-2',
@@ -1112,10 +1112,10 @@ const menus = [
               permission: ['edit', 'add', 'delete'],
               meta: {
                 title: '菜单1-2',
-                permission: ['edit', 'add', 'delete']
-              }
-            }
-          ]
+                permission: ['edit', 'add', 'delete'],
+              },
+            },
+          ],
         },
         {
           path: 'menu2',
@@ -1126,11 +1126,11 @@ const menus = [
           permission: ['edit', 'add', 'delete'],
           meta: {
             title: '菜单2',
-            permission: ['edit', 'add', 'delete']
-          }
-        }
-      ]
-    }
+            permission: ['edit', 'add', 'delete'],
+          },
+        },
+      ],
+    },
   ],
   [
     {
@@ -1143,7 +1143,7 @@ const menus = [
       meta: {
         title: '综合示例',
         icon: 'vi-ep:management',
-        alwaysShow: true
+        alwaysShow: true,
       },
       children: [
         {
@@ -1160,12 +1160,12 @@ const menus = [
             hidden: true,
             showMainRoute: true,
             activeMenu: '/example/example-page',
-            permission: ['edit', 'add', 'delete']
-          }
-        }
-      ]
-    }
-  ]
+            permission: ['edit', 'add', 'delete'],
+          },
+        },
+      ],
+    },
+  ],
 ];
 
 for (let i = 0; i < 4; i++) {
@@ -1178,8 +1178,8 @@ for (let i = 0; i < 4; i++) {
       status: Mock.Random.integer(0, 1),
       createTime: '@datetime',
       remark: '@cword(10, 15)',
-      menu: menus[i]
-    })
+      menu: menus[i],
+    }),
   );
 }
 
@@ -1192,9 +1192,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: adminList
+        data: adminList,
       };
-    }
+    },
   },
   {
     url: '/mock/role/table',
@@ -1205,10 +1205,10 @@ export default [
         code: SUCCESS_CODE,
         data: {
           list: List,
-          total: 4
-        }
+          total: 4,
+        },
       };
-    }
+    },
   },
   // 列表接口
   {
@@ -1218,9 +1218,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: testList
+        data: testList,
       };
-    }
+    },
   },
   {
     url: '/mock/role/table',
@@ -1231,9 +1231,9 @@ export default [
         code: SUCCESS_CODE,
         data: {
           list: List,
-          total: 4
-        }
+          total: 4,
+        },
       };
-    }
-  }
+    },
+  },
 ];

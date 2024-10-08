@@ -13,8 +13,8 @@ const open = () => {
       'https://images4.alphacoders.com/200/thumbbig-200966.webp',
       'https://images5.alphacoders.com/657/thumbbig-657248.webp',
       'https://images3.alphacoders.com/679/thumbbig-679917.webp',
-      'https://images3.alphacoders.com/737/thumbbig-73785.webp'
-    ]
+      'https://images3.alphacoders.com/737/thumbbig-73785.webp',
+    ],
   });
 };
 </script>

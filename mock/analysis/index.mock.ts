@@ -16,10 +16,10 @@ export default [
           users: 102400,
           messages: 81212,
           moneys: 9280,
-          shoppings: 13600
-        }
+          shoppings: 13600,
+        },
       };
-    }
+    },
   },
   // 用户来源
   {
@@ -34,10 +34,10 @@ export default [
           { value: 310, name: 'analysis.mailMarketing' },
           { value: 234, name: 'analysis.allianceAdvertising' },
           { value: 135, name: 'analysis.videoAdvertising' },
-          { value: 1548, name: 'analysis.searchEngines' }
-        ]
+          { value: 1548, name: 'analysis.searchEngines' },
+        ],
       };
-    }
+    },
   },
   // 每周用户活跃量
   {
@@ -54,10 +54,10 @@ export default [
           { value: 12340, name: 'analysis.thursday' },
           { value: 24643, name: 'analysis.friday' },
           { value: 1322, name: 'analysis.saturday' },
-          { value: 1324, name: 'analysis.sunday' }
-        ]
+          { value: 1324, name: 'analysis.sunday' },
+        ],
       };
-    }
+    },
   },
   // 每月销售额
   {
@@ -79,9 +79,9 @@ export default [
           { estimate: 163, actual: 134, name: 'analysis.september' },
           { estimate: 185, actual: 56, name: 'analysis.october' },
           { estimate: 118, actual: 99, name: 'analysis.november' },
-          { estimate: 123, actual: 123, name: 'analysis.december' }
-        ]
+          { estimate: 123, actual: 123, name: 'analysis.december' },
+        ],
       };
-    }
-  }
+    },
+  },
 ] as MockMethod[];

@@ -43,7 +43,7 @@ interface AllSchemas {
  * @ deprecated 不推荐使用，感觉过于繁琐，不是很灵活 可能会在某个版本中删除
  */
 export const useCrudSchemas = (
-  crudSchema: CrudSchema[]
+  crudSchema: CrudSchema[],
 ): {
   allSchemas: AllSchemas;
 } => {
@@ -52,7 +52,7 @@ export const useCrudSchemas = (
     searchSchema: [],
     tableColumns: [],
     formSchema: [],
-    detailSchema: []
+    detailSchema: [],
   });
 
   const searchSchema = filterSearchSchema(crudSchema);
@@ -69,7 +69,7 @@ export const useCrudSchemas = (
   allSchemas.detailSchema = detailSchema;
 
   return {
-    allSchemas
+    allSchemas,
   };
 };
 
@@ -88,7 +88,7 @@ const filterSearchSchema = (crudSchema: CrudSchema[]): FormSchema[] => {
       component: schemaItem?.search?.component || 'Input',
       ...schemaItem.search,
       field: schemaItem.field,
-      label: schemaItem.search?.label || schemaItem.label
+      label: schemaItem.search?.label || schemaItem.label,
     };
 
     searchSchema.push(searchSchemaItem);
@@ -104,10 +104,10 @@ const filterTableSchema = (crudSchema: CrudSchema[]): TableColumn[] => {
       if (!schema?.table?.hidden) {
         return {
           ...schema,
-          ...schema.table
+          ...schema.table,
         };
       }
-    }
+    },
   });
 
   // 第一次过滤会有 undefined 所以需要二次过滤
@@ -130,7 +130,7 @@ const filterFormSchema = (crudSchema: CrudSchema[]): FormSchema[] => {
       component: formItem?.form?.component || 'Input',
       ...formItem.form,
       field: formItem.field,
-      label: formItem.form?.label || formItem.label
+      label: formItem.form?.label || formItem.label,
     };
 
     formSchema.push(formSchemaItem);
@@ -149,7 +149,7 @@ const filterDescriptionsSchema = (crudSchema: CrudSchema[]): DescriptionsSchema[
       const descriptionsSchemaItem = {
         ...schemaItem.detail,
         field: schemaItem.field,
-        label: schemaItem.detail?.label || schemaItem.label
+        label: schemaItem.detail?.label || schemaItem.label,
       };
 
       // 删除不必要的字段

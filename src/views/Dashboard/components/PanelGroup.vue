@@ -19,7 +19,7 @@ let totalState = reactive<AnalysisTotalTypes>({
   users: 0,
   messages: 0,
   moneys: 0,
-  shoppings: 0
+  shoppings: 0,
 });
 
 const getCount = async () => {

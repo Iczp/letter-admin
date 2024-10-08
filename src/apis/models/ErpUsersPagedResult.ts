@@ -4,17 +4,16 @@
 /* eslint-disable */
 import type { ErpUsersDto } from './ErpUsersDto';
 export type ErpUsersPagedResult = {
-    /**
-     * 输入参数
-     */
-    input?: Record<string, any>;
-    /**
-     * 总数
-     */
-    totalCount: number;
-    /**
-     * 列表项
-     */
-    items: Array<ErpUsersDto>;
+  /**
+   * 输入参数
+   */
+  input?: Record<string, any>;
+  /**
+   * 总数
+   */
+  totalCount: number;
+  /**
+   * 列表项
+   */
+  items: Array<ErpUsersDto>;
 };
-

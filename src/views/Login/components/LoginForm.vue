@@ -32,22 +32,22 @@ const { t } = useI18n();
 
 const rules = {
   username: [required()],
-  password: [required()]
+  password: [required()],
 };
 
 const schema = reactive<FormSchema[]>([
   {
     field: 'title',
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
         default: () => {
           return <h2 class="text-2xl font-bold text-center w-[100%]">{t('login.login')}</h2>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'username',
@@ -55,11 +55,11 @@ const schema = reactive<FormSchema[]>([
     // value: 'admin',
     component: 'Input',
     colProps: {
-      span: 24
+      span: 24,
     },
     componentProps: {
-      placeholder: 'admin or test'
-    }
+      placeholder: 'admin or test',
+    },
   },
   {
     field: 'password',
@@ -67,19 +67,19 @@ const schema = reactive<FormSchema[]>([
     // value: 'admin',
     component: 'InputPassword',
     colProps: {
-      span: 24
+      span: 24,
     },
     componentProps: {
       style: {
-        width: '100%'
+        width: '100%',
       },
-      placeholder: 'admin or test'
-    }
+      placeholder: 'admin or test',
+    },
   },
   {
     field: 'tool',
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
@@ -94,14 +94,14 @@ const schema = reactive<FormSchema[]>([
               </div>
             </>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'login',
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
@@ -125,22 +125,22 @@ const schema = reactive<FormSchema[]>([
               </div>
             </>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'other',
     component: 'Divider',
     label: t('login.otherLogin'),
     componentProps: {
-      contentPosition: 'center'
-    }
+      contentPosition: 'center',
+    },
   },
   {
     field: 'otherIcon',
     colProps: {
-      span: 24
+      span: 24,
     },
     formItemProps: {
       slots: {
@@ -179,10 +179,10 @@ const schema = reactive<FormSchema[]>([
               </div>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 const iconSize = 30;
@@ -217,8 +217,8 @@ watch(
     redirect.value = route?.query?.redirect as string;
   },
   {
-    immediate: true
-  }
+    immediate: true,
+  },
 );
 
 // 登录
@@ -237,8 +237,8 @@ const signIn = async () => {
           body: {
             account: formData.username,
             password: formData.password,
-            validate_code: '1q2w3e*'
-          }
+            validate_code: '1q2w3e*',
+          },
         });
         console.log('登录 token', token);
 
@@ -253,7 +253,7 @@ const signIn = async () => {
           if (remember.value) {
             userStore.setLoginInfo({
               username: formData.username,
-              password: formData.password
+              password: formData.password,
             });
           } else {
             userStore.setLoginInfo(undefined);
@@ -263,7 +263,7 @@ const signIn = async () => {
             username: formData.username,
             password: formData.password,
             role: 'admin',
-            roleId: '1'
+            roleId: '1',
           });
 
           console.log('appStore.getDynamicRouter', appStore.getDynamicRouter);
@@ -292,7 +292,7 @@ const signIn = async () => {
 const getRole = async () => {
   const formData = await getFormData<UserType>();
   const params = {
-    roleName: formData.username
+    roleName: formData.username,
   };
 
   const isAd = appStore.getDynamicRouter && appStore.getServerDynamicRouter;

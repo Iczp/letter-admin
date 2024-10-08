@@ -5,12 +5,12 @@ import { InviterConfigDto } from '@/client';
 defineProps({
   currentRow: {
     type: Object as PropType<InviterConfigDto>,
-    default: () => undefined
+    default: () => undefined,
   },
   detailSchema: {
     type: Array as PropType<DescriptionsSchema[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 </script>
 

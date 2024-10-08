@@ -8,7 +8,7 @@ export const useTitle = (newTitle?: string) => {
   const appStore = useAppStoreWithOut();
 
   const title = ref(
-    newTitle ? `${appStore.getTitle} - ${t(newTitle as string)}` : appStore.getTitle
+    newTitle ? `${appStore.getTitle} - ${t(newTitle as string)}` : appStore.getTitle,
   );
 
   watch(
@@ -18,7 +18,7 @@ export const useTitle = (newTitle?: string) => {
         document.title = n;
       }
     },
-    { immediate: true }
+    { immediate: true },
   );
 
   return title;

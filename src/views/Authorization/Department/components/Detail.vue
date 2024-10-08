@@ -6,12 +6,12 @@ import { Descriptions, DescriptionsSchema } from '@/components/Descriptions';
 defineProps({
   currentRow: {
     type: Object as PropType<Nullable<DepartmentItem>>,
-    default: () => null
+    default: () => null,
   },
   detailSchema: {
     type: Array as PropType<DescriptionsSchema[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 </script>
 

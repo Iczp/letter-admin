@@ -10,17 +10,17 @@ const { required } = useValidator();
 const props = defineProps({
   currentRow: {
     type: Object as PropType<Nullable<DepartmentItem>>,
-    default: () => null
+    default: () => null,
   },
   formSchema: {
     type: Array as PropType<FormSchema[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 
 const rules = reactive({
   id: [required()],
-  status: [required()]
+  status: [required()],
 });
 
 const { formRegister, formMethods } = useForm();
@@ -45,12 +45,12 @@ watch(
   },
   {
     deep: true,
-    immediate: true
-  }
+    immediate: true,
+  },
 );
 
 defineExpose({
-  submit
+  submit,
 });
 </script>
 

@@ -5,72 +5,72 @@ export const AppInfoSchema = {
   properties: {
     name: {
       type: 'string',
-      default: 'letter'
+      default: 'letter',
     },
     version: {
       type: 'string',
-      default: '0.0.22'
+      default: '0.0.22',
     },
     description: {
       type: 'string',
-      default: ''
+      default: '',
     },
     author: {
       type: 'string',
-      default: 'zhongpei <1000@intry.cn>'
+      default: 'zhongpei <1000@intry.cn>',
     },
     email: {
       type: 'string',
-      default: '1000@intry.cn'
+      default: '1000@intry.cn',
     },
     website: {
       type: 'string',
-      default: 'https://iczp.net'
-    }
+      default: 'https://iczp.net',
+    },
   },
-  required: ['name', 'version', 'description', 'author', 'email', 'website']
+  required: ['name', 'version', 'description', 'author', 'email', 'website'],
 } as const;
 
 export const UserDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     account: {
-      type: 'string'
+      type: 'string',
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
     phone: {
-      type: 'string'
+      type: 'string',
     },
     user_type: {
       type: 'string',
-      enum: ['Unset', 'Customer', 'ShopManager']
+      enum: ['Unset', 'Customer', 'ShopManager'],
     },
     erp_user_id: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   required: [
     'id',
@@ -79,69 +79,69 @@ export const UserDtoSchema = {
     'deletion_time',
     'is_deleted',
     'account',
-    'name'
-  ]
+    'name',
+  ],
 } as const;
 
 export const UserPagedResultSchema = {
   type: 'object',
   properties: {
     input: {
-      type: 'object'
+      type: 'object',
     },
     totalCount: {
-      type: 'number'
+      type: 'number',
     },
     items: {
       type: 'array',
       items: {
-        $ref: '#/components/schemas/UserDto'
-      }
-    }
+        $ref: '#/components/schemas/UserDto',
+      },
+    },
   },
-  required: ['totalCount', 'items']
+  required: ['totalCount', 'items'],
 } as const;
 
 export const UserDetailDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     account: {
-      type: 'string'
+      type: 'string',
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
     phone: {
-      type: 'string'
+      type: 'string',
     },
     user_type: {
       type: 'string',
-      enum: ['Unset', 'Customer', 'ShopManager']
+      enum: ['Unset', 'Customer', 'ShopManager'],
     },
     erp_user_id: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   required: [
     'id',
@@ -150,72 +150,72 @@ export const UserDetailDtoSchema = {
     'deletion_time',
     'is_deleted',
     'account',
-    'name'
-  ]
+    'name',
+  ],
 } as const;
 
 export const UserCreateInputSchema = {
   type: 'object',
   properties: {
     account: {
-      type: 'string'
+      type: 'string',
     },
     passoword: {
-      type: 'string'
+      type: 'string',
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
     userType: {
       type: 'string',
       default: 'Unset',
-      enum: ['Unset', 'Customer', 'ShopManager']
+      enum: ['Unset', 'Customer', 'ShopManager'],
     },
     gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     phone: {
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   },
-  required: ['account', 'passoword', 'name', 'is_enabled']
+  required: ['account', 'passoword', 'name', 'is_enabled'],
 } as const;
 
 export const UserUpdateInputSchema = {
   type: 'object',
   properties: {
     account: {
-      type: 'string'
+      type: 'string',
     },
     passoword: {
-      type: 'string'
+      type: 'string',
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
     userType: {
       type: 'string',
       default: 'Unset',
-      enum: ['Unset', 'Customer', 'ShopManager']
+      enum: ['Unset', 'Customer', 'ShopManager'],
     },
     gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     phone: {
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   },
-  required: ['account', 'passoword', 'name', 'is_enabled']
+  required: ['account', 'passoword', 'name', 'is_enabled'],
 } as const;
 
 export const ExcelUploadInputSchema = {
@@ -223,49 +223,49 @@ export const ExcelUploadInputSchema = {
   properties: {
     file: {
       type: 'string',
-      format: 'binary'
+      format: 'binary',
     },
     body: {
       type: 'object',
-      default: ''
-    }
+      default: '',
+    },
   },
-  required: ['file']
+  required: ['file'],
 } as const;
 
 export const ActivityDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     title: {
-      type: 'string'
+      type: 'string',
     },
     phone: {
-      type: 'string'
+      type: 'string',
     },
     user_type: {
-      type: 'object'
-    }
+      type: 'object',
+    },
   },
   required: [
     'id',
@@ -273,62 +273,62 @@ export const ActivityDtoSchema = {
     'last_modification_time',
     'deletion_time',
     'is_deleted',
-    'title'
-  ]
+    'title',
+  ],
 } as const;
 
 export const ActivityPagedResultSchema = {
   type: 'object',
   properties: {
     input: {
-      type: 'object'
+      type: 'object',
     },
     totalCount: {
-      type: 'number'
+      type: 'number',
     },
     items: {
       type: 'array',
       items: {
-        $ref: '#/components/schemas/ActivityDto'
-      }
-    }
+        $ref: '#/components/schemas/ActivityDto',
+      },
+    },
   },
-  required: ['totalCount', 'items']
+  required: ['totalCount', 'items'],
 } as const;
 
 export const ActivityDetailDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     title: {
-      type: 'string'
+      type: 'string',
     },
     phone: {
-      type: 'string'
+      type: 'string',
     },
     user_type: {
-      type: 'object'
-    }
+      type: 'object',
+    },
   },
   required: [
     'id',
@@ -336,135 +336,135 @@ export const ActivityDetailDtoSchema = {
     'last_modification_time',
     'deletion_time',
     'is_deleted',
-    'title'
-  ]
+    'title',
+  ],
 } as const;
 
 export const ActivityCreateInputSchema = {
   type: 'object',
   properties: {
     title: {
-      type: 'string'
+      type: 'string',
     },
     coverUrl: {
-      type: 'string'
+      type: 'string',
     },
     description: {
-      type: 'string'
+      type: 'string',
     },
     address: {
-      type: 'string'
+      type: 'string',
     },
     content: {
-      type: 'string'
+      type: 'string',
     },
     max_count: {
-      type: 'number'
+      type: 'number',
     },
     start_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     end_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_actived: {
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   },
-  required: ['title', 'max_count', 'is_actived']
+  required: ['title', 'max_count', 'is_actived'],
 } as const;
 
 export const ActivityUpdateInputSchema = {
   type: 'object',
   properties: {
     title: {
-      type: 'string'
+      type: 'string',
     },
     coverUrl: {
-      type: 'string'
+      type: 'string',
     },
     description: {
-      type: 'string'
+      type: 'string',
     },
     address: {
-      type: 'string'
+      type: 'string',
     },
     content: {
-      type: 'string'
+      type: 'string',
     },
     max_count: {
-      type: 'number'
+      type: 'number',
     },
     start_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     end_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_actived: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_enabled: {
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   },
-  required: ['title', 'max_count', 'is_actived', 'is_enabled']
+  required: ['title', 'max_count', 'is_actived', 'is_enabled'],
 } as const;
 
 export const ActivityCustomerDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     customer_name: {
-      type: 'string'
+      type: 'string',
     },
     customer_phone: {
-      type: 'string'
+      type: 'string',
     },
     customer_gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     remarks: {
-      type: 'string'
+      type: 'string',
     },
     inviter_name: {
-      type: 'string'
+      type: 'string',
     },
     is_invited: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_checked: {
-      type: 'boolean'
+      type: 'boolean',
     },
     activity: {
-      $ref: '#/components/schemas/ActivityDto'
-    }
+      $ref: '#/components/schemas/ActivityDto',
+    },
   },
   required: [
     'id',
@@ -472,79 +472,79 @@ export const ActivityCustomerDtoSchema = {
     'last_modification_time',
     'deletion_time',
     'is_deleted',
-    'customer_name'
-  ]
+    'customer_name',
+  ],
 } as const;
 
 export const ActivityCustomerPagedResultSchema = {
   type: 'object',
   properties: {
     input: {
-      type: 'object'
+      type: 'object',
     },
     totalCount: {
-      type: 'number'
+      type: 'number',
     },
     items: {
       type: 'array',
       items: {
-        $ref: '#/components/schemas/ActivityCustomerDto'
-      }
-    }
+        $ref: '#/components/schemas/ActivityCustomerDto',
+      },
+    },
   },
-  required: ['totalCount', 'items']
+  required: ['totalCount', 'items'],
 } as const;
 
 export const ActivityCustomerDetailDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     customer_name: {
-      type: 'string'
+      type: 'string',
     },
     customer_phone: {
-      type: 'string'
+      type: 'string',
     },
     customer_gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     remarks: {
-      type: 'string'
+      type: 'string',
     },
     inviter_name: {
-      type: 'string'
+      type: 'string',
     },
     is_invited: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_checked: {
-      type: 'boolean'
+      type: 'boolean',
     },
     activity: {
-      $ref: '#/components/schemas/ActivityDto'
-    }
+      $ref: '#/components/schemas/ActivityDto',
+    },
   },
   required: [
     'id',
@@ -552,113 +552,113 @@ export const ActivityCustomerDetailDtoSchema = {
     'last_modification_time',
     'deletion_time',
     'is_deleted',
-    'customer_name'
-  ]
+    'customer_name',
+  ],
 } as const;
 
 export const ActivityCustomerCreateInputSchema = {
   type: 'object',
   properties: {
     customer_name: {
-      type: 'string'
+      type: 'string',
     },
     customer_gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     customer_phone: {
-      type: 'string'
+      type: 'string',
     },
     inviter_name: {
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
       type: 'boolean',
-      default: true
+      default: true,
     },
     activity_id: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
-  required: ['customer_name', 'inviter_name', 'is_enabled', 'activity_id']
+  required: ['customer_name', 'inviter_name', 'is_enabled', 'activity_id'],
 } as const;
 
 export const ActivityCustomerUpdateInputSchema = {
   type: 'object',
   properties: {
     customer_name: {
-      type: 'string'
+      type: 'string',
     },
     customer_gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     customer_phone: {
-      type: 'string'
+      type: 'string',
     },
     inviter_name: {
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
       type: 'boolean',
-      default: true
-    }
+      default: true,
+    },
   },
-  required: ['customer_name', 'inviter_name', 'is_enabled']
+  required: ['customer_name', 'inviter_name', 'is_enabled'],
 } as const;
 
 export const ActivityCustomerInvitersDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     customer_name: {
-      type: 'string'
+      type: 'string',
     },
     customer_phone: {
-      type: 'string'
+      type: 'string',
     },
     customer_gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     remarks: {
-      type: 'string'
+      type: 'string',
     },
     inviter_name: {
-      type: 'string'
+      type: 'string',
     },
     is_invited: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_checked: {
-      type: 'boolean'
+      type: 'boolean',
     },
     activity: {
-      $ref: '#/components/schemas/ActivityDto'
-    }
+      $ref: '#/components/schemas/ActivityDto',
+    },
   },
   required: [
     'id',
@@ -666,60 +666,60 @@ export const ActivityCustomerInvitersDtoSchema = {
     'last_modification_time',
     'deletion_time',
     'is_deleted',
-    'customer_name'
-  ]
+    'customer_name',
+  ],
 } as const;
 
 export const ActivityCustomerInvitersDetailDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     customer_name: {
-      type: 'string'
+      type: 'string',
     },
     customer_phone: {
-      type: 'string'
+      type: 'string',
     },
     customer_gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     remarks: {
-      type: 'string'
+      type: 'string',
     },
     inviter_name: {
-      type: 'string'
+      type: 'string',
     },
     is_invited: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_checked: {
-      type: 'boolean'
+      type: 'boolean',
     },
     activity: {
-      $ref: '#/components/schemas/ActivityDto'
-    }
+      $ref: '#/components/schemas/ActivityDto',
+    },
   },
   required: [
     'id',
@@ -727,141 +727,141 @@ export const ActivityCustomerInvitersDetailDtoSchema = {
     'last_modification_time',
     'deletion_time',
     'is_deleted',
-    'customer_name'
-  ]
+    'customer_name',
+  ],
 } as const;
 
 export const ActivityCustomerInvitersCreateInputSchema = {
   type: 'object',
   properties: {
     customer_name: {
-      type: 'string'
+      type: 'string',
     },
     customer_gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     customer_phone: {
-      type: 'string'
+      type: 'string',
     },
     inviter_name: {
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
       type: 'boolean',
-      default: true
+      default: true,
     },
     activity_id: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
-  required: ['customer_name', 'inviter_name', 'is_enabled', 'activity_id']
+  required: ['customer_name', 'inviter_name', 'is_enabled', 'activity_id'],
 } as const;
 
 export const ActivityCustomerInvitersUpdateInputSchema = {
   type: 'object',
   properties: {
     customer_name: {
-      type: 'string'
+      type: 'string',
     },
     customer_gender: {
       type: 'string',
       default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female']
+      enum: ['Unknown', 'Male', 'Female'],
     },
     customer_phone: {
-      type: 'string'
+      type: 'string',
     },
     inviter_name: {
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
       type: 'boolean',
-      default: true
-    }
+      default: true,
+    },
   },
-  required: ['customer_name', 'inviter_name', 'is_enabled']
+  required: ['customer_name', 'inviter_name', 'is_enabled'],
 } as const;
 
 export const AuthInputSchema = {
   type: 'object',
   properties: {
     account: {
-      type: 'string'
+      type: 'string',
     },
     password: {
-      type: 'string'
+      type: 'string',
     },
     validate_code: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
-  required: ['account', 'password', 'validate_code']
+  required: ['account', 'password', 'validate_code'],
 } as const;
 
 export const TokenResultSchema = {
   type: 'object',
   properties: {
     access_token: {
-      type: 'string'
+      type: 'string',
     },
     token_type: {
-      type: 'string'
+      type: 'string',
     },
     expires_in: {
-      type: 'number'
+      type: 'number',
     },
     refresh_token: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
-  required: ['access_token', 'token_type', 'expires_in']
+  required: ['access_token', 'token_type', 'expires_in'],
 } as const;
 
 export const RoleDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
     code: {
-      type: 'string'
+      type: 'string',
     },
     is_public: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_static: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_default: {
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   },
   required: [
     'id',
@@ -870,68 +870,68 @@ export const RoleDtoSchema = {
     'deletion_time',
     'is_deleted',
     'name',
-    'code'
-  ]
+    'code',
+  ],
 } as const;
 
 export const RolePagedResultSchema = {
   type: 'object',
   properties: {
     input: {
-      type: 'object'
+      type: 'object',
     },
     totalCount: {
-      type: 'number'
+      type: 'number',
     },
     items: {
       type: 'array',
       items: {
-        $ref: '#/components/schemas/RoleDto'
-      }
-    }
+        $ref: '#/components/schemas/RoleDto',
+      },
+    },
   },
-  required: ['totalCount', 'items']
+  required: ['totalCount', 'items'],
 } as const;
 
 export const RoleDetailDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
     code: {
-      type: 'string'
+      type: 'string',
     },
     is_public: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_static: {
-      type: 'boolean'
+      type: 'boolean',
     },
     is_default: {
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   },
   required: [
     'id',
@@ -940,59 +940,59 @@ export const RoleDetailDtoSchema = {
     'deletion_time',
     'is_deleted',
     'name',
-    'code'
-  ]
+    'code',
+  ],
 } as const;
 
 export const RoleCreateInputSchema = {
   type: 'object',
   properties: {
     name: {
-      type: 'string'
+      type: 'string',
     },
     is_public: {
       type: 'boolean',
-      default: true
+      default: true,
     },
     is_default: {
       type: 'boolean',
-      default: false
+      default: false,
     },
     is_enabled: {
       type: 'boolean',
-      default: true
+      default: true,
     },
     code: {
-      type: 'string'
+      type: 'string',
     },
     is_static: {
       type: 'boolean',
-      default: false
-    }
+      default: false,
+    },
   },
-  required: ['name', 'code']
+  required: ['name', 'code'],
 } as const;
 
 export const RoleUpdateInputSchema = {
   type: 'object',
   properties: {
     name: {
-      type: 'string'
+      type: 'string',
     },
     is_public: {
       type: 'boolean',
-      default: true
+      default: true,
     },
     is_default: {
       type: 'boolean',
-      default: false
+      default: false,
     },
     is_enabled: {
       type: 'boolean',
-      default: true
-    }
+      default: true,
+    },
   },
-  required: ['name']
+  required: ['name'],
 } as const;
 
 export const SetPermissionsInputSchema = {
@@ -1001,97 +1001,97 @@ export const SetPermissionsInputSchema = {
     permissions: {
       type: 'array',
       items: {
-        type: 'string'
-      }
-    }
+        type: 'string',
+      },
+    },
   },
-  required: ['permissions']
+  required: ['permissions'],
 } as const;
 
 export const AuditLogDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     app_name: {
-      type: 'string'
+      type: 'string',
     },
     user_id: {
-      type: 'string'
+      type: 'string',
     },
     user_name: {
-      type: 'string'
+      type: 'string',
     },
     client_id: {
-      type: 'string'
+      type: 'string',
     },
     client_name: {
-      type: 'string'
+      type: 'string',
     },
     ip: {
-      type: 'string'
+      type: 'string',
     },
     browser_info: {
-      type: 'string'
+      type: 'string',
     },
     host: {
-      type: 'string'
+      type: 'string',
     },
     url: {
-      type: 'string'
+      type: 'string',
     },
     http_method: {
-      type: 'string'
+      type: 'string',
     },
     http_status: {
-      type: 'string'
+      type: 'string',
     },
     class_name: {
-      type: 'string'
+      type: 'string',
     },
     handler_name: {
-      type: 'string'
+      type: 'string',
     },
     headers: {
-      type: 'string'
+      type: 'string',
     },
     referer: {
-      type: 'string'
+      type: 'string',
     },
     accept_language: {
-      type: 'string'
+      type: 'string',
     },
     accept_encoding: {
-      type: 'string'
+      type: 'string',
     },
     data: {
-      type: 'string'
+      type: 'string',
     },
     duration: {
-      type: 'string'
+      type: 'string',
     },
     excution_time: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   required: [
     'id',
@@ -1119,113 +1119,113 @@ export const AuditLogDtoSchema = {
     'accept_encoding',
     'data',
     'duration',
-    'excution_time'
-  ]
+    'excution_time',
+  ],
 } as const;
 
 export const AuditLogPagedResultSchema = {
   type: 'object',
   properties: {
     input: {
-      type: 'object'
+      type: 'object',
     },
     totalCount: {
-      type: 'number'
+      type: 'number',
     },
     items: {
       type: 'array',
       items: {
-        $ref: '#/components/schemas/AuditLogDto'
-      }
-    }
+        $ref: '#/components/schemas/AuditLogDto',
+      },
+    },
   },
-  required: ['totalCount', 'items']
+  required: ['totalCount', 'items'],
 } as const;
 
 export const AuditLogDetailDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     app_name: {
-      type: 'string'
+      type: 'string',
     },
     user_id: {
-      type: 'string'
+      type: 'string',
     },
     user_name: {
-      type: 'string'
+      type: 'string',
     },
     client_id: {
-      type: 'string'
+      type: 'string',
     },
     client_name: {
-      type: 'string'
+      type: 'string',
     },
     ip: {
-      type: 'string'
+      type: 'string',
     },
     browser_info: {
-      type: 'string'
+      type: 'string',
     },
     host: {
-      type: 'string'
+      type: 'string',
     },
     url: {
-      type: 'string'
+      type: 'string',
     },
     http_method: {
-      type: 'string'
+      type: 'string',
     },
     http_status: {
-      type: 'string'
+      type: 'string',
     },
     class_name: {
-      type: 'string'
+      type: 'string',
     },
     handler_name: {
-      type: 'string'
+      type: 'string',
     },
     headers: {
-      type: 'string'
+      type: 'string',
     },
     referer: {
-      type: 'string'
+      type: 'string',
     },
     accept_language: {
-      type: 'string'
+      type: 'string',
     },
     accept_encoding: {
-      type: 'string'
+      type: 'string',
     },
     data: {
-      type: 'string'
+      type: 'string',
     },
     duration: {
-      type: 'string'
+      type: 'string',
     },
     excution_time: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   required: [
     'id',
@@ -1253,94 +1253,94 @@ export const AuditLogDetailDtoSchema = {
     'accept_encoding',
     'data',
     'duration',
-    'excution_time'
-  ]
+    'excution_time',
+  ],
 } as const;
 
 export const AuditLogCreateInputSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     app_name: {
-      type: 'string'
+      type: 'string',
     },
     user_id: {
-      type: 'string'
+      type: 'string',
     },
     user_name: {
-      type: 'string'
+      type: 'string',
     },
     client_id: {
-      type: 'string'
+      type: 'string',
     },
     client_name: {
-      type: 'string'
+      type: 'string',
     },
     ip: {
-      type: 'string'
+      type: 'string',
     },
     browser_info: {
-      type: 'string'
+      type: 'string',
     },
     host: {
-      type: 'string'
+      type: 'string',
     },
     url: {
-      type: 'string'
+      type: 'string',
     },
     http_method: {
-      type: 'string'
+      type: 'string',
     },
     http_status: {
-      type: 'string'
+      type: 'string',
     },
     class_name: {
-      type: 'string'
+      type: 'string',
     },
     handler_name: {
-      type: 'string'
+      type: 'string',
     },
     headers: {
-      type: 'string'
+      type: 'string',
     },
     referer: {
-      type: 'string'
+      type: 'string',
     },
     accept_language: {
-      type: 'string'
+      type: 'string',
     },
     accept_encoding: {
-      type: 'string'
+      type: 'string',
     },
     data: {
-      type: 'string'
+      type: 'string',
     },
     duration: {
-      type: 'string'
+      type: 'string',
     },
     excution_time: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   required: [
     'id',
@@ -1368,94 +1368,94 @@ export const AuditLogCreateInputSchema = {
     'accept_encoding',
     'data',
     'duration',
-    'excution_time'
-  ]
+    'excution_time',
+  ],
 } as const;
 
 export const AuditLogUpdateInputSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     app_name: {
-      type: 'string'
+      type: 'string',
     },
     user_id: {
-      type: 'string'
+      type: 'string',
     },
     user_name: {
-      type: 'string'
+      type: 'string',
     },
     client_id: {
-      type: 'string'
+      type: 'string',
     },
     client_name: {
-      type: 'string'
+      type: 'string',
     },
     ip: {
-      type: 'string'
+      type: 'string',
     },
     browser_info: {
-      type: 'string'
+      type: 'string',
     },
     host: {
-      type: 'string'
+      type: 'string',
     },
     url: {
-      type: 'string'
+      type: 'string',
     },
     http_method: {
-      type: 'string'
+      type: 'string',
     },
     http_status: {
-      type: 'string'
+      type: 'string',
     },
     class_name: {
-      type: 'string'
+      type: 'string',
     },
     handler_name: {
-      type: 'string'
+      type: 'string',
     },
     headers: {
-      type: 'string'
+      type: 'string',
     },
     referer: {
-      type: 'string'
+      type: 'string',
     },
     accept_language: {
-      type: 'string'
+      type: 'string',
     },
     accept_encoding: {
-      type: 'string'
+      type: 'string',
     },
     data: {
-      type: 'string'
+      type: 'string',
     },
     duration: {
-      type: 'string'
+      type: 'string',
     },
     excution_time: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   required: [
     'id',
@@ -1483,132 +1483,132 @@ export const AuditLogUpdateInputSchema = {
     'accept_encoding',
     'data',
     'duration',
-    'excution_time'
-  ]
+    'excution_time',
+  ],
 } as const;
 
 export const ErpUsersDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
     employeeNo: {
-      type: 'string'
+      type: 'string',
     },
     organizationId: {
-      type: 'string'
+      type: 'string',
     },
     organizationName: {
-      type: 'string'
+      type: 'string',
     },
     departmentId: {
-      type: 'string'
+      type: 'string',
     },
     departmentName: {
-      type: 'string'
+      type: 'string',
     },
     departmentShortName: {
-      type: 'string'
+      type: 'string',
     },
     departmentEnCode: {
-      type: 'string'
+      type: 'string',
     },
     parentDeptId: {
-      type: 'string'
+      type: 'string',
     },
     parentDeptName: {
-      type: 'string'
+      type: 'string',
     },
     parentDeptShortName: {
-      type: 'string'
+      type: 'string',
     },
     grade: {
-      type: 'string'
+      type: 'string',
     },
     employmentStatusName: {
-      type: 'string'
+      type: 'string',
     },
     employmentStatusId: {
-      type: 'string'
+      type: 'string',
     },
     headImage: {
-      type: 'string'
+      type: 'string',
     },
     jobType: {
-      type: 'number'
+      type: 'number',
     },
     mobile: {
-      type: 'string'
+      type: 'string',
     },
     spelling: {
-      type: 'string'
+      type: 'string',
     },
     simpleSpelling: {
-      type: 'string'
+      type: 'string',
     },
     spellingFlag: {
-      type: 'string'
+      type: 'string',
     },
     gender: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
-  required: ['id']
+  required: ['id'],
 } as const;
 
 export const ErpUsersPagedResultSchema = {
   type: 'object',
   properties: {
     input: {
-      type: 'object'
+      type: 'object',
     },
     totalCount: {
-      type: 'number'
+      type: 'number',
     },
     items: {
       type: 'array',
       items: {
-        $ref: '#/components/schemas/ErpUsersDto'
-      }
-    }
+        $ref: '#/components/schemas/ErpUsersDto',
+      },
+    },
   },
-  required: ['totalCount', 'items']
+  required: ['totalCount', 'items'],
 } as const;
 
 export const UserSimpleDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     account: {
-      type: 'string'
+      type: 'string',
     },
     name: {
-      type: 'string'
-    }
+      type: 'string',
+    },
   },
   required: [
     'id',
@@ -1618,54 +1618,54 @@ export const UserSimpleDtoSchema = {
     'deletion_time',
     'is_deleted',
     'account',
-    'name'
-  ]
+    'name',
+  ],
 } as const;
 
 export const InviterConfigDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     max_count: {
-      type: 'number'
+      type: 'number',
     },
     customers_count: {
-      type: 'number'
+      type: 'number',
     },
     activity: {
       allOf: [
         {
-          $ref: '#/components/schemas/ActivityDto'
-        }
-      ]
+          $ref: '#/components/schemas/ActivityDto',
+        },
+      ],
     },
     inviter: {
       allOf: [
         {
-          $ref: '#/components/schemas/UserSimpleDto'
-        }
-      ]
-    }
+          $ref: '#/components/schemas/UserSimpleDto',
+        },
+      ],
+    },
   },
   required: [
     'id',
@@ -1677,73 +1677,73 @@ export const InviterConfigDtoSchema = {
     'max_count',
     'customers_count',
     'activity',
-    'inviter'
-  ]
+    'inviter',
+  ],
 } as const;
 
 export const InviterConfigPagedResultSchema = {
   type: 'object',
   properties: {
     input: {
-      type: 'object'
+      type: 'object',
     },
     totalCount: {
-      type: 'number'
+      type: 'number',
     },
     items: {
       type: 'array',
       items: {
-        $ref: '#/components/schemas/InviterConfigDto'
-      }
-    }
+        $ref: '#/components/schemas/InviterConfigDto',
+      },
+    },
   },
-  required: ['totalCount', 'items']
+  required: ['totalCount', 'items'],
 } as const;
 
 export const InviterConfigDetailDtoSchema = {
   type: 'object',
   properties: {
     id: {
-      type: 'string'
+      type: 'string',
     },
     creation_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     last_modification_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_enabled: {
-      type: 'boolean'
+      type: 'boolean',
     },
     deletion_time: {
       format: 'date-time',
-      type: 'string'
+      type: 'string',
     },
     is_deleted: {
-      type: 'boolean'
+      type: 'boolean',
     },
     max_count: {
-      type: 'number'
+      type: 'number',
     },
     customers_count: {
-      type: 'number'
+      type: 'number',
     },
     activity: {
       allOf: [
         {
-          $ref: '#/components/schemas/ActivityDto'
-        }
-      ]
+          $ref: '#/components/schemas/ActivityDto',
+        },
+      ],
     },
     inviter: {
       allOf: [
         {
-          $ref: '#/components/schemas/UserSimpleDto'
-        }
-      ]
-    }
+          $ref: '#/components/schemas/UserSimpleDto',
+        },
+      ],
+    },
   },
   required: [
     'id',
@@ -1755,8 +1755,8 @@ export const InviterConfigDetailDtoSchema = {
     'max_count',
     'customers_count',
     'activity',
-    'inviter'
-  ]
+    'inviter',
+  ],
 } as const;
 
 export const InviterConfigCreateInputSchema = {
@@ -1764,22 +1764,22 @@ export const InviterConfigCreateInputSchema = {
   properties: {
     max_count: {
       type: 'number',
-      default: 1
+      default: 1,
     },
     is_enabled: {
       type: 'boolean',
-      default: true
+      default: true,
     },
     activity_id: {
       type: 'string',
-      default: ''
+      default: '',
     },
     inviter_user_id: {
       type: 'string',
-      default: ''
-    }
+      default: '',
+    },
   },
-  required: ['max_count', 'activity_id', 'inviter_user_id']
+  required: ['max_count', 'activity_id', 'inviter_user_id'],
 } as const;
 
 export const InviterConfigUpdateInputSchema = {
@@ -1787,12 +1787,12 @@ export const InviterConfigUpdateInputSchema = {
   properties: {
     max_count: {
       type: 'number',
-      default: 1
+      default: 1,
     },
     is_enabled: {
       type: 'boolean',
-      default: true
-    }
+      default: true,
+    },
   },
-  required: ['max_count']
+  required: ['max_count'],
 } as const;

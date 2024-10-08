@@ -8,8 +8,8 @@ import { ElDivider, ElMessage, ElMessageBox } from 'element-plus';
 const props = defineProps({
   userInfo: {
     type: Object,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
 });
 
 const { required, phone, maxlength, email } = useValidator();
@@ -20,31 +20,31 @@ const formSchema = reactive<FormSchema[]>([
     label: '昵称',
     component: 'Input',
     colProps: {
-      span: 24
-    }
+      span: 24,
+    },
   },
   {
     field: 'phoneNumber',
     label: '手机号码',
     component: 'Input',
     colProps: {
-      span: 24
-    }
+      span: 24,
+    },
   },
   {
     field: 'email',
     label: '邮箱',
     component: 'Input',
     colProps: {
-      span: 24
-    }
-  }
+      span: 24,
+    },
+  },
 ]);
 
 const rules = reactive({
   realName: [required(), maxlength(50)],
   phoneNumber: [phone()],
-  email: [email()]
+  email: [email()],
 });
 
 const { formRegister, formMethods } = useForm();
@@ -57,8 +57,8 @@ watch(
   },
   {
     immediate: true,
-    deep: true
-  }
+    deep: true,
+  },
 );
 
 const saveLoading = ref(false);
@@ -71,7 +71,7 @@ const save = async () => {
     ElMessageBox.confirm('是否确认修改?', '提示', {
       confirmButtonText: '确认',
       cancelButtonText: '取消',
-      type: 'warning'
+      type: 'warning',
     })
       .then(async () => {
         try {

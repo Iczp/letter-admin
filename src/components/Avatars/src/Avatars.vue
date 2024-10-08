@@ -11,20 +11,20 @@ const prefixCls = getPrefixCls('avatars');
 const props = defineProps({
   size: {
     type: [String, Number] as PropType<ComponentSize | number>,
-    default: ''
+    default: '',
   },
   max: {
     type: Number,
-    default: 5
+    default: 5,
   },
   data: {
     type: Array as PropType<AvatarItem[]>,
-    default: () => []
+    default: () => [],
   },
   showTooltip: {
     type: Boolean,
-    default: true
-  }
+    default: true,
+  },
 });
 
 const filterData = computed(() => props.data.slice(0, props.max));
@@ -40,7 +40,7 @@ const filterData = computed(() => props.data.slice(0, props.max));
             :src="item.url"
             class="relative"
             :style="{
-              zIndex: filterData.indexOf(item)
+              zIndex: filterData.indexOf(item),
             }"
           />
         </ElTooltip>
@@ -51,7 +51,7 @@ const filterData = computed(() => props.data.slice(0, props.max));
           :src="item.url"
           class="relative"
           :style="{
-            zIndex: filterData.indexOf(item)
+            zIndex: filterData.indexOf(item),
           }"
         />
       </template>
@@ -60,7 +60,7 @@ const filterData = computed(() => props.data.slice(0, props.max));
     <ElAvatar
       v-if="data.length > max"
       :style="{
-        zIndex: data.length
+        zIndex: data.length,
       }"
     >
       <span>+{{ data.length - max }}</span>

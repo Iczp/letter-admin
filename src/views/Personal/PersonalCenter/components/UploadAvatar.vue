@@ -5,8 +5,8 @@ import { ref, unref } from 'vue';
 defineProps({
   url: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 
 const fileUrl = ref('');
@@ -19,7 +19,7 @@ const getBase64 = () => {
 };
 
 defineExpose({
-  getBase64
+  getBase64,
 });
 </script>
 

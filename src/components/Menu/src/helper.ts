@@ -15,7 +15,7 @@ export const getAllParentPath = <T = Recordable>(treeData: T[], path: string) =>
 
 export const hasOneShowingChild = (
   children: AppRouteRecordRaw[] = [],
-  parent: AppRouteRecordRaw
+  parent: AppRouteRecordRaw,
 ): HasOneShowingChild => {
   const onlyOneChild = ref<OnlyOneChildType>();
 
@@ -34,7 +34,7 @@ export const hasOneShowingChild = (
   if (showingChildren.length === 1) {
     return {
       oneShowingChild: true,
-      onlyOneChild: unref(onlyOneChild)
+      onlyOneChild: unref(onlyOneChild),
     };
   }
 
@@ -43,12 +43,12 @@ export const hasOneShowingChild = (
     onlyOneChild.value = { ...parent, path: '', noShowingChildren: true };
     return {
       oneShowingChild: true,
-      onlyOneChild: unref(onlyOneChild)
+      onlyOneChild: unref(onlyOneChild),
     };
   }
 
   return {
     oneShowingChild: false,
-    onlyOneChild: unref(onlyOneChild)
+    onlyOneChild: unref(onlyOneChild),
   };
 };

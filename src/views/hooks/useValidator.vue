@@ -16,33 +16,33 @@ const formSchema = reactive<FormSchema[]>([
   {
     field: 'field1',
     label: '必填',
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field2',
     label: '长度范围',
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field3',
     label: '不能有空格',
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field4',
     label: '不能有特殊字符',
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field5',
     label: '是否相等-值1',
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field6',
     label: '是否相等-值2',
-    component: 'Input'
-  }
+    component: 'Input',
+  },
 ]);
 
 const rules = reactive<{
@@ -52,8 +52,8 @@ const rules = reactive<{
   field2: [
     lengthRange({
       min: 2,
-      max: 5
-    })
+      max: 5,
+    }),
   ],
   field3: [notSpace()],
   field4: [notSpecialCharacters()],
@@ -67,9 +67,9 @@ const rules = reactive<{
         } else {
           callback();
         }
-      }
-    }
-  ]
+      },
+    },
+  ],
 });
 </script>
 

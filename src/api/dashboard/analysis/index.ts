@@ -3,7 +3,7 @@ import type {
   AnalysisTotalTypes,
   UserAccessSource,
   WeeklyUserActivity,
-  MonthlySales
+  MonthlySales,
 } from './types';
 
 export const getCountApi = (): Promise<IResponse<AnalysisTotalTypes[]>> => {

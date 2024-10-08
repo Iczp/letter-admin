@@ -48,8 +48,8 @@ for (let i = 0; i < count; i++) {
       pageviews: '@integer(100, 500)',
       image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)'),
       video_uri:
-        '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-720p.mp4'
-    })
+        '//sf1-cdn-tos.huoshanstatic.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-720p.mp4',
+    }),
   );
 }
 
@@ -88,7 +88,7 @@ for (let i = 0; i < count; i++) {
               importance: '@integer(1, 3)',
               display_time: '@datetime',
               pageviews: '@integer(300, 5000)',
-              image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)')
+              image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)'),
             },
             {
               id: toAnyString(),
@@ -99,9 +99,9 @@ for (let i = 0; i < count; i++) {
               importance: '@integer(1, 3)',
               display_time: '@datetime',
               pageviews: '@integer(300, 5000)',
-              image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)')
-            }
-          ]
+              image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)'),
+            },
+          ],
         },
         {
           id: toAnyString(),
@@ -112,7 +112,7 @@ for (let i = 0; i < count; i++) {
           importance: '@integer(1, 3)',
           display_time: '@datetime',
           pageviews: '@integer(300, 5000)',
-          image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)')
+          image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)'),
         },
         {
           id: toAnyString(),
@@ -123,7 +123,7 @@ for (let i = 0; i < count; i++) {
           importance: '@integer(1, 3)',
           display_time: '@datetime',
           pageviews: '@integer(300, 5000)',
-          image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)')
+          image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)'),
         },
         {
           id: toAnyString(),
@@ -134,11 +134,11 @@ for (let i = 0; i < count; i++) {
           importance: '@integer(1, 3)',
           display_time: '@datetime',
           pageviews: '@integer(300, 5000)',
-          image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)')
-        }
-      ]
+          image_uri: Mock.Random.image('@integer(100, 500)x@integer(100, 500)'),
+        },
+      ],
       // image_uri
-    })
+    }),
   );
 }
 
@@ -146,33 +146,33 @@ const cardList = [
   {
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
     name: 'Alipay',
-    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
+    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
   },
   {
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png',
     name: 'Angular',
-    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
+    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
   },
   {
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/siCrBXXhmvTQGWPNLBow.png',
     name: 'Bootstrap',
-    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
+    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
   },
   {
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png',
     name: 'React',
-    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
+    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
   },
   {
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/ComBAopevLwENQdKWiIn.png',
     name: 'Vue',
-    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
+    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
   },
   {
     logo: 'https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png',
     name: 'Webpack',
-    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
-  }
+    desc: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+  },
 ];
 
 export default [
@@ -188,16 +188,16 @@ export default [
         return true;
       });
       const pageList = mockList.filter(
-        (_, index) => index < pageSize * pageIndex && index >= pageSize * (pageIndex - 1)
+        (_, index) => index < pageSize * pageIndex && index >= pageSize * (pageIndex - 1),
       );
       return {
         code: SUCCESS_CODE,
         data: {
           total: mockList.length,
-          list: pageList
-        }
+          list: pageList,
+        },
       };
-    }
+    },
   },
   // 列表接口
   {
@@ -211,16 +211,16 @@ export default [
         return true;
       });
       const pageList = mockList.filter(
-        (_, index) => index < pageSize * pageIndex && index >= pageSize * (pageIndex - 1)
+        (_, index) => index < pageSize * pageIndex && index >= pageSize * (pageIndex - 1),
       );
       return {
         code: SUCCESS_CODE,
         data: {
           total: mockList.length,
-          list: pageList
-        }
+          list: pageList,
+        },
       };
-    }
+    },
   },
   // 保存接口
   {
@@ -231,12 +231,12 @@ export default [
       if (!body.id) {
         List = [
           Object.assign(body, {
-            id: toAnyString()
-          })
+            id: toAnyString(),
+          }),
         ].concat(List);
         return {
           code: SUCCESS_CODE,
-          data: 'success'
+          data: 'success',
         };
       } else {
         List.map((item) => {
@@ -248,10 +248,10 @@ export default [
         });
         return {
           code: SUCCESS_CODE,
-          data: 'success'
+          data: 'success',
         };
       }
-    }
+    },
   },
   // 详情接口
   {
@@ -263,11 +263,11 @@ export default [
         if (example.id === id) {
           return {
             code: SUCCESS_CODE,
-            data: example
+            data: example,
           };
         }
       }
-    }
+    },
   },
   // 删除接口
   {
@@ -278,7 +278,7 @@ export default [
       if (!ids) {
         return {
           code: 500,
-          message: '请选择需要删除的数据'
+          message: '请选择需要删除的数据',
         };
       } else {
         let i = List.length;
@@ -289,10 +289,10 @@ export default [
         }
         return {
           code: SUCCESS_CODE,
-          data: 'success'
+          data: 'success',
         };
       }
-    }
+    },
   },
   {
     url: '/mock/card/list',
@@ -305,15 +305,15 @@ export default [
         return true;
       });
       const pageList = mockList.filter(
-        (_, index) => index < pageSize * pageIndex && index >= pageSize * (pageIndex - 1)
+        (_, index) => index < pageSize * pageIndex && index >= pageSize * (pageIndex - 1),
       );
       return {
         code: SUCCESS_CODE,
         data: {
           total: mockList.length,
-          list: pageList
-        }
+          list: pageList,
+        },
       };
-    }
-  }
+    },
+  },
 ];

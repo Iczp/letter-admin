@@ -13,31 +13,31 @@ const formSchema = reactive<FormSchema[]>([
     label: '旧密码',
     component: 'InputPassword',
     colProps: {
-      span: 24
-    }
+      span: 24,
+    },
   },
   {
     field: 'newPassword',
     label: '新密码',
     component: 'InputPassword',
     colProps: {
-      span: 24
+      span: 24,
     },
     componentProps: {
-      strength: true
-    }
+      strength: true,
+    },
   },
   {
     field: 'newPassword2',
     label: '确认新密码',
     component: 'InputPassword',
     colProps: {
-      span: 24
+      span: 24,
     },
     componentProps: {
-      strength: true
-    }
-  }
+      strength: true,
+    },
+  },
 ]);
 
 const rules = reactive({
@@ -53,8 +53,8 @@ const rules = reactive({
         } else {
           callback();
         }
-      }
-    }
+      },
+    },
   ],
   newPassword2: [
     required(),
@@ -67,9 +67,9 @@ const rules = reactive({
         } else {
           callback();
         }
-      }
-    }
-  ]
+      },
+    },
+  ],
 });
 
 const { formRegister, formMethods } = useForm();
@@ -85,7 +85,7 @@ const save = async () => {
     ElMessageBox.confirm('是否确认修改?', '提示', {
       confirmButtonText: '确认',
       cancelButtonText: '取消',
-      type: 'warning'
+      type: 'warning',
     })
       .then(async () => {
         try {

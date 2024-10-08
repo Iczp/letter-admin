@@ -18,7 +18,7 @@ const fetchDetailUserApi = async () => {
     phoneNumber: '18888888888',
     email: '502431556@qq.com',
     avatarUrl: '',
-    roleList: ['超级管理员']
+    roleList: ['超级管理员'],
   };
   userInfo.value = data;
 };

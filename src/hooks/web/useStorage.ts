@@ -41,6 +41,6 @@ export const useStorage = (type: 'sessionStorage' | 'localStorage' = 'sessionSto
     setStorage,
     getStorage,
     removeStorage,
-    clear
+    clear,
   };
 };

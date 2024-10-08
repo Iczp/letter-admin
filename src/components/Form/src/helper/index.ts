@@ -17,18 +17,18 @@ export const setTextPlaceholder = (schema: FormSchema): PlaceholderModel => {
     ComponentNameEnum.INPUT,
     ComponentNameEnum.AUTOCOMPLETE,
     ComponentNameEnum.INPUT_NUMBER,
-    ComponentNameEnum.INPUT_PASSWORD
+    ComponentNameEnum.INPUT_PASSWORD,
   ];
   const selectMap = [
     ComponentNameEnum.SELECT,
     ComponentNameEnum.TIME_PICKER,
     ComponentNameEnum.DATE_PICKER,
     ComponentNameEnum.TIME_SELECT,
-    ComponentNameEnum.SELECT_V2
+    ComponentNameEnum.SELECT_V2,
   ];
   if (textMap.includes(schema?.component as ComponentNameEnum)) {
     return {
-      placeholder: t('common.inputText')
+      placeholder: t('common.inputText'),
     };
   }
   if (selectMap.includes(schema?.component as ComponentNameEnum)) {
@@ -37,17 +37,17 @@ export const setTextPlaceholder = (schema: FormSchema): PlaceholderModel => {
     if (
       twoTextMap.includes(
         ((schema?.componentProps as any)?.type ||
-          (schema?.componentProps as any)?.isRange) as string
+          (schema?.componentProps as any)?.isRange) as string,
       )
     ) {
       return {
         startPlaceholder: t('common.startTimeText'),
         endPlaceholder: t('common.endTimeText'),
-        rangeSeparator: '-'
+        rangeSeparator: '-',
       };
     } else {
       return {
-        placeholder: t('common.selectText')
+        placeholder: t('common.selectText'),
       };
     }
   }
@@ -70,9 +70,9 @@ export const setGridProp = (col: ColProps = {}): ColProps => {
           sm: 12,
           md: 12,
           lg: 12,
-          xl: 12
+          xl: 12,
         }),
-    ...col
+    ...col,
   };
   return colProps;
 };
@@ -99,7 +99,7 @@ export const setComponentProps = (item: FormSchema): Recordable => {
   const componentProps: Recordable = {
     clearable: true,
     ...item.componentProps,
-    ...newOnEvents
+    ...newOnEvents,
   };
   // 需要删除额外的属性
   if (componentProps.slots) {
@@ -153,7 +153,7 @@ export const initModel = (schema: FormSchema[], formModel: Recordable) => {
       set(
         model,
         v.field,
-        hasField !== void 0 ? get(model, v.field) : v.value !== void 0 ? v.value : undefined
+        hasField !== void 0 ? get(model, v.field) : v.value !== void 0 ? v.value : undefined,
       );
       // model[v.field] = hasField ? model[v.field] : v.value !== void 0 ? v.value : undefined
     }

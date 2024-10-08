@@ -5,7 +5,7 @@ export const useReq = async <T>(
   fn: () => Promise<
     | (AxiosResponse<T, any> & { error: undefined })
     | (AxiosError<unknown, any> & { data: undefined; error: unknown })
-  >
+  >,
 ) => {
   const res = await fn();
 
@@ -16,13 +16,13 @@ export const useReq = async <T>(
   const data = ref(res.data);
 
   const error = reactive({
-    ...(res.error as any)
+    ...(res.error as any),
   });
 
   return {
     status,
     isSuccess,
     data,
-    error
+    error,
   };
 };

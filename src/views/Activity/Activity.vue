@@ -27,21 +27,21 @@ const { tableRegister, tableState, tableMethods } = useTable({
         id: unref(currentNodeKey),
         skip: currentPage.value ? 0 : (currentPage.value - 1) * pageSize.value,
         pageSize: unref(pageSize),
-        ...unref(searchParams)
-      }
+        ...unref(searchParams),
+      },
     });
 
     console.log('activityCustomerGetList', res);
 
     return {
       list: res.data?.items || [],
-      total: res.data?.totalCount || 0
+      total: res.data?.totalCount || 0,
     };
   },
   fetchDelApi: async () => {
     const res = await deleteUserByIdApi(unref(ids));
     return !!res;
-  }
+  },
 });
 const { total, loading, dataList, pageSize, currentPage } = tableState;
 const { getList, getElTableExpose, delList } = tableMethods;
@@ -50,33 +50,33 @@ const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'selection',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'selection'
-    }
+      type: 'selection',
+    },
   },
   {
     field: 'index',
     label: t('userDemo.index'),
     form: {
-      hidden: true
+      hidden: true,
     },
     search: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'index'
-    }
+      type: 'index',
+    },
   },
   {
     field: 'activity.title',
@@ -87,16 +87,16 @@ const crudSchemas = reactive<CrudSchema[]>([
       componentProps: {
         multiple: false,
         collapseTags: true,
-        maxCollapseTags: 1
+        maxCollapseTags: 1,
       },
       optionApi: async () => {
         const res = await activitiesGetList();
         return res.data?.items?.map((x) => ({
           label: x.title,
-          value: x.id
+          value: x.id,
         }));
-      }
-    }
+      },
+    },
   },
   {
     field: 'activity.id',
@@ -107,30 +107,30 @@ const crudSchemas = reactive<CrudSchema[]>([
       componentProps: {
         multiple: false,
         collapseTags: true,
-        maxCollapseTags: 1
+        maxCollapseTags: 1,
       },
       optionApi: async () => {
         const res = await activitiesGetList();
         return res.data?.items?.map((x) => ({
           label: x.title,
-          value: x.id
+          value: x.id,
         }));
-      }
-    }
+      },
+    },
   },
   {
     field: 'customer_name',
-    label: '客户名称'
+    label: '客户名称',
   },
   {
     field: 'customer_gender',
-    label: '性别'
+    label: '性别',
   },
   {
     field: 'customer_name',
     label: '活动名称1',
     detail: {
-      hidden: false
+      hidden: false,
 
       // slots: {
       //   default: (data: DepartmentUserItem) => {
@@ -139,30 +139,30 @@ const crudSchemas = reactive<CrudSchema[]>([
       // }
     },
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'TreeSelect',
       componentProps: {
         nodeKey: 'id',
         props: {
-          label: 'departmentName'
-        }
+          label: 'departmentName',
+        },
       },
       optionApi: async () => {
         const res = await getDepartmentApi();
         return res.data.list;
-      }
+      },
     },
     table: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'role',
     label: '电话',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'Select',
@@ -170,52 +170,52 @@ const crudSchemas = reactive<CrudSchema[]>([
       componentProps: {
         multiple: true,
         collapseTags: true,
-        maxCollapseTags: 1
+        maxCollapseTags: 1,
       },
       optionApi: async () => {
         const res = await getRoleListApi();
         return res.data?.list?.map((v) => ({
           label: v.roleName,
-          value: v.id
+          value: v.id,
         }));
-      }
-    }
+      },
+    },
   },
   {
     field: 'inviterConfig_Name',
-    label: '邀请人'
+    label: '邀请人',
   },
   {
     field: 'remarks',
     label: '备注',
     form: {
-      component: 'Input'
+      component: 'Input',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'creation_time',
     label: t('userDemo.createTime'),
     form: {
-      component: 'Input'
+      component: 'Input',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'action',
     label: t('userDemo.action'),
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
       width: 240,
@@ -235,10 +235,10 @@ const crudSchemas = reactive<CrudSchema[]>([
               </BaseButton>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 const { allSchemas } = useCrudSchemas(crudSchemas);
@@ -263,8 +263,8 @@ const fetchDepartment = async () => {
   const activities = await activitiesGetList({
     query: {
       skip: 0,
-      limit: 999
-    }
+      limit: 999,
+    },
   });
   activitiyItems.value = activities.data?.items || [];
   const res = await getDepartmentApi();
@@ -282,7 +282,7 @@ watch(
   () => currentDepartment.value,
   (val) => {
     unref(treeEl)!.filter(val);
-  }
+  },
 );
 const activity = ref<ActivityDto>();
 const currentChange = (item: ActivityDto) => {
@@ -388,7 +388,7 @@ const excelExportTitle = ref(t('excel.export'));
         node-key="id"
         :current-node-key="currentNodeKey"
         :props="{
-          label: 'departmentName'
+          label: 'departmentName',
         }"
         :filter-node-method="filterNode"
         @current-change="currentChange"
@@ -425,7 +425,7 @@ const excelExportTitle = ref(t('excel.export'));
         :loading="loading"
         @register="tableRegister"
         :pagination="{
-          total
+          total,
         }"
       />
     </ContentWrap>

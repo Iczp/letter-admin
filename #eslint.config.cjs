@@ -1,5 +1,5 @@
 module.exports = {
   // ... 现有的 ESLint 配置 ...
-  ignores: ['src/client/*', 'src/apis/*']
+  ignores: ['src/client/*', 'src/apis/*'],
   // ... 其他配置 ...
 };

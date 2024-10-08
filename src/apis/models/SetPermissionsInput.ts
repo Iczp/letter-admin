@@ -3,9 +3,8 @@
 /* tslint:disable */
 /* eslint-disable */
 export type SetPermissionsInput = {
-    /**
-     * 权限列表
-     */
-    permissions: Array<string>;
+  /**
+   * 权限列表
+   */
+  permissions: Array<string>;
 };
-

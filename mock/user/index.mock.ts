@@ -14,15 +14,15 @@ const List: {
     password: 'admin',
     role: 'admin',
     roleId: '1',
-    permissions: ['*.*.*']
+    permissions: ['*.*.*'],
   },
   {
     username: 'test',
     password: 'test',
     role: 'test',
     roleId: '2',
-    permissions: ['example:dialog:create', 'example:dialog:delete']
-  }
+    permissions: ['example:dialog:create', 'example:dialog:delete'],
+  },
 ];
 
 export default [
@@ -38,17 +38,17 @@ export default [
         return true;
       });
       const pageList = mockList.filter(
-        (_, index) => index < pageSize * pageIndex && index >= pageSize * (pageIndex - 1)
+        (_, index) => index < pageSize * pageIndex && index >= pageSize * (pageIndex - 1),
       );
 
       return {
         code: SUCCESS_CODE,
         data: {
           total: mockList.length,
-          list: pageList
-        }
+          list: pageList,
+        },
       };
-    }
+    },
   },
   // 登录接口
   {
@@ -63,17 +63,17 @@ export default [
           hasUser = true;
           return {
             code: SUCCESS_CODE,
-            data: user
+            data: user,
           };
         }
       }
       if (!hasUser) {
         return {
           code: 500,
-          message: '账号或密码错误'
+          message: '账号或密码错误',
         };
       }
-    }
+    },
   },
   // 退出接口
   {
@@ -83,8 +83,8 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: null
+        data: null,
       };
-    }
-  }
+    },
+  },
 ];

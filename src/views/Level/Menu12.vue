@@ -5,7 +5,7 @@ import { useI18n } from '@/hooks/web/useI18n';
 import { ref } from 'vue';
 
 defineOptions({
-  name: 'Menu12'
+  name: 'Menu12',
 });
 
 const { t } = useI18n();

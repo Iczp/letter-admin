@@ -10,9 +10,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: 'request-1'
+        data: 'request-1',
       };
-    }
+    },
   },
   {
     url: '/mock/request/2',
@@ -21,9 +21,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: 'request-2'
+        data: 'request-2',
       };
-    }
+    },
   },
   {
     url: '/mock/request/3',
@@ -32,9 +32,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: 'request-3'
+        data: 'request-3',
       };
-    }
+    },
   },
   {
     url: '/mock/request/4',
@@ -43,9 +43,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: 'request-4'
+        data: 'request-4',
       };
-    }
+    },
   },
   {
     url: '/mock/request/5',
@@ -54,9 +54,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: 'request-5'
+        data: 'request-5',
       };
-    }
+    },
   },
   {
     url: '/mock/request/expired',
@@ -65,8 +65,8 @@ export default [
     response: () => {
       return {
         code: 401,
-        message: 'token expired'
+        message: 'token expired',
       };
-    }
-  }
+    },
+  },
 ];

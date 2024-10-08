@@ -18,7 +18,7 @@ async function generateIcon() {
 
   const collections = Object.entries(raw).map(([id, v]) => ({
     ...(v as any),
-    id
+    id,
   }));
 
   const choices = collections.map((item) => ({ key: item.id, value: item.id, name: item.name }));
@@ -38,8 +38,8 @@ async function generateIcon() {
         type: 'list',
         name: 'iconSet',
         choices: choices,
-        message: 'Select the icon set that needs to be generated?'
-      }
+        message: 'Select the icon set that needs to be generated?',
+      },
     ])
     // ↓命令行问答的答案
     .then(async (answers) => {
@@ -58,14 +58,14 @@ async function generateIcon() {
 
           await fs.writeFileSync(
             path.join('src/components/IconPicker/src/data', `icons.${prefix}.ts`),
-            `export default ${JSON.stringify({ name: info.name, prefix: prefixName, icons })}`
+            `export default ${JSON.stringify({ name: info.name, prefix: prefixName, icons })}`,
           );
           // ↓分类处理完成，push类型名称
           prefixSet.push(prefix);
         }
       }
       console.log(
-        `✨ ${chalk.cyan(`[${pkg.name}]`)}` + ' - Icon generated successfully:' + `[${prefixSet}]`
+        `✨ ${chalk.cyan(`[${pkg.name}]`)}` + ' - Icon generated successfully:' + `[${prefixSet}]`,
       );
     });
 }

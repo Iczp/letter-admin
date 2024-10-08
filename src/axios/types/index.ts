@@ -4,7 +4,7 @@ import type {
   AxiosRequestConfig,
   AxiosInstance,
   AxiosRequestHeaders,
-  AxiosError
+  AxiosError,
 } from 'axios';
 
 interface RequestInterceptors<T> {
@@ -27,5 +27,5 @@ export {
   AxiosInstance,
   InternalAxiosRequestConfig,
   AxiosRequestHeaders,
-  AxiosError
+  AxiosError,
 };

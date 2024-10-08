@@ -7,12 +7,12 @@ const props = defineProps({
   url: {
     type: String,
     default: '',
-    required: true
+    required: true,
   },
   poster: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 
 const playerRef = ref<Player>();
@@ -24,7 +24,7 @@ const intiPlayer = () => {
   new Player({
     autoplay: false,
     ...props,
-    el: unref(videoEl)
+    el: unref(videoEl),
   });
 };
 
@@ -41,8 +41,8 @@ watch(
     }
   },
   {
-    deep: true
-  }
+    deep: true,
+  },
 );
 
 onBeforeUnmount(() => {
@@ -50,7 +50,7 @@ onBeforeUnmount(() => {
 });
 
 defineExpose({
-  playerExpose: () => unref(playerRef)
+  playerExpose: () => unref(playerRef),
 });
 </script>
 

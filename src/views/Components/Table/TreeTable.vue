@@ -13,13 +13,13 @@ const { tableRegister, tableState } = useTable({
     const { currentPage, pageSize } = tableState;
     const res = await getTreeTableListApi({
       pageIndex: unref(currentPage),
-      pageSize: unref(pageSize)
+      pageSize: unref(pageSize),
     });
     return {
       list: res.data.list,
-      total: res.data.total
+      total: res.data.total,
     };
-  }
+  },
 });
 const { loading, dataList, total, currentPage, pageSize } = tableState;
 
@@ -28,12 +28,12 @@ const { t } = useI18n();
 const columns = reactive<TableColumn[]>([
   {
     field: 'selection',
-    type: 'selection'
+    type: 'selection',
   },
   {
     field: 'index',
     label: t('tableDemo.index'),
-    type: 'index'
+    type: 'index',
   },
   {
     field: 'content',
@@ -41,15 +41,15 @@ const columns = reactive<TableColumn[]>([
     children: [
       {
         field: 'title',
-        label: t('tableDemo.title')
+        label: t('tableDemo.title'),
       },
       {
         field: 'author',
-        label: t('tableDemo.author')
+        label: t('tableDemo.author'),
       },
       {
         field: 'display_time',
-        label: t('tableDemo.displayTime')
+        label: t('tableDemo.displayTime'),
       },
       {
         field: 'importance',
@@ -64,13 +64,13 @@ const columns = reactive<TableColumn[]>([
                   : t('tableDemo.commonly')}
             </ElTag>
           );
-        }
+        },
       },
       {
         field: 'pageviews',
-        label: t('tableDemo.pageviews')
-      }
-    ]
+        label: t('tableDemo.pageviews'),
+      },
+    ],
   },
   {
     field: 'action',
@@ -82,9 +82,9 @@ const columns = reactive<TableColumn[]>([
             {t('tableDemo.action')}
           </BaseButton>
         );
-      }
-    }
-  }
+      },
+    },
+  },
 ]);
 
 const actionFn = (data) => {
@@ -103,7 +103,7 @@ const actionFn = (data) => {
       :loading="loading"
       sortable
       :pagination="{
-        total: total
+        total: total,
       }"
       @register="tableRegister"
     />

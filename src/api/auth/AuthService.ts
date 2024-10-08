@@ -6,7 +6,7 @@ export class AuthService {
     const ret = (await request({
       method: 'post',
       url: '/api/auth/login',
-      data: input
+      data: input,
     })) as TokenDto;
     ret.creation_time = new Date();
     return ret;

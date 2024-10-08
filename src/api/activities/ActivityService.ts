@@ -6,7 +6,7 @@ export class ActivityService {
   static getList(input?: ActivityGetLisInput) {
     return request.get<PagedResultDto<ActivityDto>>({
       url: '/api/activities',
-      data: input
+      data: input,
     });
   }
 }

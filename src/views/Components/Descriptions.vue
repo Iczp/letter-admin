@@ -20,31 +20,31 @@ const data = reactive({
   email: '502431556@qq.com',
   addr: '这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的地址',
   sex: '男',
-  certy: '3505831994xxxxxxxx'
+  certy: '3505831994xxxxxxxx',
 });
 
 const schema = reactive<DescriptionsSchema[]>([
   {
     field: 'username',
-    label: t('descriptionsDemo.username')
+    label: t('descriptionsDemo.username'),
   },
   {
     field: 'nickName',
-    label: t('descriptionsDemo.nickName')
+    label: t('descriptionsDemo.nickName'),
   },
   {
     field: 'phone',
-    label: t('descriptionsDemo.phone')
+    label: t('descriptionsDemo.phone'),
   },
   {
     field: 'email',
-    label: t('descriptionsDemo.email')
+    label: t('descriptionsDemo.email'),
   },
   {
     field: 'addr',
     label: t('descriptionsDemo.addr'),
-    span: 24
-  }
+    span: 24,
+  },
 ]);
 
 const schema2 = reactive<DescriptionsSchema[]>([
@@ -61,8 +61,8 @@ const schema2 = reactive<DescriptionsSchema[]>([
             <ElInput v-model={form.username} />
           </ElFormItem>
         );
-      }
-    }
+      },
+    },
   },
   {
     field: 'nickName',
@@ -77,8 +77,8 @@ const schema2 = reactive<DescriptionsSchema[]>([
             <ElInput v-model={form.nickName} />
           </ElFormItem>
         );
-      }
-    }
+      },
+    },
   },
   {
     field: 'phone',
@@ -93,8 +93,8 @@ const schema2 = reactive<DescriptionsSchema[]>([
             <ElInput v-model={form.phone} />
           </ElFormItem>
         );
-      }
-    }
+      },
+    },
   },
   {
     field: 'email',
@@ -109,8 +109,8 @@ const schema2 = reactive<DescriptionsSchema[]>([
             <ElInput v-model={form.email} />
           </ElFormItem>
         );
-      }
-    }
+      },
+    },
   },
   {
     field: 'addr',
@@ -125,10 +125,10 @@ const schema2 = reactive<DescriptionsSchema[]>([
             <ElInput v-model={form.addr} />
           </ElFormItem>
         );
-      }
+      },
     },
-    span: 24
-  }
+    span: 24,
+  },
 ]);
 
 const form = reactive({
@@ -136,7 +136,7 @@ const form = reactive({
   nickName: '',
   phone: '',
   email: '',
-  addr: ''
+  addr: '',
 });
 
 const rules = reactive({
@@ -144,7 +144,7 @@ const rules = reactive({
   nickName: [required()],
   phone: [required()],
   email: [required()],
-  addr: [required()]
+  addr: [required()],
 });
 
 const { formRegister, formMethods } = useForm();

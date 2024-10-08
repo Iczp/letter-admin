@@ -13,7 +13,7 @@ export default defineConfig({
     format: 'prettier',
     path: 'src/client',
     // lint: 'eslint'
-    lint: false
+    lint: false,
   },
   services: {
     asClass: false,
@@ -28,9 +28,9 @@ export default defineConfig({
     // response: 'response'
   },
   types: {
-    enums: 'typescript'
+    enums: 'typescript',
   },
   schemas: {
-    type: 'form'
-  }
+    type: 'form',
+  },
 });

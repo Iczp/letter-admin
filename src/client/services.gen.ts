@@ -4,7 +4,7 @@ import {
   createClient,
   createConfig,
   type Options,
-  formDataBodySerializer
+  formDataBodySerializer,
 } from '@hey-api/client-axios';
 import type {
   AppControllerGetInfoError,
@@ -213,7 +213,7 @@ import type {
   InviterConfigControllerExportExcelResponse,
   InviterConfigControllerImportExcelData,
   InviterConfigControllerImportExcelError,
-  InviterConfigControllerImportExcelResponse
+  InviterConfigControllerImportExcelResponse,
 } from './types.gen';
 
 export const client = createClient(createConfig());
@@ -222,7 +222,7 @@ export const client = createClient(createConfig());
  * 关于 App Test
  */
 export const appGetInfo = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AppControllerGetInfoResponse,
@@ -230,7 +230,7 @@ export const appGetInfo = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/test'
+    url: '/api/test',
   });
 };
 
@@ -238,7 +238,7 @@ export const appGetInfo = <ThrowOnError extends boolean = false>(
  * get tables
  */
 export const appGetTables = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AppControllerGetTablesResponse,
@@ -246,7 +246,7 @@ export const appGetTables = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/tables'
+    url: '/api/tables',
   });
 };
 
@@ -254,7 +254,7 @@ export const appGetTables = <ThrowOnError extends boolean = false>(
  * get table
  */
 export const appGetTable = <ThrowOnError extends boolean = false>(
-  options: Options<AppControllerGetTableData, ThrowOnError>
+  options: Options<AppControllerGetTableData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AppControllerGetTableResponse,
@@ -262,7 +262,7 @@ export const appGetTable = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/table'
+    url: '/api/table',
   });
 };
 
@@ -271,7 +271,7 @@ export const appGetTable = <ThrowOnError extends boolean = false>(
  * 返回 AppInfo
  */
 export const appGetAbout = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AppControllerGetAboutResponse,
@@ -279,7 +279,7 @@ export const appGetAbout = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/about'
+    url: '/api/about',
   });
 };
 
@@ -287,7 +287,7 @@ export const appGetAbout = <ThrowOnError extends boolean = false>(
  * 用户列表
  */
 export const usersGetList = <ThrowOnError extends boolean = false>(
-  options?: Options<UsersControllerGetListData, ThrowOnError>
+  options?: Options<UsersControllerGetListData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     UsersControllerGetListResponse,
@@ -295,7 +295,7 @@ export const usersGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user'
+    url: '/api/user',
   });
 };
 
@@ -303,7 +303,7 @@ export const usersGetList = <ThrowOnError extends boolean = false>(
  * 创建用户
  */
 export const usersCreate = <ThrowOnError extends boolean = false>(
-  options: Options<UsersControllerCreateData, ThrowOnError>
+  options: Options<UsersControllerCreateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     UsersControllerCreateResponse,
@@ -311,7 +311,7 @@ export const usersCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user'
+    url: '/api/user',
   });
 };
 
@@ -319,7 +319,7 @@ export const usersCreate = <ThrowOnError extends boolean = false>(
  * 删除
  */
 export const usersDeleteMany = <ThrowOnError extends boolean = false>(
-  options: Options<UsersControllerDeleteManyData, ThrowOnError>
+  options: Options<UsersControllerDeleteManyData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).delete<
     UsersControllerDeleteManyResponse,
@@ -327,7 +327,7 @@ export const usersDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user'
+    url: '/api/user',
   });
 };
 
@@ -335,7 +335,7 @@ export const usersDeleteMany = <ThrowOnError extends boolean = false>(
  * 用户详情
  */
 export const usersGetItem = <ThrowOnError extends boolean = false>(
-  options: Options<UsersControllerGetItemData, ThrowOnError>
+  options: Options<UsersControllerGetItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     UsersControllerGetItemResponse,
@@ -343,7 +343,7 @@ export const usersGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/{id}'
+    url: '/api/user/{id}',
   });
 };
 
@@ -351,7 +351,7 @@ export const usersGetItem = <ThrowOnError extends boolean = false>(
  * 修改用户
  */
 export const usersUpdate = <ThrowOnError extends boolean = false>(
-  options: Options<UsersControllerUpdateData, ThrowOnError>
+  options: Options<UsersControllerUpdateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).put<
     UsersControllerUpdateResponse,
@@ -359,7 +359,7 @@ export const usersUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/{id}'
+    url: '/api/user/{id}',
   });
 };
 
@@ -368,7 +368,7 @@ export const usersUpdate = <ThrowOnError extends boolean = false>(
  * 启用/禁用
  */
 export const usersSetIsEnabled = <ThrowOnError extends boolean = false>(
-  options: Options<UsersControllerSetIsEnabledData, ThrowOnError>
+  options: Options<UsersControllerSetIsEnabledData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     UsersControllerSetIsEnabledResponse,
@@ -376,7 +376,7 @@ export const usersSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/enabled/{id}'
+    url: '/api/user/enabled/{id}',
   });
 };
 
@@ -385,7 +385,7 @@ export const usersSetIsEnabled = <ThrowOnError extends boolean = false>(
  * excel 模板
  */
 export const usersGetExcelTemplate = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     UsersControllerGetExcelTemplateResponse,
@@ -393,7 +393,7 @@ export const usersGetExcelTemplate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/excel/tpl'
+    url: '/api/user/excel/tpl',
   });
 };
 
@@ -402,7 +402,7 @@ export const usersGetExcelTemplate = <ThrowOnError extends boolean = false>(
  * Excel 数据
  */
 export const usersExportExcel = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     UsersControllerExportExcelResponse,
@@ -410,7 +410,7 @@ export const usersExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/excel/output'
+    url: '/api/user/excel/output',
   });
 };
 
@@ -419,7 +419,7 @@ export const usersExportExcel = <ThrowOnError extends boolean = false>(
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
 export const usersImportExcel = <ThrowOnError extends boolean = false>(
-  options: Options<UsersControllerImportExcelData, ThrowOnError>
+  options: Options<UsersControllerImportExcelData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     UsersControllerImportExcelResponse,
@@ -430,9 +430,9 @@ export const usersImportExcel = <ThrowOnError extends boolean = false>(
     ...formDataBodySerializer,
     headers: {
       'Content-Type': null,
-      ...options?.headers
+      ...options?.headers,
     },
-    url: '/api/user/excel/import'
+    url: '/api/user/excel/import',
   });
 };
 
@@ -440,7 +440,7 @@ export const usersImportExcel = <ThrowOnError extends boolean = false>(
  * 活动列表
  */
 export const activitiesGetList = <ThrowOnError extends boolean = false>(
-  options?: Options<ActivitiesControllerGetListData, ThrowOnError>
+  options?: Options<ActivitiesControllerGetListData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivitiesControllerGetListResponse,
@@ -448,7 +448,7 @@ export const activitiesGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities'
+    url: '/api/activities',
   });
 };
 
@@ -456,7 +456,7 @@ export const activitiesGetList = <ThrowOnError extends boolean = false>(
  * 创建活动
  */
 export const activitiesCreate = <ThrowOnError extends boolean = false>(
-  options: Options<ActivitiesControllerCreateData, ThrowOnError>
+  options: Options<ActivitiesControllerCreateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivitiesControllerCreateResponse,
@@ -464,7 +464,7 @@ export const activitiesCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities'
+    url: '/api/activities',
   });
 };
 
@@ -472,7 +472,7 @@ export const activitiesCreate = <ThrowOnError extends boolean = false>(
  * 删除
  */
 export const activitiesDeleteMany = <ThrowOnError extends boolean = false>(
-  options: Options<ActivitiesControllerDeleteManyData, ThrowOnError>
+  options: Options<ActivitiesControllerDeleteManyData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).delete<
     ActivitiesControllerDeleteManyResponse,
@@ -480,7 +480,7 @@ export const activitiesDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities'
+    url: '/api/activities',
   });
 };
 
@@ -488,7 +488,7 @@ export const activitiesDeleteMany = <ThrowOnError extends boolean = false>(
  * 活动列表
  */
 export const activitiesGetListByCurrentUser = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivitiesControllerGetListByCurrentUserResponse,
@@ -496,7 +496,7 @@ export const activitiesGetListByCurrentUser = <ThrowOnError extends boolean = fa
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/current-user/list'
+    url: '/api/activities/current-user/list',
   });
 };
 
@@ -504,7 +504,7 @@ export const activitiesGetListByCurrentUser = <ThrowOnError extends boolean = fa
  * 活动详情
  */
 export const activitiesGetItem = <ThrowOnError extends boolean = false>(
-  options: Options<ActivitiesControllerGetItemData, ThrowOnError>
+  options: Options<ActivitiesControllerGetItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivitiesControllerGetItemResponse,
@@ -512,7 +512,7 @@ export const activitiesGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/{id}'
+    url: '/api/activities/{id}',
   });
 };
 
@@ -520,7 +520,7 @@ export const activitiesGetItem = <ThrowOnError extends boolean = false>(
  * 修改活动
  */
 export const activitiesUpdate = <ThrowOnError extends boolean = false>(
-  options: Options<ActivitiesControllerUpdateData, ThrowOnError>
+  options: Options<ActivitiesControllerUpdateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).put<
     ActivitiesControllerUpdateResponse,
@@ -528,7 +528,7 @@ export const activitiesUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/{id}'
+    url: '/api/activities/{id}',
   });
 };
 
@@ -537,7 +537,7 @@ export const activitiesUpdate = <ThrowOnError extends boolean = false>(
  * 启用/禁用
  */
 export const activitiesSetIsEnabled = <ThrowOnError extends boolean = false>(
-  options: Options<ActivitiesControllerSetIsEnabledData, ThrowOnError>
+  options: Options<ActivitiesControllerSetIsEnabledData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivitiesControllerSetIsEnabledResponse,
@@ -545,7 +545,7 @@ export const activitiesSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/enabled/{id}'
+    url: '/api/activities/enabled/{id}',
   });
 };
 
@@ -554,7 +554,7 @@ export const activitiesSetIsEnabled = <ThrowOnError extends boolean = false>(
  * excel 模板
  */
 export const activitiesGetExcelTemplate = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivitiesControllerGetExcelTemplateResponse,
@@ -562,7 +562,7 @@ export const activitiesGetExcelTemplate = <ThrowOnError extends boolean = false>
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/excel/tpl'
+    url: '/api/activities/excel/tpl',
   });
 };
 
@@ -571,7 +571,7 @@ export const activitiesGetExcelTemplate = <ThrowOnError extends boolean = false>
  * Excel 数据
  */
 export const activitiesExportExcel = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivitiesControllerExportExcelResponse,
@@ -579,7 +579,7 @@ export const activitiesExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/excel/output'
+    url: '/api/activities/excel/output',
   });
 };
 
@@ -588,7 +588,7 @@ export const activitiesExportExcel = <ThrowOnError extends boolean = false>(
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
 export const activitiesImportExcel = <ThrowOnError extends boolean = false>(
-  options: Options<ActivitiesControllerImportExcelData, ThrowOnError>
+  options: Options<ActivitiesControllerImportExcelData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivitiesControllerImportExcelResponse,
@@ -599,9 +599,9 @@ export const activitiesImportExcel = <ThrowOnError extends boolean = false>(
     ...formDataBodySerializer,
     headers: {
       'Content-Type': null,
-      ...options?.headers
+      ...options?.headers,
     },
-    url: '/api/activities/excel/import'
+    url: '/api/activities/excel/import',
   });
 };
 
@@ -609,7 +609,7 @@ export const activitiesImportExcel = <ThrowOnError extends boolean = false>(
  * [活动客户]列表
  */
 export const activityCustomerGetList = <ThrowOnError extends boolean = false>(
-  options?: Options<ActivityCustomerControllerGetListData, ThrowOnError>
+  options?: Options<ActivityCustomerControllerGetListData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivityCustomerControllerGetListResponse,
@@ -617,7 +617,7 @@ export const activityCustomerGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer'
+    url: '/api/activity-customer',
   });
 };
 
@@ -625,7 +625,7 @@ export const activityCustomerGetList = <ThrowOnError extends boolean = false>(
  * 创建[活动客户]
  */
 export const activityCustomerCreate = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerCreateData, ThrowOnError>
+  options: Options<ActivityCustomerControllerCreateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerControllerCreateResponse,
@@ -633,7 +633,7 @@ export const activityCustomerCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer'
+    url: '/api/activity-customer',
   });
 };
 
@@ -641,7 +641,7 @@ export const activityCustomerCreate = <ThrowOnError extends boolean = false>(
  * 删除
  */
 export const activityCustomerDeleteMany = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerDeleteManyData, ThrowOnError>
+  options: Options<ActivityCustomerControllerDeleteManyData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).delete<
     ActivityCustomerControllerDeleteManyResponse,
@@ -649,7 +649,7 @@ export const activityCustomerDeleteMany = <ThrowOnError extends boolean = false>
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer'
+    url: '/api/activity-customer',
   });
 };
 
@@ -657,7 +657,7 @@ export const activityCustomerDeleteMany = <ThrowOnError extends boolean = false>
  * [活动客户]详情
  */
 export const activityCustomerGetItem = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerGetItemData, ThrowOnError>
+  options: Options<ActivityCustomerControllerGetItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivityCustomerControllerGetItemResponse,
@@ -665,7 +665,7 @@ export const activityCustomerGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/{id}'
+    url: '/api/activity-customer/{id}',
   });
 };
 
@@ -673,7 +673,7 @@ export const activityCustomerGetItem = <ThrowOnError extends boolean = false>(
  * 修改[活动客户]
  */
 export const activityCustomerUpdate = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerUpdateData, ThrowOnError>
+  options: Options<ActivityCustomerControllerUpdateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).put<
     ActivityCustomerControllerUpdateResponse,
@@ -681,7 +681,7 @@ export const activityCustomerUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/{id}'
+    url: '/api/activity-customer/{id}',
   });
 };
 
@@ -689,7 +689,7 @@ export const activityCustomerUpdate = <ThrowOnError extends boolean = false>(
  * 设置 是否签到
  */
 export const activityCustomerSetIsChecked = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerSetIsCheckedData, ThrowOnError>
+  options: Options<ActivityCustomerControllerSetIsCheckedData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerControllerSetIsCheckedResponse,
@@ -697,7 +697,7 @@ export const activityCustomerSetIsChecked = <ThrowOnError extends boolean = fals
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/checked/{id}'
+    url: '/api/activity-customer/checked/{id}',
   });
 };
 
@@ -705,7 +705,7 @@ export const activityCustomerSetIsChecked = <ThrowOnError extends boolean = fals
  * 设置 是否已邀请
  */
 export const activityCustomerSetIsActived = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerSetIsActivedData, ThrowOnError>
+  options: Options<ActivityCustomerControllerSetIsActivedData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerControllerSetIsActivedResponse,
@@ -713,7 +713,7 @@ export const activityCustomerSetIsActived = <ThrowOnError extends boolean = fals
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/invited/{id}'
+    url: '/api/activity-customer/invited/{id}',
   });
 };
 
@@ -722,7 +722,7 @@ export const activityCustomerSetIsActived = <ThrowOnError extends boolean = fals
  * 导出excel 单次导出数据不能太多
  */
 export const activityCustomerExportExcel = <ThrowOnError extends boolean = false>(
-  options?: Options<ActivityCustomerControllerExportExcelData, ThrowOnError>
+  options?: Options<ActivityCustomerControllerExportExcelData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivityCustomerControllerExportExcelResponse,
@@ -730,7 +730,7 @@ export const activityCustomerExportExcel = <ThrowOnError extends boolean = false
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/excel/output'
+    url: '/api/activity-customer/excel/output',
   });
 };
 
@@ -739,7 +739,7 @@ export const activityCustomerExportExcel = <ThrowOnError extends boolean = false
  * 启用/禁用
  */
 export const activityCustomerSetIsEnabled = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerSetIsEnabledData, ThrowOnError>
+  options: Options<ActivityCustomerControllerSetIsEnabledData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerControllerSetIsEnabledResponse,
@@ -747,7 +747,7 @@ export const activityCustomerSetIsEnabled = <ThrowOnError extends boolean = fals
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/enabled/{id}'
+    url: '/api/activity-customer/enabled/{id}',
   });
 };
 
@@ -756,7 +756,7 @@ export const activityCustomerSetIsEnabled = <ThrowOnError extends boolean = fals
  * excel 模板
  */
 export const activityCustomerGetExcelTemplate = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivityCustomerControllerGetExcelTemplateResponse,
@@ -764,7 +764,7 @@ export const activityCustomerGetExcelTemplate = <ThrowOnError extends boolean = 
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/excel/tpl'
+    url: '/api/activity-customer/excel/tpl',
   });
 };
 
@@ -773,7 +773,7 @@ export const activityCustomerGetExcelTemplate = <ThrowOnError extends boolean = 
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
 export const activityCustomerImportExcel = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerImportExcelData, ThrowOnError>
+  options: Options<ActivityCustomerControllerImportExcelData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerControllerImportExcelResponse,
@@ -784,9 +784,9 @@ export const activityCustomerImportExcel = <ThrowOnError extends boolean = false
     ...formDataBodySerializer,
     headers: {
       'Content-Type': null,
-      ...options?.headers
+      ...options?.headers,
     },
-    url: '/api/activity-customer/excel/import'
+    url: '/api/activity-customer/excel/import',
   });
 };
 
@@ -794,7 +794,7 @@ export const activityCustomerImportExcel = <ThrowOnError extends boolean = false
  * 客户列表
  */
 export const activityCustomerInvitersGetList = <ThrowOnError extends boolean = false>(
-  options?: Options<ActivityCustomerInvitersControllerGetListData, ThrowOnError>
+  options?: Options<ActivityCustomerInvitersControllerGetListData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivityCustomerInvitersControllerGetListResponse,
@@ -802,7 +802,7 @@ export const activityCustomerInvitersGetList = <ThrowOnError extends boolean = f
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters'
+    url: '/api/activity-customer-inviters',
   });
 };
 
@@ -810,7 +810,7 @@ export const activityCustomerInvitersGetList = <ThrowOnError extends boolean = f
  * 创建客户
  */
 export const activityCustomerInvitersCreate = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerInvitersControllerCreateData, ThrowOnError>
+  options: Options<ActivityCustomerInvitersControllerCreateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerInvitersControllerCreateResponse,
@@ -818,7 +818,7 @@ export const activityCustomerInvitersCreate = <ThrowOnError extends boolean = fa
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters'
+    url: '/api/activity-customer-inviters',
   });
 };
 
@@ -826,7 +826,7 @@ export const activityCustomerInvitersCreate = <ThrowOnError extends boolean = fa
  * 删除
  */
 export const activityCustomerInvitersDeleteMany = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerInvitersControllerDeleteManyData, ThrowOnError>
+  options: Options<ActivityCustomerInvitersControllerDeleteManyData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).delete<
     ActivityCustomerInvitersControllerDeleteManyResponse,
@@ -834,7 +834,7 @@ export const activityCustomerInvitersDeleteMany = <ThrowOnError extends boolean 
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters'
+    url: '/api/activity-customer-inviters',
   });
 };
 
@@ -842,7 +842,7 @@ export const activityCustomerInvitersDeleteMany = <ThrowOnError extends boolean 
  * 客户详情
  */
 export const activityCustomerInvitersGetItem = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerInvitersControllerGetItemData, ThrowOnError>
+  options: Options<ActivityCustomerInvitersControllerGetItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivityCustomerInvitersControllerGetItemResponse,
@@ -850,7 +850,7 @@ export const activityCustomerInvitersGetItem = <ThrowOnError extends boolean = f
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/{id}'
+    url: '/api/activity-customer-inviters/{id}',
   });
 };
 
@@ -858,7 +858,7 @@ export const activityCustomerInvitersGetItem = <ThrowOnError extends boolean = f
  * 修改客户
  */
 export const activityCustomerInvitersUpdate = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerInvitersControllerUpdateData, ThrowOnError>
+  options: Options<ActivityCustomerInvitersControllerUpdateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).put<
     ActivityCustomerInvitersControllerUpdateResponse,
@@ -866,7 +866,7 @@ export const activityCustomerInvitersUpdate = <ThrowOnError extends boolean = fa
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/{id}'
+    url: '/api/activity-customer-inviters/{id}',
   });
 };
 
@@ -875,7 +875,7 @@ export const activityCustomerInvitersUpdate = <ThrowOnError extends boolean = fa
  * 启用/禁用
  */
 export const activityCustomerInvitersSetIsEnabled = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerInvitersControllerSetIsEnabledData, ThrowOnError>
+  options: Options<ActivityCustomerInvitersControllerSetIsEnabledData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerInvitersControllerSetIsEnabledResponse,
@@ -883,7 +883,7 @@ export const activityCustomerInvitersSetIsEnabled = <ThrowOnError extends boolea
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/enabled/{id}'
+    url: '/api/activity-customer-inviters/enabled/{id}',
   });
 };
 
@@ -892,7 +892,7 @@ export const activityCustomerInvitersSetIsEnabled = <ThrowOnError extends boolea
  * excel 模板
  */
 export const activityCustomerInvitersGetExcelTemplate = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivityCustomerInvitersControllerGetExcelTemplateResponse,
@@ -900,7 +900,7 @@ export const activityCustomerInvitersGetExcelTemplate = <ThrowOnError extends bo
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/excel/tpl'
+    url: '/api/activity-customer-inviters/excel/tpl',
   });
 };
 
@@ -909,7 +909,7 @@ export const activityCustomerInvitersGetExcelTemplate = <ThrowOnError extends bo
  * Excel 数据
  */
 export const activityCustomerInvitersExportExcel = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ActivityCustomerInvitersControllerExportExcelResponse,
@@ -917,7 +917,7 @@ export const activityCustomerInvitersExportExcel = <ThrowOnError extends boolean
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/excel/output'
+    url: '/api/activity-customer-inviters/excel/output',
   });
 };
 
@@ -926,7 +926,7 @@ export const activityCustomerInvitersExportExcel = <ThrowOnError extends boolean
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
 export const activityCustomerInvitersImportExcel = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerInvitersControllerImportExcelData, ThrowOnError>
+  options: Options<ActivityCustomerInvitersControllerImportExcelData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     ActivityCustomerInvitersControllerImportExcelResponse,
@@ -937,14 +937,14 @@ export const activityCustomerInvitersImportExcel = <ThrowOnError extends boolean
     ...formDataBodySerializer,
     headers: {
       'Content-Type': null,
-      ...options?.headers
+      ...options?.headers,
     },
-    url: '/api/activity-customer-inviters/excel/import'
+    url: '/api/activity-customer-inviters/excel/import',
   });
 };
 
 export const authSignIn = <ThrowOnError extends boolean = false>(
-  options: Options<AuthControllerSignInData, ThrowOnError>
+  options: Options<AuthControllerSignInData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     AuthControllerSignInResponse,
@@ -952,12 +952,12 @@ export const authSignIn = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/auth/login'
+    url: '/api/auth/login',
   });
 };
 
 export const authGetProfile = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AuthControllerGetProfileResponse,
@@ -965,12 +965,12 @@ export const authGetProfile = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/auth/profile'
+    url: '/api/auth/profile',
   });
 };
 
 export const authRefreshToken = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     AuthControllerRefreshTokenResponse,
@@ -978,7 +978,7 @@ export const authRefreshToken = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/auth/refresh-token'
+    url: '/api/auth/refresh-token',
   });
 };
 
@@ -986,7 +986,7 @@ export const authRefreshToken = <ThrowOnError extends boolean = false>(
  * 种子数据
  */
 export const seedSeed = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     SeedControllerSeedResponse,
@@ -994,7 +994,7 @@ export const seedSeed = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/seed'
+    url: '/api/seed',
   });
 };
 
@@ -1002,7 +1002,7 @@ export const seedSeed = <ThrowOnError extends boolean = false>(
  * 角色列表
  */
 export const rolesGetList = <ThrowOnError extends boolean = false>(
-  options?: Options<RolesControllerGetListData, ThrowOnError>
+  options?: Options<RolesControllerGetListData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     RolesControllerGetListResponse,
@@ -1010,7 +1010,7 @@ export const rolesGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles'
+    url: '/api/roles',
   });
 };
 
@@ -1018,7 +1018,7 @@ export const rolesGetList = <ThrowOnError extends boolean = false>(
  * 创建角色
  */
 export const rolesCreate = <ThrowOnError extends boolean = false>(
-  options: Options<RolesControllerCreateData, ThrowOnError>
+  options: Options<RolesControllerCreateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     RolesControllerCreateResponse,
@@ -1026,7 +1026,7 @@ export const rolesCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles'
+    url: '/api/roles',
   });
 };
 
@@ -1034,7 +1034,7 @@ export const rolesCreate = <ThrowOnError extends boolean = false>(
  * 删除
  */
 export const rolesDeleteMany = <ThrowOnError extends boolean = false>(
-  options: Options<RolesControllerDeleteManyData, ThrowOnError>
+  options: Options<RolesControllerDeleteManyData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).delete<
     RolesControllerDeleteManyResponse,
@@ -1042,7 +1042,7 @@ export const rolesDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles'
+    url: '/api/roles',
   });
 };
 
@@ -1050,7 +1050,7 @@ export const rolesDeleteMany = <ThrowOnError extends boolean = false>(
  * 角色详情
  */
 export const rolesGetItem = <ThrowOnError extends boolean = false>(
-  options: Options<RolesControllerGetItemData, ThrowOnError>
+  options: Options<RolesControllerGetItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     RolesControllerGetItemResponse,
@@ -1058,7 +1058,7 @@ export const rolesGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/{id}'
+    url: '/api/roles/{id}',
   });
 };
 
@@ -1066,7 +1066,7 @@ export const rolesGetItem = <ThrowOnError extends boolean = false>(
  * 修改角色
  */
 export const rolesUpdate = <ThrowOnError extends boolean = false>(
-  options: Options<RolesControllerUpdateData, ThrowOnError>
+  options: Options<RolesControllerUpdateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).put<
     RolesControllerUpdateResponse,
@@ -1074,7 +1074,7 @@ export const rolesUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/{id}'
+    url: '/api/roles/{id}',
   });
 };
 
@@ -1082,7 +1082,7 @@ export const rolesUpdate = <ThrowOnError extends boolean = false>(
  * 设置权限
  */
 export const rolesSetPermissions = <ThrowOnError extends boolean = false>(
-  options: Options<RolesControllerSetPermissionsData, ThrowOnError>
+  options: Options<RolesControllerSetPermissionsData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).put<
     RolesControllerSetPermissionsResponse,
@@ -1090,7 +1090,7 @@ export const rolesSetPermissions = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/permissions/{id}'
+    url: '/api/roles/permissions/{id}',
   });
 };
 
@@ -1099,7 +1099,7 @@ export const rolesSetPermissions = <ThrowOnError extends boolean = false>(
  * 启用/禁用
  */
 export const rolesSetIsEnabled = <ThrowOnError extends boolean = false>(
-  options: Options<RolesControllerSetIsEnabledData, ThrowOnError>
+  options: Options<RolesControllerSetIsEnabledData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     RolesControllerSetIsEnabledResponse,
@@ -1107,7 +1107,7 @@ export const rolesSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/enabled/{id}'
+    url: '/api/roles/enabled/{id}',
   });
 };
 
@@ -1116,7 +1116,7 @@ export const rolesSetIsEnabled = <ThrowOnError extends boolean = false>(
  * excel 模板
  */
 export const rolesGetExcelTemplate = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     RolesControllerGetExcelTemplateResponse,
@@ -1124,7 +1124,7 @@ export const rolesGetExcelTemplate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/excel/tpl'
+    url: '/api/roles/excel/tpl',
   });
 };
 
@@ -1133,7 +1133,7 @@ export const rolesGetExcelTemplate = <ThrowOnError extends boolean = false>(
  * Excel 数据
  */
 export const rolesExportExcel = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     RolesControllerExportExcelResponse,
@@ -1141,7 +1141,7 @@ export const rolesExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/excel/output'
+    url: '/api/roles/excel/output',
   });
 };
 
@@ -1150,7 +1150,7 @@ export const rolesExportExcel = <ThrowOnError extends boolean = false>(
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
 export const rolesImportExcel = <ThrowOnError extends boolean = false>(
-  options: Options<RolesControllerImportExcelData, ThrowOnError>
+  options: Options<RolesControllerImportExcelData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     RolesControllerImportExcelResponse,
@@ -1161,9 +1161,9 @@ export const rolesImportExcel = <ThrowOnError extends boolean = false>(
     ...formDataBodySerializer,
     headers: {
       'Content-Type': null,
-      ...options?.headers
+      ...options?.headers,
     },
-    url: '/api/roles/excel/import'
+    url: '/api/roles/excel/import',
   });
 };
 
@@ -1171,7 +1171,7 @@ export const rolesImportExcel = <ThrowOnError extends boolean = false>(
  * 审计日志列表
  */
 export const auditsGetList = <ThrowOnError extends boolean = false>(
-  options?: Options<AuditsControllerGetListData, ThrowOnError>
+  options?: Options<AuditsControllerGetListData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AuditsControllerGetListResponse,
@@ -1179,7 +1179,7 @@ export const auditsGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits'
+    url: '/api/audits',
   });
 };
 
@@ -1187,7 +1187,7 @@ export const auditsGetList = <ThrowOnError extends boolean = false>(
  * 删除
  */
 export const auditsDeleteMany = <ThrowOnError extends boolean = false>(
-  options: Options<AuditsControllerDeleteManyData, ThrowOnError>
+  options: Options<AuditsControllerDeleteManyData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).delete<
     AuditsControllerDeleteManyResponse,
@@ -1195,7 +1195,7 @@ export const auditsDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits'
+    url: '/api/audits',
   });
 };
 
@@ -1203,7 +1203,7 @@ export const auditsDeleteMany = <ThrowOnError extends boolean = false>(
  * 审计日志详情
  */
 export const auditsGetItem = <ThrowOnError extends boolean = false>(
-  options: Options<AuditsControllerGetItemData, ThrowOnError>
+  options: Options<AuditsControllerGetItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AuditsControllerGetItemResponse,
@@ -1211,7 +1211,7 @@ export const auditsGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits/{id}'
+    url: '/api/audits/{id}',
   });
 };
 
@@ -1220,7 +1220,7 @@ export const auditsGetItem = <ThrowOnError extends boolean = false>(
  * 启用/禁用
  */
 export const auditsSetIsEnabled = <ThrowOnError extends boolean = false>(
-  options: Options<AuditsControllerSetIsEnabledData, ThrowOnError>
+  options: Options<AuditsControllerSetIsEnabledData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     AuditsControllerSetIsEnabledResponse,
@@ -1228,7 +1228,7 @@ export const auditsSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits/enabled/{id}'
+    url: '/api/audits/enabled/{id}',
   });
 };
 
@@ -1237,7 +1237,7 @@ export const auditsSetIsEnabled = <ThrowOnError extends boolean = false>(
  * excel 模板
  */
 export const auditsGetExcelTemplate = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AuditsControllerGetExcelTemplateResponse,
@@ -1245,7 +1245,7 @@ export const auditsGetExcelTemplate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits/excel/tpl'
+    url: '/api/audits/excel/tpl',
   });
 };
 
@@ -1254,7 +1254,7 @@ export const auditsGetExcelTemplate = <ThrowOnError extends boolean = false>(
  * Excel 数据
  */
 export const auditsExportExcel = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     AuditsControllerExportExcelResponse,
@@ -1262,7 +1262,7 @@ export const auditsExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits/excel/output'
+    url: '/api/audits/excel/output',
   });
 };
 
@@ -1271,7 +1271,7 @@ export const auditsExportExcel = <ThrowOnError extends boolean = false>(
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
 export const auditsImportExcel = <ThrowOnError extends boolean = false>(
-  options: Options<AuditsControllerImportExcelData, ThrowOnError>
+  options: Options<AuditsControllerImportExcelData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     AuditsControllerImportExcelResponse,
@@ -1282,9 +1282,9 @@ export const auditsImportExcel = <ThrowOnError extends boolean = false>(
     ...formDataBodySerializer,
     headers: {
       'Content-Type': null,
-      ...options?.headers
+      ...options?.headers,
     },
-    url: '/api/audits/excel/import'
+    url: '/api/audits/excel/import',
   });
 };
 
@@ -1292,7 +1292,7 @@ export const auditsImportExcel = <ThrowOnError extends boolean = false>(
  * ERP 用户列表
  */
 export const erpUsersFindAll = <ThrowOnError extends boolean = false>(
-  options?: Options<ErpUsersControllerFindAllData, ThrowOnError>
+  options?: Options<ErpUsersControllerFindAllData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ErpUsersControllerFindAllResponse,
@@ -1300,7 +1300,7 @@ export const erpUsersFindAll = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/erp-users'
+    url: '/api/erp-users',
   });
 };
 
@@ -1308,7 +1308,7 @@ export const erpUsersFindAll = <ThrowOnError extends boolean = false>(
  * ERP 用户详情
  */
 export const erpUsersFindOne = <ThrowOnError extends boolean = false>(
-  options: Options<ErpUsersControllerFindOneData, ThrowOnError>
+  options: Options<ErpUsersControllerFindOneData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     ErpUsersControllerFindOneResponse,
@@ -1316,7 +1316,7 @@ export const erpUsersFindOne = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/erp-users/{id}'
+    url: '/api/erp-users/{id}',
   });
 };
 
@@ -1324,7 +1324,7 @@ export const erpUsersFindOne = <ThrowOnError extends boolean = false>(
  * 邀请人列表
  */
 export const inviterConfigGetList = <ThrowOnError extends boolean = false>(
-  options?: Options<InviterConfigControllerGetListData, ThrowOnError>
+  options?: Options<InviterConfigControllerGetListData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     InviterConfigControllerGetListResponse,
@@ -1332,7 +1332,7 @@ export const inviterConfigGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config'
+    url: '/api/inviter-config',
   });
 };
 
@@ -1340,7 +1340,7 @@ export const inviterConfigGetList = <ThrowOnError extends boolean = false>(
  * 创建邀请人
  */
 export const inviterConfigCreate = <ThrowOnError extends boolean = false>(
-  options: Options<InviterConfigControllerCreateData, ThrowOnError>
+  options: Options<InviterConfigControllerCreateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     InviterConfigControllerCreateResponse,
@@ -1348,7 +1348,7 @@ export const inviterConfigCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config'
+    url: '/api/inviter-config',
   });
 };
 
@@ -1356,7 +1356,7 @@ export const inviterConfigCreate = <ThrowOnError extends boolean = false>(
  * 删除
  */
 export const inviterConfigDeleteMany = <ThrowOnError extends boolean = false>(
-  options: Options<InviterConfigControllerDeleteManyData, ThrowOnError>
+  options: Options<InviterConfigControllerDeleteManyData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).delete<
     InviterConfigControllerDeleteManyResponse,
@@ -1364,7 +1364,7 @@ export const inviterConfigDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config'
+    url: '/api/inviter-config',
   });
 };
 
@@ -1372,7 +1372,7 @@ export const inviterConfigDeleteMany = <ThrowOnError extends boolean = false>(
  * 邀请人详情
  */
 export const inviterConfigGetItem = <ThrowOnError extends boolean = false>(
-  options: Options<InviterConfigControllerGetItemData, ThrowOnError>
+  options: Options<InviterConfigControllerGetItemData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     InviterConfigControllerGetItemResponse,
@@ -1380,7 +1380,7 @@ export const inviterConfigGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/{id}'
+    url: '/api/inviter-config/{id}',
   });
 };
 
@@ -1388,7 +1388,7 @@ export const inviterConfigGetItem = <ThrowOnError extends boolean = false>(
  * 修改邀请人
  */
 export const inviterConfigUpdate = <ThrowOnError extends boolean = false>(
-  options: Options<InviterConfigControllerUpdateData, ThrowOnError>
+  options: Options<InviterConfigControllerUpdateData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).put<
     InviterConfigControllerUpdateResponse,
@@ -1396,7 +1396,7 @@ export const inviterConfigUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/{id}'
+    url: '/api/inviter-config/{id}',
   });
 };
 
@@ -1404,7 +1404,7 @@ export const inviterConfigUpdate = <ThrowOnError extends boolean = false>(
  * 邀请人详情
  */
 export const inviterConfigGetItemByCurrentUser = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     InviterConfigControllerGetItemByCurrentUserResponse,
@@ -1412,7 +1412,7 @@ export const inviterConfigGetItemByCurrentUser = <ThrowOnError extends boolean =
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/current-user/item'
+    url: '/api/inviter-config/current-user/item',
   });
 };
 
@@ -1421,7 +1421,7 @@ export const inviterConfigGetItemByCurrentUser = <ThrowOnError extends boolean =
  * 启用/禁用
  */
 export const inviterConfigSetIsEnabled = <ThrowOnError extends boolean = false>(
-  options: Options<InviterConfigControllerSetIsEnabledData, ThrowOnError>
+  options: Options<InviterConfigControllerSetIsEnabledData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     InviterConfigControllerSetIsEnabledResponse,
@@ -1429,7 +1429,7 @@ export const inviterConfigSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/enabled/{id}'
+    url: '/api/inviter-config/enabled/{id}',
   });
 };
 
@@ -1438,7 +1438,7 @@ export const inviterConfigSetIsEnabled = <ThrowOnError extends boolean = false>(
  * excel 模板
  */
 export const inviterConfigGetExcelTemplate = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     InviterConfigControllerGetExcelTemplateResponse,
@@ -1446,7 +1446,7 @@ export const inviterConfigGetExcelTemplate = <ThrowOnError extends boolean = fal
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/excel/tpl'
+    url: '/api/inviter-config/excel/tpl',
   });
 };
 
@@ -1455,7 +1455,7 @@ export const inviterConfigGetExcelTemplate = <ThrowOnError extends boolean = fal
  * Excel 数据
  */
 export const inviterConfigExportExcel = <ThrowOnError extends boolean = false>(
-  options?: Options<unknown, ThrowOnError>
+  options?: Options<unknown, ThrowOnError>,
 ) => {
   return (options?.client ?? client).get<
     InviterConfigControllerExportExcelResponse,
@@ -1463,7 +1463,7 @@ export const inviterConfigExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/excel/output'
+    url: '/api/inviter-config/excel/output',
   });
 };
 
@@ -1472,7 +1472,7 @@ export const inviterConfigExportExcel = <ThrowOnError extends boolean = false>(
  * 请从 "/xxx/excel/tpl" 中下载模板
  */
 export const inviterConfigImportExcel = <ThrowOnError extends boolean = false>(
-  options: Options<InviterConfigControllerImportExcelData, ThrowOnError>
+  options: Options<InviterConfigControllerImportExcelData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
     InviterConfigControllerImportExcelResponse,
@@ -1483,8 +1483,8 @@ export const inviterConfigImportExcel = <ThrowOnError extends boolean = false>(
     ...formDataBodySerializer,
     headers: {
       'Content-Type': null,
-      ...options?.headers
+      ...options?.headers,
     },
-    url: '/api/inviter-config/excel/import'
+    url: '/api/inviter-config/excel/import',
   });
 };

@@ -32,7 +32,7 @@ export const useRenderMenuItem = (menuMode) =>
                 index={onlyOneChild ? pathResolve(fullPath, onlyOneChild.path) : fullPath}
               >
                 {{
-                  default: () => renderMenuTitle(onlyOneChild ? onlyOneChild?.meta : meta)
+                  default: () => renderMenuTitle(onlyOneChild ? onlyOneChild?.meta : meta),
                 }}
               </ElMenuItem>
             );
@@ -45,7 +45,7 @@ export const useRenderMenuItem = (menuMode) =>
               >
                 {{
                   title: () => renderMenuTitle(meta),
-                  default: () => renderMenuItem(v.children!, fullPath)
+                  default: () => renderMenuItem(v.children!, fullPath),
                 }}
               </ElSubMenu>
             );
@@ -54,6 +54,6 @@ export const useRenderMenuItem = (menuMode) =>
     };
 
     return {
-      renderMenuItem
+      renderMenuItem,
     };
   };

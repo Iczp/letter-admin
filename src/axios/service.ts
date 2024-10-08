@@ -11,7 +11,7 @@ const abortControllerMap: Map<string, AbortController> = new Map();
 
 const axiosInstance: AxiosInstance = axios.create({
   timeout: REQUEST_TIMEOUT,
-  baseURL: PATH_URL
+  baseURL: PATH_URL,
 });
 
 axiosInstance.interceptors.request.use((res: InternalAxiosRequestConfig) => {
@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use((res: InternalAxiosRequestConfig) => {
   console.log('url' + url, res);
   abortControllerMap.set(
     import.meta.env.VITE_USE_MOCK === 'true' ? url.replace('/mock', '') : url,
-    controller
+    controller,
   );
   return res;
 });
@@ -45,7 +45,7 @@ axiosInstance.interceptors.response.use(
 
     ElMessage.error(message);
     return Promise.reject(error);
-  }
+  },
 );
 
 axiosInstance.interceptors.request.use(defaultRequestInterceptors);
@@ -84,7 +84,7 @@ const service = {
       controller.abort();
     }
     abortControllerMap.clear();
-  }
+  },
 };
 
 export default service;

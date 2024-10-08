@@ -20,7 +20,7 @@ export const initTabMap = (routes: AppRouteRecordRaw[]) => {
 
 export const filterMenusPath = (
   routes: AppRouteRecordRaw[],
-  allRoutes: AppRouteRecordRaw[]
+  allRoutes: AppRouteRecordRaw[],
 ): AppRouteRecordRaw[] => {
   const res: AppRouteRecordRaw[] = [];
   for (const v of routes) {

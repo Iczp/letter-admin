@@ -41,7 +41,7 @@ export default defineComponent({
         id={`${variables.namespace}-tool-header`}
         class={[
           prefixCls,
-          'h-[var(--top-tool-height)] relative px-[var(--top-tool-p-x)] flex items-center justify-between'
+          'h-[var(--top-tool-height)] relative px-[var(--top-tool-p-x)] flex items-center justify-between',
         ]}
       >
         {layout.value !== 'top' ? (
@@ -69,7 +69,7 @@ export default defineComponent({
         </div>
       </div>
     );
-  }
+  },
 });
 </script>
 

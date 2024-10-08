@@ -23,8 +23,8 @@ const props = withDefaults(
     themeSelector: true,
     theme: 'vs-dark',
     editorOption: () => ({}),
-    modelValue: ''
-  }
+    modelValue: '',
+  },
 );
 
 const emits = defineEmits<{
@@ -35,7 +35,7 @@ const emits = defineEmits<{
 const monacoEditorStyle = computed(() => {
   return {
     width: typeof props.width === 'string' ? props.width : props.width + 'px',
-    height: typeof props.height === 'string' ? props.height : props.height + 'px'
+    height: typeof props.height === 'string' ? props.height : props.height + 'px',
   };
 });
 
@@ -46,7 +46,7 @@ const {
   updateOptions,
   getEditor,
   changeLanguage,
-  changeTheme
+  changeTheme,
 } = useMonacoEditor(props.language);
 
 onMounted(() => {
@@ -64,7 +64,7 @@ watch(
   () => props.modelValue,
   () => {
     updateMonacoVal(props.modelValue);
-  }
+  },
 );
 
 const localLanguage = ref(props.language);

@@ -154,7 +154,7 @@ const moveToTarget = (currentTag: RouteLocationNormalizedLoaded) => {
       el: wrap$!,
       position: 'scrollLeft',
       to: 0,
-      duration: 500
+      duration: 500,
     });
     start();
   } else if ((lastTag?.to as RouteLocationNormalizedLoaded).fullPath === currentTag.fullPath) {
@@ -163,13 +163,13 @@ const moveToTarget = (currentTag: RouteLocationNormalizedLoaded) => {
       el: wrap$!,
       position: 'scrollLeft',
       to: wrap$!.scrollWidth - wrap$!.offsetWidth,
-      duration: 500
+      duration: 500,
     });
     start();
   } else {
     // find preTag and nextTag
     const currentIndex: number = tagList.findIndex(
-      (item) => (item?.to as RouteLocationNormalizedLoaded).fullPath === currentTag.fullPath
+      (item) => (item?.to as RouteLocationNormalizedLoaded).fullPath === currentTag.fullPath,
     );
     const tgsRefs = document.getElementsByClassName(`${prefixCls}__item`);
 
@@ -187,7 +187,7 @@ const moveToTarget = (currentTag: RouteLocationNormalizedLoaded) => {
         el: wrap$!,
         position: 'scrollLeft',
         to: afterNextTagOffsetLeft - wrap$!.offsetWidth,
-        duration: 500
+        duration: 500,
       });
       start();
     } else if (beforePrevTagOffsetLeft < unref(scrollLeftNumber)) {
@@ -195,7 +195,7 @@ const moveToTarget = (currentTag: RouteLocationNormalizedLoaded) => {
         el: wrap$!,
         position: 'scrollLeft',
         to: beforePrevTagOffsetLeft,
-        duration: 500
+        duration: 500,
       });
       start();
     }
@@ -240,7 +240,7 @@ const move = (to: number) => {
     el: wrap$!,
     position: 'scrollLeft',
     to: unref(scrollLeftNumber) + to,
-    duration: 500
+    duration: 500,
   });
   start();
 };
@@ -265,7 +265,7 @@ watch(
   () => {
     addTags();
     moveToCurrentTag();
-  }
+  },
 );
 </script>
 
@@ -298,7 +298,7 @@ watch(
                 disabled: selectedTag?.fullPath !== item.fullPath,
                 command: () => {
                   refreshSelectedTag(item);
-                }
+                },
               },
               {
                 icon: 'vi-ant-design:close-outlined',
@@ -306,7 +306,7 @@ watch(
                 disabled: !!visitedViews?.length && selectedTag?.meta.affix,
                 command: () => {
                   closeSelectedTag(item);
-                }
+                },
               },
               {
                 divided: true,
@@ -318,7 +318,7 @@ watch(
                     selectedTag?.fullPath !== item.fullPath),
                 command: () => {
                   closeLeftTags();
-                }
+                },
               },
               {
                 icon: 'vi-ant-design:vertical-left-outlined',
@@ -329,7 +329,7 @@ watch(
                     selectedTag?.fullPath !== item.fullPath),
                 command: () => {
                   closeRightTags();
-                }
+                },
               },
               {
                 divided: true,
@@ -338,15 +338,15 @@ watch(
                 disabled: selectedTag?.fullPath !== item.fullPath,
                 command: () => {
                   closeOthersTags();
-                }
+                },
               },
               {
                 icon: 'vi-ant-design:line-outlined',
                 label: t('common.closeAll'),
                 command: () => {
                   closeAllTags();
-                }
-              }
+                },
+              },
             ]"
             v-for="item in visitedViews"
             :key="item.fullPath"
@@ -355,8 +355,8 @@ watch(
               `${prefixCls}__item`,
               item?.meta?.affix ? `${prefixCls}__item--affix` : '',
               {
-                'is-active': isActive(item)
-              }
+                'is-active': isActive(item),
+              },
             ]"
             @visible-change="visibleChange"
           >
@@ -417,7 +417,7 @@ watch(
           label: t('common.reload'),
           command: () => {
             refreshSelectedTag(selectedTag);
-          }
+          },
         },
         {
           icon: 'vi-ant-design:close-outlined',
@@ -425,7 +425,7 @@ watch(
           disabled: !!visitedViews?.length && selectedTag?.meta.affix,
           command: () => {
             closeSelectedTag(selectedTag!);
-          }
+          },
         },
         {
           divided: true,
@@ -434,7 +434,7 @@ watch(
           disabled: !!visitedViews?.length && selectedTag?.fullPath === visitedViews[0].fullPath,
           command: () => {
             closeLeftTags();
-          }
+          },
         },
         {
           icon: 'vi-ant-design:vertical-left-outlined',
@@ -444,7 +444,7 @@ watch(
             selectedTag?.fullPath === visitedViews[visitedViews.length - 1].fullPath,
           command: () => {
             closeRightTags();
-          }
+          },
         },
         {
           divided: true,
@@ -452,15 +452,15 @@ watch(
           label: t('common.closeOther'),
           command: () => {
             closeOthersTags();
-          }
+          },
         },
         {
           icon: 'vi-ant-design:line-outlined',
           label: t('common.closeAll'),
           command: () => {
             closeAllTags();
-          }
-        }
+          },
+        },
       ]"
     >
       <span

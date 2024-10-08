@@ -22,7 +22,7 @@ import {
   ElSwitch,
   ElTimeSelect,
   ElAutocomplete,
-  ElMessage
+  ElMessage,
 } from 'element-plus';
 
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus';
@@ -35,7 +35,7 @@ import {
   activityCustomerGetItem,
   activityCustomerUpdate,
   UserDto,
-  usersGetList
+  usersGetList,
 } from '@/client';
 import { useFetchDetail } from '@/hooks/useFetchDetail';
 
@@ -60,7 +60,7 @@ const form = reactive({
   maxCount: 0,
   inviterId: '',
   activityId: '',
-  isEnabled: true
+  isEnabled: true,
 });
 
 const item = ref<InviterConfigDetailDto>();
@@ -80,7 +80,7 @@ const { isLoading, refresh } = useFetchDetail<InviterConfigDetailDto>({
     //     form[key] = item[key];
     //   }
     // });
-  }
+  },
 });
 
 watch(
@@ -91,8 +91,8 @@ watch(
     }
   },
   {
-    immediate: true
-  }
+    immediate: true,
+  },
 );
 
 watch(
@@ -109,8 +109,8 @@ watch(
     }
   },
   {
-    immediate: true
-  }
+    immediate: true,
+  },
 );
 
 const formSize = ref<ComponentSize>('default');
@@ -123,7 +123,7 @@ const locationOptions = ['Home', 'Company', 'School'];
 const rules = reactive<FormRules<IForm>>({
   inviterId: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
   activityId: [{ required: true, message: 'Please input Activity name', trigger: 'blur' }],
-  maxCount: [{ required: true, message: 'Please select maxCount', trigger: 'change' }]
+  maxCount: [{ required: true, message: 'Please select maxCount', trigger: 'change' }],
 });
 
 const submit = async () => {
@@ -135,19 +135,19 @@ const submit = async () => {
       const res = props.rowId
         ? await activityCustomerUpdate({
             path: {
-              id: props.rowId
+              id: props.rowId,
             },
             body: {
               max_count: form.maxCount,
-              is_enabled: form.isEnabled
-            }
+              is_enabled: form.isEnabled,
+            },
           })
         : await activityCustomerCreate({
             body: {
               max_count: form.maxCount,
               activity_id: form.activityId,
-              inviter_user_id: form.inviterId
-            }
+              inviter_user_id: form.inviterId,
+            },
           });
 
       console.log(res);
@@ -164,7 +164,7 @@ const reset = () => {
 
 const options = Array.from({ length: 10000 }).map((_, idx) => ({
   value: `${idx + 1}`,
-  label: `${idx + 1}`
+  label: `${idx + 1}`,
 }));
 
 const maxCountChange = (val: number) => {
@@ -188,7 +188,7 @@ const loadAll = () => {
     { value: 'mint-ui', link: 'https://github.com/ElemeFE/mint-ui' },
     { value: 'vuex', link: 'https://github.com/vuejs/vuex' },
     { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
-    { value: 'babel', link: 'https://github.com/babel/babel' }
+    { value: 'babel', link: 'https://github.com/babel/babel' },
   ];
 };
 
@@ -222,7 +222,7 @@ const onPick = ({ items }) => {
   if (items.length == 0) {
     ElMessage({
       message: '请选择邀请人',
-      type: 'warning'
+      type: 'warning',
     });
     return;
   }
@@ -236,7 +236,7 @@ const showUsersPicker = () => {
 
 defineExpose({
   submit,
-  reset
+  reset,
 });
 </script>
 

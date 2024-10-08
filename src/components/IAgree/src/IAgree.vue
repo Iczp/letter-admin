@@ -7,12 +7,12 @@ import { LinkItem } from './types';
 const props = defineProps({
   text: {
     type: String,
-    default: ''
+    default: '',
   },
   link: {
     type: Array as PropType<LinkItem[]>,
-    default: undefined
-  }
+    default: undefined,
+  },
 });
 
 const modelValue = defineModel<boolean>();

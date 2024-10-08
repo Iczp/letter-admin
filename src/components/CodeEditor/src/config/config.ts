@@ -23,27 +23,27 @@ export const languageOptions = [
   { label: 'freemarker2', value: 'freemarker2' },
   {
     label: 'freemarker2.tag-angle.interpolation-dollar',
-    value: 'freemarker2.tag-angle.interpolation-dollar'
+    value: 'freemarker2.tag-angle.interpolation-dollar',
   },
   {
     label: 'freemarker2.tag-bracket.interpolation-dollar',
-    value: 'freemarker2.tag-bracket.interpolation-dollar'
+    value: 'freemarker2.tag-bracket.interpolation-dollar',
   },
   {
     label: 'freemarker2.tag-angle.interpolation-bracket',
-    value: 'freemarker2.tag-angle.interpolation-bracket'
+    value: 'freemarker2.tag-angle.interpolation-bracket',
   },
   {
     label: 'freemarker2.tag-bracket.interpolation-bracket',
-    value: 'freemarker2.tag-bracket.interpolation-bracket'
+    value: 'freemarker2.tag-bracket.interpolation-bracket',
   },
   {
     label: 'freemarker2.tag-auto.interpolation-dollar',
-    value: 'freemarker2.tag-auto.interpolation-dollar'
+    value: 'freemarker2.tag-auto.interpolation-dollar',
   },
   {
     label: 'freemarker2.tag-auto.interpolation-bracket',
-    value: 'freemarker2.tag-auto.interpolation-bracket'
+    value: 'freemarker2.tag-auto.interpolation-bracket',
   },
   { label: 'go', value: 'go' },
   { label: 'graphql', value: 'graphql' },
@@ -106,24 +106,24 @@ export const languageOptions = [
   { label: 'wgsl', value: 'wgsl' },
   { label: 'xml', value: 'xml' },
   { label: 'yaml', value: 'yaml' },
-  { label: 'json', value: 'json' }
+  { label: 'json', value: 'json' },
 ];
 
 export const themeOptions = [
   {
     label: 'vs',
-    value: 'vs'
+    value: 'vs',
   },
   {
     label: 'vs-dark',
-    value: 'vs-dark'
+    value: 'vs-dark',
   },
   {
     label: 'hc-black',
-    value: 'hc-black'
+    value: 'hc-black',
   },
   {
     label: 'hc-light',
-    value: 'hc-light'
-  }
+    value: 'hc-light',
+  },
 ];

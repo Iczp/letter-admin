@@ -7,14 +7,14 @@ module.exports = {
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['global', 'deep']
-      }
+        ignorePseudoClasses: ['global', 'deep'],
+      },
     ],
     'at-rule-no-unknown': [
       true,
       {
-        ignoreAtRules: ['function', 'if', 'each', 'include', 'mixin']
-      }
+        ignoreAtRules: ['function', 'if', 'each', 'include', 'mixin'],
+      },
     ],
     'media-query-no-invalid': null,
     'function-no-unknown': null,
@@ -25,14 +25,14 @@ module.exports = {
     'rule-empty-line-before': [
       'always',
       {
-        ignore: ['after-comment', 'first-nested']
-      }
+        ignore: ['after-comment', 'first-nested'],
+      },
     ],
     'unit-no-unknown': [
       true,
       {
-        ignoreUnits: ['rpx']
-      }
+        ignoreUnits: ['rpx'],
+      },
     ],
     'order/order': [
       [
@@ -42,17 +42,17 @@ module.exports = {
         'declarations',
         {
           type: 'at-rule',
-          name: 'supports'
+          name: 'supports',
         },
         {
           type: 'at-rule',
-          name: 'media'
+          name: 'media',
         },
-        'rules'
+        'rules',
       ],
       {
-        severity: 'warning'
-      }
+        severity: 'warning',
+      },
     ],
     // Specify the alphabetical order of the attributes in the declaration block
     'order/properties-order': [
@@ -201,8 +201,8 @@ module.exports = {
       'page',
       'set-link-source',
       'unicode-bidi',
-      'speak'
-    ]
+      'speak',
+    ],
   },
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
   overrides: [
@@ -216,16 +216,16 @@ module.exports = {
         'selector-pseudo-class-no-unknown': [
           true,
           {
-            ignorePseudoClasses: ['deep', 'global']
-          }
+            ignorePseudoClasses: ['deep', 'global'],
+          },
         ],
         'selector-pseudo-element-no-unknown': [
           true,
           {
-            ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted']
-          }
-        ]
-      }
-    }
-  ]
-}
+            ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted'],
+          },
+        ],
+      },
+    },
+  ],
+};

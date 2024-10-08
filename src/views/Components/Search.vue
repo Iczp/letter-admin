@@ -23,11 +23,11 @@ const treeSelectData = [
         children: [
           {
             value: '1-1-1',
-            label: 'Level three 1-1-1'
-          }
-        ]
-      }
-    ]
+            label: 'Level three 1-1-1',
+          },
+        ],
+      },
+    ],
   },
   {
     value: '2',
@@ -39,9 +39,9 @@ const treeSelectData = [
         children: [
           {
             value: '2-1-1',
-            label: 'Level three 2-1-1'
-          }
-        ]
+            label: 'Level three 2-1-1',
+          },
+        ],
       },
       {
         value: '2-2',
@@ -49,11 +49,11 @@ const treeSelectData = [
         children: [
           {
             value: '2-2-1',
-            label: 'Level three 2-2-1'
-          }
-        ]
-      }
-    ]
+            label: 'Level three 2-2-1',
+          },
+        ],
+      },
+    ],
   },
   {
     value: '3',
@@ -65,9 +65,9 @@ const treeSelectData = [
         children: [
           {
             value: '3-1-1',
-            label: 'Level three 3-1-1'
-          }
-        ]
+            label: 'Level three 3-1-1',
+          },
+        ],
       },
       {
         value: '3-2',
@@ -75,12 +75,12 @@ const treeSelectData = [
         children: [
           {
             value: '3-2-1',
-            label: 'Level three 3-2-1'
-          }
-        ]
-      }
-    ]
-  }
+            label: 'Level three 3-2-1',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 // 模拟远程加载
@@ -96,7 +96,7 @@ const schema = reactive<FormSchema[]>([
   {
     field: 'field1',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field2',
@@ -106,19 +106,19 @@ const schema = reactive<FormSchema[]>([
       options: [
         {
           label: 'option1',
-          value: '1'
+          value: '1',
         },
         {
           label: 'option2',
-          value: '2'
-        }
+          value: '2',
+        },
       ],
       on: {
         change: (value: string) => {
           console.log(value);
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'field3',
@@ -128,82 +128,82 @@ const schema = reactive<FormSchema[]>([
       options: [
         {
           label: 'option-1',
-          value: '1'
+          value: '1',
         },
         {
           label: 'option-2',
-          value: '2'
-        }
-      ]
-    }
+          value: '2',
+        },
+      ],
+    },
   },
   {
     field: 'field5',
     component: 'DatePicker',
     label: t('formDemo.datePicker'),
     componentProps: {
-      type: 'date'
-    }
+      type: 'date',
+    },
   },
   {
     field: 'field6',
     component: 'TimeSelect',
-    label: t('formDemo.timeSelect')
+    label: t('formDemo.timeSelect'),
   },
   {
     field: 'field8',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field9',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field10',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field11',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field12',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field13',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field14',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field15',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field16',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field17',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field18',
     label: t('formDemo.input'),
-    component: 'Input'
+    component: 'Input',
   },
   {
     field: 'field19',
@@ -213,15 +213,15 @@ const schema = reactive<FormSchema[]>([
     optionApi: async () => {
       const res = await getTreeSelectData();
       return res;
-    }
-  }
+    },
+  },
 ]);
 
 const isGrid = ref(false);
 
 const changeGrid = (grid: boolean) => {
   setProps({
-    isCol: grid
+    isCol: grid,
   });
   // isGrid.value = grid
 };
@@ -246,8 +246,8 @@ const getDictOne = async () => {
       {
         field: 'field2',
         path: 'componentProps.options',
-        value: res.data
-      }
+        value: res.data,
+      },
     ]);
   }
 };
@@ -263,8 +263,8 @@ const delRadio = () => {
     {
       field: 'field3',
       path: 'remove',
-      value: true
-    }
+      value: true,
+    },
   ]);
 };
 
@@ -273,14 +273,14 @@ const restoreRadio = () => {
     {
       field: 'field3',
       path: 'remove',
-      value: false
-    }
+      value: false,
+    },
   ]);
 };
 
 const setValue = () => {
   setValues({
-    field1: 'Joy'
+    field1: 'Joy',
   });
 };
 

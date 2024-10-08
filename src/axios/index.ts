@@ -14,8 +14,8 @@ const request = (option: AxiosRequestConfig) => {
     headers: {
       'Content-Type': CONTENT_TYPE,
       [userStore.getTokenKey ?? 'Authorization']: userStore.getToken ?? '',
-      ...headers
-    }
+      ...headers,
+    },
   });
 };
 
@@ -37,7 +37,7 @@ export default {
   },
   cancelAllRequest: () => {
     return service.cancelAllRequest();
-  }
+  },
 };
 
 export { request };

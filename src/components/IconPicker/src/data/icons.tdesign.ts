@@ -1204,6 +1204,6 @@ export default {
     'vi-tdesign:work-off',
     'vi-tdesign:wry-smile',
     'vi-tdesign:zoom-in',
-    'vi-tdesign:zoom-out'
-  ]
+    'vi-tdesign:zoom-out',
+  ],
 };

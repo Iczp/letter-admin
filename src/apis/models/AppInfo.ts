@@ -3,11 +3,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export type AppInfo = {
-    name: string;
-    version: string;
-    description: string;
-    author: string;
-    email: string;
-    website: string;
+  name: string;
+  version: string;
+  description: string;
+  author: string;
+  email: string;
+  website: string;
 };
-

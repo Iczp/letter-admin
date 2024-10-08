@@ -17,19 +17,19 @@ const { t } = useI18n();
 const columns: TableColumn[] = [
   {
     field: 'title',
-    label: t('tableDemo.title')
+    label: t('tableDemo.title'),
   },
   {
     field: 'image_uri',
-    label: t('tableDemo.preview')
+    label: t('tableDemo.preview'),
   },
   {
     field: 'author',
-    label: t('tableDemo.author')
+    label: t('tableDemo.author'),
   },
   {
     field: 'display_time',
-    label: t('tableDemo.displayTime')
+    label: t('tableDemo.displayTime'),
   },
   {
     field: 'importance',
@@ -44,12 +44,12 @@ const columns: TableColumn[] = [
               : t('tableDemo.commonly')}
         </ElTag>
       );
-    }
+    },
   },
   {
     field: 'pageviews',
-    label: t('tableDemo.pageviews')
-  }
+    label: t('tableDemo.pageviews'),
+  },
 ];
 
 const loading = ref(true);
@@ -60,8 +60,8 @@ const getTableList = async (params?: Params) => {
   const res = await getTableListApi(
     params || {
       pageIndex: 1,
-      pageSize: 10
-    }
+      pageSize: 10,
+    },
   )
     .catch(() => {})
     .finally(() => {

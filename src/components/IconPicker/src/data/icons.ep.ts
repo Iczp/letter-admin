@@ -294,6 +294,6 @@ export default {
     'vi-ep:watermelon',
     'vi-ep:wind-power',
     'vi-ep:zoom-in',
-    'vi-ep:zoom-out'
-  ]
+    'vi-ep:zoom-out',
+  ],
 };

@@ -10,23 +10,23 @@ const { t } = useI18n();
 defineProps({
   currentRow: {
     type: Object as PropType<Nullable<TableData>>,
-    default: () => null
-  }
+    default: () => null,
+  },
 });
 
 const schema = reactive<DescriptionsSchema[]>([
   {
     field: 'title',
     label: t('exampleDemo.title'),
-    span: 24
+    span: 24,
   },
   {
     field: 'author',
-    label: t('exampleDemo.author')
+    label: t('exampleDemo.author'),
   },
   {
     field: 'display_time',
-    label: t('exampleDemo.displayTime')
+    label: t('exampleDemo.displayTime'),
   },
   {
     field: 'importance',
@@ -44,12 +44,12 @@ const schema = reactive<DescriptionsSchema[]>([
                 : t('tableDemo.commonly')}
           </ElTag>
         );
-      }
-    }
+      },
+    },
   },
   {
     field: 'pageviews',
-    label: t('exampleDemo.pageviews')
+    label: t('exampleDemo.pageviews'),
   },
   {
     field: 'content',
@@ -58,9 +58,9 @@ const schema = reactive<DescriptionsSchema[]>([
     slots: {
       default: (data: any) => {
         return <div innerHTML={data.content}></div>;
-      }
-    }
-  }
+      },
+    },
+  },
 ]);
 </script>
 

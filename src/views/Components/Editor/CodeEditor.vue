@@ -6,7 +6,7 @@ import { ref } from 'vue';
 import { BaseButton } from '@/components/Button';
 import { ElDivider } from 'element-plus';
 const content = ref(
-  'public class HelloWorld {\n  public static void main(String[] args) {\n    System.out.println("Hello, World!");\n  }\n}'
+  'public class HelloWorld {\n  public static void main(String[] args) {\n    System.out.println("Hello, World!");\n  }\n}',
 );
 const { t } = useI18n();
 

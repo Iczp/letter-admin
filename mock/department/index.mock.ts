@@ -25,7 +25,7 @@ for (let i = 0; i < 5; i++) {
         // 状态
         status: Mock.Random.integer(0, 1),
         // 备注
-        remark: '@cword(10, 15)'
+        remark: '@cword(10, 15)',
       },
       {
         // 部门名称
@@ -35,7 +35,7 @@ for (let i = 0; i < 5; i++) {
         // 状态
         status: Mock.Random.integer(0, 1),
         // 备注
-        remark: '@cword(10, 15)'
+        remark: '@cword(10, 15)',
       },
       {
         // 部门名称
@@ -45,7 +45,7 @@ for (let i = 0; i < 5; i++) {
         // 状态
         status: Mock.Random.integer(0, 1),
         // 备注
-        remark: '@cword(10, 15)'
+        remark: '@cword(10, 15)',
       },
       {
         // 部门名称
@@ -55,7 +55,7 @@ for (let i = 0; i < 5; i++) {
         // 状态
         status: Mock.Random.integer(0, 1),
         // 备注
-        remark: '@cword(10, 15)'
+        remark: '@cword(10, 15)',
       },
       {
         // 部门名称
@@ -65,7 +65,7 @@ for (let i = 0; i < 5; i++) {
         // 状态
         status: Mock.Random.integer(0, 1),
         // 备注
-        remark: '@cword(10, 15)'
+        remark: '@cword(10, 15)',
       },
       {
         // 部门名称
@@ -75,9 +75,9 @@ for (let i = 0; i < 5; i++) {
         // 状态
         status: Mock.Random.integer(0, 1),
         // 备注
-        remark: '@cword(10, 15)'
-      }
-    ]
+        remark: '@cword(10, 15)',
+      },
+    ],
   });
 }
 
@@ -90,10 +90,10 @@ export default [
       return {
         code: SUCCESS_CODE,
         data: {
-          list: departmentList
-        }
+          list: departmentList,
+        },
       };
-    }
+    },
   },
   {
     url: '/mock/department/table/list',
@@ -103,10 +103,10 @@ export default [
         code: SUCCESS_CODE,
         data: {
           list: departmentList,
-          total: 5
-        }
+          total: 5,
+        },
       };
-    }
+    },
   },
   {
     url: '/mock/department/users',
@@ -128,18 +128,18 @@ export default [
             // 创建时间
             createTime: '@datetime',
             // 用户id
-            id: toAnyString()
-          })
+            id: toAnyString(),
+          }),
         );
       }
       return {
         code: SUCCESS_CODE,
         data: {
           total: 100,
-          list: mockList
-        }
+          list: mockList,
+        },
       };
-    }
+    },
   },
   // 保存接口
   {
@@ -149,9 +149,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: 'success'
+        data: 'success',
       };
-    }
+    },
   },
   // 删除接口
   {
@@ -162,15 +162,15 @@ export default [
       if (!ids) {
         return {
           code: 500,
-          message: '请选择需要删除的数据'
+          message: '请选择需要删除的数据',
         };
       } else {
         return {
           code: SUCCESS_CODE,
-          data: 'success'
+          data: 'success',
         };
       }
-    }
+    },
   },
   // 保存接口
   {
@@ -180,9 +180,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: 'success'
+        data: 'success',
       };
-    }
+    },
   },
   // 删除接口
   {
@@ -193,14 +193,14 @@ export default [
       if (!ids) {
         return {
           code: 500,
-          message: '请选择需要删除的数据'
+          message: '请选择需要删除的数据',
         };
       } else {
         return {
           code: SUCCESS_CODE,
-          data: 'success'
+          data: 'success',
         };
       }
-    }
-  }
+    },
+  },
 ];

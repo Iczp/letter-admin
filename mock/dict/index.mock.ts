@@ -6,17 +6,17 @@ const dictObj: Recordable = {
   importance: [
     {
       value: 0,
-      label: 'tableDemo.commonly'
+      label: 'tableDemo.commonly',
     },
     {
       value: 1,
-      label: 'tableDemo.good'
+      label: 'tableDemo.good',
     },
     {
       value: 2,
-      label: 'tableDemo.important'
-    }
-  ]
+      label: 'tableDemo.important',
+    },
+  ],
 };
 
 export default [
@@ -28,9 +28,9 @@ export default [
     response: () => {
       return {
         code: SUCCESS_CODE,
-        data: dictObj
+        data: dictObj,
       };
-    }
+    },
   },
   // 获取某个字典
   {
@@ -43,18 +43,18 @@ export default [
         data: [
           {
             label: 'test1',
-            value: 0
+            value: 0,
           },
           {
             label: 'test2',
-            value: 1
+            value: 1,
           },
           {
             label: 'test3',
-            value: 2
-          }
-        ]
+            value: 2,
+          },
+        ],
       };
-    }
-  }
+    },
+  },
 ];

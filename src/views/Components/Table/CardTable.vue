@@ -21,8 +21,8 @@ const getTableList = async (params?: Params) => {
   const res = await getCardTableListApi(
     params || {
       pageIndex: 1,
-      pageSize: 10
-    }
+      pageSize: 10,
+    },
   )
     .catch(() => {})
     .finally(() => {
@@ -50,7 +50,7 @@ const actionClick = (row?: any) => {
       :card-wrap-style="{
         width: '200px',
         marginBottom: '20px',
-        marginRight: '20px'
+        marginRight: '20px',
       }"
     >
       <template #content="row">

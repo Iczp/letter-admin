@@ -18,9 +18,9 @@ const props = defineProps({
   height: propTypes.oneOfType([Number, String]).def('500px'),
   editorConfig: {
     type: Object as PropType<IEditorConfig>,
-    default: () => undefined
+    default: () => undefined,
   },
-  modelValue: propTypes.string.def('')
+  modelValue: propTypes.string.def(''),
 });
 
 const emit = defineEmits(['change', 'update:modelValue']);
@@ -35,7 +35,7 @@ watch(
   (val: string) => {
     if (val === unref(valueHtml)) return;
     valueHtml.value = val;
-  }
+  },
 );
 
 // 监听
@@ -43,7 +43,7 @@ watch(
   () => valueHtml.value,
   (val: string) => {
     emit('update:modelValue', val);
-  }
+  },
 );
 
 const handleCreated = (editor: IDomEditor) => {
@@ -77,15 +77,15 @@ const editorConfig = computed((): IEditorConfig => {
       },
       autoFocus: false,
       scroll: true,
-      uploadImgShowBase64: true
+      uploadImgShowBase64: true,
     },
-    props.editorConfig || {}
+    props.editorConfig || {},
   );
 });
 
 const editorStyle = computed(() => {
   return {
-    height: isNumber(props.height) ? `${props.height}px` : props.height
+    height: isNumber(props.height) ? `${props.height}px` : props.height,
   };
 });
 
@@ -108,7 +108,7 @@ const getEditorRef = async (): Promise<IDomEditor> => {
 };
 
 defineExpose({
-  getEditorRef
+  getEditorRef,
 });
 </script>
 

@@ -18,7 +18,7 @@ import {
   ActivityDto,
   activityCustomerDeleteMany,
   InviterConfigDto,
-  customer_gender
+  customer_gender,
 } from '@/client';
 import Form from './components/Form.vue';
 
@@ -32,21 +32,21 @@ const { tableRegister, tableState, tableMethods } = useTable({
         activity_id: unref(currentNodeKey),
         skip: currentPage.value ? 0 : (currentPage.value - 1) * pageSize.value,
         pageSize: unref(pageSize),
-        ...unref(searchParams)
-      }
+        ...unref(searchParams),
+      },
     });
 
     console.log('activityCustomerGetList', res);
 
     return {
       list: res.data?.items || [],
-      total: res.data?.totalCount || 0
+      total: res.data?.totalCount || 0,
     };
   },
   fetchDelApi: async () => {
     const res = await deleteUserByIdApi(unref(ids));
     return !!res;
-  }
+  },
 });
 const { total, loading, dataList, pageSize, currentPage } = tableState;
 const { getList, getElTableExpose, delList } = tableMethods;
@@ -55,68 +55,68 @@ const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'selection',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'selection'
-    }
+      type: 'selection',
+    },
   },
   {
     field: 'index',
     label: t('userDemo.index'),
     form: {
-      hidden: true
+      hidden: true,
     },
     search: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'index'
-    }
+      type: 'index',
+    },
   },
   {
     field: 'keyword',
     label: '搜索关键字',
     form: {
-      hidden: true
+      hidden: true,
     },
     search: {
-      hidden: false
+      hidden: false,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'customer_name',
     label: '客户名称',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'customer_gender',
     label: '性别',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
@@ -124,7 +124,7 @@ const crudSchemas = reactive<CrudSchema[]>([
           const genderEnums = {
             Unknown: '未知',
             Male: '男',
-            Female: '女'
+            Female: '女',
           };
           const gender = data.row.customer_gender ?? '55';
           return (
@@ -134,43 +134,43 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'customer_phone',
     label: '电话',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'inviterConfig_Name',
     label: '邀请人',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
 
   {
     field: 'activity_title',
     label: '活动名称',
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
         default: (data: any) => {
           return <>{data.row.activity_title}</>;
-        }
-      }
+        },
+      },
     },
     form: {
       component: 'Select',
@@ -179,23 +179,23 @@ const crudSchemas = reactive<CrudSchema[]>([
         disabled: false,
         multiple: false,
         collapseTags: true,
-        maxCollapseTags: 1
+        maxCollapseTags: 1,
       },
       optionApi: async () => {
         const res = await activitiesGetList();
         return res.data?.items?.map((x) => ({
           label: x.title,
-          value: x.id
+          value: x.id,
         }));
-      }
+      },
     },
     detail: {
       slots: {
         default: (data: any) => {
           return <>{data.activity?.title}</>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'is_invited',
@@ -211,15 +211,15 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
+        },
+      },
     },
     form: {
-      component: 'Input'
+      component: 'Input',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'is_signed',
@@ -235,15 +235,15 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
+        },
+      },
     },
     form: {
-      component: 'Input'
+      component: 'Input',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'is_gifted',
@@ -259,15 +259,15 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
+        },
+      },
     },
     form: {
-      component: 'Input'
+      component: 'Input',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'is_enabled',
@@ -283,28 +283,28 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
+        },
+      },
     },
     form: {
-      component: 'Input'
+      component: 'Input',
     },
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
 
   {
     field: 'action',
     label: t('userDemo.action'),
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
       width: 160,
@@ -321,10 +321,10 @@ const crudSchemas = reactive<CrudSchema[]>([
               </BaseButton>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 const { allSchemas } = useCrudSchemas(crudSchemas);
@@ -354,7 +354,7 @@ watch(
   () => currentDepartment.value,
   (val) => {
     unref(treeEl)!.filter(val);
-  }
+  },
 );
 const activity = ref<ActivityDto>();
 const currentChange = (item: ActivityDto) => {
@@ -398,20 +398,20 @@ const delData = async (row?: InviterConfigDto) => {
   ElMessageBox.confirm(`是否要删除选中记录(${ids.value.length})?`, '删除', {
     confirmButtonText: '删除',
     cancelButtonText: '取消',
-    type: 'warning'
+    type: 'warning',
   }).then(async () => {
     delLoading.value = true;
     await activityCustomerDeleteMany({
       query: {
-        id: unref(ids)
-      }
+        id: unref(ids),
+      },
     })
       .then((res) => {
         console.log(res);
         getList();
         ElMessage({
           type: 'success',
-          message: '删除成功'
+          message: '删除成功',
         });
       })
       .finally(() => {
@@ -436,7 +436,7 @@ const action = (row: InviterConfigDto, type: string) => {
   dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail');
   actionType.value = type;
   currentRow.value = {
-    ...row
+    ...row,
     // department: unref(treeEl)?.getCurrentNode() || {}
   };
   dialogVisible.value = true;
@@ -468,7 +468,7 @@ const save = async () => {
 
 const formDialog = reactive({
   visible: false,
-  title: '表单'
+  title: '表单',
 });
 const rowId = ref<string>();
 const rowItem = ref<InviterConfigDto>();
@@ -508,7 +508,7 @@ const onSave = () => {
         node-key="id"
         :current-node-key="currentNodeKey"
         :props="{
-          label: 'activityTitle'
+          label: 'activityTitle',
         }"
         :filter-node-method="filterNode"
         @current-change="currentChange"
@@ -541,7 +541,7 @@ const onSave = () => {
         :loading="loading"
         @register="tableRegister"
         :pagination="{
-          total
+          total,
         }"
       />
     </ContentWrap>

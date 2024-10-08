@@ -9,7 +9,7 @@ import {
   getDepartmentApi,
   getDepartmentTableApi,
   saveDepartmentApi,
-  deleteDepartmentApi
+  deleteDepartmentApi,
 } from '@/api/department';
 import type { DepartmentItem } from '@/api/department/types';
 import { useTable } from '@/hooks/web/useTable';
@@ -27,17 +27,17 @@ const { tableRegister, tableState, tableMethods } = useTable({
     const res = await getDepartmentTableApi({
       pageIndex: unref(currentPage),
       pageSize: unref(pageSize),
-      ...unref(searchParams)
+      ...unref(searchParams),
     });
     return {
       list: res.data.list,
-      total: res.data.total
+      total: res.data.total,
     };
   },
   fetchDelApi: async () => {
     const res = await deleteDepartmentApi(unref(ids));
     return !!res;
-  }
+  },
 });
 const { loading, dataList, total, currentPage, pageSize } = tableState;
 const { getList, getElTableExpose, delList } = tableMethods;
@@ -54,31 +54,31 @@ const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'selection',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'selection'
-    }
+      type: 'selection',
+    },
   },
   {
     field: 'index',
     label: t('tableDemo.index'),
     type: 'index',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'id',
@@ -87,35 +87,35 @@ const crudSchemas = reactive<CrudSchema[]>([
       slots: {
         default: (data: any) => {
           return <>{data.row.departmentName}</>;
-        }
-      }
+        },
+      },
     },
     form: {
       component: 'TreeSelect',
       componentProps: {
         nodeKey: 'id',
         props: {
-          label: 'departmentName'
-        }
+          label: 'departmentName',
+        },
       },
       optionApi: async () => {
         const res = await getDepartmentApi();
         return res.data.list;
-      }
+      },
     },
     detail: {
       slots: {
         default: (data: any) => {
           return <>{data.departmentName}</>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'status',
     label: t('userDemo.status'),
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
@@ -128,8 +128,8 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
+        },
+      },
     },
     form: {
       component: 'Select',
@@ -137,14 +137,14 @@ const crudSchemas = reactive<CrudSchema[]>([
         options: [
           {
             value: 0,
-            label: t('userDemo.disable')
+            label: t('userDemo.disable'),
           },
           {
             value: 1,
-            label: t('userDemo.enable')
-          }
-        ]
-      }
+            label: t('userDemo.enable'),
+          },
+        ],
+      },
     },
     detail: {
       slots: {
@@ -156,56 +156,56 @@ const crudSchemas = reactive<CrudSchema[]>([
               </ElTag>
             </>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'createTime',
     label: t('tableDemo.displayTime'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'remark',
     label: t('userDemo.remark'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'Input',
       componentProps: {
         type: 'textarea',
-        rows: 5
+        rows: 5,
       },
       colProps: {
-        span: 24
-      }
+        span: 24,
+      },
     },
     detail: {
       slots: {
         default: (data: any) => {
           return <>{data.remark}</>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'action',
     width: '260px',
     label: t('tableDemo.action'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
@@ -223,10 +223,10 @@ const crudSchemas = reactive<CrudSchema[]>([
               </BaseButton>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 // @ts-ignore
@@ -306,7 +306,7 @@ const save = async () => {
       :data="dataList"
       :loading="loading"
       :pagination="{
-        total: total
+        total: total,
       }"
       @register="tableRegister"
     />

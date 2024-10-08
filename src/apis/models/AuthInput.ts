@@ -3,8 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type AuthInput = {
-    account: string;
-    password: string;
-    validate_code: string;
+  account: string;
+  password: string;
+  validate_code: string;
 };
-

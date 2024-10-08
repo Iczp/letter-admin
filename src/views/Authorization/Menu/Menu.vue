@@ -20,9 +20,9 @@ const { tableRegister, tableState, tableMethods } = useTable({
   fetchDataApi: async () => {
     const res = await getMenuListApi();
     return {
-      list: res.data.list || []
+      list: res.data.list || [],
     };
-  }
+  },
 });
 
 const { dataList, loading } = tableState;
@@ -32,7 +32,7 @@ const tableColumns = reactive<TableColumn[]>([
   {
     field: 'index',
     label: t('userDemo.index'),
-    type: 'index'
+    type: 'index',
   },
   {
     field: 'meta.title',
@@ -41,8 +41,8 @@ const tableColumns = reactive<TableColumn[]>([
       default: (data: any) => {
         const title = data.row.meta.title;
         return <>{title}</>;
-      }
-    }
+      },
+    },
   },
   {
     field: 'meta.icon',
@@ -59,8 +59,8 @@ const tableColumns = reactive<TableColumn[]>([
         } else {
           return null;
         }
-      }
-    }
+      },
+    },
   },
   // {
   //   field: 'meta.permission',
@@ -79,12 +79,12 @@ const tableColumns = reactive<TableColumn[]>([
       default: (data: any) => {
         const component = data.row.component;
         return <>{component === '#' ? '顶级目录' : component === '##' ? '子目录' : component}</>;
-      }
-    }
+      },
+    },
   },
   {
     field: 'path',
-    label: t('menu.path')
+    label: t('menu.path'),
   },
   {
     field: 'status',
@@ -98,8 +98,8 @@ const tableColumns = reactive<TableColumn[]>([
             </ElTag>
           </>
         );
-      }
-    }
+      },
+    },
   },
   {
     field: 'action',
@@ -119,17 +119,17 @@ const tableColumns = reactive<TableColumn[]>([
             <BaseButton type="danger">{t('exampleDemo.del')}</BaseButton>
           </>
         );
-      }
-    }
-  }
+      },
+    },
+  },
 ]);
 
 const searchSchema = reactive<FormSchema[]>([
   {
     field: 'meta.title',
     label: t('menu.menuName'),
-    component: 'Input'
-  }
+    component: 'Input',
+  },
 ]);
 
 const searchParams = ref({});

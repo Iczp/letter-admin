@@ -50,7 +50,7 @@ export type UserDto = {
 export enum user_type {
   UNSET = 'Unset',
   CUSTOMER = 'Customer',
-  SHOP_MANAGER = 'ShopManager'
+  SHOP_MANAGER = 'ShopManager',
 }
 
 export type UserPagedResult = {
@@ -127,13 +127,13 @@ export type UserCreateInput = {
 export enum userType {
   UNSET = 'Unset',
   CUSTOMER = 'Customer',
-  SHOP_MANAGER = 'ShopManager'
+  SHOP_MANAGER = 'ShopManager',
 }
 
 export enum gender {
   UNKNOWN = 'Unknown',
   MALE = 'Male',
-  FEMALE = 'Female'
+  FEMALE = 'Female',
 }
 
 export type UserUpdateInput = {
@@ -306,7 +306,7 @@ export type ActivityCustomerDto = {
 export enum customer_gender {
   UNKNOWN = 'Unknown',
   MALE = 'Male',
-  FEMALE = 'Female'
+  FEMALE = 'Female',
 }
 
 export type ActivityCustomerPagedResult = {

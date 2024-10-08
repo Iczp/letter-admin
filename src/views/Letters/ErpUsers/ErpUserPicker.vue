@@ -31,7 +31,7 @@ import {
   ElAutocomplete,
   FormInstance,
   ElDivider,
-  ElMessage
+  ElMessage,
 } from 'element-plus';
 import { ErpUsersDto, erpUsersFindAll } from '@/client';
 import { emit } from 'process';
@@ -50,7 +50,7 @@ const props = withDefaults(
     width?: string | number;
     height?: string | number;
   }>(),
-  { width: 640, height: 360 }
+  { width: 640, height: 360 },
 );
 
 const tableRef = ref<TableInstance>();
@@ -66,7 +66,7 @@ const pickerArgs = ref<PickerInput>({
   minCount: 1,
   maxCount: 2,
   selectedItems: [],
-  disabledItems: []
+  disabledItems: [],
 });
 const set = (args: PickerInput) => {
   pickerArgs.value = args;
@@ -79,7 +79,7 @@ const onConfirm = () => {
   if (items.length == 0) {
     ElMessage({
       message: '请选择至少一项',
-      type: 'warning'
+      type: 'warning',
     });
     return;
   }
@@ -112,7 +112,7 @@ const selectionChange = (row: Array<ErpUsersDto>) => {
   // tableRef.value!.toggleRowSelection(row, true);
 };
 erpUsersFindAll({
-  query: {}
+  query: {},
 }).then((res) => {
   tableData.value = res?.data?.items || [];
 });
@@ -145,7 +145,7 @@ const onSelect = (selection: any[], row: any) => {
 const searchForm = reactive({
   user: '',
   region: '',
-  date: ''
+  date: '',
 });
 
 const onSubmit = () => {

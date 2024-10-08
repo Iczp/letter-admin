@@ -8,8 +8,8 @@ import { getMenuListApi } from '@/api/menu';
 defineProps({
   currentRow: {
     type: Object as PropType<any>,
-    default: () => undefined
-  }
+    default: () => undefined,
+  },
 });
 
 const filterPermissionName = (value: string) => {
@@ -43,7 +43,7 @@ getMenuList();
 const detailSchema = ref<DescriptionsSchema[]>([
   {
     field: 'roleName',
-    label: '角色名称'
+    label: '角色名称',
   },
   {
     field: 'status',
@@ -51,13 +51,13 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data: any) => {
         return renderTag(data.status);
-      }
-    }
+      },
+    },
   },
   {
     field: 'remark',
     label: '备注',
-    span: 24
+    span: 24,
   },
   {
     field: 'permissionList',
@@ -81,7 +81,7 @@ const detailSchema = ref<DescriptionsSchema[]>([
                   {{
                     default: (data) => {
                       return <span>{data?.data?.title}</span>;
-                    }
+                    },
                   }}
                 </ElTree>
               </div>
@@ -95,9 +95,9 @@ const detailSchema = ref<DescriptionsSchema[]>([
             </div>
           </>
         );
-      }
-    }
-  }
+      },
+    },
+  },
 ]);
 </script>
 

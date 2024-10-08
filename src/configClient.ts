@@ -11,7 +11,7 @@ export const configClient = (app: App<Element>) => {
   // axiosRetry(client.instance, { retries: 1 });
 
   client.setConfig({
-    baseURL: import.meta.env.VITE_API_BASE_PATH
+    baseURL: import.meta.env.VITE_API_BASE_PATH,
   });
   client.instance.interceptors.request.use((config: InternalAxiosRequestConfig<any>) => {
     console.log('requestConfig', config);
@@ -52,7 +52,7 @@ export const configClient = (app: App<Element>) => {
 
       ElMessage.error(`[${status}]:${message}`);
       return Promise.reject(error);
-    }
+    },
   );
 
   console.log('configClient', client.getConfig());

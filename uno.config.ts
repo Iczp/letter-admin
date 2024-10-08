@@ -20,8 +20,8 @@ const createPresetIcons = () => {
     return [
       presetIcons({
         autoInstall: false,
-        prefix: ICON_PREFIX
-      })
+        prefix: ICON_PREFIX,
+      }),
     ];
   }
 };
@@ -38,7 +38,7 @@ ${selector} {
   text-overflow: ellipsis;
 }
 `;
-      }
+      },
     ],
     [
       /^custom-hover$/,
@@ -61,7 +61,7 @@ ${selector}:hover {
   background-color: var(--el-bg-color-overlay);
 }
 `;
-      }
+      },
     ],
     [
       /^layout-border__left$/,
@@ -79,7 +79,7 @@ ${selector}:before {
   z-index: 3;
 }
 `;
-      }
+      },
     ],
     [
       /^layout-border__right$/,
@@ -97,7 +97,7 @@ ${selector}:after {
   z-index: 3;
 }
 `;
-      }
+      },
     ],
     [
       /^layout-border__top$/,
@@ -115,7 +115,7 @@ ${selector}:before {
   z-index: 3;
 }
 `;
-      }
+      },
     ],
     [
       /^layout-border__bottom$/,
@@ -133,14 +133,14 @@ ${selector}:after {
   z-index: 3;
 }
 `;
-      }
-    ]
+      },
+    ],
   ],
   presets: [presetUno({ dark: 'class', attributify: false }), ...createPresetIcons()],
   transformers: [transformerVariantGroup()],
   content: {
     pipeline: {
-      include: [/\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|ts)($|\?)/]
-    }
-  }
+      include: [/\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html|ts)($|\?)/],
+    },
+  },
 });

@@ -7,8 +7,8 @@ import { ElTag } from 'element-plus';
 defineProps({
   currentRow: {
     type: Object as PropType<any>,
-    default: () => undefined
-  }
+    default: () => undefined,
+  },
 });
 
 const renderTag = (enable?: boolean) => {
@@ -24,16 +24,16 @@ const detailSchema = ref<DescriptionsSchema[]>([
       default: (data) => {
         const type = data.type;
         return <>{type === 1 ? '菜单' : '目录'}</>;
-      }
-    }
+      },
+    },
   },
   {
     field: 'parentName',
-    label: '父级菜单'
+    label: '父级菜单',
   },
   {
     field: 'meta.title',
-    label: '菜单名称'
+    label: '菜单名称',
   },
   {
     field: 'component',
@@ -42,12 +42,12 @@ const detailSchema = ref<DescriptionsSchema[]>([
       default: (data) => {
         const component = data.component;
         return <>{component === '#' ? '顶级目录' : component === '##' ? '子目录' : component}</>;
-      }
-    }
+      },
+    },
   },
   {
     field: 'name',
-    label: '组件名称'
+    label: '组件名称',
   },
   {
     field: 'meta.icon',
@@ -64,16 +64,16 @@ const detailSchema = ref<DescriptionsSchema[]>([
         } else {
           return null;
         }
-      }
-    }
+      },
+    },
   },
   {
     field: 'path',
-    label: '路径'
+    label: '路径',
   },
   {
     field: 'meta.activeMenu',
-    label: '高亮菜单'
+    label: '高亮菜单',
   },
   {
     field: 'permissionList',
@@ -90,8 +90,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
             );
           })}
         </>
-      )
-    }
+      ),
+    },
   },
   {
     field: 'menuState',
@@ -99,8 +99,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data) => {
         return renderTag(data.menuState);
-      }
-    }
+      },
+    },
   },
   {
     field: 'meta.hidden',
@@ -108,8 +108,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data) => {
         return renderTag(data.enableHidden);
-      }
-    }
+      },
+    },
   },
   {
     field: 'meta.alwaysShow',
@@ -117,8 +117,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data) => {
         return renderTag(data.enableDisplay);
-      }
-    }
+      },
+    },
   },
   {
     field: 'meta.noCache',
@@ -126,8 +126,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data) => {
         return renderTag(data.enableCleanCache);
-      }
-    }
+      },
+    },
   },
   {
     field: 'meta.breadcrumb',
@@ -135,8 +135,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data) => {
         return renderTag(data.enableShowCrumb);
-      }
-    }
+      },
+    },
   },
   {
     field: 'meta.affix',
@@ -144,8 +144,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data) => {
         return renderTag(data.enablePinnedTab);
-      }
-    }
+      },
+    },
   },
   {
     field: 'meta.noTagsView',
@@ -153,8 +153,8 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data) => {
         return renderTag(data.enableHiddenTab);
-      }
-    }
+      },
+    },
   },
   {
     field: 'meta.canTo',
@@ -162,9 +162,9 @@ const detailSchema = ref<DescriptionsSchema[]>([
     slots: {
       default: (data) => {
         return renderTag(data.enableSkip);
-      }
-    }
-  }
+      },
+    },
+  },
 ]);
 </script>
 

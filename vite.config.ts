@@ -36,8 +36,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       Vue({
         script: {
           // 开启defineModel
-          defineModel: true
-        }
+          defineModel: true,
+        },
       }),
       VueJsx(),
       ServerUrlCopy(),
@@ -54,9 +54,9 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
                     return '';
                   }
                   return `element-plus/es/components/${name.replace(/^el-/, '')}/style/css`;
-                }
-              }
-            ]
+                },
+              },
+            ],
           })
         : undefined,
       EslintPlugin({
@@ -64,17 +64,17 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         failOnWarning: true,
         failOnError: false,
         exclude: ['src/client/**', 'src/apis/**'],
-        include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx'] // 检查的文件
+        include: ['src/**/*.vue', 'src/**/*.ts', 'src/**/*.tsx'], // 检查的文件
       }),
       VueI18nPlugin({
         runtimeOnly: true,
         compositionOnly: true,
-        include: [resolve(__dirname, 'src/locales/**')]
+        include: [resolve(__dirname, 'src/locales/**')],
       }),
       createSvgIconsPlugin({
         iconDirs: [pathResolve('src/assets/svgs')],
         symbolId: 'icon-[dir]-[name]',
-        svgoOptions: true
+        svgoOptions: true,
       }),
       PurgeIcons(),
       env.VITE_USE_MOCK === 'true'
@@ -89,39 +89,39 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           import { setupProdMockServer } from '../mock/_createProductionServer'
 
           setupProdMockServer()
-          `
+          `,
           })
         : undefined,
       ViteEjsPlugin({
-        title: env.VITE_APP_TITLE
+        title: env.VITE_APP_TITLE,
       }),
-      UnoCSS()
+      UnoCSS(),
     ],
 
     css: {
       preprocessorOptions: {
         less: {
           additionalData: '@import "./src/styles/variables.module.less";',
-          javascriptEnabled: true
-        }
-      }
+          javascriptEnabled: true,
+        },
+      },
     },
     resolve: {
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.less', '.css'],
       alias: [
         {
           find: 'vue-i18n',
-          replacement: 'vue-i18n/dist/vue-i18n.cjs.js'
+          replacement: 'vue-i18n/dist/vue-i18n.cjs.js',
         },
         {
           find: /\@\//,
-          replacement: `${pathResolve('src')}/`
-        }
-      ]
+          replacement: `${pathResolve('src')}/`,
+        },
+      ],
     },
     esbuild: {
       pure: env.VITE_DROP_CONSOLE === 'true' ? ['console.log'] : undefined,
-      drop: env.VITE_DROP_DEBUGGER === 'true' ? ['debugger'] : undefined
+      drop: env.VITE_DROP_DEBUGGER === 'true' ? ['debugger'] : undefined,
     },
     build: {
       target: 'es2015',
@@ -136,12 +136,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
             'vue-chunks': ['vue', 'vue-router', 'pinia', 'vue-i18n'],
             'element-plus': ['element-plus'],
             'wang-editor': ['@wangeditor/editor', '@wangeditor/editor-for-vue'],
-            echarts: ['echarts', 'echarts-wordcloud']
-          }
-        }
+            echarts: ['echarts', 'echarts-wordcloud'],
+          },
+        },
       },
       cssCodeSplit: !(env.VITE_USE_CSS_SPLIT === 'false'),
-      cssTarget: ['chrome31']
+      cssTarget: ['chrome31'],
     },
     server: {
       port: 4000,
@@ -150,13 +150,13 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         '/api': {
           target: 'http://127.0.0.1:8000',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
-        }
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
       },
       hmr: {
-        overlay: true
+        overlay: true,
       },
-      host: '0.0.0.0'
+      host: '0.0.0.0',
     },
     optimizeDeps: {
       include: [
@@ -177,8 +177,8 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'vue-json-pretty',
         '@zxcvbn-ts/core',
         'dayjs',
-        'cropperjs'
-      ]
-    }
+        'cropperjs',
+      ],
+    },
   };
 };

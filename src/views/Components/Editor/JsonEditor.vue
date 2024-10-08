@@ -8,7 +8,7 @@ const { t } = useI18n();
 
 const defaultData = ref({
   title: '标题',
-  content: '内容'
+  content: '内容',
 });
 
 watch(
@@ -17,14 +17,14 @@ watch(
     console.log(val);
   },
   {
-    deep: true
-  }
+    deep: true,
+  },
 );
 
 setTimeout(() => {
   defaultData.value = {
     title: '异步标题',
-    content: '异步内容'
+    content: '异步内容',
   };
 }, 4000);
 </script>

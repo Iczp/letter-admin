@@ -14,7 +14,7 @@ import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 
 defineOptions({
-  name: 'ExamplePage'
+  name: 'ExamplePage',
 });
 
 const { push } = useRouter();
@@ -33,17 +33,17 @@ const { tableRegister, tableState, tableMethods } = useTable({
     const res = await getTableListApi({
       pageIndex: unref(currentPage),
       pageSize: unref(pageSize),
-      ...unref(searchParams)
+      ...unref(searchParams),
     });
     return {
       list: res.data.list,
-      total: res.data.total
+      total: res.data.total,
     };
   },
   fetchDelApi: async () => {
     const res = await delTableListApi(unref(ids));
     return !!res;
-  }
+  },
 });
 const { loading, dataList, total, currentPage, pageSize } = tableState;
 const { getList, getElTableExpose, delList } = tableMethods;
@@ -57,7 +57,7 @@ useEventBus({
       currentPage.value = 1;
     }
     getList();
-  }
+  },
 });
 
 const { t } = useI18n();
@@ -66,96 +66,96 @@ const crudSchemas = reactive<CrudSchema[]>([
   {
     field: 'selection',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      type: 'selection'
-    }
+      type: 'selection',
+    },
   },
   {
     field: 'index',
     label: t('tableDemo.index'),
     type: 'index',
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'title',
     label: t('tableDemo.title'),
     search: {
-      component: 'Input'
+      component: 'Input',
     },
     form: {
       component: 'Input',
       colProps: {
-        span: 24
-      }
+        span: 24,
+      },
     },
     detail: {
-      span: 24
-    }
+      span: 24,
+    },
   },
   {
     field: 'author',
     label: t('tableDemo.author'),
     search: {
-      hidden: true
-    }
+      hidden: true,
+    },
   },
   {
     field: 'display_time',
     label: t('tableDemo.displayTime'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'DatePicker',
       componentProps: {
         type: 'datetime',
-        valueFormat: 'YYYY-MM-DD HH:mm:ss'
-      }
-    }
+        valueFormat: 'YYYY-MM-DD HH:mm:ss',
+      },
+    },
   },
   {
     field: 'importance',
     label: t('tableDemo.importance'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'Select',
       componentProps: {
         style: {
-          width: '100%'
+          width: '100%',
         },
         options: [
           {
             label: '重要',
-            value: 3
+            value: 3,
           },
           {
             label: '良好',
-            value: 2
+            value: 2,
           },
           {
             label: '一般',
-            value: 1
-          }
-        ]
-      }
+            value: 1,
+          },
+        ],
+      },
     },
     detail: {
       slots: {
@@ -173,57 +173,57 @@ const crudSchemas = reactive<CrudSchema[]>([
                   : t('tableDemo.commonly')}
             </ElTag>
           );
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'pageviews',
     label: t('tableDemo.pageviews'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
       component: 'InputNumber',
-      value: 0
-    }
+      value: 0,
+    },
   },
   {
     field: 'content',
     label: t('exampleDemo.content'),
     search: {
-      hidden: true
+      hidden: true,
     },
     table: {
-      show: false
+      show: false,
     },
     form: {
       component: 'Editor',
       colProps: {
-        span: 24
-      }
+        span: 24,
+      },
     },
     detail: {
       span: 24,
       slots: {
         default: (data: any) => {
           return <div innerHTML={data.content}></div>;
-        }
-      }
-    }
+        },
+      },
+    },
   },
   {
     field: 'action',
     width: '260px',
     label: t('tableDemo.action'),
     search: {
-      hidden: true
+      hidden: true,
     },
     form: {
-      hidden: true
+      hidden: true,
     },
     detail: {
-      hidden: true
+      hidden: true,
     },
     table: {
       slots: {
@@ -241,10 +241,10 @@ const crudSchemas = reactive<CrudSchema[]>([
               </BaseButton>
             </>
           );
-        }
-      }
-    }
-  }
+        },
+      },
+    },
+  },
 ]);
 
 // @ts-ignore
@@ -288,7 +288,7 @@ const action = (row: TableData, type: string) => {
       :data="dataList"
       :loading="loading"
       :pagination="{
-        total: total
+        total: total,
       }"
       @register="tableRegister"
     />

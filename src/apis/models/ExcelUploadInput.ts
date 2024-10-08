@@ -3,10 +3,9 @@
 /* tslint:disable */
 /* eslint-disable */
 export type ExcelUploadInput = {
-    file: Blob;
-    /**
-     * Excel 文件上传参数
-     */
-    body?: Record<string, any>;
+  file: Blob;
+  /**
+   * Excel 文件上传参数
+   */
+  body?: Record<string, any>;
 };
-

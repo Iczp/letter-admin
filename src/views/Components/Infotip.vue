@@ -20,12 +20,12 @@ const keyClick = (key: string) => {
       :schema="[
         {
           label: t('iconDemo.recommendeDes'),
-          keys: ['Iconify']
+          keys: ['Iconify'],
         },
         {
           label: t('iconDemo.accessAddress'),
-          keys: [t('iconDemo.accessAddress')]
-        }
+          keys: [t('iconDemo.accessAddress')],
+        },
       ]"
       @click="keyClick"
     />

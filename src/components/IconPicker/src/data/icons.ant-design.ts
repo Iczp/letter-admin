@@ -831,6 +831,6 @@ export default {
     'vi-ant-design:zhihu-outlined',
     'vi-ant-design:zhihu-square-filled',
     'vi-ant-design:zoom-in-outlined',
-    'vi-ant-design:zoom-out-outlined'
-  ]
+    'vi-ant-design:zoom-out-outlined',
+  ],
 };

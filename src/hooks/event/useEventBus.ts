@@ -21,6 +21,6 @@ export const useEventBus = (option?: Option) => {
     on: emitter.on,
     off: emitter.off,
     emit: emitter.emit,
-    all: emitter.all
+    all: emitter.all,
   };
 };

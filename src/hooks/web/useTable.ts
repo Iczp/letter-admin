@@ -30,7 +30,7 @@ export const useTable = (config: UseTableConfig) => {
     () => currentPage.value,
     () => {
       methods.getList();
-    }
+    },
   );
 
   watch(
@@ -43,7 +43,7 @@ export const useTable = (config: UseTableConfig) => {
         currentPage.value = 1;
         methods.getList();
       }
-    }
+    },
   );
 
   onMounted(() => {
@@ -158,7 +158,7 @@ export const useTable = (config: UseTableConfig) => {
       ElMessageBox.confirm(t('common.delMessage'), t('common.delWarning'), {
         confirmButtonText: t('common.delOk'),
         cancelButtonText: t('common.delCancel'),
-        type: 'warning'
+        type: 'warning',
       }).then(async () => {
         const res = await fetchDelApi();
         if (res) {
@@ -176,7 +176,7 @@ export const useTable = (config: UseTableConfig) => {
           methods.getList();
         }
       });
-    }
+    },
   };
 
   return {
@@ -187,7 +187,7 @@ export const useTable = (config: UseTableConfig) => {
       pageSize,
       total,
       dataList,
-      loading
-    }
+      loading,
+    },
   };
 };

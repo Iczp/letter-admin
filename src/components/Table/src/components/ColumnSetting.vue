@@ -5,7 +5,7 @@ import {
   ElCheckboxGroup,
   ElText,
   ElRadioButton,
-  ElRadioGroup
+  ElRadioGroup,
 } from 'element-plus';
 import { TableColumn } from '../types';
 import { PropType, ref, watch, unref } from 'vue';
@@ -18,8 +18,8 @@ const modelValue = defineModel<boolean>();
 const props = defineProps({
   columns: {
     type: Array as PropType<TableColumn[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 
 const emit = defineEmits(['confirm']);
@@ -75,7 +75,7 @@ const initColumns = (columns: TableColumn[], isReStore = false) => {
   settingColumns.value = cloneDeep(newColumns);
 
   hiddenColumns.value = cloneDeep(
-    columns?.filter((item) => item.type && DEFAULT_FILTER_COLUMN.includes(item.type))
+    columns?.filter((item) => item.type && DEFAULT_FILTER_COLUMN.includes(item.type)),
   );
 
   defaultCheckColumns.value = unref(settingColumns)?.map((item) => item.field) || [];
@@ -97,8 +97,8 @@ watch(
   },
   {
     immediate: true,
-    deep: true
-  }
+    deep: true,
+  },
 );
 </script>
 

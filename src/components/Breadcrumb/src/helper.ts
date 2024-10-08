@@ -2,7 +2,7 @@ import { pathResolve } from '@/utils/routerHelper';
 
 export const filterBreadcrumb = (
   routes: AppRouteRecordRaw[],
-  parentPath = ''
+  parentPath = '',
 ): AppRouteRecordRaw[] => {
   const res: AppRouteRecordRaw[] = [];
 
