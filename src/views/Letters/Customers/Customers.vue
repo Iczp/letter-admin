@@ -17,7 +17,8 @@ import {
   activityCustomerGetList,
   ActivityDto,
   activityCustomerDeleteMany,
-  InviterConfigDto
+  InviterConfigDto,
+  customer_gender
 } from '@/client';
 import Form from './components/Form.vue';
 
@@ -116,6 +117,25 @@ const crudSchemas = reactive<CrudSchema[]>([
     },
     form: {
       hidden: true
+    },
+    table: {
+      slots: {
+        default: (data: any) => {
+          const genderEnums = {
+            Unknown: '未知',
+            Male: '男',
+            Female: '女'
+          };
+          const gender = data.row.customer_gender ?? '55';
+          return (
+            <>
+              <ElTag type={gender == customer_gender.MALE ? 'success' : 'danger'}>
+                {genderEnums[gender]}
+              </ElTag>
+            </>
+          );
+        }
+      }
     }
   },
   {
@@ -287,7 +307,7 @@ const crudSchemas = reactive<CrudSchema[]>([
       hidden: true
     },
     table: {
-      width: 240,
+      width: 160,
       slots: {
         default: (data: any) => {
           const row = data.row as InviterConfigDto;

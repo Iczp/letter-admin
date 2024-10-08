@@ -3,13 +3,13 @@ import { Form, FormSchema } from '@/components/Form';
 import { useForm } from '@/hooks/web/useForm';
 import { PropType, reactive, watch } from 'vue';
 import { useValidator } from '@/hooks/web/useValidator';
-import { DepartmentItem } from '@/api/department/types';
+import { ActivityDto } from '@/client';
 
 const { required } = useValidator();
 
 const props = defineProps({
   currentRow: {
-    type: Object as PropType<Nullable<DepartmentItem>>,
+    type: Object as PropType<Nullable<ActivityDto>>,
     default: () => null
   },
   formSchema: {

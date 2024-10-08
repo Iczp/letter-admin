@@ -11,11 +11,12 @@ import {
   saveDepartmentApi,
   deleteDepartmentApi
 } from '@/api/department';
-import type { DepartmentItem } from '@/api/department/types';
+
 import { useTable } from '@/hooks/web/useTable';
 import { ref, unref, reactive } from 'vue';
 import Write from './components/Write.vue';
 import Detail from './components/Detail.vue';
+import ImageSettings from './components/ImageSettings.vue';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 import {
@@ -23,13 +24,13 @@ import {
   activitiesDeleteMany,
   activitiesGetList,
   activitiesUpdate,
-  ActivityCreateInput,
-  activityCustomerGetList,
+  ActivityDto,
   ActivityUpdateInput
 } from '@/client';
 import { formatToDate } from '@/utils/dateUtil';
 import { IdDto } from '@/api/dtos/IdDto';
 
+const imageSettingsRef = ref<ComponentRef<typeof ImageSettings>>();
 const ids = ref<string[]>([]);
 
 const { tableRegister, tableState, tableMethods } = useTable({
@@ -321,7 +322,7 @@ const crudSchemas = reactive<CrudSchema[]>([
   },
   {
     field: 'action',
-    width: '240px',
+    width: '320px',
     label: t('tableDemo.action'),
     search: {
       hidden: true
@@ -339,6 +340,9 @@ const crudSchemas = reactive<CrudSchema[]>([
             <>
               <BaseButton type="primary" onClick={() => action(data.row, 'edit')}>
                 {t('exampleDemo.edit')}
+              </BaseButton>
+              <BaseButton type="primary" onClick={() => openImageSettings(data.row)}>
+                设置
               </BaseButton>
               <BaseButton type="success" onClick={() => action(data.row, 'detail')}>
                 {t('exampleDemo.detail')}
@@ -360,7 +364,7 @@ const { allSchemas } = useCrudSchemas(crudSchemas);
 const dialogVisible = ref(false);
 const dialogTitle = ref('');
 
-const currentRow = ref<DepartmentItem | null>(null);
+const currentRow = ref<ActivityDto | null>(null);
 const actionType = ref('');
 
 const AddAction = () => {
@@ -372,7 +376,7 @@ const AddAction = () => {
 
 const delLoading = ref(false);
 
-const delData = async (row: DepartmentItem | null) => {
+const delData = async (row: ActivityDto | null) => {
   const elTableExpose = await getElTableExpose();
   ids.value = row ? [row.id] : elTableExpose?.getSelectionRows().map((v: IdDto) => v.id) || [];
   if (!ids.value.length) {
@@ -404,11 +408,15 @@ const delData = async (row: DepartmentItem | null) => {
   });
 };
 
-const action = (row: DepartmentItem, type: string) => {
+const action = (row: ActivityDto, type: string) => {
   dialogTitle.value = t(type === 'edit' ? 'exampleDemo.edit' : 'exampleDemo.detail');
   actionType.value = type;
   currentRow.value = row;
   dialogVisible.value = true;
+};
+
+const openImageSettings = (row: ActivityDto) => {
+  imageSettingsRef.value?.open(row);
 };
 
 const writeRef = ref<ComponentRef<typeof Write>>();
@@ -500,4 +508,6 @@ const save = async () => {
       <BaseButton @click="dialogVisible = false">{{ t('dialogDemo.close') }}</BaseButton>
     </template>
   </Dialog>
+
+  <ImageSettings ref="imageSettingsRef" />
 </template>
