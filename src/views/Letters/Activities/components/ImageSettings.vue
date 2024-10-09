@@ -4,43 +4,11 @@ import { useDesign } from '@/hooks/web/useDesign';
 import { nextTick, unref, ref, watch, onBeforeUnmount, onMounted, computed } from 'vue';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
+import QRCode from 'qrcode';
 
 import { useDebounceFn } from '@vueuse/core';
 import { BaseButton } from '@/components/Button';
-import {
-  ElUpload,
-  UploadFile,
-  ElTooltip,
-  ComponentSize,
-  ElTable,
-  ElTableColumn,
-  TableInstance,
-  ElPagination,
-  ElForm,
-  ElIcon,
-  ElInput,
-  ElSelect,
-  ElButton,
-  ElFormItem,
-  ElOption,
-  ElSelectV2,
-  ElInputNumber,
-  ElCheckbox,
-  ElDatePicker,
-  ElTimePicker,
-  ElCheckboxGroup,
-  ElRadioGroup,
-  ElRadio,
-  ElCol,
-  ElSegmented,
-  ElAffix,
-  ElSwitch,
-  ElTimeSelect,
-  ElAutocomplete,
-  FormInstance,
-  ElDivider,
-  ElMessage,
-} from 'element-plus';
+import { ElUpload, UploadFile, ElTooltip, ElMessage } from 'element-plus';
 
 const props = defineProps({
   width: {
@@ -53,7 +21,8 @@ const props = defineProps({
   },
   imageUrl: {
     type: String,
-    default: '',
+    default:
+      'https://hips.hearstapps.com/hmg-prod/images/%E5%AE%8B%E6%99%BA%E5%AD%9D-1597774015.jpg?crop=0.500xw:1.00xh;0.500xw,0&resize=640:*',
     // required: true
   },
   cropBoxWidth: {
@@ -66,11 +35,11 @@ const props = defineProps({
   },
   boxWidth: {
     type: [Number, String],
-    default: 425,
+    default: 600,
   },
   boxHeight: {
     type: [Number, String],
-    default: 320,
+    default: 460,
   },
   showResult: {
     type: Boolean,
@@ -129,9 +98,28 @@ const getScaleSize = (scale: number) => {
 const imgBase64 = ref('');
 const imgRef = ref<HTMLImageElement>();
 const cropperRef = ref<Cropper>();
+
+const qrcodeRect = ref<Cropper.SetDataOptions>({
+  x: 109.56521739130434,
+  y: 39.130434782608695,
+  width: 260.8695652173913,
+  height: 260.8695652173913,
+  rotate: 0,
+  scaleX: 1,
+  scaleY: 1,
+});
+
+const cropBoxData = ref<Cropper.SetCropBoxDataOptions>({
+  height: 58.66668701171875,
+  left: 431.33331298828125,
+  top: 363.33331298828125,
+  width: 58.66668701171875,
+});
 const intiCropper = () => {
+  console.log('intiCropper', unref(imgRef));
   if (!unref(imgRef)) return;
   const imgEl = unref(imgRef)!;
+  console.log('imgEl', imgEl);
   cropperRef.value = new Cropper(imgEl, {
     aspectRatio: 1,
     viewMode: 1,
@@ -140,17 +128,25 @@ const intiCropper = () => {
     // cropBoxMovable: false,
     toggleDragModeOnDblclick: false,
     checkCrossOrigin: false,
+
     ready() {
-      resetCropBox();
+      unref(cropperRef)!.setData(qrcodeRect.value);
+      unref(cropperRef)?.setCropBoxData(cropBoxData.value);
+      // resetCropBox();
     },
     cropmove() {
-      getBase64();
+      qrcodeRect.value = cropperRef.value!.getData();
+
+      // const cropBoxData = cropperRef.value!.getCropBoxData();
+      // console.log('cropmove', cropBoxData, data);
+      // getBase64();
     },
     zoom() {
       getBase64();
     },
     crop() {
-      getBase64();
+      // console.log('cropmove');
+      // getBase64();
     },
   });
 };
@@ -161,9 +157,14 @@ const uploadChange = (uploadFile: UploadFile) => {
     ElMessage.error('请上传图片格式的文件');
     return;
   }
+  console.log('url', uploadFile.raw);
+
   if (!uploadFile.raw) return;
   // 获取图片的访问地址
   const url = URL.createObjectURL(uploadFile.raw);
+
+  console.log('url', url);
+
   unref(cropperRef)?.replace(url);
 };
 
@@ -210,15 +211,79 @@ onBeforeUnmount(() => {
   unref(cropperRef)?.destroy();
 });
 
+let qrCodeUrl = '';
+const generateQRCode = async (url: string = 'https://example.com') => {
+  try {
+    qrCodeUrl = await QRCode.toDataURL(url, {});
+  } catch (err) {
+    console.error('生成二维码时出错:', err);
+  }
+};
+
+// 插入二维码并导出图片
+const insertQRCodeAndExport = async () => {
+  const cropperInstance = unref(cropperRef);
+  if (!cropperInstance) return;
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const cropBoxData = cropperInstance.getCropBoxData();
+  // const imageData = cropperInstance.getImageData();
+  // const containerData = cropperInstance.getContainerData();
+  // const canvasData = cropperInstance.getCanvasData();
+  // console.log('canvasData', canvasData);
+  // console.log('containerData', containerData);
+
+  console.log('cropBoxData', cropBoxData);
+  // console.log('imageData', imageData);
+  const data = cropperInstance.getData();
+  console.log('data', data);
+  const img = imgRef.value!;
+  canvas.width = img.width;
+  canvas.height = img.height;
+
+  ctx.drawImage(img, 0, 0, img.width, img.height);
+
+  const url: string = 'https://example.com';
+  qrCodeUrl = await QRCode.toDataURL(url, { width: data.width, margin: 2 });
+  const qrImage = await loadImage(qrCodeUrl);
+  ctx.drawImage(qrImage, data.x, data.y, data.width, data.height);
+
+  const resultUrl = canvas.toDataURL('image/png');
+  imgBase64.value = resultUrl;
+  // console.log(resultUrl); // 处理合成后的图片，例如展示或下载
+};
+
+// 辅助函数：加载图片
+const loadImage = (url: string) =>
+  new Promise<HTMLImageElement>((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = url;
+  });
+
 const open = (args: any) => {
   visible.value = true;
+  nextTick(() => {
+    intiCropper();
+  });
 };
 const close = () => {
   visible.value = false;
 };
 
 const onConfirm = () => {
-  close();
+  insertQRCodeAndExport()
+    .then((res) => {
+      console.log('res', res);
+      // close();
+    })
+    .catch((err) => {
+      console.log('error', err);
+    });
 };
 const onCancel = () => {
   close();
@@ -233,13 +298,12 @@ defineExpose({ open, close });
       <div
         :class="{
           [prefixCls]: true,
-          'flex items-center': showResult,
+          'flex items-center flex-col': showResult,
         }"
       >
         <div>
           <div :style="getBoxStyle" class="flex justify-center items-center">
             <img
-              v-show="imageUrl"
               ref="imgRef"
               :src="imageUrl"
               class="block max-w-full"
@@ -248,71 +312,11 @@ defineExpose({ open, close });
               srcset=""
             />
           </div>
-          <div v-if="showActions" class="mt-10px flex items-center">
-            <div class="flex items-center">
-              <ElTooltip content="选择文件" placement="bottom">
-                <ElUpload
-                  action="''"
-                  accept="image/*"
-                  :auto-upload="false"
-                  :show-file-list="false"
-                  :on-change="uploadChange"
-                >
-                  <BaseButton size="small" type="primary" class="mt-2px"
-                    ><Icon icon="vi-ep:upload-filled"
-                  /></BaseButton>
-                </ElUpload>
-              </ElTooltip>
-            </div>
-            <div class="flex items-center justify-end flex-1">
-              <ElTooltip content="重置" placement="bottom">
-                <BaseButton size="small" type="primary" @click="reset"
-                  ><Icon icon="vi-ep:refresh"
-                /></BaseButton>
-              </ElTooltip>
-              <ElTooltip content="逆时针旋转" placement="bottom">
-                <BaseButton size="small" type="primary" @click="rotate(-45)"
-                  ><Icon icon="vi-ant-design:rotate-left-outlined"
-                /></BaseButton>
-              </ElTooltip>
-              <ElTooltip content="顺时针旋转" placement="bottom">
-                <BaseButton size="small" type="primary" @click="rotate(45)"
-                  ><Icon icon="vi-ant-design:rotate-right-outlined"
-                /></BaseButton>
-              </ElTooltip>
-              <ElTooltip content="水平翻转" placement="bottom">
-                <BaseButton size="small" type="primary" @click="scale('scaleX')"
-                  ><Icon icon="vi-vaadin:arrows-long-h"
-                /></BaseButton>
-              </ElTooltip>
-              <ElTooltip content="垂直翻转" placement="bottom">
-                <BaseButton size="small" type="primary" @click="scale('scaleY')"
-                  ><Icon icon="vi-vaadin:arrows-long-v"
-                /></BaseButton>
-              </ElTooltip>
-              <ElTooltip content="放大" placement="bottom">
-                <BaseButton size="small" type="primary" @click="zoom(0.1)"
-                  ><Icon icon="vi-ant-design:zoom-in-outlined"
-                /></BaseButton>
-              </ElTooltip>
-              <ElTooltip content="缩小" placement="bottom">
-                <BaseButton size="small" type="primary" @click="zoom(-0.1)"
-                  ><Icon icon="vi-ant-design:zoom-out-outlined"
-                /></BaseButton>
-              </ElTooltip>
-            </div>
-          </div>
+          <div>{{ qrcodeRect }}</div>
         </div>
-        <div v-if="imgBase64 && showResult" class="ml-20px">
+        <div v-if="imgBase64 && showResult">
           <div class="flex justify-center items-center">
-            <img :src="imgBase64" class="rounded-[50%]" :style="getCropBoxStyle" />
-          </div>
-          <ElDivider />
-          <div class="flex justify-center items-center">
-            <img :src="imgBase64" class="rounded-[50%]" :style="getScaleSize(0.2)" />
-            <img :src="imgBase64" class="rounded-[50%] ml-20px" :style="getScaleSize(0.25)" />
-            <img :src="imgBase64" class="rounded-[50%] ml-20px" :style="getScaleSize(0.3)" />
-            <img :src="imgBase64" class="rounded-[50%] ml-20px" :style="getScaleSize(0.35)" />
+            <img :src="imgBase64" :style="getCropBoxStyle" />
           </div>
         </div>
       </div>
@@ -321,8 +325,18 @@ defineExpose({ open, close });
     <template #footer>
       <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row items-center gap-2">
-          <BaseButton type="primary" @click="onConfirm"> 上传图片 </BaseButton></div
-        >
+          <ElUpload
+            action="''"
+            accept="image/*"
+            :auto-upload="false"
+            :show-file-list="false"
+            :on-change="uploadChange"
+          >
+            <BaseButton type="primary" class="mt-2px">
+              <Icon icon="vi-ep:upload-filled" /> 上传图片
+            </BaseButton>
+          </ElUpload>
+        </div>
         <div>
           <BaseButton type="primary" @click="onConfirm"> 确定 </BaseButton>
           <BaseButton @click="onCancel">取消</BaseButton>
@@ -332,4 +346,21 @@ defineExpose({ open, close });
   </Dialog>
 </template>
 
-<style lang="scss" scoped></style>
+<style>
+.cropper-crop-box {
+  position: relative;
+}
+
+.cropper-crop-box::after {
+  content: '二维码位置' !important;
+  position: absolute;
+  pointer-events: none;
+  color: rgb(0, 0, 0);
+  border: 10px solid #000000c7;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+</style>
