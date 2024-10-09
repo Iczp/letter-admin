@@ -80,20 +80,7 @@ const getBoxStyle = computed(() => {
   };
 });
 
-const getCropBoxStyle = computed(() => {
-  return {
-    width: `${props.cropBoxWidth}px`,
-    height: `${props.cropBoxHeight}px`,
-  };
-});
-
 // 获取对应的缩小倍数的宽高
-const getScaleSize = (scale: number) => {
-  return {
-    width: props.cropBoxWidth * scale + 'px',
-    height: props.cropBoxHeight * scale + 'px',
-  };
-};
 
 const imgBase64 = ref('');
 const imgRef = ref<HTMLImageElement>();
@@ -170,26 +157,6 @@ const uploadChange = (uploadFile: UploadFile) => {
 
 const reset = () => {
   unref(cropperRef)?.reset();
-};
-
-const rotate = (deg: number) => {
-  unref(cropperRef)?.rotate(deg);
-};
-
-const scaleX = ref(1);
-const scaleY = ref(1);
-const scale = (type: 'scaleX' | 'scaleY') => {
-  if (type === 'scaleX') {
-    scaleX.value = scaleX.value === 1 ? -1 : 1;
-    unref(cropperRef)?.[type](unref(scaleX));
-  } else {
-    scaleY.value = scaleY.value === 1 ? -1 : 1;
-    unref(cropperRef)?.[type](unref(scaleY));
-  }
-};
-
-const zoom = (num: number) => {
-  unref(cropperRef)?.zoom(num);
 };
 
 onMounted(() => {
@@ -316,7 +283,7 @@ defineExpose({ open, close });
         </div>
         <div v-if="imgBase64 && showResult">
           <div class="flex justify-center items-center">
-            <img :src="imgBase64" :style="getCropBoxStyle" />
+            <img :src="imgBase64" class="w-full" />
           </div>
         </div>
       </div>

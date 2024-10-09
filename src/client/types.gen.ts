@@ -187,11 +187,46 @@ export type ActivityDto = {
    * 是否删除
    */
   is_deleted: boolean;
+  /**
+   * 活动标题
+   */
   title: string;
-  phone?: string;
-  user_type?: {
-    [key: string]: unknown;
-  };
+  /**
+   * 封面地址
+   */
+  cover_url?: string;
+  /**
+   * 活动简介
+   */
+  description?: string;
+  /**
+   * 参与人数量
+   */
+  max_count?: number;
+  /**
+   * 客户数量
+   */
+  customers_count?: number;
+  /**
+   * 邀请人数量
+   */
+  inviter_configs_count?: number;
+  /**
+   * 开始时间
+   */
+  start_time?: string;
+  /**
+   * 结束时间
+   */
+  end_time?: string;
+  /**
+   * 是否活跃
+   */
+  is_actived?: boolean;
+  /**
+   * 是否设置了图片模板
+   */
+  is_image_seted?: boolean;
 };
 
 export type ActivityPagedResult = {
@@ -236,16 +271,55 @@ export type ActivityDetailDto = {
    * 是否删除
    */
   is_deleted: boolean;
+  /**
+   * 活动标题
+   */
   title: string;
-  phone?: string;
-  user_type?: {
-    [key: string]: unknown;
-  };
+  /**
+   * 封面地址
+   */
+  cover_url?: string;
+  /**
+   * 活动简介
+   */
+  description?: string;
+  /**
+   * 参与人数量
+   */
+  max_count?: number;
+  /**
+   * 客户数量
+   */
+  customers_count?: number;
+  /**
+   * 邀请人数量
+   */
+  inviter_configs_count?: number;
+  /**
+   * 开始时间
+   */
+  start_time?: string;
+  /**
+   * 结束时间
+   */
+  end_time?: string;
+  /**
+   * 是否活跃
+   */
+  is_actived?: boolean;
+  /**
+   * 是否设置了图片模板
+   */
+  is_image_seted?: boolean;
+  /**
+   * 活动说明
+   */
+  content?: string;
 };
 
 export type ActivityCreateInput = {
   title: string;
-  coverUrl?: string;
+  cover_url?: string;
   description?: string;
   address?: string;
   content?: string;
@@ -257,7 +331,7 @@ export type ActivityCreateInput = {
 
 export type ActivityUpdateInput = {
   title: string;
-  coverUrl?: string;
+  cover_url?: string;
   description?: string;
   address?: string;
   content?: string;
@@ -266,6 +340,42 @@ export type ActivityUpdateInput = {
   end_time?: string;
   is_actived: boolean;
   is_enabled: boolean;
+};
+
+export type CropDataDto = {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  rotate?: number;
+  scaleX?: number;
+  scaleY?: number;
+};
+
+export type CropBoxDto = {
+  left?: number;
+  top?: number;
+  width?: number;
+  height?: number;
+};
+
+export type CropDto = {
+  /**
+   * 剪裁数据信息
+   */
+  data?: CropDataDto;
+  /**
+   * 剪裁框信息
+   */
+  box?: CropBoxDto;
+};
+
+export type ActivityTemplageInput = {
+  file: Blob | File;
+  /**
+   * 二维码图片剪裁信息
+   */
+  body: CropDto;
 };
 
 export type ActivityCustomerDto = {
@@ -1580,6 +1690,22 @@ export type ActivitiesControllerUpdateResponse = ActivityDetailDto;
 
 export type ActivitiesControllerUpdateError = unknown;
 
+export type ActivitiesControllerSetTemplateData = {
+  /**
+   * 模板图片
+   */
+  body: ActivityTemplageInput;
+  query: {
+    id: string;
+  };
+};
+
+export type ActivitiesControllerSetTemplateResponse = {
+  [key: string]: unknown;
+};
+
+export type ActivitiesControllerSetTemplateError = unknown;
+
 export type ActivitiesControllerSetIsEnabledData = {
   path: {
     id: string;
@@ -1626,12 +1752,26 @@ export type ActivityCustomerControllerGetListData = {
      * 邀请人用户Id
      */
     inviter_user_id?: string;
+    /**
+     * 是否审核
+     */
     is_checked?: boolean;
     /**
      * 是否可用
      */
     is_enabled?: boolean;
+    /**
+     * 是否已赠送
+     */
+    is_gifted?: boolean;
+    /**
+     * 是否已邀请
+     */
     is_invited?: boolean;
+    /**
+     * 是否签到
+     */
+    is_signed?: boolean;
     /**
      * 关键字
      */
@@ -1709,7 +1849,7 @@ export type ActivityCustomerControllerSetIsCheckedResponse = {
 
 export type ActivityCustomerControllerSetIsCheckedError = unknown;
 
-export type ActivityCustomerControllerSetIsActivedData = {
+export type ActivityCustomerControllerSetIsInvitedData = {
   path: {
     id: string;
   };
@@ -1718,11 +1858,26 @@ export type ActivityCustomerControllerSetIsActivedData = {
   };
 };
 
-export type ActivityCustomerControllerSetIsActivedResponse = {
+export type ActivityCustomerControllerSetIsInvitedResponse = {
   [key: string]: unknown;
 };
 
-export type ActivityCustomerControllerSetIsActivedError = unknown;
+export type ActivityCustomerControllerSetIsInvitedError = unknown;
+
+export type ActivityCustomerControllerSetIsIsSignedData = {
+  path: {
+    id: string;
+  };
+  query: {
+    is_signed: boolean;
+  };
+};
+
+export type ActivityCustomerControllerSetIsIsSignedResponse = {
+  [key: string]: unknown;
+};
+
+export type ActivityCustomerControllerSetIsIsSignedError = unknown;
 
 export type ActivityCustomerControllerExportExcelData = {
   query?: {
@@ -1738,12 +1893,26 @@ export type ActivityCustomerControllerExportExcelData = {
      * 邀请人用户Id
      */
     inviter_user_id?: string;
+    /**
+     * 是否审核
+     */
     is_checked?: boolean;
     /**
      * 是否可用
      */
     is_enabled?: boolean;
+    /**
+     * 是否已赠送
+     */
+    is_gifted?: boolean;
+    /**
+     * 是否已邀请
+     */
     is_invited?: boolean;
+    /**
+     * 是否签到
+     */
+    is_signed?: boolean;
     /**
      * 关键字
      */
@@ -1809,12 +1978,26 @@ export type ActivityCustomerInvitersControllerGetListData = {
      * 邀请人用户Id
      */
     inviter_user_id?: string;
+    /**
+     * 是否审核
+     */
     is_checked?: boolean;
     /**
      * 是否可用
      */
     is_enabled?: boolean;
+    /**
+     * 是否已赠送
+     */
+    is_gifted?: boolean;
+    /**
+     * 是否已邀请
+     */
     is_invited?: boolean;
+    /**
+     * 是否签到
+     */
+    is_signed?: boolean;
     /**
      * 关键字
      */
@@ -1994,6 +2177,7 @@ export type RolesControllerGetListData = {
       | 'Activity_GetItem'
       | 'Activity_GetList'
       | 'Activity_Delete'
+      | 'Activity_Set_Template'
       | 'Activity_Excel_Tpl'
       | 'Activity_Excel_Import'
       | 'Activity_Excel_Ouput'
@@ -2010,6 +2194,7 @@ export type RolesControllerGetListData = {
       | 'ActivityCustomer_Set_IsChecked'
       | 'ActivityCustomer_Set_IsInvited'
       | 'ActivityCustomer_Set_IsGifed'
+      | 'ActivityCustomer_Set_IsSigned'
       | 'ActivityCustomer_Set_IsEnabled'
       | 'ErpUsers_GetItem'
       | 'ErpUsers_GetList'

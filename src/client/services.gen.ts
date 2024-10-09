@@ -58,6 +58,9 @@ import type {
   ActivitiesControllerUpdateData,
   ActivitiesControllerUpdateError,
   ActivitiesControllerUpdateResponse,
+  ActivitiesControllerSetTemplateData,
+  ActivitiesControllerSetTemplateError,
+  ActivitiesControllerSetTemplateResponse,
   ActivitiesControllerSetIsEnabledData,
   ActivitiesControllerSetIsEnabledError,
   ActivitiesControllerSetIsEnabledResponse,
@@ -86,9 +89,12 @@ import type {
   ActivityCustomerControllerSetIsCheckedData,
   ActivityCustomerControllerSetIsCheckedError,
   ActivityCustomerControllerSetIsCheckedResponse,
-  ActivityCustomerControllerSetIsActivedData,
-  ActivityCustomerControllerSetIsActivedError,
-  ActivityCustomerControllerSetIsActivedResponse,
+  ActivityCustomerControllerSetIsInvitedData,
+  ActivityCustomerControllerSetIsInvitedError,
+  ActivityCustomerControllerSetIsInvitedResponse,
+  ActivityCustomerControllerSetIsIsSignedData,
+  ActivityCustomerControllerSetIsIsSignedError,
+  ActivityCustomerControllerSetIsIsSignedResponse,
   ActivityCustomerControllerExportExcelData,
   ActivityCustomerControllerExportExcelError,
   ActivityCustomerControllerExportExcelResponse,
@@ -533,6 +539,28 @@ export const activitiesUpdate = <ThrowOnError extends boolean = false>(
 };
 
 /**
+ * 设置活动模板
+ * 设置模板
+ */
+export const activitiesSetTemplate = <ThrowOnError extends boolean = false>(
+  options: Options<ActivitiesControllerSetTemplateData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).post<
+    ActivitiesControllerSetTemplateResponse,
+    ActivitiesControllerSetTemplateError,
+    ThrowOnError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    headers: {
+      'Content-Type': null,
+      ...options?.headers,
+    },
+    url: '/api/activities/set-temp/{id}',
+  });
+};
+
+/**
  * 启用/禁用
  * 启用/禁用
  */
@@ -686,7 +714,7 @@ export const activityCustomerUpdate = <ThrowOnError extends boolean = false>(
 };
 
 /**
- * 设置 是否签到
+ * 设置 是否审核
  */
 export const activityCustomerSetIsChecked = <ThrowOnError extends boolean = false>(
   options: Options<ActivityCustomerControllerSetIsCheckedData, ThrowOnError>,
@@ -704,16 +732,32 @@ export const activityCustomerSetIsChecked = <ThrowOnError extends boolean = fals
 /**
  * 设置 是否已邀请
  */
-export const activityCustomerSetIsActived = <ThrowOnError extends boolean = false>(
-  options: Options<ActivityCustomerControllerSetIsActivedData, ThrowOnError>,
+export const activityCustomerSetIsInvited = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerControllerSetIsInvitedData, ThrowOnError>,
 ) => {
   return (options?.client ?? client).post<
-    ActivityCustomerControllerSetIsActivedResponse,
-    ActivityCustomerControllerSetIsActivedError,
+    ActivityCustomerControllerSetIsInvitedResponse,
+    ActivityCustomerControllerSetIsInvitedError,
     ThrowOnError
   >({
     ...options,
     url: '/api/activity-customer/invited/{id}',
+  });
+};
+
+/**
+ * 设置 是否签到
+ */
+export const activityCustomerSetIsIsSigned = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerControllerSetIsIsSignedData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).post<
+    ActivityCustomerControllerSetIsIsSignedResponse,
+    ActivityCustomerControllerSetIsIsSignedError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/activity-customer/gifted/{id}',
   });
 };
 

@@ -9,7 +9,7 @@ export const AppInfoSchema = {
     },
     version: {
       type: 'string',
-      default: '0.0.22',
+      default: '0.0.24',
     },
     description: {
       type: 'string',
@@ -260,11 +260,34 @@ export const ActivityDtoSchema = {
     title: {
       type: 'string',
     },
-    phone: {
+    cover_url: {
       type: 'string',
     },
-    user_type: {
-      type: 'object',
+    description: {
+      type: 'string',
+    },
+    max_count: {
+      type: 'number',
+    },
+    customers_count: {
+      type: 'number',
+    },
+    inviter_configs_count: {
+      type: 'number',
+    },
+    start_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    end_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    is_actived: {
+      type: 'boolean',
+    },
+    is_image_seted: {
+      type: 'boolean',
     },
   },
   required: [
@@ -323,11 +346,37 @@ export const ActivityDetailDtoSchema = {
     title: {
       type: 'string',
     },
-    phone: {
+    cover_url: {
       type: 'string',
     },
-    user_type: {
-      type: 'object',
+    description: {
+      type: 'string',
+    },
+    max_count: {
+      type: 'number',
+    },
+    customers_count: {
+      type: 'number',
+    },
+    inviter_configs_count: {
+      type: 'number',
+    },
+    start_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    end_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    is_actived: {
+      type: 'boolean',
+    },
+    is_image_seted: {
+      type: 'boolean',
+    },
+    content: {
+      type: 'string',
     },
   },
   required: [
@@ -346,7 +395,7 @@ export const ActivityCreateInputSchema = {
     title: {
       type: 'string',
     },
-    coverUrl: {
+    cover_url: {
       type: 'string',
     },
     description: {
@@ -382,7 +431,7 @@ export const ActivityUpdateInputSchema = {
     title: {
       type: 'string',
     },
-    coverUrl: {
+    cover_url: {
       type: 'string',
     },
     description: {
@@ -413,6 +462,89 @@ export const ActivityUpdateInputSchema = {
     },
   },
   required: ['title', 'max_count', 'is_actived', 'is_enabled'],
+} as const;
+
+export const CropDataDtoSchema = {
+  type: 'object',
+  properties: {
+    x: {
+      type: 'number',
+    },
+    y: {
+      type: 'number',
+    },
+    width: {
+      type: 'number',
+    },
+    height: {
+      type: 'number',
+    },
+    rotate: {
+      type: 'number',
+    },
+    scaleX: {
+      type: 'number',
+    },
+    scaleY: {
+      type: 'number',
+    },
+  },
+} as const;
+
+export const CropBoxDtoSchema = {
+  type: 'object',
+  properties: {
+    left: {
+      type: 'number',
+    },
+    top: {
+      type: 'number',
+    },
+    width: {
+      type: 'number',
+    },
+    height: {
+      type: 'number',
+    },
+  },
+} as const;
+
+export const CropDtoSchema = {
+  type: 'object',
+  properties: {
+    data: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/CropDataDto',
+        },
+      ],
+    },
+    box: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/CropBoxDto',
+        },
+      ],
+    },
+  },
+} as const;
+
+export const ActivityTemplageInputSchema = {
+  type: 'object',
+  properties: {
+    file: {
+      type: 'string',
+      format: 'binary',
+    },
+    body: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/CropDto',
+        },
+      ],
+    },
+  },
+  required: ['file', 'body'],
 } as const;
 
 export const ActivityCustomerDtoSchema = {
