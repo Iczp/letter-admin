@@ -246,6 +246,34 @@ export type ActivityPagedResult = {
   items: Array<ActivityDto>;
 };
 
+export type CropDataDto = {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  rotate?: number;
+  scaleX?: number;
+  scaleY?: number;
+};
+
+export type CropBoxDto = {
+  left?: number;
+  top?: number;
+  width?: number;
+  height?: number;
+};
+
+export type CropDto = {
+  /**
+   * 剪裁数据信息
+   */
+  data?: CropDataDto;
+  /**
+   * 剪裁框信息
+   */
+  box?: CropBoxDto;
+};
+
 export type ActivityDetailDto = {
   /**
    * id
@@ -315,6 +343,26 @@ export type ActivityDetailDto = {
    * 活动说明
    */
   content?: string;
+  /**
+   * 模板图片base64
+   */
+  image_base64?: string;
+  /**
+   * 图片类型
+   */
+  image_mimetype?: string;
+  /**
+   * 模板二维码图片位置信息
+   */
+  image_crop?: CropDto;
+  /**
+   * 图片大小
+   */
+  image_size?: number;
+  /**
+   * 图片模板修改时间
+   */
+  image_last_modification_time?: string;
 };
 
 export type ActivityCreateInput = {
@@ -340,34 +388,6 @@ export type ActivityUpdateInput = {
   end_time?: string;
   is_actived: boolean;
   is_enabled: boolean;
-};
-
-export type CropDataDto = {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  rotate?: number;
-  scaleX?: number;
-  scaleY?: number;
-};
-
-export type CropBoxDto = {
-  left?: number;
-  top?: number;
-  width?: number;
-  height?: number;
-};
-
-export type CropDto = {
-  /**
-   * 剪裁数据信息
-   */
-  data?: CropDataDto;
-  /**
-   * 剪裁框信息
-   */
-  box?: CropBoxDto;
 };
 
 export type ActivityTemplageInput = {
@@ -1695,7 +1715,7 @@ export type ActivitiesControllerSetTemplateData = {
    * 模板图片
    */
   body: ActivityTemplageInput;
-  query: {
+  path: {
     id: string;
   };
 };

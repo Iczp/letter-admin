@@ -319,6 +319,71 @@ export const ActivityPagedResultSchema = {
   required: ['totalCount', 'items'],
 } as const;
 
+export const CropDataDtoSchema = {
+  type: 'object',
+  properties: {
+    x: {
+      type: 'number',
+    },
+    y: {
+      type: 'number',
+    },
+    width: {
+      type: 'number',
+    },
+    height: {
+      type: 'number',
+    },
+    rotate: {
+      type: 'number',
+    },
+    scaleX: {
+      type: 'number',
+    },
+    scaleY: {
+      type: 'number',
+    },
+  },
+} as const;
+
+export const CropBoxDtoSchema = {
+  type: 'object',
+  properties: {
+    left: {
+      type: 'number',
+    },
+    top: {
+      type: 'number',
+    },
+    width: {
+      type: 'number',
+    },
+    height: {
+      type: 'number',
+    },
+  },
+} as const;
+
+export const CropDtoSchema = {
+  type: 'object',
+  properties: {
+    data: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/CropDataDto',
+        },
+      ],
+    },
+    box: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/CropBoxDto',
+        },
+      ],
+    },
+  },
+} as const;
+
 export const ActivityDetailDtoSchema = {
   type: 'object',
   properties: {
@@ -376,6 +441,26 @@ export const ActivityDetailDtoSchema = {
       type: 'boolean',
     },
     content: {
+      type: 'string',
+    },
+    image_base64: {
+      type: 'string',
+    },
+    image_mimetype: {
+      type: 'string',
+    },
+    image_crop: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/CropDto',
+        },
+      ],
+    },
+    image_size: {
+      type: 'number',
+    },
+    image_last_modification_time: {
+      format: 'date-time',
       type: 'string',
     },
   },
@@ -462,71 +547,6 @@ export const ActivityUpdateInputSchema = {
     },
   },
   required: ['title', 'max_count', 'is_actived', 'is_enabled'],
-} as const;
-
-export const CropDataDtoSchema = {
-  type: 'object',
-  properties: {
-    x: {
-      type: 'number',
-    },
-    y: {
-      type: 'number',
-    },
-    width: {
-      type: 'number',
-    },
-    height: {
-      type: 'number',
-    },
-    rotate: {
-      type: 'number',
-    },
-    scaleX: {
-      type: 'number',
-    },
-    scaleY: {
-      type: 'number',
-    },
-  },
-} as const;
-
-export const CropBoxDtoSchema = {
-  type: 'object',
-  properties: {
-    left: {
-      type: 'number',
-    },
-    top: {
-      type: 'number',
-    },
-    width: {
-      type: 'number',
-    },
-    height: {
-      type: 'number',
-    },
-  },
-} as const;
-
-export const CropDtoSchema = {
-  type: 'object',
-  properties: {
-    data: {
-      allOf: [
-        {
-          $ref: '#/components/schemas/CropDataDto',
-        },
-      ],
-    },
-    box: {
-      allOf: [
-        {
-          $ref: '#/components/schemas/CropBoxDto',
-        },
-      ],
-    },
-  },
 } as const;
 
 export const ActivityTemplageInputSchema = {

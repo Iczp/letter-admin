@@ -5,10 +5,13 @@ import { nextTick, unref, ref, watch, onBeforeUnmount, onMounted, computed } fro
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.min.css';
 import QRCode from 'qrcode';
-
+import assert from '@/utils';
+import { base64ToBlob } from '@/utils/base64ToBlob';
 import { useDebounceFn } from '@vueuse/core';
 import { BaseButton } from '@/components/Button';
 import { ElUpload, UploadFile, ElTooltip, ElMessage } from 'element-plus';
+import { activitiesGetItem, activitiesSetTemplate, ActivityDetailDto, ActivityDto } from '@/client';
+import { bool } from 'vue-types';
 
 const props = defineProps({
   width: {
@@ -21,8 +24,7 @@ const props = defineProps({
   },
   imageUrl: {
     type: String,
-    default:
-      'https://hips.hearstapps.com/hmg-prod/images/%E5%AE%8B%E6%99%BA%E5%AD%9D-1597774015.jpg?crop=0.500xw:1.00xh;0.500xw,0&resize=640:*',
+    default: '',
     // required: true
   },
   cropBoxWidth: {
@@ -50,6 +52,8 @@ const props = defineProps({
     default: true,
   },
 });
+
+const detailItem = ref<ActivityDetailDto>();
 
 const visible = ref(false);
 const title = ref('请选择');
@@ -86,22 +90,9 @@ const imgBase64 = ref('');
 const imgRef = ref<HTMLImageElement>();
 const cropperRef = ref<Cropper>();
 
-const qrcodeRect = ref<Cropper.SetDataOptions>({
-  x: 109.56521739130434,
-  y: 39.130434782608695,
-  width: 260.8695652173913,
-  height: 260.8695652173913,
-  rotate: 0,
-  scaleX: 1,
-  scaleY: 1,
-});
+const cropData = ref<Cropper.SetDataOptions>();
 
-const cropBoxData = ref<Cropper.SetCropBoxDataOptions>({
-  height: 58.66668701171875,
-  left: 431.33331298828125,
-  top: 363.33331298828125,
-  width: 58.66668701171875,
-});
+const cropBoxData = ref<Cropper.SetCropBoxDataOptions>();
 const intiCropper = () => {
   console.log('intiCropper', unref(imgRef));
   if (!unref(imgRef)) return;
@@ -117,12 +108,16 @@ const intiCropper = () => {
     checkCrossOrigin: false,
 
     ready() {
-      unref(cropperRef)!.setData(qrcodeRect.value);
-      unref(cropperRef)?.setCropBoxData(cropBoxData.value);
+      if (cropData.value) {
+        unref(cropperRef)!.setData(cropData.value);
+      }
+      if (cropBoxData.value) {
+        unref(cropperRef)?.setCropBoxData(cropBoxData.value);
+      }
       // resetCropBox();
     },
     cropmove() {
-      qrcodeRect.value = cropperRef.value!.getData();
+      cropData.value = cropperRef.value!.getData();
 
       // const cropBoxData = cropperRef.value!.getCropBoxData();
       // console.log('cropmove', cropBoxData, data);
@@ -132,7 +127,7 @@ const intiCropper = () => {
       getBase64();
     },
     crop() {
-      // console.log('cropmove');
+      console.log('crop');
       // getBase64();
     },
   });
@@ -169,7 +164,7 @@ watch(
     if (url) {
       unref(cropperRef)?.replace(url);
       await nextTick();
-      resetCropBox();
+      // resetCropBox();
     }
   },
 );
@@ -188,7 +183,7 @@ const generateQRCode = async (url: string = 'https://example.com') => {
 };
 
 // 插入二维码并导出图片
-const insertQRCodeAndExport = async () => {
+const previewResult = async () => {
   const cropperInstance = unref(cropperRef);
   if (!cropperInstance) return;
 
@@ -210,14 +205,11 @@ const insertQRCodeAndExport = async () => {
   const img = imgRef.value!;
   canvas.width = img.width;
   canvas.height = img.height;
-
   ctx.drawImage(img, 0, 0, img.width, img.height);
-
   const url: string = 'https://example.com';
   qrCodeUrl = await QRCode.toDataURL(url, { width: data.width, margin: 2 });
   const qrImage = await loadImage(qrCodeUrl);
   ctx.drawImage(qrImage, data.x, data.y, data.width, data.height);
-
   const resultUrl = canvas.toDataURL('image/png');
   imgBase64.value = resultUrl;
   // console.log(resultUrl); // 处理合成后的图片，例如展示或下载
@@ -232,8 +224,49 @@ const loadImage = (url: string) =>
     img.src = url;
   });
 
-const open = (args: any) => {
+const open = (input: ActivityDto) => {
   visible.value = true;
+  activitiesGetItem({
+    path: {
+      id: input.id,
+    },
+  }).then(async (res) => {
+    console.log('res', res);
+    detailItem.value = res.data;
+    const item = res.data!;
+
+    const image_base64 = item?.image_base64;
+    const cropperInstance = unref(cropperRef);
+    if (image_base64) {
+      const blob = base64ToBlob(image_base64, 'image/png');
+      if (blob) {
+        const url = URL.createObjectURL(blob);
+        console.log('url', url);
+        cropperInstance?.clear();
+        cropperInstance?.replace(url);
+
+        console.log('item.image_crop', item.image_crop);
+
+        if (item.image_crop) {
+          const image_crop =
+            typeof item.image_crop === 'string' ? JSON.parse(item.image_crop) : item.image_crop;
+          const { box, data } = image_crop;
+
+          if (box) {
+            cropBoxData.value = box;
+            // cropperInstance?.setCropBoxData(box);
+            console.log('setCropBoxData', box);
+          }
+          if (data) {
+            cropData.value = data;
+            // cropperInstance?.setData(data);
+            console.log('setData', cropperInstance, data);
+          }
+        }
+      }
+    }
+    // 获取图片的访问地址
+  });
   nextTick(() => {
     intiCropper();
   });
@@ -242,10 +275,61 @@ const close = () => {
   visible.value = false;
 };
 
+const convertToFile = async (image: HTMLImageElement, fileName: string) => {
+  if (!image) {
+    console.error('Image element is not available');
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = image.naturalWidth;
+  canvas.height = image.naturalHeight;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    console.error('Failed to get 2D rendering context');
+    return;
+  }
+  ctx.drawImage(image, 0, 0);
+  const dataURL = canvas.toDataURL('image/png');
+  // 清理：删除canvas元素
+  if (canvas && canvas.parentNode) {
+    canvas.parentNode.removeChild(canvas);
+    console.error('remove canvas');
+  }
+
+  const file = await dataURLtoFile(dataURL, fileName);
+  console.log(file); // Here is your File object
+  // You can perform file upload or other operations here
+  return file;
+};
+
+const dataURLtoFile = async (dataURL: string, fileName: string) => {
+  const arr = dataURL.split(',');
+  const mime = arr[0].match(/:(.*?);/)?.[1] || 'image/png';
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], fileName, { type: mime });
+};
+
 const onConfirm = () => {
-  insertQRCodeAndExport()
-    .then((res) => {
+  previewResult()
+    .then(async (res) => {
       console.log('res', res);
+      const file = await convertToFile(imgRef.value!, 'qrcode.png');
+      assert.If(!file, '文件不存在');
+      console.log('file', file);
+      const cropperInstance = unref(cropperRef);
+      assert.If(!cropperInstance, 'cropper实例不存在');
+      const data = cropperInstance?.getData();
+      const box = cropperInstance?.getCropBoxData();
+      activitiesSetTemplate({
+        path: { id: detailItem.value!.id! },
+        body: { file: file!, body: { data, box } },
+      });
       // close();
     })
     .catch((err) => {
@@ -279,7 +363,7 @@ defineExpose({ open, close });
               srcset=""
             />
           </div>
-          <div>{{ qrcodeRect }}</div>
+          <div>{{ cropData }}</div>
         </div>
         <div v-if="imgBase64 && showResult">
           <div class="flex justify-center items-center">
@@ -303,6 +387,7 @@ defineExpose({ open, close });
               <Icon icon="vi-ep:upload-filled" /> 上传图片
             </BaseButton>
           </ElUpload>
+          <BaseButton @click="reset"> 重设 </BaseButton>
         </div>
         <div>
           <BaseButton type="primary" @click="onConfirm"> 确定 </BaseButton>

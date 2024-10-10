@@ -1,3 +1,6 @@
+import * as assert from './assert';
+
+export default assert;
 /**
  *
  * @param component 需要注册的组件
