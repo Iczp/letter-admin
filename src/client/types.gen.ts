@@ -427,12 +427,38 @@ export type ActivityCustomerDto = {
    * 是否删除
    */
   is_deleted: boolean;
+  /**
+   * AutoId
+   */
+  auto_id?: number;
+  /**
+   * 名字
+   */
   customer_name: string;
+  /**
+   * 电话
+   */
   customer_phone?: string;
+  /**
+   * 邀请码
+   */
+  invitation_code?: string;
   customer_gender?: 'Unknown' | 'Male' | 'Female';
+  /**
+   * 备注
+   */
   remarks?: string;
+  /**
+   * 邀请人
+   */
   inviter_name?: string;
+  /**
+   * 是否邀请
+   */
   is_invited?: boolean;
+  /**
+   * 是否审核
+   */
   is_checked?: boolean;
   activity?: ActivityDto;
 };
@@ -485,12 +511,38 @@ export type ActivityCustomerDetailDto = {
    * 是否删除
    */
   is_deleted: boolean;
+  /**
+   * AutoId
+   */
+  auto_id?: number;
+  /**
+   * 名字
+   */
   customer_name: string;
+  /**
+   * 电话
+   */
   customer_phone?: string;
+  /**
+   * 邀请码
+   */
+  invitation_code?: string;
   customer_gender?: 'Unknown' | 'Male' | 'Female';
+  /**
+   * 备注
+   */
   remarks?: string;
+  /**
+   * 邀请人
+   */
   inviter_name?: string;
+  /**
+   * 是否邀请
+   */
   is_invited?: boolean;
+  /**
+   * 是否审核
+   */
   is_checked?: boolean;
   activity?: ActivityDto;
 };
@@ -548,12 +600,38 @@ export type ActivityCustomerInvitersDto = {
    * 是否删除
    */
   is_deleted: boolean;
+  /**
+   * AutoId
+   */
+  auto_id?: number;
+  /**
+   * 名字
+   */
   customer_name: string;
+  /**
+   * 电话
+   */
   customer_phone?: string;
+  /**
+   * 邀请码
+   */
+  invitation_code?: string;
   customer_gender?: 'Unknown' | 'Male' | 'Female';
+  /**
+   * 备注
+   */
   remarks?: string;
+  /**
+   * 邀请人
+   */
   inviter_name?: string;
+  /**
+   * 是否邀请
+   */
   is_invited?: boolean;
+  /**
+   * 是否审核
+   */
   is_checked?: boolean;
   activity?: ActivityDto;
 };
@@ -583,12 +661,38 @@ export type ActivityCustomerInvitersDetailDto = {
    * 是否删除
    */
   is_deleted: boolean;
+  /**
+   * AutoId
+   */
+  auto_id?: number;
+  /**
+   * 名字
+   */
   customer_name: string;
+  /**
+   * 电话
+   */
   customer_phone?: string;
+  /**
+   * 邀请码
+   */
+  invitation_code?: string;
   customer_gender?: 'Unknown' | 'Male' | 'Female';
+  /**
+   * 备注
+   */
   remarks?: string;
+  /**
+   * 邀请人
+   */
   inviter_name?: string;
+  /**
+   * 是否邀请
+   */
   is_invited?: boolean;
+  /**
+   * 是否审核
+   */
   is_checked?: boolean;
   activity?: ActivityDto;
 };

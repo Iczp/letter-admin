@@ -9,7 +9,7 @@ export const AppInfoSchema = {
     },
     version: {
       type: 'string',
-      default: '0.0.25',
+      default: '0.0.26',
     },
     description: {
       type: 'string',
@@ -594,10 +594,16 @@ export const ActivityCustomerDtoSchema = {
     is_deleted: {
       type: 'boolean',
     },
+    auto_id: {
+      type: 'number',
+    },
     customer_name: {
       type: 'string',
     },
     customer_phone: {
+      type: 'string',
+    },
+    invitation_code: {
       type: 'string',
     },
     customer_gender: {
@@ -674,10 +680,16 @@ export const ActivityCustomerDetailDtoSchema = {
     is_deleted: {
       type: 'boolean',
     },
+    auto_id: {
+      type: 'number',
+    },
     customer_name: {
       type: 'string',
     },
     customer_phone: {
+      type: 'string',
+    },
+    invitation_code: {
       type: 'string',
     },
     customer_gender: {
@@ -794,10 +806,16 @@ export const ActivityCustomerInvitersDtoSchema = {
     is_deleted: {
       type: 'boolean',
     },
+    auto_id: {
+      type: 'number',
+    },
     customer_name: {
       type: 'string',
     },
     customer_phone: {
+      type: 'string',
+    },
+    invitation_code: {
       type: 'string',
     },
     customer_gender: {
@@ -855,10 +873,16 @@ export const ActivityCustomerInvitersDetailDtoSchema = {
     is_deleted: {
       type: 'boolean',
     },
+    auto_id: {
+      type: 'number',
+    },
     customer_name: {
       type: 'string',
     },
     customer_phone: {
+      type: 'string',
+    },
+    invitation_code: {
       type: 'string',
     },
     customer_gender: {
