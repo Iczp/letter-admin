@@ -463,6 +463,9 @@ export const ActivityDetailDtoSchema = {
       format: 'date-time',
       type: 'string',
     },
+    qrcode_template: {
+      type: 'string',
+    },
   },
   required: [
     'id',

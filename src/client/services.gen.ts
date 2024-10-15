@@ -98,6 +98,9 @@ import type {
   ActivityCustomerControllerExportExcelData,
   ActivityCustomerControllerExportExcelError,
   ActivityCustomerControllerExportExcelResponse,
+  ActivityCustomerControllerLetterData,
+  ActivityCustomerControllerLetterError,
+  ActivityCustomerControllerLetterResponse,
   ActivityCustomerControllerSetIsEnabledData,
   ActivityCustomerControllerSetIsEnabledError,
   ActivityCustomerControllerSetIsEnabledResponse,
@@ -775,6 +778,23 @@ export const activityCustomerExportExcel = <ThrowOnError extends boolean = false
   >({
     ...options,
     url: '/api/activity-customer/excel/output',
+  });
+};
+
+/**
+ * 邀请函
+ * 邀请函图片
+ */
+export const activityCustomerLetter = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerControllerLetterData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    ActivityCustomerControllerLetterResponse,
+    ActivityCustomerControllerLetterError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/activity-customer/letter/{id}',
   });
 };
 

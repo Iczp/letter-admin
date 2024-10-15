@@ -363,6 +363,10 @@ export type ActivityDetailDto = {
    * 图片模板修改时间
    */
   image_last_modification_time?: string;
+  /**
+   * 二维码模板, 变量 {{id}} 如： https://iczp.net/letter?id={{id}}
+   */
+  qrcode_template?: string;
 };
 
 export type ActivityCreateInput = {
@@ -1956,6 +1960,16 @@ export type ActivityCustomerControllerExportExcelResponse = unknown;
 
 export type ActivityCustomerControllerExportExcelError = unknown;
 
+export type ActivityCustomerControllerLetterData = {
+  path: {
+    id: string;
+  };
+};
+
+export type ActivityCustomerControllerLetterResponse = unknown;
+
+export type ActivityCustomerControllerLetterError = unknown;
+
 export type ActivityCustomerControllerSetIsEnabledData = {
   path: {
     id: string;
@@ -2216,6 +2230,7 @@ export type RolesControllerGetListData = {
       | 'ActivityCustomer_Set_IsGifed'
       | 'ActivityCustomer_Set_IsSigned'
       | 'ActivityCustomer_Set_IsEnabled'
+      | 'ActivityCustomer_Get_Letter'
       | 'ErpUsers_GetItem'
       | 'ErpUsers_GetList'
       | 'InviterConfig_Create'
