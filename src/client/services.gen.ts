@@ -92,6 +92,9 @@ import type {
   ActivityCustomerControllerSetIsInvitedData,
   ActivityCustomerControllerSetIsInvitedError,
   ActivityCustomerControllerSetIsInvitedResponse,
+  ActivityCustomerControllerSetIsIsGiftedData,
+  ActivityCustomerControllerSetIsIsGiftedError,
+  ActivityCustomerControllerSetIsIsGiftedResponse,
   ActivityCustomerControllerSetIsIsSignedData,
   ActivityCustomerControllerSetIsIsSignedError,
   ActivityCustomerControllerSetIsIsSignedResponse,
@@ -213,6 +216,9 @@ import type {
   InviterConfigControllerUpdateResponse,
   InviterConfigControllerGetItemByCurrentUserError,
   InviterConfigControllerGetItemByCurrentUserResponse,
+  InviterConfigControllerGetListByCurrentUserData,
+  InviterConfigControllerGetListByCurrentUserError,
+  InviterConfigControllerGetListByCurrentUserResponse,
   InviterConfigControllerSetIsEnabledData,
   InviterConfigControllerSetIsEnabledError,
   InviterConfigControllerSetIsEnabledResponse,
@@ -223,6 +229,9 @@ import type {
   InviterConfigControllerImportExcelData,
   InviterConfigControllerImportExcelError,
   InviterConfigControllerImportExcelResponse,
+  ScanControllerGetCodeResultData,
+  ScanControllerGetCodeResultError,
+  ScanControllerGetCodeResultResponse,
 } from './types.gen';
 
 export const client = createClient(createConfig());
@@ -749,6 +758,22 @@ export const activityCustomerSetIsInvited = <ThrowOnError extends boolean = fals
 };
 
 /**
+ * 设置 是否赠送礼品
+ */
+export const activityCustomerSetIsIsGifted = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerControllerSetIsIsGiftedData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).post<
+    ActivityCustomerControllerSetIsIsGiftedResponse,
+    ActivityCustomerControllerSetIsIsGiftedError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/activity-customer/gifted/{id}',
+  });
+};
+
+/**
  * 设置 是否签到
  */
 export const activityCustomerSetIsIsSigned = <ThrowOnError extends boolean = false>(
@@ -760,7 +785,7 @@ export const activityCustomerSetIsIsSigned = <ThrowOnError extends boolean = fal
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/gifted/{id}',
+    url: '/api/activity-customer/signed/{id}',
   });
 };
 
@@ -1481,6 +1506,22 @@ export const inviterConfigGetItemByCurrentUser = <ThrowOnError extends boolean =
 };
 
 /**
+ * 邀请人详情
+ */
+export const inviterConfigGetListByCurrentUser = <ThrowOnError extends boolean = false>(
+  options?: Options<InviterConfigControllerGetListByCurrentUserData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    InviterConfigControllerGetListByCurrentUserResponse,
+    InviterConfigControllerGetListByCurrentUserError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/inviter-config/current-user/list',
+  });
+};
+
+/**
  * 启用/禁用
  * 启用/禁用
  */
@@ -1550,5 +1591,21 @@ export const inviterConfigImportExcel = <ThrowOnError extends boolean = false>(
       ...options?.headers,
     },
     url: '/api/inviter-config/excel/import',
+  });
+};
+
+/**
+ * 扫码
+ */
+export const scanGetCodeResult = <ThrowOnError extends boolean = false>(
+  options: Options<ScanControllerGetCodeResultData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    ScanControllerGetCodeResultResponse,
+    ScanControllerGetCodeResultError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/api/scan/{type}',
   });
 };

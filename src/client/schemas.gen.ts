@@ -9,7 +9,7 @@ export const AppInfoSchema = {
     },
     version: {
       type: 'string',
-      default: '0.0.24',
+      default: '0.0.25',
     },
     description: {
       type: 'string',
@@ -735,8 +735,14 @@ export const ActivityCustomerCreateInputSchema = {
     activity_id: {
       type: 'string',
     },
+    inviter_config_id: {
+      type: 'string',
+    },
+    inviter_erp_user_id: {
+      type: 'string',
+    },
   },
-  required: ['customer_name', 'inviter_name', 'is_enabled', 'activity_id'],
+  required: ['customer_name', 'inviter_name', 'is_enabled'],
 } as const;
 
 export const ActivityCustomerUpdateInputSchema = {
@@ -910,8 +916,14 @@ export const ActivityCustomerInvitersCreateInputSchema = {
     activity_id: {
       type: 'string',
     },
+    inviter_config_id: {
+      type: 'string',
+    },
+    inviter_erp_user_id: {
+      type: 'string',
+    },
   },
-  required: ['customer_name', 'inviter_name', 'is_enabled', 'activity_id'],
+  required: ['customer_name', 'inviter_name', 'is_enabled'],
 } as const;
 
 export const ActivityCustomerInvitersUpdateInputSchema = {
@@ -1807,6 +1819,12 @@ export const InviterConfigDtoSchema = {
     customers_count: {
       type: 'number',
     },
+    customers_invited_count: {
+      type: 'number',
+    },
+    customers_signed_count: {
+      type: 'number',
+    },
     activity: {
       allOf: [
         {
@@ -1831,6 +1849,8 @@ export const InviterConfigDtoSchema = {
     'is_deleted',
     'max_count',
     'customers_count',
+    'customers_invited_count',
+    'customers_signed_count',
     'activity',
     'inviter',
   ],
@@ -1885,6 +1905,12 @@ export const InviterConfigDetailDtoSchema = {
     customers_count: {
       type: 'number',
     },
+    customers_invited_count: {
+      type: 'number',
+    },
+    customers_signed_count: {
+      type: 'number',
+    },
     activity: {
       allOf: [
         {
@@ -1909,6 +1935,8 @@ export const InviterConfigDetailDtoSchema = {
     'is_deleted',
     'max_count',
     'customers_count',
+    'customers_invited_count',
+    'customers_signed_count',
     'activity',
     'inviter',
   ],
@@ -1950,4 +1978,26 @@ export const InviterConfigUpdateInputSchema = {
     },
   },
   required: ['max_count'],
+} as const;
+
+export const ScanDtoSchema = {
+  type: 'object',
+  properties: {
+    type: {
+      type: 'string',
+    },
+    input: {
+      type: 'string',
+    },
+    message: {
+      type: 'string',
+    },
+    success: {
+      type: 'boolean',
+    },
+    result: {
+      type: 'object',
+    },
+  },
+  required: ['type', 'input', 'message'],
 } as const;

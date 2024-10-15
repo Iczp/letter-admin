@@ -501,7 +501,18 @@ export type ActivityCustomerCreateInput = {
   customer_phone?: string;
   inviter_name: string;
   is_enabled: boolean;
-  activity_id: string;
+  /**
+   * 活动id
+   */
+  activity_id?: string;
+  /**
+   * 邀请人配置Id
+   */
+  inviter_config_id?: string;
+  /**
+   * 邀请人ERP用户Id
+   */
+  inviter_erp_user_id?: string;
 };
 
 export type ActivityCustomerUpdateInput = {
@@ -588,7 +599,18 @@ export type ActivityCustomerInvitersCreateInput = {
   customer_phone?: string;
   inviter_name: string;
   is_enabled: boolean;
-  activity_id: string;
+  /**
+   * 活动id
+   */
+  activity_id?: string;
+  /**
+   * 邀请人配置Id
+   */
+  inviter_config_id?: string;
+  /**
+   * 邀请人ERP用户Id
+   */
+  inviter_erp_user_id?: string;
 };
 
 export type ActivityCustomerInvitersUpdateInput = {
@@ -1399,6 +1421,14 @@ export type InviterConfigDto = {
    */
   customers_count: number;
   /**
+   * 已邀请人数
+   */
+  customers_invited_count: number;
+  /**
+   * 已签到人数
+   */
+  customers_signed_count: number;
+  /**
    * 活动
    */
   activity: ActivityDto;
@@ -1459,6 +1489,14 @@ export type InviterConfigDetailDto = {
    */
   customers_count: number;
   /**
+   * 已邀请人数
+   */
+  customers_invited_count: number;
+  /**
+   * 已签到人数
+   */
+  customers_signed_count: number;
+  /**
    * 活动
    */
   activity: ActivityDto;
@@ -1496,6 +1534,31 @@ export type InviterConfigUpdateInput = {
    * 是否启用
    */
   is_enabled?: boolean;
+};
+
+export type ScanDto = {
+  /**
+   * 类型
+   */
+  type: string;
+  /**
+   * 数量
+   */
+  input: string;
+  /**
+   * 消息
+   */
+  message: string;
+  /**
+   * 是否成功
+   */
+  success?: boolean;
+  /**
+   * 识别结果
+   */
+  result?: {
+    [key: string]: unknown;
+  };
 };
 
 export type AppControllerGetInfoResponse = unknown;
@@ -1888,6 +1951,21 @@ export type ActivityCustomerControllerSetIsInvitedResponse = {
 
 export type ActivityCustomerControllerSetIsInvitedError = unknown;
 
+export type ActivityCustomerControllerSetIsIsGiftedData = {
+  path: {
+    id: string;
+  };
+  query: {
+    is_gifted: boolean;
+  };
+};
+
+export type ActivityCustomerControllerSetIsIsGiftedResponse = {
+  [key: string]: unknown;
+};
+
+export type ActivityCustomerControllerSetIsIsGiftedError = unknown;
+
 export type ActivityCustomerControllerSetIsIsSignedData = {
   path: {
     id: string;
@@ -2243,6 +2321,7 @@ export type RolesControllerGetListData = {
       | 'InviterConfig_Excel_Ouput'
       | 'InviterConfig_Set_IsEnabled'
       | 'InviterConfig_GetItem_ByCurrentUser'
+      | 'InviterConfig_GetList_ByCurrentUser'
       | 'ActivityCustomerInviters_Create'
       | 'ActivityCustomerInviters_Update'
       | 'ActivityCustomerInviters_GetItem'
@@ -2585,6 +2664,43 @@ export type InviterConfigControllerGetItemByCurrentUserResponse = InviterConfigD
 
 export type InviterConfigControllerGetItemByCurrentUserError = unknown;
 
+export type InviterConfigControllerGetListByCurrentUserData = {
+  query?: {
+    /**
+     * 活动ID
+     */
+    activity_id?: string;
+    /**
+     * 邀请人ERP User ID
+     */
+    inviter_erp_user_id?: string;
+    /**
+     * 邀请人用户ID
+     */
+    inviter_user_id?: string;
+    /**
+     * 关键字
+     */
+    keyword?: string;
+    /**
+     * 每页显示数量
+     */
+    maxResultCount?: number;
+    /**
+     * skin
+     */
+    skip?: number;
+    /**
+     * 排序
+     */
+    sort?: string;
+  };
+};
+
+export type InviterConfigControllerGetListByCurrentUserResponse = unknown;
+
+export type InviterConfigControllerGetListByCurrentUserError = unknown;
+
 export type InviterConfigControllerSetIsEnabledData = {
   path: {
     id: string;
@@ -2616,3 +2732,16 @@ export type InviterConfigControllerImportExcelData = {
 export type InviterConfigControllerImportExcelResponse = unknown;
 
 export type InviterConfigControllerImportExcelError = unknown;
+
+export type ScanControllerGetCodeResultData = {
+  path: {
+    type: string;
+  };
+  query: {
+    input: string;
+  };
+};
+
+export type ScanControllerGetCodeResultResponse = ScanDto;
+
+export type ScanControllerGetCodeResultError = unknown;
