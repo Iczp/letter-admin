@@ -18,6 +18,7 @@ import Write from './components/Write.vue';
 import Detail from './components/Detail.vue';
 import ImageSettings from './components/ImageSettings.vue';
 import Designer from './components/Designer.vue';
+import KonvaDesigner from './components/KonvaDesigner.vue';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 import {
@@ -512,5 +513,6 @@ const save = async () => {
 
   <ImageSettings ref="imageSettingsRef" />
 
-  <Designer> 55 </Designer>
+  <!-- <Designer> 55 </Designer> -->
+  <KonvaDesigner />
 </template>
