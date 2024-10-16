@@ -7,6 +7,9 @@
  */
 export const base64ToBlob = (base64Data: string, contentType?: string): Blob | null => {
   contentType = contentType || '';
+
+  base64Data = base64Data.includes(',') ? base64Data.split(',')[1] : base64Data;
+
   const sliceSize = 512;
   const byteCharacters = safeAtob(base64Data);
   if (byteCharacters == null) {

@@ -17,6 +17,7 @@ import { ref, unref, reactive } from 'vue';
 import Write from './components/Write.vue';
 import Detail from './components/Detail.vue';
 import ImageSettings from './components/ImageSettings.vue';
+import Designer from './components/Designer.vue';
 import { CrudSchema, useCrudSchemas } from '@/hooks/web/useCrudSchemas';
 import { BaseButton } from '@/components/Button';
 import {
@@ -510,4 +511,6 @@ const save = async () => {
   </Dialog>
 
   <ImageSettings ref="imageSettingsRef" />
+
+  <Designer> 55 </Designer>
 </template>

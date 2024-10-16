@@ -11,7 +11,6 @@ import { useDebounceFn } from '@vueuse/core';
 import { BaseButton } from '@/components/Button';
 import { ElUpload, UploadFile, ElTooltip, ElMessage } from 'element-plus';
 import { activitiesGetItem, activitiesSetTemplate, ActivityDetailDto, ActivityDto } from '@/client';
-import { bool } from 'vue-types';
 
 const props = defineProps({
   width: {
