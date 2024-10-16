@@ -1,110 +1,84 @@
 <template>
   <div>
-    <input type="file" @change="onFileChange" />
-    <label for="textColor">选择文本颜色:</label>
-    <input type="color" id="textColor" v-model="selectedColor" @input="updateTextColor" />
-
-    <label for="fontSize">选择字体大小:</label>
-    <input type="number" id="fontSize" v-model="fontSize" @input="updateTextFontSize" />
-
-    <label for="fontFamily">选择字体:</label>
-    <select id="fontFamily" v-model="fontFamily" @change="updateTextFontFamily">
-      <option value="Arial">Arial</option>
-      <option value="Helvetica">Helvetica</option>
-      <option value="Courier">Courier</option>
-      <option value="Times New Roman">Times New Roman</option>
-    </select>
-    <div ref="konvaContainer" style="width: 800px; height: 600px; background-color: #f0f0f0"></div>
+    <v-stage ref="stage" :config="{ width: stageWidth, height: stageHeight }" class="stage">
+      <v-layer ref="layer">
+        <v-image v-for="(image, index) in images" :key="index" :config="image.config" draggable />
+        <v-text
+          v-for="(textItem, index) in texts"
+          :key="index"
+          :config="textItem.config"
+          draggable
+        />
+      </v-layer>
+    </v-stage>
+    <button @click="submitToBackend">提交到后端</button>
   </div>
 </template>
 
-<script>
-import { onMounted, ref } from 'vue';
-import Konva from 'konva';
+<script setup>
+import { ref } from 'vue';
 
-export default {
-  setup() {
-    const konvaContainer = ref(null);
-    let stage = null;
-    let layer = null;
-    let image = null;
-    const texts = [];
-    let rectangle = null;
-    const selectedColor = ref('#000000');
-    const fontSize = ref(20);
-    const fontFamily = ref('Arial');
+const stageWidth = 800;
+const stageHeight = 600;
 
-    onMounted(() => {
-      stage = new Konva.Stage({
-        container: konvaContainer.value,
-        width: 800,
-        height: 600,
-      });
-      layer = new Konva.Layer();
-      stage.add(layer);
+const stage = ref(null);
+const layer = ref(null);
 
-      // Initialize an empty image and a rectangle
-      image = new Konva.Image({ x: 0, y: 0, width: 800, height: 600 });
-      rectangle = new Konva.Rect({ x: 100, y: 100, width: 200, height: 200, fill: 'red' });
-      layer.add(image);
-      layer.add(rectangle);
-
-      // Add three text objects
-      for (let i = 0; i < 3; i++) {
-        const text = new Konva.Text({
-          x: 50 + i * 200,
-          y: 50,
-          text: `Text ${i + 1}`,
-          fontSize: fontSize.value,
-          fontFamily: fontFamily.value,
-          fill: selectedColor.value,
-        });
-        texts.push(text);
-        layer.add(text);
-      }
-    });
-
-    const onFileChange = (event) => {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        image.image(e.target.result);
-        layer.draw();
-      };
-      reader.readAsDataURL(file);
-    };
-
-    const updateTextColor = () => {
-      texts.forEach((text) => {
-        text.fill(selectedColor.value);
-      });
-      layer.draw();
-    };
-
-    const updateTextFontSize = () => {
-      texts.forEach((text) => {
-        text.fontSize(fontSize.value);
-      });
-      layer.draw();
-    };
-
-    const updateTextFontFamily = () => {
-      texts.forEach((text) => {
-        text.fontFamily(fontFamily.value);
-      });
-      layer.draw();
-    };
-
-    return {
-      konvaContainer,
-      selectedColor,
-      fontSize,
-      fontFamily,
-      onFileChange,
-      updateTextColor,
-      updateTextFontSize,
-      updateTextFontFamily,
-    };
+const images = ref([
+  {
+    config: {
+      x: 50,
+      y: 50,
+      width: 200,
+      height: 200,
+      src: 'path/to/image.jpg',
+    },
   },
+]);
+
+const texts = ref([
+  {
+    config: {
+      x: 100,
+      y: 100,
+      text: 'Hello World',
+      fontSize: 24,
+      fill: 'red',
+      // draggable: true,
+    },
+  },
+  {
+    config: {
+      x: 100,
+      y: 200,
+      text: 'Hello World',
+      draggable: true,
+      fontSize: 24,
+      fill: 'black',
+    },
+  },
+]);
+
+const submitToBackend = () => {
+  const json = stage.value.getStage().toJSON();
+  console.log('json', json);
+  // fetch('http://your-backend-url/api/generate-image', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: json,
+  // })
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     console.log('图片生成成功:', data);
+  //   })
+  //   .catch((error) => {
+  //     console.error('图片生成失败:', error);
+  //   });
 };
 </script>
+
+<style>
+.stage {
+  background-color: bisque;
+}
+</style>

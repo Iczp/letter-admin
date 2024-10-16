@@ -38,6 +38,8 @@ import './permission';
 
 import { configClient } from './configClient';
 
+import VueKonva from 'vue-konva';
+
 // 创建实例
 const setupAll = async () => {
   const app = createApp(App);
@@ -55,6 +57,8 @@ const setupAll = async () => {
   setupRouter(app);
 
   setupPermission(app);
+
+  app.use(VueKonva);
 
   app.mount('#app');
 };
