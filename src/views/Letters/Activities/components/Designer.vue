@@ -1,38 +1,59 @@
 <template>
-  <div>
-    <canvas ref="canvasRef"></canvas>
-
-    <input type="file" @change="onFileChange" />
-    <label for="textColor">选择文本颜色: </label>
-    <input type="color" id="textColor" v-model="selectedColor" @input="updateTextColor" />
-
-    <label for="fontSize">选择字体大小: </label>
-    <input type="number" id="fontSize" v-model="fontSize" @input="updateTextFontSize" />
-
-    <label for="fontFamily">选择字体: </label>
-    <select id="fontFamily" v-model="fontFamily" @change="updateTextFontFamily">
-      <option value="Arial">Arial</option>
-      <option value="Helvetica">Helvetica</option>
-      <option value="Courier">Courier</option>
-      <option value="Times New Roman">Times New Roman</option>
-    </select>
-
-    <div>
-      <button @click="getAllObjectsInfo">获取所有对象信息</button>
+  <div class="flex flex-row gap-4">
+    <div class="flex overflow-auto max-w-456px max-h-830px">
+      <canvas ref="canvasRef"></canvas>
     </div>
+    <div class="flex flex-1 flex-col">
+      <div>
+        <div>
+          <label for="canvasWidth">宽：</label>
+          <input
+            type="number"
+            id="canvasWidth"
+            v-model="form.canvasWidth"
+            @input="updateCanvasWidth"
+          />
+          <label for="canvasHeight">高：</label>
+          <input
+            type="number"
+            id="canvasHeight"
+            v-model="form.canvasHeight"
+            @input="updateCanvasHeight"
+          />
+        </div>
+      </div>
+      <input type="file" @change="onFileChange" />
+      <label for="textColor">选择文本颜色: </label>
+      <input type="color" id="textColor" v-model="selectedColor" @input="updateTextColor" />
 
-    <div v-if="selectedObjectInfo">
-      <h3>选中对象信息：</h3>
-      <p>类型: {{ selectedObjectInfo.type }}</p>
-      <p>位置: ({{ selectedObjectInfo.left }}, {{ selectedObjectInfo.top }})</p>
-      <p>宽度: {{ selectedObjectInfo.width }}</p>
-      <p>高度: {{ selectedObjectInfo.height }}</p>
+      <label for="fontSize">选择字体大小: </label>
+      <input type="number" id="fontSize" v-model="fontSize" @input="updateTextFontSize" />
+
+      <label for="fontFamily">选择字体: </label>
+      <select id="fontFamily" v-model="fontFamily" @change="updateTextFontFamily">
+        <option value="Arial">Arial</option>
+        <option value="Helvetica">Helvetica</option>
+        <option value="Courier">Courier</option>
+        <option value="Times New Roman">Times New Roman</option>
+      </select>
+
+      <div>
+        <button @click="getAllObjectsInfo">获取所有对象信息</button>
+      </div>
+
+      <div v-if="selectedObjectInfo">
+        <h3>选中对象信息：</h3>
+        <p>类型: {{ selectedObjectInfo.type }}</p>
+        <p>位置: ({{ selectedObjectInfo.left }}, {{ selectedObjectInfo.top }})</p>
+        <p>宽度: {{ selectedObjectInfo.width }}</p>
+        <p>高度: {{ selectedObjectInfo.height }}</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, reactive } from 'vue';
 import * as fabric from 'fabric';
 import { base64ToBlob } from '@/utils/base64ToBlob';
 
@@ -49,10 +70,29 @@ interface CanvasData {
   }>;
 }
 
+const form = reactive({
+  canvasWidth: 560,
+  canvasHeight: 812,
+});
+
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 let canvas: fabric.Canvas | null = null;
 let textObjects: fabric.Textbox[] = []; // 保存文本对象的引用
 
+const updateCanvasWidth = () => {
+  if (canvas) {
+    const width = form.canvasWidth;
+    canvas.setWidth(width);
+    canvas.renderAll();
+  }
+};
+const updateCanvasHeight = () => {
+  if (canvas) {
+    const height = form.canvasHeight;
+    canvas.setHeight(height);
+    canvas.renderAll();
+  }
+};
 const canvasData = ref<CanvasData>({
   backgroundImage: null,
   qrCodeImage: null,
@@ -67,7 +107,7 @@ const canvasData = ref<CanvasData>({
       fontFamily: 'Arial',
     },
     {
-      text: '{{二维码位置}}',
+      text: '{{编辑号}}',
       left: 50,
       top: 200,
       color: '#000000',
@@ -109,8 +149,8 @@ const initCanvas = () => {
   fabric.Object.prototype.transparentCorners = false;
 
   canvas = new fabric.Canvas(canvasElement, {
-    width: 750,
-    height: 1500,
+    width: 375,
+    height: 812,
     selection: false,
     containerClass: 'canvas-container',
   });
@@ -262,8 +302,8 @@ const addQRCodeAndText = () => {
   const rect = new fabric.Rect({
     left: 100,
     top: 100,
-    width: 60,
-    height: 70,
+    width: 100,
+    height: 100,
     fill: '#000000',
     opacity: 0.5,
   });
@@ -334,6 +374,7 @@ const getAllObjectsInfo = () => {
   console.log('画布图片:', blob, url);
 
   const json = canvas.toJSON();
+  imageService;
   console.log('画布 json:', json);
 };
 
@@ -347,6 +388,12 @@ const onFileChange = (e: Event) => {
     reader.onload = (event) => {
       const result = event.target?.result as string;
       canvasData.value.backgroundImage = result; // 设置背景图片
+      const image = new Image();
+      image.src = result;
+      image.onload = () => {
+        // canvas?.setWidth(image.width);
+        // canvas?.setHeight(image.height);
+      };
     };
 
     reader.readAsDataURL(file);
@@ -359,12 +406,12 @@ canvas {
   border: 1px solid #000;
 }
 .canvas-container {
-  transform: scale(0.5);
+  transform: scale(1);
 }
 </style>
 
 <style>
 .canvas-container {
-  transform: scale(0.5);
+  transform: scale(1);
 }
 </style>

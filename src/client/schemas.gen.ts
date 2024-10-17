@@ -31,6 +31,11 @@ export const AppInfoSchema = {
   required: ['name', 'version', 'description', 'author', 'email', 'website'],
 } as const;
 
+export const ObjectSchema = {
+  type: 'object',
+  properties: {},
+} as const;
+
 export const UserDtoSchema = {
   type: 'object',
   properties: {

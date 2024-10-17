@@ -513,6 +513,6 @@ const save = async () => {
 
   <ImageSettings ref="imageSettingsRef" />
 
-  <!-- <Designer> 55 </Designer> -->
-  <KonvaDesigner />
+  <Designer> 55 </Designer>
+  <!-- <KonvaDesigner /> -->
 </template>

@@ -16,6 +16,9 @@ import type {
   AppControllerGetTableResponse,
   AppControllerGetAboutError,
   AppControllerGetAboutResponse,
+  ImagesControllerGenerateImageData,
+  ImagesControllerGenerateImageError,
+  ImagesControllerGenerateImageResponse,
   UsersControllerGetListData,
   UsersControllerGetListError,
   UsersControllerGetListResponse,
@@ -248,7 +251,7 @@ export const appGetInfo = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/test',
+    url: '/letter-api/test',
   });
 };
 
@@ -264,7 +267,7 @@ export const appGetTables = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/tables',
+    url: '/letter-api/tables',
   });
 };
 
@@ -280,7 +283,7 @@ export const appGetTable = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/table',
+    url: '/letter-api/table',
   });
 };
 
@@ -297,7 +300,20 @@ export const appGetAbout = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/about',
+    url: '/letter-api/about',
+  });
+};
+
+export const imagesGenerateImage = <ThrowOnError extends boolean = false>(
+  options: Options<ImagesControllerGenerateImageData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).post<
+    ImagesControllerGenerateImageResponse,
+    ImagesControllerGenerateImageError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/images/generate-image',
   });
 };
 
@@ -313,7 +329,7 @@ export const usersGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user',
+    url: '/letter-api/user',
   });
 };
 
@@ -329,7 +345,7 @@ export const usersCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user',
+    url: '/letter-api/user',
   });
 };
 
@@ -345,7 +361,7 @@ export const usersDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user',
+    url: '/letter-api/user',
   });
 };
 
@@ -361,7 +377,7 @@ export const usersGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/{id}',
+    url: '/letter-api/user/{id}',
   });
 };
 
@@ -377,7 +393,7 @@ export const usersUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/{id}',
+    url: '/letter-api/user/{id}',
   });
 };
 
@@ -394,7 +410,7 @@ export const usersSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/enabled/{id}',
+    url: '/letter-api/user/enabled/{id}',
   });
 };
 
@@ -411,7 +427,7 @@ export const usersGetExcelTemplate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/excel/tpl',
+    url: '/letter-api/user/excel/tpl',
   });
 };
 
@@ -428,7 +444,7 @@ export const usersExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/user/excel/output',
+    url: '/letter-api/user/excel/output',
   });
 };
 
@@ -450,7 +466,7 @@ export const usersImportExcel = <ThrowOnError extends boolean = false>(
       'Content-Type': null,
       ...options?.headers,
     },
-    url: '/api/user/excel/import',
+    url: '/letter-api/user/excel/import',
   });
 };
 
@@ -466,7 +482,7 @@ export const activitiesGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities',
+    url: '/letter-api/activities',
   });
 };
 
@@ -482,7 +498,7 @@ export const activitiesCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities',
+    url: '/letter-api/activities',
   });
 };
 
@@ -498,7 +514,7 @@ export const activitiesDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities',
+    url: '/letter-api/activities',
   });
 };
 
@@ -514,7 +530,7 @@ export const activitiesGetListByCurrentUser = <ThrowOnError extends boolean = fa
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/current-user/list',
+    url: '/letter-api/activities/current-user/list',
   });
 };
 
@@ -530,7 +546,7 @@ export const activitiesGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/{id}',
+    url: '/letter-api/activities/{id}',
   });
 };
 
@@ -546,7 +562,7 @@ export const activitiesUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/{id}',
+    url: '/letter-api/activities/{id}',
   });
 };
 
@@ -568,7 +584,7 @@ export const activitiesSetTemplate = <ThrowOnError extends boolean = false>(
       'Content-Type': null,
       ...options?.headers,
     },
-    url: '/api/activities/set-temp/{id}',
+    url: '/letter-api/activities/set-temp/{id}',
   });
 };
 
@@ -585,7 +601,7 @@ export const activitiesSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/enabled/{id}',
+    url: '/letter-api/activities/enabled/{id}',
   });
 };
 
@@ -602,7 +618,7 @@ export const activitiesGetExcelTemplate = <ThrowOnError extends boolean = false>
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/excel/tpl',
+    url: '/letter-api/activities/excel/tpl',
   });
 };
 
@@ -619,7 +635,7 @@ export const activitiesExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activities/excel/output',
+    url: '/letter-api/activities/excel/output',
   });
 };
 
@@ -641,7 +657,7 @@ export const activitiesImportExcel = <ThrowOnError extends boolean = false>(
       'Content-Type': null,
       ...options?.headers,
     },
-    url: '/api/activities/excel/import',
+    url: '/letter-api/activities/excel/import',
   });
 };
 
@@ -657,7 +673,7 @@ export const activityCustomerGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer',
+    url: '/letter-api/activity-customer',
   });
 };
 
@@ -673,7 +689,7 @@ export const activityCustomerCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer',
+    url: '/letter-api/activity-customer',
   });
 };
 
@@ -689,7 +705,7 @@ export const activityCustomerDeleteMany = <ThrowOnError extends boolean = false>
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer',
+    url: '/letter-api/activity-customer',
   });
 };
 
@@ -705,7 +721,7 @@ export const activityCustomerGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/{id}',
+    url: '/letter-api/activity-customer/{id}',
   });
 };
 
@@ -721,7 +737,7 @@ export const activityCustomerUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/{id}',
+    url: '/letter-api/activity-customer/{id}',
   });
 };
 
@@ -737,7 +753,7 @@ export const activityCustomerSetIsChecked = <ThrowOnError extends boolean = fals
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/checked/{id}',
+    url: '/letter-api/activity-customer/checked/{id}',
   });
 };
 
@@ -753,7 +769,7 @@ export const activityCustomerSetIsInvited = <ThrowOnError extends boolean = fals
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/invited/{id}',
+    url: '/letter-api/activity-customer/invited/{id}',
   });
 };
 
@@ -769,7 +785,7 @@ export const activityCustomerSetIsIsGifted = <ThrowOnError extends boolean = fal
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/gifted/{id}',
+    url: '/letter-api/activity-customer/gifted/{id}',
   });
 };
 
@@ -785,7 +801,7 @@ export const activityCustomerSetIsIsSigned = <ThrowOnError extends boolean = fal
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/signed/{id}',
+    url: '/letter-api/activity-customer/signed/{id}',
   });
 };
 
@@ -802,7 +818,7 @@ export const activityCustomerExportExcel = <ThrowOnError extends boolean = false
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/excel/output',
+    url: '/letter-api/activity-customer/excel/output',
   });
 };
 
@@ -819,7 +835,7 @@ export const activityCustomerLetter = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/letter/{id}',
+    url: '/letter-api/activity-customer/letter/{id}',
   });
 };
 
@@ -836,7 +852,7 @@ export const activityCustomerSetIsEnabled = <ThrowOnError extends boolean = fals
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/enabled/{id}',
+    url: '/letter-api/activity-customer/enabled/{id}',
   });
 };
 
@@ -853,7 +869,7 @@ export const activityCustomerGetExcelTemplate = <ThrowOnError extends boolean = 
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer/excel/tpl',
+    url: '/letter-api/activity-customer/excel/tpl',
   });
 };
 
@@ -875,7 +891,7 @@ export const activityCustomerImportExcel = <ThrowOnError extends boolean = false
       'Content-Type': null,
       ...options?.headers,
     },
-    url: '/api/activity-customer/excel/import',
+    url: '/letter-api/activity-customer/excel/import',
   });
 };
 
@@ -891,7 +907,7 @@ export const activityCustomerInvitersGetList = <ThrowOnError extends boolean = f
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters',
+    url: '/letter-api/activity-customer-inviters',
   });
 };
 
@@ -907,7 +923,7 @@ export const activityCustomerInvitersCreate = <ThrowOnError extends boolean = fa
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters',
+    url: '/letter-api/activity-customer-inviters',
   });
 };
 
@@ -923,7 +939,7 @@ export const activityCustomerInvitersDeleteMany = <ThrowOnError extends boolean 
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters',
+    url: '/letter-api/activity-customer-inviters',
   });
 };
 
@@ -939,7 +955,7 @@ export const activityCustomerInvitersGetItem = <ThrowOnError extends boolean = f
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/{id}',
+    url: '/letter-api/activity-customer-inviters/{id}',
   });
 };
 
@@ -955,7 +971,7 @@ export const activityCustomerInvitersUpdate = <ThrowOnError extends boolean = fa
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/{id}',
+    url: '/letter-api/activity-customer-inviters/{id}',
   });
 };
 
@@ -972,7 +988,7 @@ export const activityCustomerInvitersSetIsEnabled = <ThrowOnError extends boolea
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/enabled/{id}',
+    url: '/letter-api/activity-customer-inviters/enabled/{id}',
   });
 };
 
@@ -989,7 +1005,7 @@ export const activityCustomerInvitersGetExcelTemplate = <ThrowOnError extends bo
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/excel/tpl',
+    url: '/letter-api/activity-customer-inviters/excel/tpl',
   });
 };
 
@@ -1006,7 +1022,7 @@ export const activityCustomerInvitersExportExcel = <ThrowOnError extends boolean
     ThrowOnError
   >({
     ...options,
-    url: '/api/activity-customer-inviters/excel/output',
+    url: '/letter-api/activity-customer-inviters/excel/output',
   });
 };
 
@@ -1028,7 +1044,7 @@ export const activityCustomerInvitersImportExcel = <ThrowOnError extends boolean
       'Content-Type': null,
       ...options?.headers,
     },
-    url: '/api/activity-customer-inviters/excel/import',
+    url: '/letter-api/activity-customer-inviters/excel/import',
   });
 };
 
@@ -1041,7 +1057,7 @@ export const authSignIn = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/auth/login',
+    url: '/letter-api/auth/login',
   });
 };
 
@@ -1054,7 +1070,7 @@ export const authGetProfile = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/auth/profile',
+    url: '/letter-api/auth/profile',
   });
 };
 
@@ -1067,7 +1083,7 @@ export const authRefreshToken = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/auth/refresh-token',
+    url: '/letter-api/auth/refresh-token',
   });
 };
 
@@ -1083,7 +1099,7 @@ export const seedSeed = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/seed',
+    url: '/letter-api/seed',
   });
 };
 
@@ -1099,7 +1115,7 @@ export const rolesGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles',
+    url: '/letter-api/roles',
   });
 };
 
@@ -1115,7 +1131,7 @@ export const rolesCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles',
+    url: '/letter-api/roles',
   });
 };
 
@@ -1131,7 +1147,7 @@ export const rolesDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles',
+    url: '/letter-api/roles',
   });
 };
 
@@ -1147,7 +1163,7 @@ export const rolesGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/{id}',
+    url: '/letter-api/roles/{id}',
   });
 };
 
@@ -1163,7 +1179,7 @@ export const rolesUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/{id}',
+    url: '/letter-api/roles/{id}',
   });
 };
 
@@ -1179,7 +1195,7 @@ export const rolesSetPermissions = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/permissions/{id}',
+    url: '/letter-api/roles/permissions/{id}',
   });
 };
 
@@ -1196,7 +1212,7 @@ export const rolesSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/enabled/{id}',
+    url: '/letter-api/roles/enabled/{id}',
   });
 };
 
@@ -1213,7 +1229,7 @@ export const rolesGetExcelTemplate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/excel/tpl',
+    url: '/letter-api/roles/excel/tpl',
   });
 };
 
@@ -1230,7 +1246,7 @@ export const rolesExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/roles/excel/output',
+    url: '/letter-api/roles/excel/output',
   });
 };
 
@@ -1252,7 +1268,7 @@ export const rolesImportExcel = <ThrowOnError extends boolean = false>(
       'Content-Type': null,
       ...options?.headers,
     },
-    url: '/api/roles/excel/import',
+    url: '/letter-api/roles/excel/import',
   });
 };
 
@@ -1268,7 +1284,7 @@ export const auditsGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits',
+    url: '/letter-api/audits',
   });
 };
 
@@ -1284,7 +1300,7 @@ export const auditsDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits',
+    url: '/letter-api/audits',
   });
 };
 
@@ -1300,7 +1316,7 @@ export const auditsGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits/{id}',
+    url: '/letter-api/audits/{id}',
   });
 };
 
@@ -1317,7 +1333,7 @@ export const auditsSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits/enabled/{id}',
+    url: '/letter-api/audits/enabled/{id}',
   });
 };
 
@@ -1334,7 +1350,7 @@ export const auditsGetExcelTemplate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits/excel/tpl',
+    url: '/letter-api/audits/excel/tpl',
   });
 };
 
@@ -1351,7 +1367,7 @@ export const auditsExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/audits/excel/output',
+    url: '/letter-api/audits/excel/output',
   });
 };
 
@@ -1373,7 +1389,7 @@ export const auditsImportExcel = <ThrowOnError extends boolean = false>(
       'Content-Type': null,
       ...options?.headers,
     },
-    url: '/api/audits/excel/import',
+    url: '/letter-api/audits/excel/import',
   });
 };
 
@@ -1389,7 +1405,7 @@ export const erpUsersFindAll = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/erp-users',
+    url: '/letter-api/erp-users',
   });
 };
 
@@ -1405,7 +1421,7 @@ export const erpUsersFindOne = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/erp-users/{id}',
+    url: '/letter-api/erp-users/{id}',
   });
 };
 
@@ -1421,7 +1437,7 @@ export const inviterConfigGetList = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config',
+    url: '/letter-api/inviter-config',
   });
 };
 
@@ -1437,7 +1453,7 @@ export const inviterConfigCreate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config',
+    url: '/letter-api/inviter-config',
   });
 };
 
@@ -1453,7 +1469,7 @@ export const inviterConfigDeleteMany = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config',
+    url: '/letter-api/inviter-config',
   });
 };
 
@@ -1469,7 +1485,7 @@ export const inviterConfigGetItem = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/{id}',
+    url: '/letter-api/inviter-config/{id}',
   });
 };
 
@@ -1485,7 +1501,7 @@ export const inviterConfigUpdate = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/{id}',
+    url: '/letter-api/inviter-config/{id}',
   });
 };
 
@@ -1501,7 +1517,7 @@ export const inviterConfigGetItemByCurrentUser = <ThrowOnError extends boolean =
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/current-user/item',
+    url: '/letter-api/inviter-config/current-user/item',
   });
 };
 
@@ -1517,7 +1533,7 @@ export const inviterConfigGetListByCurrentUser = <ThrowOnError extends boolean =
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/current-user/list',
+    url: '/letter-api/inviter-config/current-user/list',
   });
 };
 
@@ -1534,7 +1550,7 @@ export const inviterConfigSetIsEnabled = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/enabled/{id}',
+    url: '/letter-api/inviter-config/enabled/{id}',
   });
 };
 
@@ -1551,7 +1567,7 @@ export const inviterConfigGetExcelTemplate = <ThrowOnError extends boolean = fal
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/excel/tpl',
+    url: '/letter-api/inviter-config/excel/tpl',
   });
 };
 
@@ -1568,7 +1584,7 @@ export const inviterConfigExportExcel = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/inviter-config/excel/output',
+    url: '/letter-api/inviter-config/excel/output',
   });
 };
 
@@ -1590,7 +1606,7 @@ export const inviterConfigImportExcel = <ThrowOnError extends boolean = false>(
       'Content-Type': null,
       ...options?.headers,
     },
-    url: '/api/inviter-config/excel/import',
+    url: '/letter-api/inviter-config/excel/import',
   });
 };
 
@@ -1606,6 +1622,6 @@ export const scanGetCodeResult = <ThrowOnError extends boolean = false>(
     ThrowOnError
   >({
     ...options,
-    url: '/api/scan/{type}',
+    url: '/letter-api/scan/{type}',
   });
 };

@@ -9,6 +9,10 @@ export type AppInfo = {
   website: string;
 };
 
+export type Object = {
+  [key: string]: unknown;
+};
+
 export type UserDto = {
   /**
    * id
@@ -1688,6 +1692,17 @@ export type AppControllerGetTableError = unknown;
 export type AppControllerGetAboutResponse = AppInfo;
 
 export type AppControllerGetAboutError = unknown;
+
+export type ImagesControllerGenerateImageData = {
+  /**
+   * jsonData
+   */
+  body: Object;
+};
+
+export type ImagesControllerGenerateImageResponse = unknown;
+
+export type ImagesControllerGenerateImageError = unknown;
 
 export type UsersControllerGetListData = {
   query?: {
