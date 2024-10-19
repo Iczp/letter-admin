@@ -108,7 +108,7 @@ const canvasData = ref<CanvasData>({
       fontFamily: 'Arial',
     },
     {
-      text: '{{编辑号}}',
+      text: '{{编号}}',
       left: 50,
       top: 200,
       color: '#000000',
@@ -280,8 +280,8 @@ const addQRCodeAndText = () => {
 
     text.setControlVisible('mt', false);
     text.setControlVisible('mb', false);
-    text.setControlVisible('mr', false);
-    text.setControlVisible('ml', false);
+    // text.setControlVisible('mr', false);
+    // text.setControlVisible('ml', false);
     text.setControlVisible('mtr', false);
 
     text.set('fill', item.color);
@@ -368,17 +368,6 @@ const updateTextFontFamily = () => {
 const getAllObjectsInfo = () => {
   if (!canvas) return;
 
-  const objects = canvas.getObjects();
-  const objectInfo = objects.map((obj) => ({
-    type: obj.type,
-    left: obj.left,
-    top: obj.top,
-    width: obj.width,
-    height: obj.height,
-  }));
-
-  console.log('画布对象信息:', objectInfo, objects);
-
   const dataURL = canvas.toDataURL();
 
   const blob = base64ToBlob(dataURL, 'image/png');
@@ -390,21 +379,19 @@ const getAllObjectsInfo = () => {
   // a.download = '画布图片';
   // a.click();
   console.log('画布图片:', blob, url);
-
   const json = canvas.toJSON();
-
   console.log('画布 json:', json);
   console.log('canvas:', canvas);
   imagesGenerateImage({
     body: {
+      version: '1.0',
       lib: 'fabricjs',
-      ...json,
-      canvas: {
+      jsonData: json,
+      canvasData: {
         width: canvas.width,
         height: canvas.height,
       },
     },
-    responseType: 'blob',
   })
     .then((res) => {
       console.log('生成图片', res, res.data instanceof ArrayBuffer);

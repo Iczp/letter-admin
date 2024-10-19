@@ -314,10 +314,10 @@ export const imagesGenerateImage = <ThrowOnError extends boolean = false>(
   >({
     ...options,
     ...formDataBodySerializer,
-    headers: {
-      'Content-Type': null,
-      ...options?.headers,
-    },
+    // headers: {
+    //   'Content-Type': null,
+    //   ...options?.headers,
+    // },
     url: '/letter-api/images/generate-image',
   });
 };

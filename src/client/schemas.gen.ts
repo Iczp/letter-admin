@@ -31,7 +31,7 @@ export const AppInfoSchema = {
   required: ['name', 'version', 'description', 'author', 'email', 'website'],
 } as const;
 
-export const ImageInputSchema = {
+export const GenerateImageInputSchema = {
   type: 'object',
   properties: {
     lib: {
@@ -43,7 +43,7 @@ export const ImageInputSchema = {
     jsonData: {
       type: 'object',
     },
-    canvas: {
+    canvasData: {
       type: 'object',
       properties: {
         width: {
@@ -57,7 +57,7 @@ export const ImageInputSchema = {
       },
     },
   },
-  required: ['lib', 'version', 'jsonData', 'canvas'],
+  required: ['lib', 'version', 'jsonData', 'canvasData'],
 } as const;
 
 export const UserDtoSchema = {

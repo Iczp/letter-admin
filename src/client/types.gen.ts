@@ -9,13 +9,22 @@ export type AppInfo = {
   website: string;
 };
 
-export type ImageInput = {
+export type GenerateImageInput = {
+  /**
+   * 前端组件端
+   */
   lib: string;
+  /**
+   * 前端组件版本
+   */
   version: string;
+  /**
+   * Json数据
+   */
   jsonData: {
     [key: string]: unknown;
   };
-  canvas: {
+  canvasData: {
     width?: number;
     height?: number;
   };
@@ -1705,7 +1714,7 @@ export type ImagesControllerGenerateImageData = {
   /**
    * jsonData
    */
-  body: ImageInput;
+  body: GenerateImageInput;
 };
 
 export type ImagesControllerGenerateImageResponse = (Blob | File) | unknown;
