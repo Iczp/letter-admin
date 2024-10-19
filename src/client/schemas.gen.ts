@@ -31,9 +31,33 @@ export const AppInfoSchema = {
   required: ['name', 'version', 'description', 'author', 'email', 'website'],
 } as const;
 
-export const ObjectSchema = {
+export const ImageInputSchema = {
   type: 'object',
-  properties: {},
+  properties: {
+    lib: {
+      type: 'string',
+    },
+    version: {
+      type: 'string',
+    },
+    jsonData: {
+      type: 'object',
+    },
+    canvas: {
+      type: 'object',
+      properties: {
+        width: {
+          required: true,
+          type: 'number',
+        },
+        height: {
+          required: true,
+          type: 'number',
+        },
+      },
+    },
+  },
+  required: ['lib', 'version', 'jsonData', 'canvas'],
 } as const;
 
 export const UserDtoSchema = {
@@ -557,7 +581,7 @@ export const ActivityUpdateInputSchema = {
   required: ['title', 'max_count', 'is_actived', 'is_enabled'],
 } as const;
 
-export const ActivityTemplageInputSchema = {
+export const ActivityTemplateInputSchema = {
   type: 'object',
   properties: {
     file: {

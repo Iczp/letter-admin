@@ -9,8 +9,16 @@ export type AppInfo = {
   website: string;
 };
 
-export type Object = {
-  [key: string]: unknown;
+export type ImageInput = {
+  lib: string;
+  version: string;
+  jsonData: {
+    [key: string]: unknown;
+  };
+  canvas: {
+    width?: number;
+    height?: number;
+  };
 };
 
 export type UserDto = {
@@ -398,7 +406,7 @@ export type ActivityUpdateInput = {
   is_enabled: boolean;
 };
 
-export type ActivityTemplageInput = {
+export type ActivityTemplateInput = {
   file: Blob | File;
   /**
    * 二维码图片剪裁信息
@@ -1697,10 +1705,10 @@ export type ImagesControllerGenerateImageData = {
   /**
    * jsonData
    */
-  body: Object;
+  body: ImageInput;
 };
 
-export type ImagesControllerGenerateImageResponse = unknown;
+export type ImagesControllerGenerateImageResponse = (Blob | File) | unknown;
 
 export type ImagesControllerGenerateImageError = unknown;
 
@@ -1900,7 +1908,7 @@ export type ActivitiesControllerSetTemplateData = {
   /**
    * 模板图片
    */
-  body: ActivityTemplageInput;
+  body: ActivityTemplateInput;
   path: {
     id: string;
   };

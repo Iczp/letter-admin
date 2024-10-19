@@ -56,6 +56,7 @@
 import { ref, onMounted, watch, reactive } from 'vue';
 import * as fabric from 'fabric';
 import { base64ToBlob } from '@/utils/base64ToBlob';
+import { activityCustomerLetter, imagesGenerateImage } from '@/client';
 
 interface CanvasData {
   backgroundImage: string | null;
@@ -71,8 +72,8 @@ interface CanvasData {
 }
 
 const form = reactive({
-  canvasWidth: 560,
-  canvasHeight: 812,
+  canvasWidth: 540,
+  canvasHeight: 960,
 });
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
@@ -150,7 +151,7 @@ const initCanvas = () => {
 
   canvas = new fabric.Canvas(canvasElement, {
     width: 375,
-    height: 812,
+    height: 667,
     selection: false,
     containerClass: 'canvas-container',
   });
@@ -215,7 +216,7 @@ const updateCanvas = () => {
 
       img.set({
         selectable: false, // 禁止移动背景
-        evented: true, // 禁止鼠标事件
+        evented: false, // 禁止鼠标事件
       });
 
       canvas!.add(img);
@@ -288,7 +289,7 @@ const addQRCodeAndText = () => {
     text.on('editing:entered', (e) => {
       e.e.preventDefault();
 
-      text.text = '+*';
+      // text.text = '+*';
       canvas!.renderAll();
       console.log('editing:entered', e);
     });
@@ -308,14 +309,31 @@ const addQRCodeAndText = () => {
     opacity: 0.5,
   });
 
-  rect.setControlVisible('mt', false);
-  rect.setControlVisible('mb', false);
-  rect.setControlVisible('mr', false);
-  rect.setControlVisible('ml', false);
-  rect.setControlVisible('mtr', false);
-
   // 将自定义矩形添加到画布上
-  canvas.add(rect);
+  // canvas.add(rect);
+
+  const text = new fabric.Text('二维码位置', {
+    left: 100, // 文字的左边位置（相对于正方形的位置）
+    top: 100, // 文字的顶部位置（相对于正方形的位置）
+    fill: 'white', // 文字的颜色
+    fontSize: 14, // 文字的字体大小
+    originX: 'center', // 文字水平居中
+    originY: 'center', // 文字垂直居中
+  });
+  text.set({
+    left: rect.left + rect.width / 2,
+    top: rect.top + rect.height / 2,
+  });
+
+  // 创建一个组，将正方形和文字添加到组中
+  const group = new fabric.Group([rect, text]);
+
+  // 将组添加到 Canvas 上
+  canvas.add(group);
+  ['mt', 'mb', 'ml', 'mr', 'mtr'].forEach((direction) => {
+    group.setControlVisible(direction, false);
+  });
+
   canvas.renderAll();
 };
 
@@ -370,12 +388,41 @@ const getAllObjectsInfo = () => {
   a.href = url;
   a.target = '_blank';
   // a.download = '画布图片';
-  a.click();
+  // a.click();
   console.log('画布图片:', blob, url);
 
   const json = canvas.toJSON();
-  imageService;
+
   console.log('画布 json:', json);
+  console.log('canvas:', canvas);
+  imagesGenerateImage({
+    body: {
+      lib: 'fabricjs',
+      ...json,
+      canvas: {
+        width: canvas.width,
+        height: canvas.height,
+      },
+    },
+    responseType: 'blob',
+  })
+    .then((res) => {
+      console.log('生成图片', res, res.data instanceof ArrayBuffer);
+
+      // // const blob = new Blob([res.data as any], { type: 'image/png' });
+      // const blob = res.data as Blob;
+      // const url = URL.createObjectURL(blob);
+      // console.log('生成图片 Blob 和 URL:', blob, url);
+      // // 下载图片
+      // const a = document.createElement('a');
+      // a.href = url;
+      // a.target = '_blank';
+      // a.download = '画布图片';
+      // a.click();
+    })
+    .catch((err) => {
+      console.log('生成图片失败', err);
+    });
 };
 
 const onFileChange = (e: Event) => {
@@ -405,13 +452,13 @@ const onFileChange = (e: Event) => {
 canvas {
   border: 1px solid #000;
 }
-.canvas-container {
+/* .canvas-container {
   transform: scale(1);
-}
+} */
 </style>
 
 <style>
-.canvas-container {
-  transform: scale(1);
-}
+/* .canvas-container {
+  transform: scale(0.5) translate(-50%, -50%);
+} */
 </style>
