@@ -52,8 +52,47 @@ export const FabricObjectSchema = {
       ],
       type: 'string',
     },
+    src: {
+      type: 'string',
+    },
+    left: {
+      type: 'number',
+    },
+    top: {
+      type: 'number',
+    },
+    width: {
+      type: 'number',
+    },
+    height: {
+      type: 'number',
+    },
+    fill: {
+      type: 'string',
+    },
+    opacity: {
+      type: 'number',
+    },
+    scaleX: {
+      type: 'number',
+    },
+    scaleY: {
+      type: 'number',
+    },
+    text: {
+      type: 'string',
+    },
+    fontWeight: {
+      type: 'string',
+    },
+    fontSize: {
+      type: 'number',
+    },
+    fontFamily: {
+      type: 'string',
+    },
   },
-  required: ['visible', 'type'],
+  required: ['visible', 'type', 'left', 'top', 'width', 'height', 'scaleX', 'scaleY'],
 } as const;
 
 export const JsonDataSchema = {

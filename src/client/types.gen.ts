@@ -28,6 +28,58 @@ export type FabricObject = {
     | 'Polygon'
     | 'Polyline'
     | 'Line';
+  /**
+   * src
+   */
+  src?: string;
+  /**
+   * left
+   */
+  left: number;
+  /**
+   * top
+   */
+  top: number;
+  /**
+   * width
+   */
+  width: number;
+  /**
+   * height
+   */
+  height: number;
+  /**
+   * text
+   */
+  fill?: string;
+  /**
+   * opacity
+   */
+  opacity?: number;
+  /**
+   * scaleX
+   */
+  scaleX: number;
+  /**
+   * scaleY
+   */
+  scaleY: number;
+  /**
+   * text
+   */
+  text?: string;
+  /**
+   * fontWeight
+   */
+  fontWeight?: string;
+  /**
+   * fontSize
+   */
+  fontSize?: number;
+  /**
+   * fontFamily
+   */
+  fontFamily?: string;
 };
 
 /**
