@@ -9,6 +9,69 @@ export type AppInfo = {
   website: string;
 };
 
+export type FabricObject = {
+  /**
+   * visible
+   */
+  visible: boolean;
+  /**
+   * type
+   */
+  type:
+    | 'Image'
+    | 'Textbox'
+    | 'Rect'
+    | 'Circle'
+    | 'Path'
+    | 'Triangle'
+    | 'Group'
+    | 'Polygon'
+    | 'Polyline'
+    | 'Line';
+};
+
+/**
+ * type
+ */
+export enum type {
+  IMAGE = 'Image',
+  TEXTBOX = 'Textbox',
+  RECT = 'Rect',
+  CIRCLE = 'Circle',
+  PATH = 'Path',
+  TRIANGLE = 'Triangle',
+  GROUP = 'Group',
+  POLYGON = 'Polygon',
+  POLYLINE = 'Polyline',
+  LINE = 'Line',
+}
+
+export type JsonData = {
+  /**
+   * 前端组件端
+   */
+  lib: string;
+  /**
+   * 前端组件版本
+   */
+  version: string;
+  /**
+   * Fabric对象
+   */
+  objects: Array<FabricObject>;
+};
+
+export type CanvasData = {
+  /**
+   * width
+   */
+  width: number;
+  /**
+   * height
+   */
+  height: number;
+};
+
 export type GenerateImageInput = {
   /**
    * 前端组件端
@@ -21,13 +84,11 @@ export type GenerateImageInput = {
   /**
    * Json数据
    */
-  jsonData: {
-    [key: string]: unknown;
-  };
-  canvasData: {
-    width?: number;
-    height?: number;
-  };
+  jsonData: JsonData;
+  /**
+   * 画面数据
+   */
+  canvasData: CanvasData;
 };
 
 export type UserDto = {

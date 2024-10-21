@@ -5,6 +5,7 @@ import * as fabric from 'fabric';
 import { base64ToBlob } from '@/utils/base64ToBlob';
 import {
   activitiesGetItem,
+  activitiesSaveTemplate,
   activitiesSetTemplate,
   activityCustomerLetter,
   ActivityDetailDto,
@@ -352,8 +353,12 @@ const onConfirm = () => {
   const { objects } = json;
   assert.If(!objects.some((x) => x.type === 'Image'), '请添加背景图片');
 
+  assert.If(!detailItem.value, '活动Id为空');
   isPosting.value = true;
-  imagesGenerateImage({
+  activitiesSaveTemplate({
+    path: {
+      id: detailItem.value!.id!,
+    },
     body: {
       version: '1.0',
       lib: 'fabricjs',
@@ -429,7 +434,7 @@ const open = (input: ActivityDto) => {
   }).then(async (res) => {
     console.log('res', res);
     detailItem.value = res.data;
-    const item = res.data!;
+    isPosting.value = false;
     // 获取图片的访问地址
   });
   nextTick(() => {

@@ -31,6 +31,63 @@ export const AppInfoSchema = {
   required: ['name', 'version', 'description', 'author', 'email', 'website'],
 } as const;
 
+export const FabricObjectSchema = {
+  type: 'object',
+  properties: {
+    visible: {
+      type: 'boolean',
+    },
+    type: {
+      enum: [
+        'Image',
+        'Textbox',
+        'Rect',
+        'Circle',
+        'Path',
+        'Triangle',
+        'Group',
+        'Polygon',
+        'Polyline',
+        'Line',
+      ],
+      type: 'string',
+    },
+  },
+  required: ['visible', 'type'],
+} as const;
+
+export const JsonDataSchema = {
+  type: 'object',
+  properties: {
+    lib: {
+      type: 'string',
+    },
+    version: {
+      type: 'string',
+    },
+    objects: {
+      type: 'array',
+      items: {
+        $ref: '#/components/schemas/FabricObject',
+      },
+    },
+  },
+  required: ['lib', 'version', 'objects'],
+} as const;
+
+export const CanvasDataSchema = {
+  type: 'object',
+  properties: {
+    width: {
+      type: 'number',
+    },
+    height: {
+      type: 'number',
+    },
+  },
+  required: ['width', 'height'],
+} as const;
+
 export const GenerateImageInputSchema = {
   type: 'object',
   properties: {
@@ -41,20 +98,18 @@ export const GenerateImageInputSchema = {
       type: 'string',
     },
     jsonData: {
-      type: 'object',
+      allOf: [
+        {
+          $ref: '#/components/schemas/JsonData',
+        },
+      ],
     },
     canvasData: {
-      type: 'object',
-      properties: {
-        width: {
-          required: true,
-          type: 'number',
+      allOf: [
+        {
+          $ref: '#/components/schemas/CanvasData',
         },
-        height: {
-          required: true,
-          type: 'number',
-        },
-      },
+      ],
     },
   },
   required: ['lib', 'version', 'jsonData', 'canvasData'],
