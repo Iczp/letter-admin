@@ -180,6 +180,36 @@ import type {
   RolesControllerImportExcelData,
   RolesControllerImportExcelError,
   RolesControllerImportExcelResponse,
+  AppMenusControllerGetListData,
+  AppMenusControllerGetListError,
+  AppMenusControllerGetListResponse,
+  AppMenusControllerCreateData,
+  AppMenusControllerCreateError,
+  AppMenusControllerCreateResponse,
+  AppMenusControllerDeleteManyData,
+  AppMenusControllerDeleteManyError,
+  AppMenusControllerDeleteManyResponse,
+  AppMenusControllerGetItemData,
+  AppMenusControllerGetItemError,
+  AppMenusControllerGetItemResponse,
+  AppMenusControllerUpdateData,
+  AppMenusControllerUpdateError,
+  AppMenusControllerUpdateResponse,
+  AppMenusControllerListByCurrentUserData,
+  AppMenusControllerListByCurrentUserError,
+  AppMenusControllerListByCurrentUserResponse,
+  AppMenusControllerAppMenusError,
+  AppMenusControllerAppMenusResponse,
+  AppMenusControllerSetIsEnabledData,
+  AppMenusControllerSetIsEnabledError,
+  AppMenusControllerSetIsEnabledResponse,
+  AppMenusControllerGetExcelTemplateError,
+  AppMenusControllerGetExcelTemplateResponse,
+  AppMenusControllerExportExcelError,
+  AppMenusControllerExportExcelResponse,
+  AppMenusControllerImportExcelData,
+  AppMenusControllerImportExcelError,
+  AppMenusControllerImportExcelResponse,
   AuditsControllerGetListData,
   AuditsControllerGetListError,
   AuditsControllerGetListResponse,
@@ -1295,6 +1325,191 @@ export const rolesImportExcel = <ThrowOnError extends boolean = false>(
       ...options?.headers,
     },
     url: '/letter-api/roles/excel/import',
+  });
+};
+
+/**
+ * App菜单列表
+ */
+export const appMenusGetList = <ThrowOnError extends boolean = false>(
+  options?: Options<AppMenusControllerGetListData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    AppMenusControllerGetListResponse,
+    AppMenusControllerGetListError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus',
+  });
+};
+
+/**
+ * 创建App菜单
+ */
+export const appMenusCreate = <ThrowOnError extends boolean = false>(
+  options: Options<AppMenusControllerCreateData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).post<
+    AppMenusControllerCreateResponse,
+    AppMenusControllerCreateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus',
+  });
+};
+
+/**
+ * 删除
+ */
+export const appMenusDeleteMany = <ThrowOnError extends boolean = false>(
+  options: Options<AppMenusControllerDeleteManyData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).delete<
+    AppMenusControllerDeleteManyResponse,
+    AppMenusControllerDeleteManyError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus',
+  });
+};
+
+/**
+ * App菜单详情
+ */
+export const appMenusGetItem = <ThrowOnError extends boolean = false>(
+  options: Options<AppMenusControllerGetItemData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    AppMenusControllerGetItemResponse,
+    AppMenusControllerGetItemError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus/{id}',
+  });
+};
+
+/**
+ * 修改App菜单
+ */
+export const appMenusUpdate = <ThrowOnError extends boolean = false>(
+  options: Options<AppMenusControllerUpdateData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).put<
+    AppMenusControllerUpdateResponse,
+    AppMenusControllerUpdateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus/{id}',
+  });
+};
+
+/**
+ * App端菜单
+ */
+export const appMenusListByCurrentUser = <ThrowOnError extends boolean = false>(
+  options?: Options<AppMenusControllerListByCurrentUserData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    AppMenusControllerListByCurrentUserResponse,
+    AppMenusControllerListByCurrentUserError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus/list/current-user',
+  });
+};
+
+/**
+ * 用户App菜单
+ */
+export const appMenusAppMenus = <ThrowOnError extends boolean = false>(
+  options?: Options<unknown, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    AppMenusControllerAppMenusResponse,
+    AppMenusControllerAppMenusError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus/app/menus',
+  });
+};
+
+/**
+ * 启用/禁用
+ * 启用/禁用
+ */
+export const appMenusSetIsEnabled = <ThrowOnError extends boolean = false>(
+  options: Options<AppMenusControllerSetIsEnabledData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).post<
+    AppMenusControllerSetIsEnabledResponse,
+    AppMenusControllerSetIsEnabledError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus/enabled/{id}',
+  });
+};
+
+/**
+ * excel 模板
+ * excel 模板
+ */
+export const appMenusGetExcelTemplate = <ThrowOnError extends boolean = false>(
+  options?: Options<unknown, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    AppMenusControllerGetExcelTemplateResponse,
+    AppMenusControllerGetExcelTemplateError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus/excel/tpl',
+  });
+};
+
+/**
+ * 导出数据到 Excel
+ * Excel 数据
+ */
+export const appMenusExportExcel = <ThrowOnError extends boolean = false>(
+  options?: Options<unknown, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    AppMenusControllerExportExcelResponse,
+    AppMenusControllerExportExcelError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/app-menus/excel/output',
+  });
+};
+
+/**
+ * 导入数据
+ * 请从 "/xxx/excel/tpl" 中下载模板
+ */
+export const appMenusImportExcel = <ThrowOnError extends boolean = false>(
+  options: Options<AppMenusControllerImportExcelData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).post<
+    AppMenusControllerImportExcelResponse,
+    AppMenusControllerImportExcelError,
+    ThrowOnError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    headers: {
+      'Content-Type': null,
+      ...options?.headers,
+    },
+    url: '/letter-api/app-menus/excel/import',
   });
 };
 

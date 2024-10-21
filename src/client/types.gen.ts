@@ -102,11 +102,11 @@ export type JsonData = {
   /**
    * 前端组件端
    */
-  lib: string;
+  lib?: string;
   /**
    * 前端组件版本
    */
-  version: string;
+  version?: string;
   /**
    * Fabric对象
    */
@@ -125,14 +125,6 @@ export type CanvasData = {
 };
 
 export type GenerateImageInput = {
-  /**
-   * 前端组件端
-   */
-  lib: string;
-  /**
-   * 前端组件版本
-   */
-  version: string;
   /**
    * Json数据
    */
@@ -501,6 +493,18 @@ export type ActivityDetailDto = {
    * 二维码模板, 变量 {{id}} 如： https://iczp.net/letter?id={{id}}
    */
   qrcode_template?: string;
+  /**
+   * 组件库
+   */
+  designer_lib: string;
+  /**
+   * 设计器版本
+   */
+  designer_version: string;
+  /**
+   * 数据
+   */
+  designer_json: GenerateImageInput;
 };
 
 export type ActivityCreateInput = {
@@ -1035,6 +1039,243 @@ export type SetPermissionsInput = {
    * 权限列表
    */
   permissions: Array<string>;
+};
+
+export type AppMenusDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否启用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
+  /**
+   * 名称
+   */
+  name: string;
+  /**
+   * icon
+   */
+  icon: string;
+  /**
+   * url
+   */
+  url: string;
+  /**
+   * path
+   */
+  path: string;
+  /**
+   * code
+   */
+  code: string;
+  /**
+   * 是否公开
+   */
+  is_public?: boolean;
+  /**
+   * 是否固定
+   */
+  is_static?: boolean;
+  /**
+   * 是否默认
+   */
+  is_default?: boolean;
+};
+
+export type AppMenusPagedResult = {
+  /**
+   * 输入参数
+   */
+  input?: {
+    [key: string]: unknown;
+  };
+  /**
+   * 总数
+   */
+  totalCount: number;
+  /**
+   * 列表项
+   */
+  items: Array<AppMenusDto>;
+};
+
+export type AppMenusDetailDto = {
+  /**
+   * id
+   */
+  id: string;
+  /**
+   * 创建时间
+   */
+  creation_time: string;
+  /**
+   * 最后修改时间
+   */
+  last_modification_time: string;
+  /**
+   * 是否启用
+   */
+  is_enabled?: boolean;
+  /**
+   * 删除时间
+   */
+  deletion_time: string;
+  /**
+   * 是否删除
+   */
+  is_deleted: boolean;
+  /**
+   * 名称
+   */
+  name: string;
+  /**
+   * icon
+   */
+  icon: string;
+  /**
+   * url
+   */
+  url: string;
+  /**
+   * path
+   */
+  path: string;
+  /**
+   * code
+   */
+  code: string;
+  /**
+   * 是否公开
+   */
+  is_public?: boolean;
+  /**
+   * 是否固定
+   */
+  is_static?: boolean;
+  /**
+   * 是否默认
+   */
+  is_default?: boolean;
+};
+
+export type AppMenusCreateInput = {
+  /**
+   * 名称
+   */
+  name: string;
+  /**
+   * icon
+   */
+  icon: string;
+  /**
+   * url
+   */
+  url: string;
+  /**
+   * path
+   */
+  path: string;
+  /**
+   * code
+   */
+  code: string;
+  /**
+   * 是否公开
+   */
+  is_public?: boolean;
+  /**
+   * 是否默认
+   */
+  is_default?: boolean;
+  /**
+   * 是否启用
+   */
+  is_enabled?: boolean;
+  /**
+   * 是否固定
+   */
+  is_static?: boolean;
+};
+
+export type AppMenusUpdateInput = {
+  /**
+   * 名称
+   */
+  name: string;
+  /**
+   * icon
+   */
+  icon: string;
+  /**
+   * url
+   */
+  url: string;
+  /**
+   * path
+   */
+  path: string;
+  /**
+   * code
+   */
+  code: string;
+  /**
+   * 是否公开
+   */
+  is_public?: boolean;
+  /**
+   * 是否默认
+   */
+  is_default?: boolean;
+  /**
+   * 是否启用
+   */
+  is_enabled?: boolean;
+};
+
+export type AppMenu = {
+  /**
+   * 菜单
+   */
+  menu: AppMenusDto;
+  /**
+   * 角标
+   */
+  badge?: number;
+};
+
+export type AppMenusResult = {
+  /**
+   * 输入参数
+   */
+  input?: {
+    [key: string]: unknown;
+  };
+  /**
+   * 总数
+   */
+  totalCount: number;
+  /**
+   * 列表项
+   */
+  items: Array<AppMenu>;
 };
 
 export type AuditLogDto = {
@@ -2307,7 +2548,7 @@ export type ActivityCustomerControllerLetterData = {
   };
 };
 
-export type ActivityCustomerControllerLetterResponse = unknown;
+export type ActivityCustomerControllerLetterResponse = Blob | File;
 
 export type ActivityCustomerControllerLetterError = unknown;
 
@@ -2492,6 +2733,10 @@ export type SeedControllerSeedError = unknown;
 export type RolesControllerGetListData = {
   query?: {
     /**
+     * App菜单编码
+     */
+    app_menu_code?: 'activity-list' | 'scan-sign';
+    /**
      * 是否默认
      */
     is_default?: boolean;
@@ -2593,7 +2838,17 @@ export type RolesControllerGetListData = {
       | 'ActivityCustomerInviters_Excel_Tpl'
       | 'ActivityCustomerInviters_Excel_Import'
       | 'ActivityCustomerInviters_Excel_Ouput'
-      | 'ActivityCustomerInviters_Set_IsEnabled';
+      | 'ActivityCustomerInviters_Set_IsEnabled'
+      | 'AppMenus_Create'
+      | 'AppMenus_Update'
+      | 'AppMenus_GetItem'
+      | 'AppMenus_GetList'
+      | 'AppMenus_Delete'
+      | 'AppMenus_Excel_Tpl'
+      | 'AppMenus_Excel_Import'
+      | 'AppMenus_Excel_Ouput'
+      | 'AppMenus_Set_IsEnabled'
+      | 'AppMenus_GetList_ByCurrentUser';
     /**
      * skin
      */
@@ -2694,6 +2949,157 @@ export type RolesControllerImportExcelData = {
 export type RolesControllerImportExcelResponse = unknown;
 
 export type RolesControllerImportExcelError = unknown;
+
+export type AppMenusControllerGetListData = {
+  query?: {
+    is_enabled?: boolean;
+    /**
+     * 是否公开
+     */
+    is_public?: boolean;
+    /**
+     * 是否固定
+     */
+    is_static?: boolean;
+    /**
+     * 关键字
+     */
+    keyword?: string;
+    /**
+     * 每页显示数量
+     */
+    maxResultCount?: number;
+    /**
+     * skin
+     */
+    skip?: number;
+    /**
+     * 排序
+     */
+    sort?: string;
+    /**
+     * 用户Id
+     */
+    user_id?: string;
+  };
+};
+
+export type AppMenusControllerGetListResponse = AppMenusPagedResult;
+
+export type AppMenusControllerGetListError = unknown;
+
+export type AppMenusControllerCreateData = {
+  body: AppMenusCreateInput;
+};
+
+export type AppMenusControllerCreateResponse = AppMenusDetailDto;
+
+export type AppMenusControllerCreateError = unknown;
+
+export type AppMenusControllerDeleteManyData = {
+  query: {
+    id: Array<string>;
+  };
+};
+
+export type AppMenusControllerDeleteManyResponse = unknown;
+
+export type AppMenusControllerDeleteManyError = unknown;
+
+export type AppMenusControllerGetItemData = {
+  path: {
+    id: string;
+  };
+};
+
+export type AppMenusControllerGetItemResponse = AppMenusDetailDto;
+
+export type AppMenusControllerGetItemError = unknown;
+
+export type AppMenusControllerUpdateData = {
+  body: AppMenusUpdateInput;
+  path: {
+    id: string;
+  };
+};
+
+export type AppMenusControllerUpdateResponse = AppMenusDetailDto;
+
+export type AppMenusControllerUpdateError = unknown;
+
+export type AppMenusControllerListByCurrentUserData = {
+  query?: {
+    is_enabled?: boolean;
+    /**
+     * 是否公开
+     */
+    is_public?: boolean;
+    /**
+     * 是否固定
+     */
+    is_static?: boolean;
+    /**
+     * 关键字
+     */
+    keyword?: string;
+    /**
+     * 每页显示数量
+     */
+    maxResultCount?: number;
+    /**
+     * skin
+     */
+    skip?: number;
+    /**
+     * 排序
+     */
+    sort?: string;
+    /**
+     * 用户Id
+     */
+    user_id?: string;
+  };
+};
+
+export type AppMenusControllerListByCurrentUserResponse = AppMenusPagedResult;
+
+export type AppMenusControllerListByCurrentUserError = unknown;
+
+export type AppMenusControllerAppMenusResponse = AppMenusResult;
+
+export type AppMenusControllerAppMenusError = unknown;
+
+export type AppMenusControllerSetIsEnabledData = {
+  path: {
+    id: string;
+  };
+  query: {
+    is_enabled: boolean;
+  };
+};
+
+export type AppMenusControllerSetIsEnabledResponse = unknown;
+
+export type AppMenusControllerSetIsEnabledError = unknown;
+
+export type AppMenusControllerGetExcelTemplateResponse = unknown;
+
+export type AppMenusControllerGetExcelTemplateError = unknown;
+
+export type AppMenusControllerExportExcelResponse = unknown;
+
+export type AppMenusControllerExportExcelError = unknown;
+
+export type AppMenusControllerImportExcelData = {
+  /**
+   * Excel
+   */
+  body: ExcelUploadInput;
+};
+
+export type AppMenusControllerImportExcelResponse = unknown;
+
+export type AppMenusControllerImportExcelError = unknown;
 
 export type AuditsControllerGetListData = {
   query?: {

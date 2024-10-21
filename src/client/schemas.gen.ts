@@ -111,7 +111,7 @@ export const JsonDataSchema = {
       },
     },
   },
-  required: ['lib', 'version', 'objects'],
+  required: ['objects'],
 } as const;
 
 export const CanvasDataSchema = {
@@ -130,12 +130,6 @@ export const CanvasDataSchema = {
 export const GenerateImageInputSchema = {
   type: 'object',
   properties: {
-    lib: {
-      type: 'string',
-    },
-    version: {
-      type: 'string',
-    },
     jsonData: {
       allOf: [
         {
@@ -151,7 +145,7 @@ export const GenerateImageInputSchema = {
       ],
     },
   },
-  required: ['lib', 'version', 'jsonData', 'canvasData'],
+  required: ['jsonData', 'canvasData'],
 } as const;
 
 export const UserDtoSchema = {
@@ -589,6 +583,19 @@ export const ActivityDetailDtoSchema = {
     qrcode_template: {
       type: 'string',
     },
+    designer_lib: {
+      type: 'string',
+    },
+    designer_version: {
+      type: 'string',
+    },
+    designer_json: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/GenerateImageInput',
+        },
+      ],
+    },
   },
   required: [
     'id',
@@ -597,6 +604,9 @@ export const ActivityDetailDtoSchema = {
     'deletion_time',
     'is_deleted',
     'title',
+    'designer_lib',
+    'designer_version',
+    'designer_json',
   ],
 } as const;
 
@@ -1320,6 +1330,259 @@ export const SetPermissionsInputSchema = {
     },
   },
   required: ['permissions'],
+} as const;
+
+export const AppMenusDtoSchema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    is_enabled: {
+      type: 'boolean',
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    is_deleted: {
+      type: 'boolean',
+    },
+    name: {
+      type: 'string',
+    },
+    icon: {
+      type: 'string',
+    },
+    url: {
+      type: 'string',
+    },
+    path: {
+      type: 'string',
+    },
+    code: {
+      type: 'string',
+    },
+    is_public: {
+      type: 'boolean',
+    },
+    is_static: {
+      type: 'boolean',
+    },
+    is_default: {
+      type: 'boolean',
+    },
+  },
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'name',
+    'icon',
+    'url',
+    'path',
+    'code',
+  ],
+} as const;
+
+export const AppMenusPagedResultSchema = {
+  type: 'object',
+  properties: {
+    input: {
+      type: 'object',
+    },
+    totalCount: {
+      type: 'number',
+    },
+    items: {
+      type: 'array',
+      items: {
+        $ref: '#/components/schemas/AppMenusDto',
+      },
+    },
+  },
+  required: ['totalCount', 'items'],
+} as const;
+
+export const AppMenusDetailDtoSchema = {
+  type: 'object',
+  properties: {
+    id: {
+      type: 'string',
+    },
+    creation_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    last_modification_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    is_enabled: {
+      type: 'boolean',
+    },
+    deletion_time: {
+      format: 'date-time',
+      type: 'string',
+    },
+    is_deleted: {
+      type: 'boolean',
+    },
+    name: {
+      type: 'string',
+    },
+    icon: {
+      type: 'string',
+    },
+    url: {
+      type: 'string',
+    },
+    path: {
+      type: 'string',
+    },
+    code: {
+      type: 'string',
+    },
+    is_public: {
+      type: 'boolean',
+    },
+    is_static: {
+      type: 'boolean',
+    },
+    is_default: {
+      type: 'boolean',
+    },
+  },
+  required: [
+    'id',
+    'creation_time',
+    'last_modification_time',
+    'deletion_time',
+    'is_deleted',
+    'name',
+    'icon',
+    'url',
+    'path',
+    'code',
+  ],
+} as const;
+
+export const AppMenusCreateInputSchema = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+    },
+    icon: {
+      type: 'string',
+    },
+    url: {
+      type: 'string',
+    },
+    path: {
+      type: 'string',
+    },
+    code: {
+      type: 'string',
+    },
+    is_public: {
+      type: 'boolean',
+      default: true,
+    },
+    is_default: {
+      type: 'boolean',
+      default: false,
+    },
+    is_enabled: {
+      type: 'boolean',
+      default: true,
+    },
+    is_static: {
+      type: 'boolean',
+      default: false,
+    },
+  },
+  required: ['name', 'icon', 'url', 'path', 'code'],
+} as const;
+
+export const AppMenusUpdateInputSchema = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string',
+    },
+    icon: {
+      type: 'string',
+    },
+    url: {
+      type: 'string',
+    },
+    path: {
+      type: 'string',
+    },
+    code: {
+      type: 'string',
+    },
+    is_public: {
+      type: 'boolean',
+      default: true,
+    },
+    is_default: {
+      type: 'boolean',
+      default: false,
+    },
+    is_enabled: {
+      type: 'boolean',
+      default: true,
+    },
+  },
+  required: ['name', 'icon', 'url', 'path', 'code'],
+} as const;
+
+export const AppMenuSchema = {
+  type: 'object',
+  properties: {
+    menu: {
+      allOf: [
+        {
+          $ref: '#/components/schemas/AppMenusDto',
+        },
+      ],
+    },
+    badge: {
+      type: 'number',
+    },
+  },
+  required: ['menu'],
+} as const;
+
+export const AppMenusResultSchema = {
+  type: 'object',
+  properties: {
+    input: {
+      type: 'object',
+    },
+    totalCount: {
+      type: 'number',
+    },
+    items: {
+      type: 'array',
+      items: {
+        $ref: '#/components/schemas/AppMenu',
+      },
+    },
+  },
+  required: ['totalCount', 'items'],
 } as const;
 
 export const AuditLogDtoSchema = {
