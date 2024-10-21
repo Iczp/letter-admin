@@ -64,6 +64,9 @@ import type {
   ActivitiesControllerSetTemplateData,
   ActivitiesControllerSetTemplateError,
   ActivitiesControllerSetTemplateResponse,
+  ActivitiesControllerSaveTemplateData,
+  ActivitiesControllerSaveTemplateError,
+  ActivitiesControllerSaveTemplateResponse,
   ActivitiesControllerSetIsEnabledData,
   ActivitiesControllerSetIsEnabledError,
   ActivitiesControllerSetIsEnabledResponse,
@@ -314,10 +317,10 @@ export const imagesGenerateImage = <ThrowOnError extends boolean = false>(
   >({
     ...options,
     ...formDataBodySerializer,
-    // headers: {
-    //   'Content-Type': null,
-    //   ...options?.headers,
-    // },
+    headers: {
+      'Content-Type': null,
+      ...options?.headers,
+    },
     url: '/letter-api/images/generate-image',
   });
 };
@@ -590,6 +593,24 @@ export const activitiesSetTemplate = <ThrowOnError extends boolean = false>(
       ...options?.headers,
     },
     url: '/letter-api/activities/set-temp/{id}',
+  });
+};
+
+export const activitiesSaveTemplate = <ThrowOnError extends boolean = false>(
+  options: Options<ActivitiesControllerSaveTemplateData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).post<
+    ActivitiesControllerSaveTemplateResponse,
+    ActivitiesControllerSaveTemplateError,
+    ThrowOnError
+  >({
+    ...options,
+    ...formDataBodySerializer,
+    headers: {
+      'Content-Type': null,
+      ...options?.headers,
+    },
+    url: '/letter-api/activities/save-template/{id}',
   });
 };
 

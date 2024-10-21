@@ -1717,7 +1717,7 @@ export type ImagesControllerGenerateImageData = {
   body: GenerateImageInput;
 };
 
-export type ImagesControllerGenerateImageResponse = (Blob | File) | unknown;
+export type ImagesControllerGenerateImageResponse = unknown;
 
 export type ImagesControllerGenerateImageError = unknown;
 
@@ -1928,6 +1928,20 @@ export type ActivitiesControllerSetTemplateResponse = {
 };
 
 export type ActivitiesControllerSetTemplateError = unknown;
+
+export type ActivitiesControllerSaveTemplateData = {
+  /**
+   * 保存模板
+   */
+  body: GenerateImageInput;
+  path: {
+    id: string;
+  };
+};
+
+export type ActivitiesControllerSaveTemplateResponse = unknown;
+
+export type ActivitiesControllerSaveTemplateError = unknown;
 
 export type ActivitiesControllerSetIsEnabledData = {
   path: {
