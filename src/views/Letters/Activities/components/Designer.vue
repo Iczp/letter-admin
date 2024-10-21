@@ -1,63 +1,21 @@
-<template>
-  <div class="flex flex-row gap-4">
-    <div class="flex overflow-auto max-w-456px max-h-830px">
-      <canvas ref="canvasRef"></canvas>
-    </div>
-    <div class="flex flex-1 flex-col">
-      <div>
-        <div>
-          <label for="canvasWidth">宽：</label>
-          <input
-            type="number"
-            id="canvasWidth"
-            v-model="form.canvasWidth"
-            @input="updateCanvasWidth"
-          />
-          <label for="canvasHeight">高：</label>
-          <input
-            type="number"
-            id="canvasHeight"
-            v-model="form.canvasHeight"
-            @input="updateCanvasHeight"
-          />
-        </div>
-      </div>
-      <input type="file" @change="onFileChange" />
-      <label for="textColor">选择文本颜色: </label>
-      <input type="color" id="textColor" v-model="selectedColor" @input="updateTextColor" />
-
-      <label for="fontSize">选择字体大小: </label>
-      <input type="number" id="fontSize" v-model="fontSize" @input="updateTextFontSize" />
-
-      <label for="fontFamily">选择字体: </label>
-      <select id="fontFamily" v-model="fontFamily" @change="updateTextFontFamily">
-        <option value="Arial">Arial</option>
-        <option value="Helvetica">Helvetica</option>
-        <option value="Courier">Courier</option>
-        <option value="Times New Roman">Times New Roman</option>
-      </select>
-
-      <div>
-        <button @click="getAllObjectsInfo">获取所有对象信息</button>
-      </div>
-
-      <div v-if="selectedObjectInfo">
-        <h3>选中对象信息：</h3>
-        <p>类型: {{ selectedObjectInfo.type }}</p>
-        <p>位置: ({{ selectedObjectInfo.left }}, {{ selectedObjectInfo.top }})</p>
-        <p>宽度: {{ selectedObjectInfo.width }}</p>
-        <p>高度: {{ selectedObjectInfo.height }}</p>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import { ref, onMounted, watch, reactive } from 'vue';
+import { Dialog } from '@/components/Dialog';
+import { ref, onMounted, watch, reactive, nextTick } from 'vue';
 import * as fabric from 'fabric';
 import { base64ToBlob } from '@/utils/base64ToBlob';
-import { activityCustomerLetter, imagesGenerateImage } from '@/client';
+import {
+  activitiesGetItem,
+  activitiesSetTemplate,
+  activityCustomerLetter,
+  ActivityDetailDto,
+  ActivityDto,
+  imagesGenerateImage,
+} from '@/client';
+import { useI18n } from '@/hooks/web/useI18n';
+import assert from '@/utils';
+import { ElMessage, UploadFile, ElUpload } from 'element-plus';
 
+const { t } = useI18n();
 interface CanvasData {
   backgroundImage: string | null;
   qrCodeImage: string | null;
@@ -65,18 +23,22 @@ interface CanvasData {
     text: string;
     left: number;
     top: number;
-    color: string;
+    fill: string;
     fontSize: number;
     fontFamily: string;
   }>;
 }
 
+const detailItem = ref<ActivityDetailDto>();
+
+const visible = ref(false);
+
 const form = reactive({
   canvasWidth: 540,
-  canvasHeight: 960,
+  canvasHeight: 812,
 });
 
-const canvasRef = ref<HTMLCanvasElement | null>(null);
+const canvasRef = ref<HTMLCanvasElement>();
 let canvas: fabric.Canvas | null = null;
 let textObjects: fabric.Textbox[] = []; // 保存文本对象的引用
 
@@ -103,7 +65,7 @@ const canvasData = ref<CanvasData>({
       text: '{{客户名字}}',
       left: 50,
       top: 100,
-      color: '#000000',
+      fill: '#000000',
       fontSize: 24,
       fontFamily: 'Arial',
     },
@@ -111,7 +73,7 @@ const canvasData = ref<CanvasData>({
       text: '{{编号}}',
       left: 50,
       top: 200,
-      color: '#000000',
+      fill: '#000000',
       fontSize: 24,
       fontFamily: 'Arial',
     },
@@ -119,7 +81,7 @@ const canvasData = ref<CanvasData>({
       text: '{{邀请码}}',
       left: 50,
       top: 300,
-      color: '#000000',
+      fill: '#000000',
       fontSize: 24,
       fontFamily: 'Arial',
     },
@@ -133,7 +95,9 @@ let activeTextIndex = 0; // 当前选中的文本索引
 const selectedObjectInfo = ref<any>(null); // 保存选中对象的信息
 
 onMounted(() => {
-  initCanvas();
+  nextTick(() => {
+    initCanvas();
+  });
 });
 
 watch(
@@ -146,7 +110,11 @@ watch(
 
 const initCanvas = () => {
   const canvasElement = canvasRef.value;
+
+  console.log('initCanvas', canvasRef.value);
+
   if (!canvasElement) return;
+
   fabric.Object.prototype.transparentCorners = false;
 
   canvas = new fabric.Canvas(canvasElement, {
@@ -173,18 +141,6 @@ const initCanvas = () => {
     const obj = e.target;
     console.log(`Added object with custom ID: ${obj['customId']}`);
   });
-
-  setTimeout(() => {
-    // const canvasElement = canvasRef.value;
-    // canvasElement.width = 540;
-    // canvasElement.height = 960;
-    // canvas!.width = 540;
-    // canvas!.height = 960;
-    // canvas!.renderAll();
-    // canvas!.setWidth(540);
-    // canvas!.setHeight(960);
-  }, 1000);
-
   updateCanvas();
 };
 
@@ -193,12 +149,6 @@ const updateCanvas = () => {
 
   canvas.clear();
   textObjects = []; // 清空文本对象引用
-
-  /**
-改进如下：
-1. 选中对象的信息(类型\left\top\zoomX\zoomY\scaleX\scaleY\fill\borderColor\backgroundColor\宽度高度)， 要在输入框中显示, 改变时同时更新画布的信息
-
-   */
 
   // 添加背景图片并保持比例
   if (canvasData.value.backgroundImage) {
@@ -251,7 +201,7 @@ const addQRCodeAndText = () => {
       left: item.left,
       top: item.top,
       fontSize: item.fontSize,
-      fill: item.color, // 设置文本颜色
+      fill: item.fill, // 设置文本颜色
       fontFamily: item.fontFamily,
       // backgroundColor: '#f3f3f3',
       borderColor: '#000',
@@ -284,7 +234,7 @@ const addQRCodeAndText = () => {
     // text.setControlVisible('ml', false);
     text.setControlVisible('mtr', false);
 
-    text.set('fill', item.color);
+    text.set('fill', item.fill);
 
     text.on('editing:entered', (e) => {
       e.e.preventDefault();
@@ -365,11 +315,10 @@ const updateTextFontFamily = () => {
 };
 
 // 获取所有对象信息
-const getAllObjectsInfo = () => {
+
+const previewLocal = () => {
   if (!canvas) return;
-
   const dataURL = canvas.toDataURL();
-
   const blob = base64ToBlob(dataURL, 'image/png');
   const url = URL.createObjectURL(blob!);
   // 下载图片
@@ -379,9 +328,31 @@ const getAllObjectsInfo = () => {
   // a.download = '画布图片';
   // a.click();
   console.log('画布图片:', blob, url);
-  const json = canvas.toJSON();
-  console.log('画布 json:', json);
   console.log('canvas:', canvas);
+};
+const previewServer = (body: any) => {
+  if (!canvas) return;
+  imagesGenerateImage({
+    body: body,
+  })
+    .then((res) => {
+      console.log('生成图片', res, res.data instanceof ArrayBuffer);
+    })
+    .catch((err) => {
+      console.log('生成图片失败', err);
+    })
+    .finally(() => {
+      isPosting.value = false;
+    });
+};
+const isPosting = ref(false);
+const onConfirm = () => {
+  if (!canvas) return;
+  const json = canvas.toJSON();
+  const { objects } = json;
+  assert.If(!objects.some((x) => x.type === 'Image'), '请添加背景图片');
+
+  isPosting.value = true;
   imagesGenerateImage({
     body: {
       version: '1.0',
@@ -409,31 +380,159 @@ const getAllObjectsInfo = () => {
     })
     .catch((err) => {
       console.log('生成图片失败', err);
+    })
+    .finally(() => {
+      isPosting.value = false;
     });
 };
 
-const onFileChange = (e: Event) => {
-  const target = e.target as HTMLInputElement;
-  const files = target.files;
-  if (files && files.length > 0) {
-    const file = files[0];
-    const reader = new FileReader();
+const designergVisible = ref(true);
 
-    reader.onload = (event) => {
-      const result = event.target?.result as string;
-      canvasData.value.backgroundImage = result; // 设置背景图片
-      const image = new Image();
-      image.src = result;
-      image.onload = () => {
-        // canvas?.setWidth(image.width);
-        // canvas?.setHeight(image.height);
-      };
-    };
-
-    reader.readAsDataURL(file);
+const uploadChange = (uploadFile: UploadFile) => {
+  // 判断是否是图片
+  if (uploadFile?.raw?.type.indexOf('image') === -1) {
+    ElMessage.error('请上传图片格式的文件');
+    return;
   }
+  console.log('url', uploadFile.raw);
+
+  if (!uploadFile.raw) return;
+
+  //转为base64
+
+  // 转为Base64
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    if (event.target) {
+      const base64 = event.target.result as string;
+      console.log('Base64:', base64);
+
+      canvasData.value.backgroundImage = base64;
+      // 在这里处理Base64字符串，例如更新数据或发送到服务器
+      // unref(cropperRef)?.replace(base64); // 假设你需要将Base64字符串传递给某个方法或属性
+    }
+  };
+  reader.onerror = () => {
+    ElMessage.error('文件读取失败');
+  };
+  reader.readAsDataURL(uploadFile.raw);
+
+  // unref(cropperRef)?.replace(url);
 };
+const open = (input: ActivityDto) => {
+  designergVisible.value = true;
+
+  activitiesGetItem({
+    path: {
+      id: input.id,
+    },
+  }).then(async (res) => {
+    console.log('res', res);
+    detailItem.value = res.data;
+    const item = res.data!;
+    // 获取图片的访问地址
+  });
+  nextTick(() => {
+    initCanvas();
+  });
+};
+const close = () => {
+  designergVisible.value = false;
+};
+
+const reset = () => {};
+const onCancel = () => {
+  close();
+};
+
+defineExpose({
+  open,
+  close,
+});
 </script>
+
+<template>
+  <Dialog v-model="designergVisible" title="dialogTitle" :width="780" :maxHeight="680">
+    <div class="flex flex-row gap-4">
+      <div class="flex max-w-456px max-h-860px">
+        <canvas ref="canvasRef"></canvas>
+      </div>
+      <div class="flex flex-1 flex-col">
+        <div>
+          <div>
+            <label for="canvasWidth">宽：</label>
+            <input
+              type="number"
+              id="canvasWidth"
+              v-model="form.canvasWidth"
+              @input="updateCanvasWidth"
+            />
+            <label for="canvasHeight">高：</label>
+            <input
+              type="number"
+              id="canvasHeight"
+              v-model="form.canvasHeight"
+              @input="updateCanvasHeight"
+            />
+          </div>
+        </div>
+        <label for="textColor">选择文本颜色: </label>
+        <input type="color" id="textColor" v-model="selectedColor" @input="updateTextColor" />
+
+        <label for="fontSize">选择字体大小: </label>
+        <input type="number" id="fontSize" v-model="fontSize" @input="updateTextFontSize" />
+
+        <label for="fontFamily">选择字体: </label>
+        <select id="fontFamily" v-model="fontFamily" @change="updateTextFontFamily">
+          <option value="Arial">Arial</option>
+          <option value="Helvetica">Helvetica</option>
+          <option value="Courier">Courier</option>
+          <option value="Times New Roman">Times New Roman</option>
+        </select>
+
+        <div>
+          <button @click="onConfirm">获取所有对象信息</button>
+        </div>
+
+        <div v-if="selectedObjectInfo">
+          <h3>选中对象信息：</h3>
+          <p>类型: {{ selectedObjectInfo.type }}</p>
+          <p>位置: ({{ selectedObjectInfo.left }}, {{ selectedObjectInfo.top }})</p>
+          <p>宽度: {{ selectedObjectInfo.width }}</p>
+          <p>高度: {{ selectedObjectInfo.height }}</p>
+        </div>
+      </div>
+    </div>
+    <template #footer>
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row items-center gap-2">
+          <ElUpload
+            action="''"
+            accept="image/*"
+            :auto-upload="false"
+            :show-file-list="false"
+            :on-change="uploadChange"
+          >
+            <BaseButton type="primary" class="mt-2px">
+              <Icon icon="vi-ep:upload-filled" /> 背景图片
+            </BaseButton>
+          </ElUpload>
+          <BaseButton @click="reset"> 重设 </BaseButton>
+        </div>
+        <div>
+          <BaseButton type="primary" :loading="isPosting" @click="onConfirm"> 确定 </BaseButton>
+          <BaseButton @click="onCancel">取消</BaseButton>
+        </div>
+      </div>
+    </template>
+    <!-- <template #footer>
+      <BaseButton type="primary" :loading="isPosting" @click="onConfirm">
+        {{ t('exampleDemo.save') }}
+      </BaseButton>
+      <BaseButton @click="designergVisible = false">{{ t('dialogDemo.close') }}</BaseButton>
+    </template> -->
+  </Dialog>
+</template>
 
 <style scoped>
 canvas {

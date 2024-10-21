@@ -3,7 +3,7 @@ import { ContentWrap } from '@/components/ContentWrap';
 import { Search } from '@/components/Search';
 import { Dialog } from '@/components/Dialog';
 import { useI18n } from '@/hooks/web/useI18n';
-import { ElMessage, ElMessageBox, ElTag } from 'element-plus';
+import { ElMessage, ElMessageBox, ElTag, UploadFile } from 'element-plus';
 import { Table } from '@/components/Table';
 import {
   getDepartmentApi,
@@ -33,6 +33,7 @@ import { formatToDate } from '@/utils/dateUtil';
 import { IdDto } from '@/api/dtos/IdDto';
 
 const imageSettingsRef = ref<ComponentRef<typeof ImageSettings>>();
+const designerRef = ref<ComponentRef<typeof Designer>>();
 const ids = ref<string[]>([]);
 
 const { tableRegister, tableState, tableMethods } = useTable({
@@ -324,7 +325,7 @@ const crudSchemas = reactive<CrudSchema[]>([
   },
   {
     field: 'action',
-    width: '320px',
+    width: '380px',
     label: t('tableDemo.action'),
     search: {
       hidden: true,
@@ -343,8 +344,11 @@ const crudSchemas = reactive<CrudSchema[]>([
               <BaseButton type="primary" onClick={() => action(data.row, 'edit')}>
                 {t('exampleDemo.edit')}
               </BaseButton>
-              <BaseButton type="primary" onClick={() => openImageSettings(data.row)}>
+              {/* <BaseButton type="primary" onClick={() => openImageSettings(data.row)}>
                 设置
+              </BaseButton> */}
+              <BaseButton type="primary" onClick={() => openDesigner(data.row)}>
+                设计
               </BaseButton>
               <BaseButton type="success" onClick={() => action(data.row, 'detail')}>
                 {t('exampleDemo.detail')}
@@ -458,6 +462,13 @@ const save = async () => {
     saveLoading.value = false;
   }
 };
+
+const designerVisible = ref(false);
+
+const openDesigner = (row: ActivityDto) => {
+  designerRef.value?.open(row);
+  designerVisible.value = true;
+};
 </script>
 
 <template>
@@ -513,6 +524,41 @@ const save = async () => {
 
   <ImageSettings ref="imageSettingsRef" />
 
-  <Designer> 55 </Designer>
+  <Designer ref="designerRef" />
+
+  <!-- <Dialog v-model="designerVisible" :width="780" :maxHeight="680" :title="'模板设计器'">
+    <Designer ref="designerRef" />
+
+    <template #footer>
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row items-center gap-2">
+          <ElUpload
+            action="''"
+            accept="image/*"
+            :auto-upload="false"
+            :show-file-list="false"
+            :on-change="uploadChange"
+          >
+            <BaseButton type="primary" class="mt-2px">
+              <Icon icon="vi-ep:upload-filled" /> 上传图片
+            </BaseButton>
+          </ElUpload>
+          <BaseButton> 重设 </BaseButton>
+        </div>
+        <div>
+          <BaseButton
+            v-if="actionType !== 'detail'"
+            type="primary"
+            :loading="saveLoading"
+            @click="save"
+          >
+            {{ t('exampleDemo.save') }}
+          </BaseButton>
+          <BaseButton @click="designerVisible = false">{{ t('dialogDemo.close') }}</BaseButton>
+        </div>
+      </div>
+    </template>
+  </Dialog> -->
+
   <!-- <KonvaDesigner /> -->
 </template>
