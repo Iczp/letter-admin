@@ -123,8 +123,11 @@ export const CanvasDataSchema = {
     height: {
       type: 'number',
     },
+    zoom: {
+      type: 'number',
+    },
   },
-  required: ['width', 'height'],
+  required: ['width', 'height', 'zoom'],
 } as const;
 
 export const GenerateImageInputSchema = {

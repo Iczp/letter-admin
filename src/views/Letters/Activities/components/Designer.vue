@@ -15,6 +15,7 @@ import {
 import { useI18n } from '@/hooks/web/useI18n';
 import assert from '@/utils';
 import { ElMessage, UploadFile, ElUpload } from 'element-plus';
+import { group } from 'console';
 
 const { t } = useI18n();
 interface CanvasData {
@@ -35,13 +36,19 @@ const detailItem = ref<ActivityDetailDto>();
 const visible = ref(false);
 
 const form = reactive({
-  canvasWidth: 540,
-  canvasHeight: 812,
+  canvasWidth: 750,
+  canvasHeight: 1500,
 });
 
 const canvasRef = ref<HTMLCanvasElement>();
 let canvas: fabric.Canvas | null = null;
 let textObjects: fabric.Textbox[] = []; // 保存文本对象的引用
+
+const currentObject = ref<{ [key: string]: any }>();
+const nameTextObj = ref<fabric.Textbox>();
+const noTextObj = ref<fabric.Textbox>();
+const bgImgObj = ref<fabric.Image>();
+const qrCodeObj = ref<fabric.Group>();
 
 const updateCanvasWidth = () => {
   if (canvas) {
@@ -119,8 +126,8 @@ const initCanvas = () => {
   fabric.Object.prototype.transparentCorners = false;
 
   canvas = new fabric.Canvas(canvasElement, {
-    width: 375,
-    height: 667,
+    width: 750,
+    height: 1500,
     selection: false,
     containerClass: 'canvas-container',
   });
@@ -140,7 +147,7 @@ const initCanvas = () => {
   // 获取对象并打印自定义 ID
   canvas.on('object:added', (e) => {
     const obj = e.target;
-    console.log(`Added object with custom ID: ${obj['customId']}`);
+    console.log(`Added object`, obj);
   });
   updateCanvas();
 };
@@ -354,23 +361,26 @@ const onConfirm = () => {
   assert.If(!objects.some((x) => x.type === 'Image'), '请添加背景图片');
 
   assert.If(!detailItem.value, '活动Id为空');
+  console.log('canvas', canvas);
+
   isPosting.value = true;
   activitiesSaveTemplate({
     path: {
       id: detailItem.value!.id!,
     },
     body: {
-      version: '1.0',
-      lib: 'fabricjs',
-      jsonData: json,
       canvasData: {
         width: canvas.width,
         height: canvas.height,
+        zoom: canvas.getZoom(),
       },
+      jsonData: json,
     },
   })
     .then((res) => {
       console.log('生成图片', res, res.data instanceof ArrayBuffer);
+
+      ElMessage.success('保存成功');
 
       // // const blob = new Blob([res.data as any], { type: 'image/png' });
       // const blob = res.data as Blob;
@@ -424,9 +434,84 @@ const uploadChange = (uploadFile: UploadFile) => {
 
   // unref(cropperRef)?.replace(url);
 };
+
+const resetObjects = () => {
+  if (!canvas) {
+    console.warn('canvas is null');
+    return;
+  }
+
+  // const canvasAspect = canvasData!.width! / canvasData!.height!;
+
+  // JSON 数据加载完成后的回调函数
+  const objects = canvas.getObjects(); // 获取画布上所有对象
+  const canvasWidth = canvas.getWidth(); // 画布宽度
+  const canvasHeight = canvas.getHeight(); // 画布高度
+  const canvasAspect = canvasWidth / canvasHeight; // 画布宽高比
+  const findTextbox = (text: string) =>
+    objects.find(
+      (x) => x.type.toLocaleLowerCase() === 'textbox' && (x as fabric.Textbox).text === text,
+    ) as fabric.Textbox;
+  nameTextObj.value = findTextbox('{{客户名字}}');
+  noTextObj.value = findTextbox('{{编号}}');
+  qrCodeObj.value = objects.find((x) => x.type.toLocaleLowerCase() === 'group') as fabric.Group;
+  bgImgObj.value = objects.find((x) => x.type.toLocaleLowerCase() === 'image') as fabric.Image;
+  // nameTextObj.value?.set('fill', 'white');
+
+  console.log('nameTextObj.value fill', nameTextObj.value?.fill);
+  console.log('nameTextObj.value', nameTextObj.value);
+
+  objects
+    .filter((x) => x.type.toLocaleLowerCase() === 'textbox')
+    .forEach((obj) => {
+      console.log('setControlVisible', obj);
+      ['mt', 'mb', 'mtr'].forEach((direction) => obj?.setControlVisible(direction, false));
+      obj.setCoords();
+    });
+
+  objects.forEach((obj) => {
+    obj.off('selected');
+    obj.on('selected', () => {
+      currentObject.value = obj;
+      console.log('obj modified', obj);
+    });
+  });
+  [qrCodeObj.value].forEach((obj) => {
+    ['mt', 'mb', 'ml', 'mr', 'mtr'].forEach((direction) =>
+      obj?.setControlVisible(direction, false),
+    );
+  });
+  [bgImgObj.value].forEach((obj) => {
+    if (!obj) {
+      console.warn('bgImgObj is null');
+      return;
+    }
+    // 检查对象是否是图片
+    const imgAspect = obj.width / obj.height; // 图片宽高比
+    if (canvasAspect >= imgAspect) {
+      // 如果画布比较宽，则以高度为基准进行缩放
+      obj.scaleToHeight(canvasHeight);
+    } else {
+      // 否则以宽度为基准进行缩放
+      obj.scaleToWidth(canvasWidth);
+    }
+    // 设置图片属性
+    obj.set({
+      selectable: false, // 禁止移动背景
+      evented: false, // 禁止鼠标事件
+    });
+    // 更新对象的位置，确保它居中或其他所需位置
+    obj.setCoords(); // 更新坐标，对于某些操作很重要
+  });
+  // setTimeout(() => {
+  //   canvas?.renderAll();
+  // }, 50);
+};
 const open = (input: ActivityDto) => {
   designergVisible.value = true;
-
+  nextTick(() => {
+    initCanvas();
+  });
   activitiesGetItem({
     path: {
       id: input.id,
@@ -435,10 +520,31 @@ const open = (input: ActivityDto) => {
     console.log('res', res);
     detailItem.value = res.data;
     isPosting.value = false;
+
+    const { canvasData, jsonData } = res.data!.designer_json!;
+
+    if (jsonData && canvasData) {
+      const jsonDataValue = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData;
+      console.log('jsonData', jsonDataValue);
+
+      //重新设置图片大小
+
+      canvas?.clear();
+      canvas
+        ?.loadFromJSON(jsonDataValue, (e, i) => {
+          console.log('Canvas loaded from JSON!', e, i);
+        })
+        .then((canvas) => {
+          canvas?.renderAll();
+          resetObjects();
+        });
+
+      // nextTick(() => {
+      //   canvas?.renderAll();
+      // });
+    }
+
     // 获取图片的访问地址
-  });
-  nextTick(() => {
-    initCanvas();
   });
 };
 const close = () => {
@@ -449,6 +555,17 @@ const reset = () => {};
 const onCancel = () => {
   close();
 };
+watch(
+  () => currentObject.value,
+  (newValue) => {
+    console.log('newValue', newValue);
+    canvas?.renderAll();
+  },
+  {
+    deep: true,
+    immediate: true,
+  },
+);
 
 defineExpose({
   open,
@@ -458,8 +575,16 @@ defineExpose({
 
 <template>
   <Dialog v-model="designergVisible" title="dialogTitle" :width="780" :maxHeight="680">
+    <div class="toolbar">
+      <div>type:{{ currentObject?.type }}</div>
+      <div v-if="currentObject?.type == 'textbox'"
+        >text:{{ currentObject?.text }}
+
+        <input type="color" id="textColor" v-model="currentObject.fill" />
+      </div>
+    </div>
     <div class="flex flex-row gap-4">
-      <div class="flex max-w-456px max-h-860px">
+      <div class="flex overflow-hidden max-w-375px max-h-667px">
         <canvas ref="canvasRef"></canvas>
       </div>
       <div class="flex flex-1 flex-col">
@@ -549,7 +674,17 @@ canvas {
 </style>
 
 <style>
-/* .canvas-container {
+.canvas-container {
   transform: scale(0.5) translate(-50%, -50%);
-} */
+}
+
+.toolbar {
+  position: absolute;
+  background-color: rgba(131, 131, 131, 0.6);
+  width: 100%;
+  height: 32px;
+  border-radius: 8px;
+  z-index: 99;
+  color: white;
+}
 </style>

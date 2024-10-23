@@ -122,6 +122,10 @@ export type CanvasData = {
    * height
    */
   height: number;
+  /**
+   * zoom
+   */
+  zoom: number;
 };
 
 export type GenerateImageInput = {
