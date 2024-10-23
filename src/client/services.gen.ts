@@ -16,6 +16,8 @@ import type {
   AppControllerGetTableResponse,
   AppControllerGetAboutError,
   AppControllerGetAboutResponse,
+  AppControllerShortidError,
+  AppControllerShortidResponse,
   ImagesControllerGenerateImageData,
   ImagesControllerGenerateImageError,
   ImagesControllerGenerateImageResponse,
@@ -92,6 +94,9 @@ import type {
   ActivityCustomerControllerUpdateData,
   ActivityCustomerControllerUpdateError,
   ActivityCustomerControllerUpdateResponse,
+  ActivityCustomerControllerGetItemByCodeData,
+  ActivityCustomerControllerGetItemByCodeError,
+  ActivityCustomerControllerGetItemByCodeResponse,
   ActivityCustomerControllerSetIsCheckedData,
   ActivityCustomerControllerSetIsCheckedError,
   ActivityCustomerControllerSetIsCheckedResponse,
@@ -334,6 +339,23 @@ export const appGetAbout = <ThrowOnError extends boolean = false>(
   >({
     ...options,
     url: '/letter-api/about',
+  });
+};
+
+/**
+ * shortid
+ * shortid
+ */
+export const appShortid = <ThrowOnError extends boolean = false>(
+  options?: Options<unknown, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    AppControllerShortidResponse,
+    AppControllerShortidError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/shortid',
   });
 };
 
@@ -794,6 +816,22 @@ export const activityCustomerUpdate = <ThrowOnError extends boolean = false>(
   >({
     ...options,
     url: '/letter-api/activity-customer/{id}',
+  });
+};
+
+/**
+ * [活动客户]详情
+ */
+export const activityCustomerGetItemByCode = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerControllerGetItemByCodeData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    ActivityCustomerControllerGetItemByCodeResponse,
+    ActivityCustomerControllerGetItemByCodeError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/activity-customer/invitation_code/{invitation_code}',
   });
 };
 

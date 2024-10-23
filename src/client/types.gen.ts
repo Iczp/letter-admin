@@ -2068,6 +2068,10 @@ export type AppControllerGetAboutResponse = AppInfo;
 
 export type AppControllerGetAboutError = unknown;
 
+export type AppControllerShortidResponse = unknown;
+
+export type AppControllerShortidError = unknown;
+
 export type ImagesControllerGenerateImageData = {
   /**
    * jsonData
@@ -2428,6 +2432,16 @@ export type ActivityCustomerControllerUpdateData = {
 export type ActivityCustomerControllerUpdateResponse = ActivityCustomerDetailDto;
 
 export type ActivityCustomerControllerUpdateError = unknown;
+
+export type ActivityCustomerControllerGetItemByCodeData = {
+  path: {
+    invitation_code: string;
+  };
+};
+
+export type ActivityCustomerControllerGetItemByCodeResponse = ActivityCustomerDetailDto;
+
+export type ActivityCustomerControllerGetItemByCodeError = unknown;
 
 export type ActivityCustomerControllerSetIsCheckedData = {
   path: {
@@ -2821,6 +2835,7 @@ export type RolesControllerGetListData = {
       | 'ActivityCustomer_Set_IsSigned'
       | 'ActivityCustomer_Set_IsEnabled'
       | 'ActivityCustomer_Get_Letter'
+      | 'ActivityCustomer_GetItem_By_InvitationCode'
       | 'ErpUsers_GetItem'
       | 'ErpUsers_GetList'
       | 'InviterConfig_Create'
@@ -2852,7 +2867,8 @@ export type RolesControllerGetListData = {
       | 'AppMenus_Excel_Import'
       | 'AppMenus_Excel_Ouput'
       | 'AppMenus_Set_IsEnabled'
-      | 'AppMenus_GetList_ByCurrentUser';
+      | 'AppMenus_GetList_ByCurrentUser'
+      | 'Scan_getCodeResult';
     /**
      * skin
      */
