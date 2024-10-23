@@ -918,71 +918,33 @@ export const ActivityCustomerUpdateInputSchema = {
   required: ['customer_name', 'inviter_name', 'is_enabled'],
 } as const;
 
-export const ActivityCustomerInvitersDtoSchema = {
+export const IdDtoSchema = {
   type: 'object',
   properties: {
     id: {
       type: 'string',
     },
-    creation_time: {
-      format: 'date-time',
-      type: 'string',
+  },
+  required: ['id'],
+} as const;
+
+export const ActivityCustomerInvitersPagedResultSchema = {
+  type: 'object',
+  properties: {
+    input: {
+      type: 'object',
     },
-    last_modification_time: {
-      format: 'date-time',
-      type: 'string',
-    },
-    is_enabled: {
-      type: 'boolean',
-    },
-    deletion_time: {
-      format: 'date-time',
-      type: 'string',
-    },
-    is_deleted: {
-      type: 'boolean',
-    },
-    auto_id: {
+    totalCount: {
       type: 'number',
     },
-    customer_name: {
-      type: 'string',
-    },
-    customer_phone: {
-      type: 'string',
-    },
-    invitation_code: {
-      type: 'string',
-    },
-    customer_gender: {
-      type: 'string',
-      default: 'Unknown',
-      enum: ['Unknown', 'Male', 'Female'],
-    },
-    remarks: {
-      type: 'string',
-    },
-    inviter_name: {
-      type: 'string',
-    },
-    is_invited: {
-      type: 'boolean',
-    },
-    is_checked: {
-      type: 'boolean',
-    },
-    activity: {
-      $ref: '#/components/schemas/ActivityDto',
+    items: {
+      type: 'array',
+      items: {
+        $ref: '#/components/schemas/ActivityCustomerDto',
+      },
     },
   },
-  required: [
-    'id',
-    'creation_time',
-    'last_modification_time',
-    'deletion_time',
-    'is_deleted',
-    'customer_name',
-  ],
+  required: ['totalCount', 'items'],
 } as const;
 
 export const ActivityCustomerInvitersDetailDtoSchema = {

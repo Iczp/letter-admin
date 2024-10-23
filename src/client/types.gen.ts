@@ -717,65 +717,25 @@ export type ActivityCustomerUpdateInput = {
   is_enabled: boolean;
 };
 
-export type ActivityCustomerInvitersDto = {
-  /**
-   * id
-   */
+export type IdDto = {
   id: string;
+};
+
+export type ActivityCustomerInvitersPagedResult = {
   /**
-   * 创建时间
+   * 输入参数
    */
-  creation_time: string;
+  input?: {
+    [key: string]: unknown;
+  };
   /**
-   * 最后修改时间
+   * 总数
    */
-  last_modification_time: string;
+  totalCount: number;
   /**
-   * 是否可用
+   * 列表项
    */
-  is_enabled?: boolean;
-  /**
-   * 删除时间
-   */
-  deletion_time: string;
-  /**
-   * 是否删除
-   */
-  is_deleted: boolean;
-  /**
-   * AutoId
-   */
-  auto_id?: number;
-  /**
-   * 名字
-   */
-  customer_name: string;
-  /**
-   * 电话
-   */
-  customer_phone?: string;
-  /**
-   * 邀请码
-   */
-  invitation_code?: string;
-  customer_gender?: 'Unknown' | 'Male' | 'Female';
-  /**
-   * 备注
-   */
-  remarks?: string;
-  /**
-   * 邀请人
-   */
-  inviter_name?: string;
-  /**
-   * 是否邀请
-   */
-  is_invited?: boolean;
-  /**
-   * 是否审核
-   */
-  is_checked?: boolean;
-  activity?: ActivityDto;
+  items: Array<ActivityCustomerDto>;
 };
 
 export type ActivityCustomerInvitersDetailDto = {
@@ -2452,9 +2412,11 @@ export type ActivityCustomerControllerSetIsCheckedData = {
   };
 };
 
-export type ActivityCustomerControllerSetIsCheckedResponse = {
-  [key: string]: unknown;
-};
+export type ActivityCustomerControllerSetIsCheckedResponse =
+  | IdDto
+  | {
+      [key: string]: unknown;
+    };
 
 export type ActivityCustomerControllerSetIsCheckedError = unknown;
 
@@ -2467,9 +2429,11 @@ export type ActivityCustomerControllerSetIsInvitedData = {
   };
 };
 
-export type ActivityCustomerControllerSetIsInvitedResponse = {
-  [key: string]: unknown;
-};
+export type ActivityCustomerControllerSetIsInvitedResponse =
+  | IdDto
+  | {
+      [key: string]: unknown;
+    };
 
 export type ActivityCustomerControllerSetIsInvitedError = unknown;
 
@@ -2482,9 +2446,11 @@ export type ActivityCustomerControllerSetIsIsGiftedData = {
   };
 };
 
-export type ActivityCustomerControllerSetIsIsGiftedResponse = {
-  [key: string]: unknown;
-};
+export type ActivityCustomerControllerSetIsIsGiftedResponse =
+  | IdDto
+  | {
+      [key: string]: unknown;
+    };
 
 export type ActivityCustomerControllerSetIsIsGiftedError = unknown;
 
@@ -2497,9 +2463,11 @@ export type ActivityCustomerControllerSetIsIsSignedData = {
   };
 };
 
-export type ActivityCustomerControllerSetIsIsSignedResponse = {
-  [key: string]: unknown;
-};
+export type ActivityCustomerControllerSetIsIsSignedResponse =
+  | IdDto
+  | {
+      [key: string]: unknown;
+    };
 
 export type ActivityCustomerControllerSetIsIsSignedError = unknown;
 
@@ -2651,7 +2619,7 @@ export type ActivityCustomerInvitersControllerGetListData = {
   };
 };
 
-export type ActivityCustomerInvitersControllerGetListResponse = Array<ActivityCustomerInvitersDto>;
+export type ActivityCustomerInvitersControllerGetListResponse = ActivityCustomerInvitersPagedResult;
 
 export type ActivityCustomerInvitersControllerGetListError = unknown;
 
@@ -3386,7 +3354,7 @@ export type InviterConfigControllerGetListByCurrentUserData = {
   };
 };
 
-export type InviterConfigControllerGetListByCurrentUserResponse = unknown;
+export type InviterConfigControllerGetListByCurrentUserResponse = InviterConfigPagedResult;
 
 export type InviterConfigControllerGetListByCurrentUserError = unknown;
 
