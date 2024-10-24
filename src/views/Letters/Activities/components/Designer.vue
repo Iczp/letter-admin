@@ -47,6 +47,7 @@ let textObjects: fabric.Textbox[] = []; // 保存文本对象的引用
 const currentObject = ref<{ [key: string]: any }>();
 const nameTextObj = ref<fabric.Textbox>();
 const noTextObj = ref<fabric.Textbox>();
+const invitationCodeTextObj = ref<fabric.Textbox>();
 const bgImgObj = ref<fabric.Image>();
 const qrCodeObj = ref<fabric.Group>();
 
@@ -453,12 +454,15 @@ const resetObjects = () => {
       (x) => x.type.toLocaleLowerCase() === 'textbox' && (x as fabric.Textbox).text === text,
     ) as fabric.Textbox;
   nameTextObj.value = findTextbox('{{客户名字}}');
-  noTextObj.value = findTextbox('{{编号}}');
+  noTextObj.value = findTextbox('{{NO.编号}}');
+  invitationCodeTextObj.value = findTextbox('{{邀请码}}');
   qrCodeObj.value = objects.find((x) => x.type.toLocaleLowerCase() === 'group') as fabric.Group;
   bgImgObj.value = objects.find((x) => x.type.toLocaleLowerCase() === 'image') as fabric.Image;
   // nameTextObj.value?.set('fill', 'white');
 
-  console.log('nameTextObj.value fill', nameTextObj.value?.fill);
+  // invitationCodeTextObj.value?.set('textAlign', 'left');
+
+  console.log('invitationCodeTextObj.value?.textAlign', invitationCodeTextObj.value?.textAlign);
   console.log('nameTextObj.value', nameTextObj.value);
 
   objects

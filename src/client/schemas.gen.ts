@@ -9,7 +9,7 @@ export const AppInfoSchema = {
     },
     version: {
       type: 'string',
-      default: '0.0.26',
+      default: '0.0.27',
     },
     description: {
       type: 'string',
@@ -81,6 +81,9 @@ export const FabricObjectSchema = {
     },
     text: {
       type: 'string',
+    },
+    textAlign: {
+      type: 'object',
     },
     fontWeight: {
       type: 'string',

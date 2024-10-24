@@ -69,6 +69,12 @@ export type FabricObject = {
    */
   text?: string;
   /**
+   * textAlign
+   */
+  textAlign?: {
+    [key: string]: unknown;
+  };
+  /**
    * fontWeight
    */
   fontWeight?: string;
@@ -2662,6 +2668,16 @@ export type ActivityCustomerInvitersControllerUpdateResponse = ActivityCustomerI
 
 export type ActivityCustomerInvitersControllerUpdateError = unknown;
 
+export type ActivityCustomerInvitersControllerLetterData = {
+  path: {
+    id: string;
+  };
+};
+
+export type ActivityCustomerInvitersControllerLetterResponse = Blob | File;
+
+export type ActivityCustomerInvitersControllerLetterError = unknown;
+
 export type ActivityCustomerInvitersControllerSetIsEnabledData = {
   path: {
     id: string;
@@ -2826,6 +2842,7 @@ export type RolesControllerGetListData = {
       | 'ActivityCustomerInviters_Excel_Import'
       | 'ActivityCustomerInviters_Excel_Ouput'
       | 'ActivityCustomerInviters_Set_IsEnabled'
+      | 'ActivityCustomerInviters_Get_Letter'
       | 'AppMenus_Create'
       | 'AppMenus_Update'
       | 'AppMenus_GetItem'

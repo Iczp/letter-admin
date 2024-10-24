@@ -138,6 +138,9 @@ import type {
   ActivityCustomerInvitersControllerUpdateData,
   ActivityCustomerInvitersControllerUpdateError,
   ActivityCustomerInvitersControllerUpdateResponse,
+  ActivityCustomerInvitersControllerLetterData,
+  ActivityCustomerInvitersControllerLetterError,
+  ActivityCustomerInvitersControllerLetterResponse,
   ActivityCustomerInvitersControllerSetIsEnabledData,
   ActivityCustomerInvitersControllerSetIsEnabledError,
   ActivityCustomerInvitersControllerSetIsEnabledResponse,
@@ -1066,6 +1069,23 @@ export const activityCustomerInvitersUpdate = <ThrowOnError extends boolean = fa
   >({
     ...options,
     url: '/letter-api/activity-customer-inviters/{id}',
+  });
+};
+
+/**
+ * 邀请函
+ * 邀请函图片
+ */
+export const activityCustomerInvitersLetter = <ThrowOnError extends boolean = false>(
+  options: Options<ActivityCustomerInvitersControllerLetterData, ThrowOnError>,
+) => {
+  return (options?.client ?? client).get<
+    ActivityCustomerInvitersControllerLetterResponse,
+    ActivityCustomerInvitersControllerLetterError,
+    ThrowOnError
+  >({
+    ...options,
+    url: '/letter-api/activity-customer-inviters/letter/{id}',
   });
 };
 
